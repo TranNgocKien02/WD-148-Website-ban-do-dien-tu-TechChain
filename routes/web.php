@@ -3,15 +3,16 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\SanPhamController;
-use App\Http\Controllers\CartController;
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\client\ProductController;
-use App\Http\Controllers\OderController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\KhachHangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,17 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
             Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
     });
+    Route::prefix('khachangs')
+->as('khachhangs.')
+->group(function () {
+    Route::get('/', [KhachHangController::class, 'index'])->name('index');
+    Route::get('/create', [KhachHangController::class, 'create'])->name('create');
+    Route::post('/store', [KhachHangController::class, 'store'])->name('store');
+    Route::get('/show/{id}', [KhachHangController::class, 'show'])->name('show');
+    Route::get('{id}/edit', [KhachHangController::class, 'edit'])->name('edit');
+    Route::put('{id}/update', [KhachHangController::class, 'update'])->name('update');
+    Route::delete('{id}/destroy', [KhachHangController::class, 'destroy'])->name('destroy');
+});
     });
 Route::prefix('clients')
     ->as('clients.')
@@ -119,7 +131,7 @@ Route::prefix('clients')
         // Route::delete('{id}/destroy', [SanPhamController::class,'destroy'])->name('destroy');
 
     });
-  
+
 
 
 

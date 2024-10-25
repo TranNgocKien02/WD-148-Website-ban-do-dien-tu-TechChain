@@ -35,13 +35,13 @@
                 </li>
 
                 <li>
-                    <a class='tp-link' href='calendar.html'>
+                    <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
                         <i data-feather="users"></i>
                             <span> Quản lý tài khoản </span>
                     </a>
 
                 </li>
-    
+
                 <li class="menu-title">Kinh doanh </li>
 
                 <li>
@@ -50,7 +50,7 @@
                             <span> Doanh mục sản phẩm </span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a class='tp-link' href='{{ route('admins.sanphams.index') }}'>
                         <i data-feather="package"></i>
