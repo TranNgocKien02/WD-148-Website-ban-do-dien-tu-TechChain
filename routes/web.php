@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BaoCaoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\SanPhamController;
+use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\CartController;
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\client\ProductController;
@@ -87,6 +89,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::put('{id}/update', [DanhMucController::class, 'update'])->name('update');
                 Route::delete('{id}/destroy', [DanhMucController::class, 'destroy'])->name('destroy');
             });
+
         Route::prefix('sanphams')
             ->as('sanphams.')
             ->group(function () {
@@ -97,16 +100,30 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('{id}/edit', [SanPhamController::class, 'edit'])->name('edit');
                 Route::put('{id}/update', [SanPhamController::class, 'update'])->name('update');
                 Route::delete('{id}/destroy', [SanPhamController::class, 'destroy'])->name('destroy');
-        });
+            });
+
         Route::prefix('donhangs')
-        ->as('donhangs.')
-        ->group(function () {
-            Route::get('/', [DonHangController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
-            Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
-            Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
+            ->as('donhangs.')
+            ->group(function () {
+                Route::get('/', [DonHangController::class, 'index'])->name('index');
+                Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
+                Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
+                Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
+            });
+
+        // Route cho thống kê
+        Route::prefix('thongkes')
+            ->as('thongkes.')
+            ->group(function () {
+                Route::get('/', [ThongKeController::class, 'index'])->name('index'); // Xem báo cáo thống kê
+                // Route::get('/show/{id}', [ThongKeController::class, 'show'])->name('show'); // Xem chi tiết báo cáo
+                // Route::delete('{id}/destroy', [ThongKeController::class, 'destroy'])->name('destroy'); // Xóa báo cáo nếu cần
+                Route::get('/chi-tiet-thong-ke', [ThongKeController::class, 'chiTietThongKe'])->name('chiTietThongKe');
+                Route::get('/bao-cao', [ThongKeController::class, 'baoCao'])->name('bao-cao');
+
+            });
     });
-    });
+
 Route::prefix('clients')
     ->as('clients.')
     ->group(function () {

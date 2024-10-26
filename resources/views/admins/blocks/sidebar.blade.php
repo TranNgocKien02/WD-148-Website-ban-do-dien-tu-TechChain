@@ -65,6 +65,13 @@
                     </a>
 
                 </li>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.thongkes.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Thống kê</span>
+                    </a>
+
+                </li>
             </ul>
 
         </div>
