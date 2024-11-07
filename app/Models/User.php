@@ -51,11 +51,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Optional: Additional check with mutator
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
-    }
+    // // Optional: Additional check with mutator
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = Hash::make($value);
+    // }
     public function donHang(){
         return $this->hasMany(DonHang::class) ;
     }

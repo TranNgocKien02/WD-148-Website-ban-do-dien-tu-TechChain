@@ -35,9 +35,16 @@
                 </li>
 
                 <li>
-                    <a class='tp-link' href='calendar.html'>
+                    <a class='tp-link' href='{{ route('admins.taikhoans.index') }}'>
                         <i data-feather="users"></i>
                             <span> Quản lý tài khoản </span>
+                    </a>
+
+                </li>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.thongtintrangwebs.index') }}'>
+                        <i data-feather="users"></i>
+                            <span> Quản lý thông tin </span>
                     </a>
 
                 </li>

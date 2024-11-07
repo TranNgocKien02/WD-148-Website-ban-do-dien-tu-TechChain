@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\BaoCaoController;
+use App\Http\Controllers\Admin\TaiKhoanController;
+use App\Http\Controllers\Admin\ThongTinTrangWebController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -122,6 +125,27 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/bao-cao', [ThongKeController::class, 'baoCao'])->name('bao-cao');
 
             });
+        // route quản lý trang web
+        Route::prefix('thong-tin-trang-web')
+        ->as('thongtintrangwebs.')
+        ->group(function () {
+            Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
+            Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
+        });
+
+        // route tài khoản
+        Route::prefix('taikhoans')
+            ->as('taikhoans.')
+            ->group(function () {
+                Route::get('/', [TaiKhoanController::class, 'index'])->name('index'); // List all accounts
+                Route::get('/create', [TaiKhoanController::class, 'create'])->name('create'); // Show create form
+                Route::post('/store', [TaiKhoanController::class, 'store'])->name('store'); // Store new account
+                Route::get('/show/{id}', [TaiKhoanController::class, 'show'])->name('show'); // Show specific account
+                Route::get('{id}/edit', [TaiKhoanController::class, 'edit'])->name('edit'); // Edit account
+                Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
+                Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
+            });
+            
     });
 
 Route::prefix('clients')
