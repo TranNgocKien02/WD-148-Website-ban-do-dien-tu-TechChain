@@ -21,9 +21,6 @@
 
         <!-- Icons -->
         <link href="{{ asset('assets/admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-        
-        {{-- biểu đồ hình tronf pie chart --}}
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         @yield('css')
     </head>
 

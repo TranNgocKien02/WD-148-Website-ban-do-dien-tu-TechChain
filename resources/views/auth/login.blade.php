@@ -159,7 +159,7 @@
                 <input id="checkbox1" type="checkbox" />
                 <label for="checkbox1">Keep me logged in</label>
               </div>
-              <a href="{{ route('password.request') }}" class="switcher-text"
+              <a href="forgot-password-9.html" class="switcher-text"
                 >Forgot Password</a
               >
             </div>
