@@ -51,10 +51,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // // Optional: Additional check with mutator
+    // Mutator để mã hóa mật khẩu khi lưu vào DB
     // public function setPasswordAttribute($value)
     // {
-    //     $this->attributes['password'] = Hash::make($value);
+    //     // Nếu giá trị password không rỗng, mã hóa mật khẩu bằng bcrypt
+    //     if (!empty($value)) {
+    //         $this->attributes['password'] = bcrypt($value);
+    //     }
     // }
     public function donHang(){
         return $this->hasMany(DonHang::class) ;

@@ -33,6 +33,7 @@ use App\Http\Controllers\OrderController;
 //     return view('admins.danhmucs.index');
 // });
 
+Auth::routes();
 
 
 
@@ -42,6 +43,12 @@ route::post('login', [AuthController::class, 'login'])->name('login');
 route::get('register', [AuthController::class, 'showFromRegister']);
 route::post('register', [AuthController::class, 'register'])->name('register');
 route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+// lấy lại mật khẩu
+// Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
+// Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+// Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
+// Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
 
 // Route::get('/home', function () {
