@@ -77,6 +77,11 @@
                         <i data-feather="package"></i>
                             <span>Thống kê</span>
                     </a>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.khuyenmais.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Khuyến mãi</span>
+                    </a>
 
                 </li>
             </ul>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BaoCaoController;
+use App\Http\Controllers\Admin\KhuyenMaiController;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\ThongTinTrangWebController;
 use App\Http\Controllers\Admin\UserController;
@@ -133,7 +134,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
 
             });
         // route quản lý trang web
-        Route::prefix('thong-tin-trang-web')
+        Route::prefix('thongtintrangwebs')
         ->as('thongtintrangwebs.')
         ->group(function () {
             Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
@@ -152,6 +153,20 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
                 Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
             });
+
+            Route::prefix('khuyenmais')
+            ->as('khuyenmais.')
+            ->group(function () {
+                Route::get('/', [KhuyenMaiController::class, 'index'])->name('index'); // List all promotions
+                Route::get('/create', [KhuyenMaiController::class, 'create'])->name('create'); // Show create form for promotions
+                Route::post('/store', [KhuyenMaiController::class, 'store'])->name('store'); // Store new promotion
+                Route::get('/show/{id}', [KhuyenMaiController::class, 'show'])->name('show'); // Show specific promotion
+                Route::get('{id}/edit', [KhuyenMaiController::class, 'edit'])->name('edit'); // Edit promotion
+                Route::put('{id}/update', [KhuyenMaiController::class, 'update'])->name('update'); // Update promotion
+                Route::delete('{id}/destroy', [KhuyenMaiController::class, 'destroy'])->name('destroy'); // Delete promotion
+            });
+
+            
             
     });
 
