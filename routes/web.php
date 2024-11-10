@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\CartController;
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\client\ProductController;
+use App\Http\Controllers\OderController;
 use App\Http\Controllers\Admin\KhachHangController;
 
 /*
