@@ -80,4 +80,5 @@ class DonHang extends Model
     protected $casts = [
         'ngay_dat' => 'datetime',
     ];
+    
 }
