@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\SanPham;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,11 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('ma_san_pham')->unique();
-            $table->string('ten_san_pham');
+            $table->foreignIdFor(SanPham::class)->constrained();
+            // $table->string('ma_san_pham')->unique();
+            $table->string('hinh_anh');
             $table->text('content');
-            $table->boolean('chapn  han')->default(false);
+            // $table->boolean('chapnhan')->default(false);
             $table->timestamps();
         });
     }

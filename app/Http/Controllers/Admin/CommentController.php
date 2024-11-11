@@ -23,64 +23,64 @@ class CommentController extends Controller
     /**
      * Hiển thị form tạo bình luận mới.
      */
-    public function create()
-    {
-        $title = "Thêm bình luận mới";
-        $listSanPham = SanPham::all();
-        return view('admins.comments.create', compact('title', 'listSanPham'));
-    }
+    // public function create()
+    // {
+    //     $title = "Thêm bình luận mới";
+    //     $listSanPham = SanPham::all();
+    //     return view('admins.comments.create', compact('title', 'listSanPham'));
+    // }
 
     /**
      * Lưu bình luận mới vào cơ sở dữ liệu.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'ma_san_pham' => 'required|string',
-            'ten_san_pham' => 'required|string',
-            'content' => 'required|string',
-            'chấp nhận' => 'boolean',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'ma_san_pham' => 'required|string',
+    //         'ten_san_pham' => 'required|string',
+    //         'content' => 'required|string',
+    //         'chấp nhận' => 'boolean',
+    //     ]);
 
-        Comment::create($request->all());
-        return redirect()->route('admins.comments.index')->with('success', 'Thêm bình luận thành công');
-    }
+    //     Comment::create($request->all());
+    //     return redirect()->route('admins.comments.index')->with('success', 'Thêm bình luận thành công');
+    // }
 
     /**
      * Hiển thị chi tiết bình luận.
      */
-    public function show(string $id)
-    {
-        $comment = Comment::findOrFail($id);
-        $title = "Chi tiết bình luận";
-        return view('admins.comments.show', compact('title', 'comment'));
-    }
+    // public function show(string $id)
+    // {
+    //     $comment = Comment::findOrFail($id);
+    //     $title = "Chi tiết bình luận";
+    //     return view('admins.comments.show', compact('title', 'comment'));
+    // }
 
     /**
      * Hiển thị form chỉnh sửa bình luận.
      */
-    public function edit(string $id)
-    {
-        $comment = Comment::findOrFail($id);
-        $title = "Chỉnh sửa bình luận";
-        return view('admins.comments.edit', compact('title', 'comment'));
-    }
+    // public function edit(string $id)
+    // {
+    //     $comment = Comment::findOrFail($id);
+    //     $title = "Chỉnh sửa bình luận";
+    //     return view('admins.comments.edit', compact('title', 'comment'));
+    // }
 
     /**
      * Cập nhật bình luận.
      */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'ten_san_pham' => 'required|string',
-            'content' => 'required|string',
-            'chấp nhận' => 'boolean',
-        ]);
+    // public function update(Request $request, string $id)
+    // {
+    //     $request->validate([
+    //         'ten_san_pham' => 'required|string',
+    //         'content' => 'required|string',
+    //         'chấp nhận' => 'boolean',
+    //     ]);
 
-        $comment = Comment::findOrFail($id);
-        $comment->update($request->all());
-        return redirect()->route('admins.comments.index')->with('success', 'Cập nhật bình luận thành công');
-    }
+    //     $comment = Comment::findOrFail($id);
+    //     $comment->update($request->all());
+    //     return redirect()->route('admins.comments.index')->with('success', 'Cập nhật bình luận thành công');
+    // }
 
     /**
      * Xóa bình luận.

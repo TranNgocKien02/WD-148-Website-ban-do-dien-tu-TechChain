@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\client\ProductController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,10 +12,8 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ma_san_pham',
-        'ten_san_pham',
+        'hinh_anh',
         'content',
-        'chấp nhận',
     ];
 
     /**
@@ -23,7 +22,7 @@ class Comment extends Model
      */
     public function product()
     {
-        return $this->belongsTo(ProductController::class, 'ma_san_pham', 'ma_san_pham');
+        return $this->belongsTo(SanPhamController::class, 'ma_san_pham', 'ma_san_pham');
     }
 
     /**
