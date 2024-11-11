@@ -116,6 +116,10 @@ Route::prefix('admins')
             ->group(function () {
                 Route::get('/', [CommentController::class, 'index'])->name('index');         
                 Route::get('/show/{id}', [CommentController::class, 'show'])->name('show');
+                Route::get('/create', [CommentController::class, 'create'])->name('create');
+                Route::post('/', [CommentController::class, 'store'])->name('store');
+                Route::get('/{id}/edit', [CommentController::class, 'edit'])->name('edit');
+                Route::put('/{id}', [CommentController::class, 'update'])->name('update');
                 Route::delete('{id}/destroy', [CommentController::class, 'destroy'])->name('destroy');
             });
     });
