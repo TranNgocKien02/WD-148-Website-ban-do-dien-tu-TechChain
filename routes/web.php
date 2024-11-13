@@ -7,6 +7,7 @@ use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\SanPhamController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\client\ProductController;
@@ -105,7 +106,17 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
             Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
             Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
-    });
+        });
+        Route::prefix('banners')
+        ->as('banners.')
+        ->group(function () {
+            Route::get('/', [BannerController::class, 'index'])->name('index');
+            Route::get('/create', [BannerController::class, 'create'])->name('create');
+            Route::post('/store', [BannerController::class, 'store'])->name('store');
+            Route::get('{banner}/edit', [BannerController::class, 'edit'])->name('edit');
+            Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
+            Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
+        });
     });
 Route::prefix('clients')
     ->as('clients.')
