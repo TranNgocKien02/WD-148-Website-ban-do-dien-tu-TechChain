@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tieu_de');
             $table->text('mo_ta')->nullable();
             $table->string('anh')->nullable();
+            $table->string('loai')->nullable();
             $table->string('link')->nullable();
             $table->dateTime('ngay_bat_dau')->nullable();
             $table->dateTime('ngay_ket_thuc')->nullable();

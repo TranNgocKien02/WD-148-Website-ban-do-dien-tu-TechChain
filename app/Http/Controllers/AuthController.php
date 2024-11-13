@@ -11,14 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     //đăng nhập 
-    public function showFromLogin(){
     public function showFromLogin()
     {
         return view('auth.login');
     }
 
-     //đăng nhập 
-     public function login(Request $request){
     //đăng nhập 
     public function login(Request $request)
     {
@@ -37,21 +34,18 @@ class AuthController extends Controller
 
         return redirect()->back()->withErrors([
             'email' => 'Thông tin sai đăng nhập ' 
-            'email' => 'Thông tin sai đăng nhập '
         ]);
      }
-    }
+    
 
-      //đăng ký
-    public function showFromRegister(){
+
     //đăng ký
     public function showFromRegister()
     {
         return view('auth.register');
     }
 
-     //đăng ký 
-     public function register(Request $request){
+
     //đăng ký 
     public function register(Request $request)
     {
@@ -71,11 +65,7 @@ class AuthController extends Controller
         #
 
      }
-    }
-
-      //đăng xuất 
-    public function logout(Request $request){
-        Auth::logout() ;
+    
     //đăng xuất 
     public function logout(Request $request)
     {

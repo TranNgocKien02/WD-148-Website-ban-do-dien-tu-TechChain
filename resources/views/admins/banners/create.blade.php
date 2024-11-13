@@ -66,6 +66,20 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="loai" class="form-label">Loại Banner</label>
+                                    <select name="loai" id="loai" class="form-control @error('loai') is-invalid @enderror" value="{{ old('loai') }}">
+                                        <option value="" disabled selected>Chọn loại banner</option>
+                                        <option value="main" {{ old('loai') == 'main' ? 'selected' : '' }}>Main Banner</option>
+                                        <option value="sale" {{ old('loai') == 'sale' ? 'selected' : '' }}>Sale Banner</option>
+                                        <option value="product" {{ old('loai') == 'product' ? 'selected' : '' }}>Product Banner</option>
+                                    </select>
+                                    @error('loai')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
                                 <div>
 
                                     <label for="is_active" class="form-label">Trạng thái</label>
@@ -91,7 +105,7 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="ngay_bat_dau" class="form-label">Ngày bắt đầu</label>
-                                <input type="date" id="ngay_bat_dau" name="ngay_bat_dau" class="form-control 
+                                <input type="datetime-local" id="ngay_bat_dau" name="ngay_bat_dau" class="form-control 
                                 @error('ngay_bat_dau') is-invalid @enderror" value="{{ old('ngay_bat_dau') }}"
                                 placeholder="Ngày bắt đầu">
 
@@ -102,7 +116,7 @@
 
                              <div class="mb-3">
                                 <label for="ngay_ket_thuc" class="form-label">Ngày kết thúc</label>
-                                <input type="date" id="ngay_ket_thuc" name="ngay_ket_thuc" class="form-control 
+                                <input type="datetime-local" id="ngay_ket_thuc" name="ngay_ket_thuc" class="form-control 
                                 @error('ngay_ket_thuc') is-invalid @enderror" value="{{ old('ngay_ket_thuc') }}"
                                 placeholder="Ngày két thúc">
 

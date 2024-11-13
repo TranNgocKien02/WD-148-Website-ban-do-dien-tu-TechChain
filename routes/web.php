@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BaoCaoController;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\ThongTinTrangWebController;
@@ -7,8 +8,8 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OderController;
+// use App\Http\Controllers\CartController;
+// use App\Http\Controllers\OderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\Admin\DanhMucController;
@@ -19,6 +20,7 @@ use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\OderController;
 use App\Http\Controllers\Admin\KhachHangController;
+use App\Http\Controllers\Admin\ThongKeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +135,17 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/chi-tiet-thong-ke', [ThongKeController::class, 'chiTietThongKe'])->name('chiTietThongKe');
                 Route::get('/bao-cao', [ThongKeController::class, 'baoCao'])->name('bao-cao');
 
+            });
+
+            Route::prefix('banners')
+            ->as('banners.')
+            ->group(function () {
+                Route::get('/', [BannerController::class, 'index'])->name('index');
+                Route::get('{banner}/edit', [BannerController::class, 'edit'])->name('edit');
+                Route::get('/create', [BannerController::class, 'create'])->name('create');
+                Route::post('/store', [BannerController::class, 'store'])->name('store');
+                Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
+                Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
             });
         // route quản lý trang web
         Route::prefix('thong-tin-trang-web')

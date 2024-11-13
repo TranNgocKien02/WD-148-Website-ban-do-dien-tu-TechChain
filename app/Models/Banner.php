@@ -13,6 +13,7 @@ class Banner extends Model
         'tieu_de',
         'mo_ta',
         'anh',
+        'loai',
         'link',
         'ngay_bat_dau',
         'ngay_ket_thuc',

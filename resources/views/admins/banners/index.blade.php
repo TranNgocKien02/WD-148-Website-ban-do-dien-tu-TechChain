@@ -39,6 +39,7 @@
                             <th scope="col">Hình ảnh </th>
                             <th scope="col">Mô tả</th>
                             <th scope="col">Link </th>
+                            <th scope="col">Loại Banner </th>
                             <th scope="col">Ngày bắt đầu</th>
                             <th scope="col">Ngày kết thúc</th>
                             <th scope="col">Tình trạng</th>
@@ -55,6 +56,16 @@
                             </td>
                             <td>{{ $item->mo_ta}}</td>
                             <td>{{ $item->link}}</td>
+                            <td>@if($item->loai == 'main')
+                                    Main Banner
+                                @elseif($item->loai == 'sale')
+                                    Sale Banner
+                                @elseif($item->loai == 'product')
+                                    Product Banner
+                                @else
+                                    Unknown Type
+                                @endif
+                            </td>
                             <td>{{ \Carbon\Carbon::parse($item->ngay_bat_dau)->format('H:i:s - d/m/Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->ngay_ket_thuc)->format('H:i:s - d/m/Y') }}</td>
 

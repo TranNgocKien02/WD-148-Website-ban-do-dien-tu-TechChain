@@ -67,6 +67,19 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="loai" class="form-label">Loại Banner</label>
+                                    <select name="loai" id="loai" class="form-control @error('loai') is-invalid @enderror" value="{{ old('loai') }}">
+                                        <option value="" disabled selected>Chọn loại banner</option>
+                                        <option value="main" {{ old('loai', $banner->loai) == 'main' ? 'selected' : '' }}>Main Banner</option>
+                                        <option value="sale" {{ old('loai', $banner->loai) == 'sale' ? 'selected' : '' }}>Sale Banner</option>
+                                        <option value="product" {{ old('loai', $banner->loai) == 'product' ? 'selected' : '' }}>Product Banner</option>
+                                    </select>
+                                    @error('loai')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
                                 <div>
 
                                     <label for="is_active" class="form-label">Trạng thái</label>

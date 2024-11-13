@@ -35,11 +35,11 @@
                 </li>
 
                 <li>
-                    <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
+                    {{-- <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
 
                         <i data-feather="users"></i>
                             <span> Quản lý tài khoản </span>
-                    </a>
+                    </a> --}}
 
                 </li>
 
