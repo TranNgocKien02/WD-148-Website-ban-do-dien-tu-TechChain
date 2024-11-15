@@ -89,6 +89,13 @@
                     </a>
 
                 </li>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.lienhes.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Liên Hệ</span>
+                    </a>
+
+                </li>
             </ul>
 
         </div>

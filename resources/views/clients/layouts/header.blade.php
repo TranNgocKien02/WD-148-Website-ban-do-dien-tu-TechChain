@@ -339,7 +339,7 @@
                                                     </li>
                                                     <li><a href="index.html">Other Pages 2</a>
                                                         <ul>
-                                                            <li><a href="contact.html">Contact</a></li>
+                                                            <li><a href="{{route('contact')}}">Contact</a></li>
                                                             <li><a href="about-us.html">About Us</a></li>
                                                             <li><a href="faq.html">FAQ</a></li>
                                                             <li><a href="404.html">404 Error</a></li>
@@ -348,7 +348,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="about-us.html">About Us</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="{{route('contact')}}">Contact</a></li>
                                             <li><a href="shop-left-sidebar.html">Smartwatch</a></li>
                                             <li><a href="shop-left-sidebar.html">Accessories</a></li>
                                         </ul>

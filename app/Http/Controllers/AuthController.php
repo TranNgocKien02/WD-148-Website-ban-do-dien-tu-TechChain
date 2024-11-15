@@ -26,9 +26,9 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
         // dd($user);
-        // if (Auth::attempt($user)) {
-        //     return redirect()->intended('home');
-        // }
+        if (Auth::attempt($user)) {
+            return redirect()->intended('home');
+        }
         return redirect()->intended('home');
 
 

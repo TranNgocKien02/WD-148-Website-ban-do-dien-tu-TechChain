@@ -101,4 +101,5 @@
     </body>
 
 <!-- index30:23-->
+    @yield('script');
 </html>

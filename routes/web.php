@@ -21,6 +21,8 @@ use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\OderController;
 use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\ThongKeController;
+use App\Http\Controllers\Admin\LienHeController;
+use App\Http\Controllers\LienHeController as ControllersLienHeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,10 @@ Route::post('/cart/add', [CartController::class, 'addCart'])->name('cart.add');
 Route::get('/cart/list', [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 
+Route::controller(ControllersLienHeController::class)->group(function () {
+    Route::get('/contact', 'index')->name('contact');
+    Route::post('/contact', 'store')->name('contact.store');
+});
 
 
 Route::middleware('auth')->prefix('donhangs')
@@ -83,6 +89,8 @@ Route::middleware('auth')->prefix('donhangs')
     Route::get('/show/{id}',    [OrderController::class, 'show'])->name('show');
     Route::put('{id}/update',   [OrderController::class, 'update'])->name('update');
 });
+
+
 
 // route Admin
 Route::middleware(['auth', 'auth.admin'])->prefix('admins')
@@ -137,7 +145,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
 
             });
 
-            Route::prefix('banners')
+        Route::prefix('banners')
             ->as('banners.')
             ->group(function () {
                 Route::get('/', [BannerController::class, 'index'])->name('index');
@@ -147,15 +155,26 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
                 Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
             });
+            
         // route quản lý trang web
         Route::prefix('thong-tin-trang-web')
-        ->as('thongtintrangwebs.')
-        ->group(function () {
-            Route::get('/', [DonHangController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
-            Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
-            Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
-    });
+            ->as('thongtintrangwebs.')
+            ->group(function () {
+                Route::get('/', [DonHangController::class, 'index'])->name('index');
+                Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
+                Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
+                Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
+            });
+
+        // route quản lý lien he
+        Route::prefix('lien-he')
+            ->as('lienhes.')
+            ->group(function () {
+                Route::get('/', [LienHeController::class, 'index'])->name('index');
+                Route::get('{lienHe}/', [LienHeController::class, 'show'])->name('show');
+                Route::post('/respond', [LienHeController::class, 'respond'])->name('respond');
+                Route::delete('{lienHe}/destroy', [LienHeController::class, 'destroy'])->name('destroy');
+            });
     });
 Route::prefix('clients')
     ->as('clients.')

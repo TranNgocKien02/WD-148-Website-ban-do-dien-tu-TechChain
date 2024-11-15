@@ -30,7 +30,7 @@
 
                 <div class="card-body">
                         <form action="{{ route('admins.banners.store') }}" method="post" enctype="multipart/form-data">
-                            @csrf
+                        @csrf
                         <div class="row">
 
                             <div class="col-lg-6">
