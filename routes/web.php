@@ -16,10 +16,8 @@ use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\SanPhamController;
 
 use App\Http\Controllers\Admin\ThongKeController;
-use App\Http\Controllers\CartController;
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\client\ProductController;
-use App\Http\Controllers\OderController;
 use App\Http\Controllers\Admin\KhachHangController;
 
 /*
@@ -65,7 +63,7 @@ route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/product-detail/{id}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
 Route::post('/cart/add', [CartController::class, 'addCart'])->name('cart.add');
@@ -173,7 +171,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
             });
             
-    });
+    // });
 
 Route::prefix('clients')
     ->as('clients.')

@@ -365,24 +365,24 @@ textarea {
 /*----------------------------------------*/
 button.li-btn {
     border: none;
-    background: #fed700;
-    color: #242424;
+    background: rgba(255, 255, 255, 0.437);
+    color: #908a8a;
     font-size: 20px;
     width: 45px;
     border-radius: 0 2px 2px 0;
-    height: 45px;
+    height: 35px;
     line-height: 45px;
     position: absolute;
-    right: -1px;
-    top: -1px;
+    /* right: -1px;
+    top: -1px; */
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
-button.li-btn:hover {
+/* button.li-btn:hover {
     background: #333333;
     color: #ffffff;
-}
+} */
 
 a.links,
 a.links-2,
@@ -1775,15 +1775,16 @@ textarea:focus {
     background: #fff;
     border-radius: 5px;
     border: 1px solid #e1e1e1;
-    min-width: 638px;
-    height: 45px;
+    min-width: 530px;
+    height: 40px;
+    top: 15px;
     float: left;
 }
 
 .hm-searchbox .nice-select.select-search-category {
     width: auto;
     line-height: 43px;
-    height: 43px;
+    height: 40px;
     margin: 0;
     border: 0;
     padding: 0 28px 0 25px;
@@ -1829,6 +1830,12 @@ textarea:focus {
     padding: 0 60px 0 33px;
 }
 
+.hm-searchbox-text{
+    font-size: 13px;
+    color: #a5a5a5;
+    margin-left: 15px;
+}
+
 /*Header Middle Right*/
 .header-middle-right {
     display: flex;
@@ -1844,6 +1851,7 @@ textarea:focus {
 
 .hm-wishlist>a {
     border: 1px solid #e1e1e1;
+    background-color: white;
     font-size: 20px;
     color: #242424;
     width: 45px;
@@ -1856,8 +1864,9 @@ textarea:focus {
 
 .hm-wishlist>a:hover {
     border-color: #fed700;
-    color: #fed700;
+    color: red;
 }
+
 
 /*Header Middle Minicart*/
 .hm-minicart {
@@ -1913,7 +1922,7 @@ textarea:focus {
     font-size: 12px;
     font-weight: 400;
     color: #242424;
-    background: #fed700;
+    background: white;
     text-align: center;
     border-radius: 100%;
 }
@@ -2105,6 +2114,7 @@ textarea:focus {
 .header-bottom {
     background: #fed700;
     margin-bottom: 20px;
+    height: 70px;
 }
 
 .hb-menu>nav>ul {
@@ -2143,7 +2153,7 @@ textarea:focus {
     color: #ffffff;
 }
 
-.hb-menu nav>ul>li>a::after {
+.hb-menu nav>ul>.pages>a::after {
     content: "\f107";
     position: absolute;
     top: 8px;
@@ -2154,9 +2164,9 @@ textarea:focus {
     color: #242424;
 }
 
-.hb-menu nav>ul>li:nth-child(n+5)>a::after {
+/* .hb-menu nav>ul>li:nth-child(n+2)>a::after {
     content: none;
-}
+} */
 
 .hb-menu nav>ul>li:hover a::after {
     transform: rotate(180deg);
@@ -2204,6 +2214,7 @@ textarea:focus {
 }
 
 .megamenu {
+    /* width: 500px !important; */
     background: #ffffff;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2237,12 +2248,14 @@ textarea:focus {
 
 .megamenu>li:first-child {
     padding-left: 5px;
+    margin-left: 10px;
 }
 
 .megamenu>li:last-child,
 .megamenu-static-holder .hb-megamenu>li:last-child {
     border-right: none;
 }
+   
 
 .megamenu>li>a {
     padding: 8px 0 5px;
@@ -2265,13 +2278,34 @@ textarea:focus {
 .megamenu-static-holder .megamenu li ul li a:hover {
     color: #fed700;
 }
+.megamenu-static-holder .megamenu li{
+    border-bottom: 1px solid rgb(222, 216, 216);
+}
+.megamenu-static-holder .megamenu li ul li{
+   display: none;
+}
+.megamenu-leftside{
+    position: absolute;
+    top: 50px;
+    left: 400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Cho phép phần tử tự động xuống dòng */
+    max-width: 700px; /* Giới hạn kích thước tối đa */
+}
+.megamenu-leftside li{
+    margin-left: 15px;
+}
+.megamenu-static-holder .megamenu li:hover ul li{
+    display: block;
+}
 
 .megamenu-holder .megamenu li ul li a,
 .megamenu-static-holder .megamenu li ul li a {
     color: #7e7e7e;
     font-size: 14px;
     padding: 7px 0;
-    display: block
+    display: block;
 }
 
 .megamenu-holder .megamenu.is-visible,
@@ -2311,12 +2345,15 @@ textarea:focus {
     left: 0;
     z-index: 99;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .megamenu-holder .hb-megamenu {
     width: auto;
     background-size: auto;
     background-position: inherit;
+   
 }
 
 .megamenu-static-holder .hb-megamenu>li {
@@ -3673,8 +3710,8 @@ textarea:focus {
 }
 
 .category-heading>h2>i {
-    float: ;
-    text-align: ;
+    /* float: ;
+    text-align: ; */
     float: right;
     padding-right: 20px;
     font-size: 12px;
