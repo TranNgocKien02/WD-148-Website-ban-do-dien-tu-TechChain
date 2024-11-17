@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\SanPhamController;
 
 use App\Http\Controllers\Admin\ThongKeController;
-use App\Http\Controllers\CartController;
+
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\Admin\KhachHangController;
@@ -171,8 +171,8 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
                 Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
             });
-            
-    });
+
+
 
 Route::prefix('clients')
     ->as('clients.')
