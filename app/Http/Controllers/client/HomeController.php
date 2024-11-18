@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\DanhMuc;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('clients.home.index') ;
+        // Lấy tất cả danh mục cùng với sản phẩm của từng danh mục
+        $listDanhMuc = DanhMuc::with('sanPhams')->get();
+        return view('clients.home.index', compact('listDanhMuc'));
     }
 
     /**
