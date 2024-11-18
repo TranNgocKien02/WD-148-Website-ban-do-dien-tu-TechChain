@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     //đăng nhập 
-    // public function showFromLogin()
-    // {
-    //     return view('auth.login');
-    // }
+
+    public function showFromLogin()
+    {
+        return view('auth.login');
+    }
 
     //đăng nhập 
 
@@ -24,6 +25,21 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|string'
         ]);
+        // $user = $request->
+        //     // only('email','password');
+        //     validate([
+        //         'email' => 'required|string|email|max:255',
+        //         'password' => 'required|string'
+        //     ]);
+        // // dd($user);
+        // if (Auth::attempt($user)) {
+        //     return redirect()->intended('home');
+        // }
+        // only('email','password');
+        // validate([
+        //     'email' => 'required|string|email|max:255',
+        //     'password' => 'required|string'
+        // ]);
 
         // Kiểm tra nếu người dùng tồn tại và mật khẩu khớp
         $user = User::where('email', $credentials['email'])->first();
@@ -35,7 +51,8 @@ class AuthController extends Controller
         }
 
         return redirect()->back()->withErrors([
-            'email' => 'Thông tin sai đăng nhập'
+
+            'email' => 'Thông tin sai đăng nhập '
         ]);
     }
    
@@ -87,13 +104,15 @@ class AuthController extends Controller
 
         $user = User::query()->create($data);
 
+
         Auth::login($user);
 
-        return redirect()->intended('home');
+
         return redirect()->intended('home');
         #
 
     }
+
     //đăng xuất 
 
     public function logout(Request $request)
