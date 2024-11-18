@@ -11,96 +11,63 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     //đăng nhập 
-    public function showFromLogin(){
+    public function showFromLogin()
+    {
         return view('auth.login');
     }
 
-     //đăng nhập 
-    //  public function login(Request $request){
-    //     $user = $request->
-    //     // only('email','password');
-    //     validate([
-    //         'email' => 'required|string|email|max:255',
-    //         'password' => 'required|string'
-    //     ]);
-    //     // dd($user);
-    //     if (Auth::attempt($user)) {
-    //         return redirect()->intended('home');
-    //     }
+    //đăng nhập 
 
-    //     return redirect()->back()->withErrors([
-    //         'email' => 'Thông tin sai đăng nhập ' 
-    //     ]);
-    //  }
     public function login(Request $request)
-{
-    $credentials = $request->validate([
-        'email' => 'required|string|email|max:255',
-        'password' => 'required|string'
-    ]);
+    {
+        $credentials = $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string'
+        ]);
 
-    // Kiểm tra nếu người dùng tồn tại và mật khẩu khớp
-    $user = User::where('email', $credentials['email'])->first();
+        // Kiểm tra nếu người dùng tồn tại và mật khẩu khớp
+        $user = User::where('email', $credentials['email'])->first();
 
-    if ($user && $user->password === $credentials['password']) {
-        // Đăng nhập người dùng
-        Auth::login($user);
-        return redirect()->intended('clients');  // Chuyển đến trang đích 'clients'
+        if ($user && $user->password === $credentials['password']) {
+            // Đăng nhập người dùng
+            Auth::login($user);
+            return redirect()->intended('clients');  // Chuyển đến trang đích 'clients'
+        }
+
+        return redirect()->back()->withErrors([
+            'email' => 'Thông tin sai đăng nhập'
+        ]);
     }
 
-    return redirect()->back()->withErrors([
-        'email' => 'Thông tin sai đăng nhập'
-    ]);
-}
 
-
-      //đăng ký
-    public function showFromRegister(){
+    //đăng ký
+    public function showFromRegister()
+    {
         return view('auth.register');
     }
-
-     //đăng ký 
-    //  public function register(Request $request){
-    //     $data = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255',
-    //         'password' => 'required|string|min:8|',
-    //     ]);
-
-    //     $user = User::query()->create($data) ;
-        
-    //     Auth::login($user);
-
-    //     return redirect()->intended('home') ;
-    //     #
-
-    //  }
     public function register(Request $request)
-{
-    $data = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255',
-        'password' => 'required|string|min:8',
-    ]);
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
 
-    // Lưu mật khẩu trực tiếp mà không mã hóa
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => $data['password'], // Không sử dụng Hash::make()
-    ]);
+        // Lưu mật khẩu trực tiếp mà không mã hóa
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'], // Không sử dụng Hash::make()
+        ]);
 
-    Auth::login($user);
+        Auth::login($user);
 
-    return redirect()->intended('home');
-}
-
-
-      //đăng xuất 
-    public function logout(Request $request){
-        Auth::logout() ;
+        return redirect()->intended('home');
+    }
+    //đăng xuất 
+    public function logout(Request $request)
+    {
+        Auth::logout();
         return redirect('/login');
     }
-
-    
 }
