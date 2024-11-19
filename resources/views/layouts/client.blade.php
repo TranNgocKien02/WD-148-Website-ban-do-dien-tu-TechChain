@@ -279,8 +279,12 @@
         <title>E-Smart || Đồ điện tử thông minh</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+        {{-- <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"> --}}
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('lib/images/favicon.png')}}">
+
         <!-- Material Design Iconic Font-V2.2.0 -->
         <link rel="stylesheet" href="{{asset('lib/css/material-design-iconic-font.min.css')}}">
         <!-- Font Awesome -->
@@ -311,8 +315,19 @@
         <link rel="stylesheet" href="{{asset('lib/style.css')}}">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{asset('lib/css/responsive.css')}}">
+        <link rel="stylesheet" href="{{ asset('assets/client/css/style.css') }}">
+    {{-- <script src="{{ asset('assets/client/js/main.js') }}"></script>
+    <script src="{{asset('lib/js/main.js')}}"></script> --}}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AbwlofImYY9g_g3EKi4Hx5ela-htKEt2Q9ZXXOcng8O3xteVQ_RM94T9axkKHesAQtcayGfz2eus3x_l&currency=USD&components=buttons"></script>
+
+
+
+
+    @yield('css')
         <!-- Modernizr js -->
-        <script src="{{asset('lib/')}}js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
     <body>
     <!--[if lt IE 8]>
@@ -328,6 +343,8 @@
         </div>
         <!-- Body Wrapper End Here -->
         <!-- jQuery-V1.12.4 -->
+        <script src="{{asset('lib/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
         <script src="{{asset('lib/js/vendor/jquery-1.12.4.min.js')}}"></script>
         <!-- Popper js -->
         <script src="{{asset('lib/js/vendor/popper.min.js')}}"></script>
@@ -371,5 +388,6 @@
         <script src="{{asset('lib/js/main.js')}}"></script>
     </body>
 
+    @yield('js')
 <!-- index30:23-->
 </html>

@@ -79,8 +79,9 @@
                         <i data-feather="package"></i>
                             <span>Thống kê</span>
                     </a>
+                </li>
                 <li>
-                    <a class='tp-link' href='{{ route('admins.khuyenmais.index') }}'>
+                    <a class='tp-link' href='{{ route('admins.coupons.index') }}'>
                         <i data-feather="package"></i>
                             <span>Khuyến mãi</span>
                     </a>
