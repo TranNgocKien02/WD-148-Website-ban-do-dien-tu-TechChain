@@ -1,5 +1,14 @@
 @extends('layouts.client')
 
+@section('css')
+<style>
+    /* .duong1 .img-fluid {
+        width: 400px;
+         height: 400px;
+          overflow: hidden;"
+    } */
+</style>
+@endsection
 @section('content')
 <main>
     <!-- breadcrumb area start -->
@@ -10,8 +19,8 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('clients.index')}}"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="{{route('clients.index')}}">shop</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">product details</li>
                             </ul>
                         </nav>
@@ -32,39 +41,8 @@
                     <div class="product-details-inner">
                         <div class="row">
                             <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img1.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img2.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img3.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img4.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img5.jpg') }}" alt="product-details" />
-                                    </div>
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img1.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img2.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img3.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img4.jpg') }}" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="{{ asset('assets/client/img/product/product-details-img5.jpg') }}" alt="product-details" />
-                                    </div>
+                                <div class="duong1">
+                                    <img class="img-fluid" src="{{ Storage::url($products->hinh_anh) }}" alt="product" style="object-fit: cover; width: 100%; height: 100%;">
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -80,41 +58,44 @@
                                         <span><i class="fa fa-star-o"></i></span>
                                         <span><i class="fa fa-star-o"></i></span>
                                         <div class="pro-review">
-                                            <span>{{ $products->luot_xem }}lượt xem</span>
+                                            <span>{{ $products->luot_xem }} lượt xem</span>
                                         </div>
                                     </div>
                                     <div class="price-box">
-                                        <span class="price-regular">{{ number_format($products->gia_san_pham, 0, '', '.') }}đ</span>
-                                        <span class="price-old"><del>{{ number_format($products->gia_khuyen_mai, 0, '', '.') }}đ</del></span>
+                                        @if($products->gia_khuyen_mai > 0)
+                                            <!-- Hiển thị giá khuyến mãi nếu có -->
+                                            <span class="price-regular">{{ number_format($products->gia_khuyen_mai, 0, '', '.') }}đ</span>
+                                            <span class="price-old"><del>{{ number_format($products->gia_san_pham, 0, '', '.') }}đ</del></span>
+                                        @else
+                                            <!-- Nếu không có giá khuyến mãi, hiển thị giá gốc -->
+                                            <span class="price-regular">{{ number_format($products->gia_san_pham, 0, '', '.') }}đ</span>
+                                        @endif
                                     </div>
                                     <div class="availability">
                                         <i class="fa fa-check-circle"></i>
-                                        <span>Số lượng :{{ $products->so_luong }}</span>
+                                        <span>Số lượng: {{ $products->so_luong }}</span>
                                     </div>
                                     <p class="pro-desc">
-                                        Mô tả ngắn : {{ $products->mo_to_ngan }}
+                                        Mô tả ngắn: {{ $products->mo_ta_ngan }}
                                     </p>
                                     <form action="{{ route('cart.add')}}" method="post">
                                         @csrf
                                         <div class="quantity-cart-box d-flex align-items-center">
                                             <h6 class="option-title">qty:</h6>
-                                            
                                             <div class="quantity">
-                                                <div class="pro-qty"><input type="text" value="1" id="quantityInput" name="quantity"></div>
-                                                <input type="hidden" value="{{ $products->id }}" name="product_id"></div>
+                                                <div class="pro-qty d-flex align-items-center">
+                                                    <input type="text" value="1" class="pro-qty" name="quantity" id="quantityInput" min="1">
+                                                </div>
+                                                <input type="hidden" value="{{ $products->id }}" name="product_id">
                                             </div>
                                             <div class="action_link">
                                                 <button type="submit" class="btn btn-cart2">Add to cart</button>
                                             </div>
                                         </div>
                                     </form>
-                                  
-                                 
                                     <div class="useful-links">
-                                        <a href="#" data-bs-toggle="tooltip" title="Compare"><i
-                                                class="pe-7s-refresh-2"></i>compare</a>
-                                        <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
-                                                class="pe-7s-like"></i>wishlist</a>
+                                        <a href="#" data-bs-toggle="tooltip" title="Compare"><i class="pe-7s-refresh-2"></i>compare</a>
+                                        <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i class="pe-7s-like"></i>wishlist</a>
                                     </div>
                                     <div class="like-icon">
                                         <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
@@ -126,8 +107,9 @@
                             </div>
                         </div>
                     </div>
+                    
                     <!-- product details inner end -->
-</div>
+{{-- </div> --}}
                     <!-- product details reviews start -->
                     <div class="product-details-reviews section-padding pb-0">
                         <div class="row">
@@ -241,6 +223,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     <!-- product details reviews end -->
                 </div>
                 <!-- product details wrapper end -->
@@ -269,9 +252,9 @@
                         @foreach ($collection as $item)
                         <div class="product-item">
                             <figure class="product-thumb">
-                                <a href="product-details.html">
-                                    <img class="pri-img" src="{{ Storage::url($item->hinh_anh) }}" alt="product">
-                                    <img class="sec-img" src="{{ Storage::url($item->hinh_anh) }}" alt="product">
+                                <a  href="{{ route('product-detail', ['id' => $item->id]) }}">
+                                    <img  style="width: 200px; height: 200px; overflow: hidden;"  class="pri-img" src="{{ Storage::url($item->hinh_anh) }}" alt="product">
+                                    <img  style="width: 200px; height: 200px; overflow: hidden;"  class="sec-img" src="{{ Storage::url($item->hinh_anh) }}" alt="product">
                                 </a>
                                 <div class="product-badge">
                                     <div class="product-label new">
@@ -329,7 +312,7 @@
 @endsection
 
 @section('js')
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
             $('.pro-qty').append('<span class="inc qtybtn">+</span>');
@@ -379,14 +362,14 @@
             });
 
             $('.quantityInput').on('change', function() {
-                var value = parseInt($(this).val(), 10);
+            var value = parseInt($(this).val(), 10);
 
-                if (isNaN(value) || value < 1) {
-                    alert('Số lượng phải lớn hơn 1.');
-                    $(this).val(1);
-                }
-                updateTotals();
-            });
+            if (isNaN(value) || value < 1) {
+                alert('Số lượng phải lớn hơn 1.');
+                $(this).val(1);
+            }
+            updateTotals();
+        });
 
             $('.tm-cart-removeproduct').on('click', function() {
                 var $row = $(this).closest('tr');
@@ -396,5 +379,5 @@
 
             updateTotals();
         });
-    </script> --}}
+    </script>
 @endsection

@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     //đăng nhập 
-    public function showFromLogin(){
+    public function showFromLogin()
+    {
         return view('auth.login');
     }
 
@@ -54,8 +55,9 @@ class AuthController extends Controller
 }
 
 
-      //đăng ký
-    public function showFromRegister(){
+    //đăng ký
+    public function showFromRegister()
+    {
         return view('auth.register');
     }
 
@@ -98,9 +100,15 @@ class AuthController extends Controller
 
       //đăng xuất 
     public function logout(Request $request){
+        // Xóa giỏ hàng khỏi session khi đăng xuất
+    session()->forget('cart');
         Auth::logout() ;
         return redirect('/login');
+
     }
 
-    
+    //   //đăng xuất 
+    // public function logout(Request $request){
+    //     Auth::logout() ;
+    //đăng xuất 
 }

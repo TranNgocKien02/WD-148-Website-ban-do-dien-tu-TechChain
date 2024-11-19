@@ -35,12 +35,14 @@
                 </li>
 
                 <li>
-                    <a class='tp-link' href='{{ route('admins.taikhoans.index') }}'>
+                    <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
+
                         <i data-feather="users"></i>
                             <span> Quản lý tài khoản </span>
                     </a>
 
                 </li>
+
                 <li>
                     <a class='tp-link' href='{{ route('admins.thongtintrangwebs.index') }}'>
                         <i data-feather="users"></i>
@@ -57,7 +59,7 @@
                             <span> Doanh mục sản phẩm </span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a class='tp-link' href='{{ route('admins.sanphams.index') }}'>
                         <i data-feather="package"></i>
@@ -77,8 +79,9 @@
                         <i data-feather="package"></i>
                             <span>Thống kê</span>
                     </a>
+                </li>
                 <li>
-                    <a class='tp-link' href='{{ route('admins.khuyenmais.index') }}'>
+                    <a class='tp-link' href='{{ route('admins.coupons.index') }}'>
                         <i data-feather="package"></i>
                             <span>Khuyến mãi</span>
                     </a>
