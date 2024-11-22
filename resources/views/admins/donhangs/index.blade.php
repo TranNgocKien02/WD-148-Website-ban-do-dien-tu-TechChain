@@ -39,7 +39,7 @@
                 <table class="table table-striped mb-0">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Mã đơn hàng</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Tên danh mục</th>
                             <th scope="col">Trạng thái</th>
@@ -49,7 +49,7 @@
                     <tbody>
                         @foreach ($listDonHang as $item)
                         <tr>
-                            <th class="text-center">
+                            <th>
                                 <a href="{{ route('admins.donhangs.show',$item->id)}}">
                                     {{ $item->ma_don_hang}}
                                 </a>
@@ -83,24 +83,26 @@
 
                             </td>
 
-                            <td class="{{ $item->trang_thai == true ? 'text-success' : 'text-danger'}}">
+                            {{-- <td class="{{ $item->trang_thai == true ? 'text-success' : 'text-danger'}}">
                                 {{ $item->trang_thai == true ? 'Hiển thị' : 'Ẩn'}}
+                            </td> --}}
+                            <td>
+                                <a href="{{ route('admins.donhangs.show',$item->id) }}">
+                                    <i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i>
+                                </a>
+                            
+                                {{-- Kiểm tra trạng thái đơn hàng là HỦY hoặc ĐÃ GIAO HÀNG --}}
+                                @if ($item->trang_thai_don_hang === $type_huy_don_hang || $item->trang_thai_don_hang === 'da_giao_hang')
+                                <form action="{{ route('admins.donhangs.destroy',$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Bạn có đồng ý xóa không ?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="border-0 bg-white">
+                                        <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
+                                    </button>
+                                </form>
+                                @endif
                             </td>
-                            <td>                                                       
-                                <a href="{{ route('admins.donhangs.show',$item->id) }}"><i class="mdi mdi-eye text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
-                               
-                               @if ($item->trang_thai_don_hang === $type_huy_don_hang)
-                               <form action="{{ route('admins.donhangs.destroy',$item->id) }}" method="post" class="d-inline" onsubmit="return confirm('Bạn có đồng ý xóa không ?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="border-0 bg-white">
-                                    <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"></i>
-
-                                </button>
-                            </form>
-                               @endif
-                              
-                             </td>
+                            
                         </tr>
                         @endforeach
                         
@@ -123,9 +125,9 @@
     <script>
         function confirmSubmit(element) {
             var form = element.form;
-            var selectedOption = element.options[element.selectedOption].text ;
+            var selectedOption = element.options[element.selectedIndex].text ;
             var defaultVal = element.getAttribute('data-default-value');
-            if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái đơn hàng này?')) {
+            if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái đơn hàng này thành"' + selectedOption +'" không?')) {
                 form.submit();
             }else{
                 element.value = defaultVal ;

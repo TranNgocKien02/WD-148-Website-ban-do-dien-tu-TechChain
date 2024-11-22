@@ -47,9 +47,9 @@
                                 <div class="ht-language-trigger"><span>Tiếng việt</span></div>
                                 <div class="language ht-language">
                                     <ul class="ht-setting-list">
-                                        <li class="active"><a href="#"><img src="images/menu/flag-icon/1.jpg"
+                                        <li class="active"><a href="#"><img src="{{asset('lib/images/menu/flag-icon/1.jpg')}}"
                                                     alt="">English</a></li>
-                                        <li><a href="#"><img src="images/menu/flag-icon/2.jpg"
+                                        <li><a href="#"><img src="{{asset('lib/images/menu/flag-icon/2.jpg')}}"
                                                     alt="">Tiếng việt</a></li>
                                     </ul>
                                 </div>
@@ -84,22 +84,22 @@
                                                     </div> --}}
                                     <!-- Header Logo Area End Here -->
                                 </li>
-                                <li><a href="#">Trang chủ</a>
+                                <li><a href="{{route('clients.index')}}">Trang chủ</a>
                                 </li>
                                 <li class="megamenu-static-holder pages"><a href="index.html">Danh mục</a>
                                     <ul class="megamenu hb-megamenu">
-                                        @foreach ($listDanhMuc as $danhMuc)
+                                        {{-- @foreach ($listDanhMuc as $danhMuc)
                                             <li><a class="megamenu-blog"
                                                     href="blog-left-sidebar.html">{{ $danhMuc->ten_danh_muc }}</a>
                                                 <ul class="megamenu-leftside">
                                                     <li>Hãng {{ $danhMuc->ten_danh_muc }}</li>
                                                     @foreach ($danhMuc->hangs as $hang)
-                                                        {{-- <li><a href="blog-2-column.html">Blog 2 Column</a></li> --}}
+                                                        <li><a href="blog-2-column.html">Blog 2 Column</a></li>
                                                         <li><a href="blog-2-column.html">{{ $hang->ten_hang }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>
-                                        @endforeach
+                                        @endforeach --}}
                                         <li><a href="megamenu-blog">Thông tin</a>
                                             <ul class="megamenu-leftside">
                                                 <li><a href="blog-2-column.html">Tư vấn chọn mua</a></li>
@@ -146,19 +146,19 @@
 
                                             <!-- Begin Header Mini Cart Area -->
                                             <li class="hm-minicart">
-                                                <div class="hm-minicart-trigger">
-                                                    <span class="item-icon"></span>
-                                                    <span class="item-text">£80.00
-                                                        <span class="cart-item-count">2</span>
-                                                    </span>
-                                                </div>
+                                                    <div class="hm-minicart-trigger">
+                                                        <span class="item-icon"></span>
+                                                        <span class="item-text">£80.00
+                                                            <span href="{{route('cart.list')}}" class="cart-item-count">{{ session('cart') ? count(session('cart')) : '0' }}</span>
+                                                        </span>
+                                                    </div>
                                                 <span></span>
                                                 <div class="minicart">
                                                     <ul class="minicart-product-list">
                                                         <li>
                                                             <a href="single-product.html"
                                                                 class="minicart-product-image">
-                                                                <img src="images/product/small-size/5.jpg"
+                                                                <img src="{{asset('lib/images/product/small-size/5.jpg')}}"
                                                                     alt="cart products">
                                                             </a>
                                                             <div class="minicart-product-details">
@@ -174,7 +174,7 @@
                                                         <li>
                                                             <a href="single-product.html"
                                                                 class="minicart-product-image">
-                                                                <img src="images/product/small-size/6.jpg"
+                                                                <img src="{{asset('lib/images/product/small-size/6.jpg')}}"
                                                                     alt="cart products">
                                                             </a>
                                                             <div class="minicart-product-details">
@@ -189,11 +189,11 @@
                                                     </ul>
                                                     <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
                                                     <div class="minicart-button">
-                                                        <a href="shopping-cart.html"
+                                                        <a href="{{route('cart.list')}}"
                                                             class="li-button li-button-fullwidth li-button-dark">
                                                             <span>View Full Cart</span>
                                                         </a>
-                                                        <a href="checkout.html" class="li-button li-button-fullwidth">
+                                                        <a href="{{route('donhangs.index')}}" class="li-button li-button-fullwidth">
                                                             <span>Checkout</span>
                                                         </a>
                                                     </div>

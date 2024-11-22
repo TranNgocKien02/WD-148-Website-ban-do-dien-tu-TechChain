@@ -1775,7 +1775,7 @@ textarea:focus {
     background: #fff;
     border-radius: 5px;
     border: 1px solid #e1e1e1;
-    min-width: 530px;
+    min-width: 470px;
     height: 40px;
     top: 15px;
     float: left;
