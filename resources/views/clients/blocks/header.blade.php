@@ -73,7 +73,7 @@
                     <div class="hb-menu">
                         <nav>
                             <ul>
-                                <li>
+                                <li class="logo-nav">
                                     E-SMART
                                     <!-- Begin Header Logo Area -->
                                     {{-- <div class="logo pb-sm-30 pb-xs-30">
@@ -84,9 +84,9 @@
                                                     </div> --}}
                                     <!-- Header Logo Area End Here -->
                                 </li>
-                                <li><a href="{{route('clients.index')}}">Trang chủ</a>
+                                <li class="logo-nav"><a href="{{route('clients.index')}}">Trang chủ</a>
                                 </li>
-                                <li class="megamenu-static-holder pages"><a href="index.html">Danh mục</a>
+                                <li class="megamenu-static-holder pages logo-nav"><a href="index.html">Danh mục</a>
                                     <ul class="megamenu hb-megamenu">
                                         {{-- @foreach ($listDanhMuc as $danhMuc)
                                             <li><a class="megamenu-blog"

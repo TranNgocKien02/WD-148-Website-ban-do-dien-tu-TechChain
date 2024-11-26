@@ -1840,6 +1840,8 @@ textarea:focus {
 .header-middle-right {
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    bottom: 10px;
 }
 
 /*Header Middle Wishlist*/
@@ -1856,12 +1858,14 @@ textarea:focus {
     color: #242424;
     width: 45px;
     text-align: center;
-    height: 45px;
+    height: 40px;
     line-height: 45px;
     display: block;
     transition: all 0.3s ease-in-out;
 }
-
+.fa{
+    margin-top: 10px;
+}
 .hm-wishlist>a:hover {
     border-color: #fed700;
     color: red;
@@ -1878,7 +1882,7 @@ textarea:focus {
     border-radius: 2px;
     background: #e80f0f;
     color: #fff;
-    height: 45px;
+    height: 40px;
     cursor: pointer;
     display: block;
     position: relative;
@@ -2171,7 +2175,10 @@ textarea:focus {
 .hb-menu nav>ul>li:hover a::after {
     transform: rotate(180deg);
 }
-
+.logo-nav{
+    position: relative !important;
+    top: -10px !important;
+}
 .ht-menu>li .ht-currency-trigger span::after,
 .ht-menu>li .ht-language-trigger span::after,
 .hm-minicart-trigger .item-text::after {
@@ -2331,9 +2338,9 @@ textarea:focus {
     margin-right: -20px;
 }
 
-.megamenu-static-holder {
+/* .megamenu-static-holder {
     position: static !important;
-}
+} */
 
 .megamenu-static-holder .hb-megamenu,
 .megamenu-holder .hb-megamenu {
