@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Requests\StoreLienHeRequest;
 use App\Models\LienHe;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +29,6 @@ class LienHeController extends Controller
             return back();
         }
 
-        return back()->with('success', 'Thêm banner thành công');
+        return back()->with('success', 'Thành công');
     }
 }

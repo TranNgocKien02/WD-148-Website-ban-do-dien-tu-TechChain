@@ -142,6 +142,7 @@
                                     <input type="hidden" name="lien_he_id" id="" value="{{$lienHe->id}}">
                                     <input type="hidden" name="email_khach_hang" id="" value="{{$lienHe->email_khach_hang}}">
                                     <input type="hidden" name="ten_khach_hang" id="" value="{{$lienHe->ten_khach_hang}}">
+                                    <input type="hidden" name="created_at" id="" value="{{$lienHe->created_at}}">
                                     <div class="mb-3">
                                         <label for="tieu_de" class="form-label">Nội dung</label>
                                         <textarea type="text" id="noi_dung" rows="5" name="noi_dung" class="form-control"> </textarea>

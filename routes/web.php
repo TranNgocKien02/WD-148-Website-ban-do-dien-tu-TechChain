@@ -22,7 +22,7 @@ use App\Http\Controllers\OderController;
 use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\Admin\LienHeController;
-use App\Http\Controllers\LienHeController as ControllersLienHeController;
+use App\Http\Controllers\Client\LienHeController as ControllersLienHeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 
 Route::get('/product-detail/{id}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
 Route::post('/cart/add', [CartController::class, 'addCart'])->name('cart.add');

@@ -18,11 +18,14 @@ class ContactMail extends Mailable
      */
     public $noi_dung;
     public $ten_khach_hang;
+    public $created_at;
+    
 
-    public function __construct($noi_dung, $ten_khach_hang)
+    public function __construct($noi_dung, $ten_khach_hang, $created_at)
     {
         $this->ten_khach_hang = $ten_khach_hang;
         $this->noi_dung = $noi_dung;
+        $this->created_at = $created_at;
     }
 
     /**
@@ -45,6 +48,7 @@ class ContactMail extends Mailable
             with: [
                 'ten_khach_hang' => $this->ten_khach_hang,
                 'noi_dung' => $this->noi_dung,
+                'created_at' => $this->created_at,
             ]
         );
     }

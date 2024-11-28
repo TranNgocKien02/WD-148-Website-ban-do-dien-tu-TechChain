@@ -6,6 +6,7 @@ use App\Models\LienHe;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
 use App\Models\PhanHoi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -41,14 +42,17 @@ class LienHeController extends Controller
         $data = $request->all();
         $data['nguoi_phan_hoi'] = auth()->user()->name;
         $lienHeId = $data['lien_he_id'];
+        $data['created_at'] = Carbon::parse();
         try {
             DB::beginTransaction();
             try { 
-                Mail::to($data['email_khach_hang'])->send(new ContactMail($data['noi_dung'], $data['ten_khach_hang'])); 
+                Mail::to($data['email_khach_hang'])->send(new ContactMail($data['noi_dung'], $data['ten_khach_hang'], $data['created_at'])); 
             } catch (\Exception $mailException) { 
+                dd($mailException);
                 DB::rollback(); 
                 return back()->withErrors('Error occurred while sending email: ' . $mailException->getMessage()); 
             }
+
             PhanHoi::create($data);
             $lienHeId = $request->input('lien_he_id');
             if (PhanHoi::where('lien_he_id', $lienHeId)->exists()) { 
