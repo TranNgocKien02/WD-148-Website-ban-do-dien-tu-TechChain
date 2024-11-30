@@ -85,7 +85,7 @@
                                         <td>{{ $donHang->ma_don_hang }}</td>
                                         <td>{{ $donHang->user->name }}</td>
                                         <td>{{ number_format($donHang->tong_tien, 0, ',', '.') }} VNĐ</td>
-                                        <td>{{ $donHang->trangThai->ten_trang_thai }}</td>
+                                        <td>{{ $donHang->trang_thai_thanh_toan }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -97,7 +97,7 @@
         </div><!-- end row -->
 
         <!-- Delivered Orders Section -->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
@@ -170,7 +170,7 @@
                     </div><!-- end card body -->
                 </div><!-- end card -->
             </div><!-- end col -->
-        </div><!-- end row -->
+        </div><!-- end row --> --}}
 
         <div class="table-responsive">
             <a 

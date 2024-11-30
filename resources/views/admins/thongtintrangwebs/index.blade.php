@@ -18,7 +18,7 @@
                     </div><!-- end card header -->
 
                     <div class="card-body">
-                        <form action="{{ route('admins.thongtintrangwebs.update') }}" method="POST">
+                        <form action="{{ route('admins.thongtintrangwebs.update', $thongTin->id) }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="tieu_de" class="form-label">Tiêu Đề</label>
@@ -47,5 +47,5 @@
             </div><!-- end col -->
         </div><!-- end row -->
     </div> <!-- container-fluid -->
-</div> <!-- content -->
+</div> 
 @endsection
