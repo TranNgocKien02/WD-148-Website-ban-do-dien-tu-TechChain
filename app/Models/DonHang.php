@@ -43,6 +43,7 @@ class DonHang extends Model
         'trang_thai_don_hang',
         'trang_thai_thanh_toan',
         'tien_hang',
+        'tien_khuyen_mai',
         'tien_ship',
         'tong_tien',
        
@@ -80,4 +81,5 @@ class DonHang extends Model
     protected $casts = [
         'ngay_dat' => 'datetime',
     ];
+    
 }

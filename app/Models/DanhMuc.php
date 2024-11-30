@@ -25,4 +25,11 @@ class DanhMuc extends Model
     public function sanPhams(){
         return $this->hasMany(SanPham::class) ;
     }
+
+
+    // Quan hệ một-nhiều với HangModel
+    public function hangs()
+    {
+        return $this->hasMany(HangModel::class, 'danh_muc_id', 'id');
+    }
 }

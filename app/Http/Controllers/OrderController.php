@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
 use App\Mail\OrderConfirm;
 use App\Models\DonHang;
 use Illuminate\Http\Request;
@@ -29,64 +30,114 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $cart =  session()->get('cart',[]);
-        if (!empty($cart)) {
-            $total = 0 ;
-            $subTotal = 0 ;
-            foreach($cart as $item){
-                $subTotal += $item['gia'] * $item['so_luong'];
-            }
-            $shipping = 30000 ;
-            $total = $subTotal + $shipping;
-            return view('clients.donhangs.create',compact('cart', 'total', 'shipping', 'subTotal'));
+public function create()
+{
+    $cart = session()->get('cart', []); // Lấy dữ liệu giỏ hàng từ session
+
+    if (!empty($cart)) {
+        // Tính tổng tiền và các giá trị liên quan (subTotal, shipping, coupon)
+        $subTotal = 0;
+        $shipping = 20000; // Phí vận chuyển mặc định
+        $coupon = session()->get('coupon', 0); // Kiểm tra coupon có trong session không
+
+        foreach ($cart as $item) {
+            // Ưu tiên giá khuyến mãi nếu có, nếu không thì lấy giá gốc
+            $giaHienThi = $item['gia_khuyen_mai'] ?? $item['gia'];
+            $subTotal += $giaHienThi * $item['so_luong'];
         }
-       return redirect()->route('cart.list');
+
+        // Tính tổng tiền, trừ đi nếu có coupon
+        $total = $subTotal + $shipping - $coupon;
+
+        // Lưu lại giá trị subTotal, shipping và coupon vào session
+        session()->put('subTotal', $subTotal);
+        session()->put('shipping', $shipping);
+        session()->put('coupon', $coupon);
+
+        // Trả dữ liệu cho view
+        return view('clients.donhangs.create', compact('cart', 'subTotal', 'shipping', 'coupon', 'total'));
     }
+
+    // Nếu giỏ hàng rỗng, chuyển hướng về trang giỏ hàng
+    return redirect()->route('cart.list')->with('message', 'Giỏ hàng của bạn đang trống.');
+}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-       if ($request->isMethod('POST')) {
+        // Kiểm tra xem yêu cầu có phải là phương thức POST không
+        if ($request->isMethod('POST')) {
+            // Bắt đầu giao dịch
             DB::beginTransaction();
             try {
+                // Lấy tất cả dữ liệu từ request trừ _token
                 $param = $request->except('_token');
-                $param['ma_don_hang'] = $this->generateUniqueOrderCode();
                 
-                $donHang =  DonHang::query()->create($param);
-                $don_hang_id = $donHang->id ; 
-
-                $carts = session()->get('cart',[]);
-
-                foreach($carts as $key => $item){
-                     $thanhtien = $item['gia'] * $item['so_luong'] ;
-
-                     $donHang->chiTietDonHang()->create([
+                // Tạo mã đơn hàng duy nhất
+                $param['ma_don_hang'] = $this->generateUniqueOrderCode();
+    
+                // Lấy thông tin khuyến mãi (coupon) từ session
+                $tienKhuyenMai = session()->get('coupon', 0);
+    
+                // Tính tổng tiền (subTotal + shipping - coupon)
+                $subTotal = session()->get('subTotal', 0); // Tổng tiền trước khi trừ khuyến mãi
+                $shipping = session()->get('shipping', 20000); // Phí vận chuyển (giả sử đã lưu trong session)
+                $total = $subTotal + $shipping - $tienKhuyenMai; // Tổng tiền sau khi trừ khuyến mãi
+    
+                // Thêm thông tin khuyến mãi và tổng tiền vào param
+                $param['tien_khuyen_mai'] = $tienKhuyenMai;
+                $param['tong_tien'] = $total;
+    
+                // Lưu thông tin đơn hàng vào cơ sở dữ liệu
+                $donHang = DonHang::create($param); // Tạo đơn hàng mới
+                $don_hang_id = $donHang->id; // Lấy ID của đơn hàng đã lưu
+    
+                // Lấy giỏ hàng từ session
+                $carts = session()->get('cart', []);
+    
+                // Lưu chi tiết đơn hàng
+                foreach ($carts as $productId => $item) {
+                    $thanhTien = $item['gia'] * $item['so_luong']; // Tính thành tiền của mỗi sản phẩm
+    
+                    // Lưu chi tiết đơn hàng vào bảng chi tiết
+                    $donHang->chiTietDonHang()->create([
                         'don_hang_id' => $don_hang_id,
-                        'san_pham_id' => $key,
+                        'san_pham_id' => $productId,
                         'don_gia' => $item['gia'],
                         'so_luong' => $item['so_luong'],
-                        'thanh_tien' => $thanhtien,
-                     ]);
+                        'thanh_tien' => $thanhTien,
+                    ]);
                 }
+    
+                // Commit giao dịch nếu không có lỗi
                 DB::commit();
-
-                Mail::to($donHang->email_nguoi_nhan)->queue(new OrderConfirm($donHang));
-
-                session()->put('cart',[]);
-
-                return redirect()->route('donhangs.index')->with('success','Đơn hàng đã được thêm thành công');
-
-            } catch (\Exception $th) {
+    
+                // Gửi email xác nhận đơn hàng (bạn có thể bật lại nếu cần thiết)
+                // Mail::to($donHang->email_nguoi_nhan)->queue(new OrderConfirm($donHang));
+    
+                // Xóa giỏ hàng sau khi tạo đơn hàng thành công
+                session()->forget('cart');
+    
+                // Chuyển hướng đến trang chi tiết đơn hàng
+                return redirect()->route('donhangs.show', ['id' => $don_hang_id])
+                    ->with('success', 'Đơn hàng đã được thêm thành công');
+            } catch (\Exception $e) {
+                // Rollback nếu có lỗi trong quá trình lưu trữ
                 DB::rollBack();
-
-                return redirect()->route('cart.list')->with('error','Có lỗi khi tạo đơn hàng. Vui lòng thử lại sau');
+    
+                // Quay lại trang giỏ hàng và hiển thị thông báo lỗi
+                return redirect()->route('cart.list')->with('error', 'Có lỗi khi tạo đơn hàng. Vui lòng thử lại sau.');
             }
-       }
+        }
+    
+        // Nếu không phải là phương thức POST, chuyển hướng về trang giỏ hàng
+        return redirect()->route('cart.list')->with('error', 'Có lỗi khi tạo đơn hàng. Vui lòng thử lại sau.');
     }
+    
+
+
 
     /**
      * Display the specified resource.
@@ -145,4 +196,7 @@ class OrderController extends Controller
         } while (DonHang::where('ma_don_hang',$orderCode)->exists());
         return $orderCode;
     }
+
+
+    
 }

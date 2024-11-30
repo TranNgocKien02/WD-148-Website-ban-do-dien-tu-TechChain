@@ -43,6 +43,11 @@ class SanPham extends Model
     public function hinhAnhSanPham(){
         return $this->hasMany(HinhAnhSanPham::class) ;
     }
+     // Quan hệ ngược lại với HangModel
+     public function hang()
+{
+    return $this->belongsTo(HangModel::class, 'hang_id');
+}
 }
 
 // protected $fillable = [
