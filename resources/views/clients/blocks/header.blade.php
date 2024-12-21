@@ -16,32 +16,17 @@
                 <!-- Begin Header Top Right Area -->
                 <div class="col-lg-9 col-md-8">
                     <div class="header-top-right">
-                        <ul class="ht-menu">
-                            <!-- Begin Setting Area -->
+                        {{-- <ul class="ht-menu">
                             <li>
                                 <div class="ht-setting-trigger"><span>Cài đặt</span></div>
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
                                         <li><a href="login-register.html">My Account</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="login-register.html">Sign In</a></li>
+                                        <li><a href="{{route('login')}}">Sign In</a></li>
                                     </ul>
                                 </div>
                             </li>
-                            <!-- Setting Area End Here -->
-                            <!-- Begin Currency Area -->
-                            {{-- <li>
-                                            <span class="currency-selector-wrapper">Currency :</span>
-                                            <div class="ht-currency-trigger"><span>USD $</span></div>
-                                            <div class="currency ht-currency">
-                                                <ul class="ht-setting-list">
-                                                    <li><a href="#">EUR €</a></li>
-                                                    <li class="active"><a href="#">USD $</a></li>
-                                                </ul>
-                                            </div>
-                                        </li> --}}
-                            <!-- Currency Area End Here -->
-                            <!-- Begin Language Area -->
                             <li>
                                 <span class="language-selector-wrapper">Ngôn ngữ :</span>
                                 <div class="ht-language-trigger"><span>Tiếng việt</span></div>
@@ -54,8 +39,24 @@
                                     </ul>
                                 </div>
                             </li>
-                            <!-- Language Area End Here -->
+                        </ul> --}}
+                        <ul class="ht-setting-list">
+                            @if(auth()->check())
+                                <!-- Hiển thị tên người dùng nếu đã đăng nhập -->
+                                <li>
+                                    <a href="{{ route('profile') }}">
+                                        {{ auth()->user()->name }}
+                                    </a>
+                                </li>
+                                {{-- <li>
+                                    <a href="{{ route('logout') }}">Logout</a>
+                                </li> --}}
+                            @else
+                                <!-- Hiển thị "Sign In" nếu chưa đăng nhập -->
+                                <li><a href="{{ route('login') }}">Sign In</a></li>
+                            @endif
                         </ul>
+                        
                     </div>
                 </div>
                 <!-- Header Top Right Area End Here -->

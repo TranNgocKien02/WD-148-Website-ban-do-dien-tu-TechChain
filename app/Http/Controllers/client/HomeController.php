@@ -21,11 +21,17 @@ class HomeController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
-        $sanPhamBanChays = Sanpham::select('san_phams.*', DB::raw('SUM(chi_tiet_don_hangs.so_luong) as tong_so_luong'))
+        // $sanPhamBanChays = Sanpham::select('san_phams.*', DB::raw('SUM(chi_tiet_don_hangs.so_luong) as tong_so_luong'))
+        // ->join('chi_tiet_don_hangs', 'san_phams.id', '=', 'chi_tiet_don_hangs.san_pham_id')
+        // ->groupBy('san_phams.id')
+        // ->orderByDesc('tong_so_luong')
+        // ->take(10) // Lấy top 10 sản phẩm bán chạy nhất
+        // ->get();
+        $sanPhamBanChays = Sanpham::select('san_phams.id', 'san_phams.ten_san_pham', 'san_phams.gia_san_pham', DB::raw('SUM(chi_tiet_don_hangs.so_luong) as tong_so_luong'))
         ->join('chi_tiet_don_hangs', 'san_phams.id', '=', 'chi_tiet_don_hangs.san_pham_id')
-        ->groupBy('san_phams.id')
+        ->groupBy('san_phams.id', 'san_phams.ten_san_pham', 'san_phams.gia_san_pham')
         ->orderByDesc('tong_so_luong')
-        ->take(10) // Lấy top 10 sản phẩm bán chạy nhất
+        ->take(10)
         ->get();
 
         $sanPhamNoiBats = Sanpham::orderBy('luot_xem', 'desc')->take(10)->get();

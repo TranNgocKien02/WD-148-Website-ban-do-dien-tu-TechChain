@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\BaoCaoController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\KhuyenMaiController;
 use App\Http\Controllers\Admin\ThongTinTrangWebController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\client\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -49,7 +49,9 @@ route::post('login', [AuthController::class, 'login'])->name('login');
 route::get('register', [AuthController::class, 'showFromRegister']);
 route::post('register', [AuthController::class, 'register'])->name('register');
 route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::get('/profile', [UserController::class, 'showProfile'])->name('profile')->middleware('auth');
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+Route::put('/profile/update', [UserController::class, 'update'])->name('profile.update');
 // lấy lại mật khẩu
 // Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
 // Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
