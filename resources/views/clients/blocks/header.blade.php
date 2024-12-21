@@ -87,40 +87,50 @@
                                 </li>
                                 <li class="logo-nav"><a href="{{route('clients.index')}}">Trang chủ</a>
                                 </li>
-                                <li class="megamenu-static-holder pages logo-nav"><a href="index.html">Danh mục</a>
-                                    <ul class="megamenu hb-megamenu">
-                                        {{-- @foreach ($listDanhMuc as $danhMuc)
-                                            <li><a class="megamenu-blog"
-                                                    href="blog-left-sidebar.html">{{ $danhMuc->ten_danh_muc }}</a>
-                                                <ul class="megamenu-leftside">
-                                                    <li>Hãng {{ $danhMuc->ten_danh_muc }}</li>
-                                                    @foreach ($danhMuc->hangs as $hang)
-                                                        <li><a href="blog-2-column.html">Blog 2 Column</a></li>
-                                                        <li><a href="blog-2-column.html">{{ $hang->ten_hang }}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        @endforeach --}}
-                                        <li><a href="megamenu-blog">Thông tin</a>
-                                            <ul class="megamenu-leftside">
-                                                <li><a href="blog-2-column.html">Tư vấn chọn mua</a></li>
-                                                <li><a href="blog-2-column.html"> Khuyến mãi </a></li>
-                                                <li><a href="blog-2-column.html"> Tìm địa chỉ cửa hàng </a></li>
-                                                <li><a href="blog-2-column.html">Tìm hiểu về mua trả góp </a></li>
-                                                <li><a href="blog-2-column.html"> Tra cứu bảo hành</a></li>
+
+
+                                <li class="menu-link megamenu-static-holder pages logo-nav">
+                                    <a href="index.html">Danh mục</a>
+                                    <ul class="dropdown">
+                                        <!-- Vòng lặp qua các danh mục chính -->
+                                        @foreach ($listDanhMuc as $danhMuc)
+                                        <li class="dropdown-item">
+                                            <a class="megamenu-blog" href="blog-left-sidebar.html">{{ $danhMuc->ten_danh_muc }}</a>
+                                            <!-- Danh mục con -->
+                                            <ul class="sub-dropdown">
+                                                {{-- <li>{{ $danhMuc->ten_danh_muc }}</li> --}}
+                                                @foreach ($danhMuc->hangs as $hang)
+                                                <li><a href="blog-2-column.html">{{ $hang->ten_hang }}</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
-                                        <li><a href="megamenu-blog">Dịch vụ tiện ích</a>
-                                            <ul class="megamenu-leftside">
-                                                <li><a href="blog-2-column.html">Vệ sinh điều hòa </a></li>
+                                        @endforeach
+                                
+                                        <!-- Thông tin -->
+                                        <li class="dropdown-item">
+                                            <a href="#">Thông tin</a>
+                                            <ul class="sub-dropdown">
+                                                <li><a href="blog-2-column.html">Tư vấn chọn mua</a></li>
+                                                <li><a href="blog-2-column.html">Khuyến mãi</a></li>
+                                                <li><a href="blog-2-column.html">Tìm địa chỉ cửa hàng</a></li>
+                                                <li><a href="blog-2-column.html">Tìm hiểu về mua trả góp</a></li>
+                                                <li><a href="blog-2-column.html">Tra cứu bảo hành</a></li>
+                                            </ul>
+                                        </li>
+                                
+                                        <!-- Dịch vụ tiện ích -->
+                                        <li class="dropdown-item">
+                                            <a href="#">Dịch vụ tiện ích</a>
+                                            <ul class="sub-dropdown">
+                                                <li><a href="blog-2-column.html">Vệ sinh điều hòa</a></li>
                                                 <li><a href="blog-2-column.html">Sim số, thẻ cào</a></li>
-                                                <li><a href="blog-2-column.html">Đóng tiền trả góp </a></li>
-                                                <li><a href="blog-2-column.html">Vay tiền mặt CAKE </a></li>
+                                                <li><a href="blog-2-column.html">Đóng tiền trả góp</a></li>
+                                                <li><a href="blog-2-column.html">Vay tiền mặt CAKE</a></li>
                                             </ul>
                                         </li>
                                     </ul>
-
                                 </li>
+                                
 
                                 <li>
                                     <!-- Begin Header Middle Right Area -->

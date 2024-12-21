@@ -2247,6 +2247,46 @@ textarea:focus {
     box-shadow: 0 0 5px rgba(0, 0, 0, .1);
 }
 
+
+.menu-link {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    z-index: 1000;
+    padding: 10px;
+    list-style: none;
+}
+
+.dropdown-item {
+    position: relative;
+}
+
+.sub-dropdown {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    list-style: none;
+    padding: 10px;
+}
+
+.menu-link:hover .dropdown,
+.dropdown-item:hover > .sub-dropdown {
+    display: block;
+}
+
+
+
+
 .megamenu>li {
     padding: 0 20px;
     min-width: 250px;
@@ -2313,6 +2353,11 @@ textarea:focus {
     font-size: 14px;
     padding: 7px 0;
     display: block;
+    position: absolute;
+    flex-direction: row;
+    flex-wrap: wrap; /* Cho phép phần tử tự động xuống dòng */
+    max-width: 700px; 
+    
 }
 
 .megamenu-holder .megamenu.is-visible,
