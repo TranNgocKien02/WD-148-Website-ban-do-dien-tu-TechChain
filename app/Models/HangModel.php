@@ -18,14 +18,14 @@ class HangModel extends Model
         'san_pham_id',
     ];
 
-      // Quan hệ ngược lại với DanhMuc
-      public function danhMuc()
-      {
-          return $this->belongsTo(DanhMuc::class, 'danh_muc_id', 'id');
-      }
+    // Quan hệ ngược lại với DanhMuc
+    public function danhMuc()
+    {
+        return $this->belongsTo(DanhMuc::class, 'danh_muc_id', 'id');
+    }
     // Quan hệ một-nhiều với SanPham
     public function sanPhams()
     {
-        return $this->hasMany(SanPham::class, 'hang_id', 'id');
+        return $this->hasMany(SanPham::class, 'hang_id');
     }
 }

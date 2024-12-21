@@ -3,26 +3,26 @@
 use App\Http\Controllers\Admin\BaoCaoController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\KhuyenMaiController;
-use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\ThongTinTrangWebController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\client\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\OderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
+use App\Http\Controllers\Admin\HangController;
 use App\Http\Controllers\Admin\SanPhamController;
-
 use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Middleware\CheckRoleAdminMiddleware;
+use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\PayPalController;
+use App\Models\ThongTinTrangWeb;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +49,9 @@ route::post('login', [AuthController::class, 'login'])->name('login');
 route::get('register', [AuthController::class, 'showFromRegister']);
 route::post('register', [AuthController::class, 'register'])->name('register');
 route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::get('/profile', [UserController::class, 'showProfile'])->name('profile')->middleware('auth');
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+Route::put('/profile/update', [UserController::class, 'update'])->name('profile.update');
 // lấy lại mật khẩu
 // Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
 // Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
@@ -147,15 +149,27 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/bao-cao', [ThongKeController::class, 'baoCao'])->name('bao-cao');
 
             });
+            Route::prefix('hangs')
+            ->as('hangs.')
+            ->group(function () {
+                Route::get('/', [HangController::class, 'index'])->name('index');
+                Route::get('/create', [HangController::class, 'create'])->name('create');
+                Route::post('/store', [HangController::class, 'store'])->name('store');
+                Route::get('/show/{id}', [HangController::class, 'show'])->name('show');
+                Route::get('{id}/edit', [HangController::class, 'edit'])->name('edit');
+                Route::put('{id}/update', [HangController::class, 'update'])->name('update');
+                Route::delete('{id}/destroy', [HangController::class, 'destroy'])->name('destroy');
+
+            });
         // route quản lý trang web
-        Route::prefix('thongtintrangwebs')
-        ->as('thongtintrangwebs.')
-        ->group(function () {
-            Route::get('/', [DonHangController::class, 'index'])->name('index');
-            Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
-            Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
-            Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
-    });
+    //     Route::prefix('thongtintrangwebs')
+    //     ->as('thongtintrangwebs.')
+    //     ->group(function () {
+    //         Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index');
+    //         Route::get('/show/{id}', [ThongTinTrangWebController::class, 'show'])->name('show');
+    //         Route::put('{id}/update', [ThongTinTrangWebController::class, 'update'])->name('update');
+    //         Route::delete('{id}/destroy', [ThongTinTrangWebController::class, 'destroy'])->name('destroy');
+    // });
     Route::prefix('khachangs')
         ->as('khachhangs.')
         ->group(function () {
@@ -167,6 +181,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             Route::put('{id}/update', [KhachHangController::class, 'update'])->name('update');
             Route::delete('{id}/destroy', [KhachHangController::class, 'destroy'])->name('destroy');
         });
+
             Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
             Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
         });
@@ -202,7 +217,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
             
     // });
-
+    
 Route::prefix('clients')
     ->as('clients.')
     ->group(function () {

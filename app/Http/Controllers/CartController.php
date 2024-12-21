@@ -52,6 +52,8 @@ class CartController extends Controller
     
     // Lấy giỏ hàng hiện tại từ session
     $cart = session()->get('cart', []);
+
+    
     
     // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ, tăng số lượng
     if (isset($cart[$productId])) {
@@ -69,8 +71,9 @@ class CartController extends Controller
     
     // Cập nhật lại giỏ hàng vào session
     session()->put('cart', $cart);
+    return redirect()->route('cart.list');
     
-    return redirect()->back()->with('success', 'Thêm sản phẩm vào giỏ hàng thành công!');
+    // return view('clients.sanphams.giohang', compact('cart', 'total', 'shipping', 'subTotal', 'coupon'));
 }
 
 

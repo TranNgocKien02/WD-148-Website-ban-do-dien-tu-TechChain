@@ -45,9 +45,9 @@ class SanPham extends Model
     }
      // Quan hệ ngược lại với HangModel
      public function hang()
-     {
-         return $this->belongsTo(HangModel::class, 'hang_id', 'id');
-     }
+{
+    return $this->belongsTo(HangModel::class, 'hang_id');
+}
 }
 
 // protected $fillable = [
