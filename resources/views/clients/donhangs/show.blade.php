@@ -43,7 +43,8 @@
                                 <p>Trạng thái đơn hàng: <strong>{{ $donHang->trang_thai_don_hang }}</strong></p>
                                 <p>Trạng thái thanh toán: <strong>{{ $donHang->trang_thai_thanh_toan }}</strong></p>
                                 <p>Tổng tiền hàng: <strong>{{ number_format($donHang->tien_hang, 0, '', '.') }}đ</strong></p>
-                                <p>Tổng tiền ship: <strong{{ number_format( $donHang->tien_ship, 0, '', '.') }}đ</strong></p>
+                                <p>Tổng tiền khuyến mãi: <strong>{{ number_format( $donHang->tien_khuyen_mai, 0, '', '.') }}đ</strong></p>
+                                <p>Tổng tiền ship: <strong>{{ number_format( $donHang->tien_ship, 0, '', '.') }}đ</strong></p>
                                 <p>Tổng tiền đơn hàng: <strong>{{ number_format($donHang->tong_tien, 0, '', '.') }}đ</strong></p>
                             </div>
                         </div>

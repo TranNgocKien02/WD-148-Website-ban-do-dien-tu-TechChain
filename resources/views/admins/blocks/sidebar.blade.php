@@ -43,12 +43,13 @@
 
                 </li>
 
-                <li>
+                {{-- <li>
                     <a class='tp-link' href='{{ route('admins.thongtintrangwebs.index') }}'>
                         <i data-feather="users"></i>
                             <span> Quản lý thông tin </span>
                     </a>
 
+<<<<<<< HEAD
                 </li>
 
                 <li>
@@ -58,6 +59,9 @@
                     </a>
 
                 </li>
+=======
+                </li> --}}
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
     
                 <li class="menu-title">Kinh doanh </li>
 
@@ -86,6 +90,19 @@
                     <a class='tp-link' href='{{ route('admins.thongkes.index') }}'>
                         <i data-feather="package"></i>
                             <span>Thống kê</span>
+                    </a>
+                </li>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.coupons.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Khuyến mãi</span>
+                    </a>
+
+                </li>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.hangs.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Hãng Sản Phẩm</span>
                     </a>
 
                 </li>

@@ -6,7 +6,7 @@
                         <div class="col-lg-12">
                             <div class="li-product-tab li-trending-product-tab">
                                 <h2>
-                                    <span>Trendding Products</span>
+                                    <span>SẢN PHẨM THỊNH HÀNH</span>
                                 </h2>
                                 <ul class="nav li-product-menu li-trending-product-menu">
                                    <li><a class="active" data-toggle="tab" href="#home1"><span>Sanai</span></a></li>
@@ -60,11 +60,16 @@
                                                         </ul>
                                                     </div>
                                                 </div>
+<<<<<<< HEAD
                                             </div>
                                             <!-- single-product-wrap end -->
                                         </div>
                                     @endforeach
                                             
+=======
+                                                <!-- single-product-wrap end -->
+                                            </div>
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
                                         </div>
                                     </div>
                                 </div>
@@ -112,11 +117,16 @@
                                                         </ul>
                                                     </div>
                                                 </div>
+<<<<<<< HEAD
                                             </div>
                                             <!-- single-product-wrap end -->
                                         </div>
                                     @endforeach
                                             
+=======
+                                                <!-- single-product-wrap end -->
+                                            </div>
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
                                         </div>
                                     </div>
                                 </div>
@@ -164,11 +174,16 @@
                                                         </ul>
                                                     </div>
                                                 </div>
+<<<<<<< HEAD
                                             </div>
                                             <!-- single-product-wrap end -->
                                         </div>
                                     @endforeach
                                             
+=======
+                                                <!-- single-product-wrap end -->
+                                            </div>
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
                                         </div>
                                     </div>
                                 </div>
@@ -180,6 +195,7 @@
                 </div>
             </section>
             <!-- Li's Trending Product Area End Here -->
+<<<<<<< HEAD
             <!-- Begin Li's Trendding Products Area -->
             <section class="product-area li-laptop-product li-trendding-products best-sellers pb-45">
                 <div class="container">
@@ -247,3 +263,6 @@
                 </div>
             </section>
             <!-- Li's Trendding Products Area End Here -->
+=======
+         
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6

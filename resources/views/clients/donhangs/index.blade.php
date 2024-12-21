@@ -1,5 +1,14 @@
 @extends('layouts.client')
 
+@section('css')
+    <style>
+        .tab-one{
+            img{
+                max-width: 250px;
+            }
+        }
+    </style>
+@endsection
 @section('content')
     <main>
         <!-- breadcrumb area start -->
@@ -93,19 +102,18 @@
                                 </table>
                             </div>
                             <!-- Cart Update Option -->
-                            <div class="cart-update-option d-block d-md-flex justify-content-between">
+                            {{-- <div class="cart-update-option d-block d-md-flex justify-content-between">
                                 <div class="apply-coupon-wrapper">
                                 </div>
                                 <div class="cart-update">
                                     <button type="submit" class="btn btn-sqr">Update Cart</button>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-lg-5 ml-auto">
-                            <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
                                     <h6>Cart Totals</h6>
@@ -114,23 +122,23 @@
                                             <tr>
                                                 <td>Sub Total</td>
                                                 <td class="sub-total" id="cartSubtotal">
-                                                    {{-- {{ number_format($subTotal, 0, '', '.') }}đ</td> --}}
+                                                    {{ number_format($subTotal, 0, '', '.') }}đ</td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping</td>
-                                                {{-- <td class="shipping">{{ number_format($shipping, 0, '', '.') }}đ</td> --}}
+                                                <td class="shipping">{{ number_format($shipping, 0, '', '.') }}đ</td>
                                             </tr>
                                             <tr class="total">
                                                 <td>Total</td>
-                                                {{-- <td class="total-amount">{{ number_format($total, 0, '', '.') }}đ</td> --}}
+                                                <td class="total-amount">{{ number_format($total, 0, '', '.') }}đ</td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
-                                {{-- <a href="{{ route('donhangs.create') }}" class="btn btn-sqr d-block">Proceed Checkout</a> --}}
+                                <a href="{{ route('donhangs.create') }}" class="btn btn-sqr d-block">Proceed Checkout</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
