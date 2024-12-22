@@ -141,33 +141,31 @@ class AuthController extends Controller
     //     ]);
     // }
 
-    //đăng ký
-// >>>>>>> main
-//     public function showFromRegister()
-//     {
-//         return view('auth.register');
-//     }
+    // đăng ký
+    public function showFromRegister()
+    {
+        return view('auth.register');
+    }
 
-// <<<<<<< HEAD
     // Xử lý đăng ký
-    // public function register(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:users',
-    //         'password' => 'required|string|min:8',
-    //     ]);
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
 
-    //     $user = User::create([
-    //         'name' => $data['name'],
-    //         'email' => $data['email'],
-    //         'password' => bcrypt($data['password']), // Mã hóa mật khẩu
-    //     ]);
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']), // Mã hóa mật khẩu
+        ]);
 
-    //     Auth::login($user);
+        Auth::login($user);
 
-    //     return redirect()->intended('home');
-    // }
+        return redirect()->intended('home');
+    }
 
     // // Đăng xuất
     // public function logout()
@@ -178,25 +176,25 @@ class AuthController extends Controller
 // }
 // =======
     
-    public function register(Request $request)
-{
-    $data = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255',
-        'password' => 'required|string|min:8',
-    ]);
+//     public function register(Request $request)
+// {
+//     $data = $request->validate([
+//         'name' => 'required|string|max:255',
+//         'email' => 'required|string|email|max:255',
+//         'password' => 'required|string|min:8',
+//     ]);
 
-    // Lưu mật khẩu trực tiếp mà không mã hóa
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => $data['password'], // Không sử dụng Hash::make()
-    ]);
+//     // Lưu mật khẩu trực tiếp mà không mã hóa
+//     $user = User::create([
+//         'name' => $data['name'],
+//         'email' => $data['email'],
+//         'password' => $data['password'], // Không sử dụng Hash::make()
+//     ]);
 
-    Auth::login($user);
+//     Auth::login($user);
 
-    return redirect()->intended('home');
-}
+//     return redirect()->intended('home');
+// }
 
 
       //đăng xuất 
