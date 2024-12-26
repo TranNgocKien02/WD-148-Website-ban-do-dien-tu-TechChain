@@ -35,15 +35,12 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Hình ảnh </th>
                             <th scope="col">Mã sản phẩm</th>
                             <th scope="col">Tên sản phẩm</th>
-                            <th scope="col">Hình ảnh </th>
                             <th scope="col">Giá sản phẩm</th>
                             <th scope="col">Giá khuyến mãi</th>
-                            <th scope="col">Mô tả ngắn</th>
-                            <th scope="col">Nội dung</th>
                             <th scope="col">Số lượng</th>
-                            <th scope="col">Lượt xem</th>
                             <th scope="col">Ngày nhập</th>
                             <th scope="col">Danh mục</th>
                             <th scope="col">Hành động</th>
@@ -53,25 +50,24 @@
                         @foreach ($listSanPham as $index => $item)
                         <tr>
                             <th scope="row">{{ $index+1 }}</th>
-                            <td>{{ $item->ma_san_pham}}</td>
-                            <td>{{ $item->ten_san_pham}}</td>
                             <td>
                                 <img src="{{ Storage::url($item->hinh_anh) }}" alt="Hình ảnh sản phẩm" width="100px">
-                               </td>
+                            </td>
+                            <td>{{ $item->ma_san_pham}}</td>
+                            <td>{{ $item->ten_san_pham}}</td>
                             <td>{{ $item->gia_san_pham}}</td>
                             <td>{{ $item->gia_khuyen_mai}}</td>
-                            <td>{{ $item->mo_ta_ngan}}</td>
-                            <td>{{ $item->noi_dung}}</td>
                             <td>{{ $item->so_luong}}</td>
-                            <td>{{ $item->luot_xem}}</td>
-                            <td>{{ $item->ngay_nhap}}</td>
-                            <td>{{ $item->danh_muc_id == 1 ? 'Đồ nam mùa hè' : 'Đồ nam mùa đông'}}</td>
+                            <td>{{ $item->created_at->format('d/m/Y')}}
+                                <small style="color: #878A99;">{{$item->created_at->format('H:i A')}}</small>
+                            </td>
+                            <td>{{ $item->danhMuc->ten_danh_muc}}</td>
                             
-                            <td >
+                            {{-- <td >
                                 <div class="d-flex">
-                                    <a href="{{ route('admins.sanphams.edit',$item->id) }}"><i class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
+                                    <a href="{{ route('admins.sanphams.edit',$item) }}"><i class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>
 
-                                    <form action="{{ route('admins.sanphams.destroy',$item->id) }}" method="post" class="" onsubmit="return confirm('Bạn có đồng ý xóa không ?')">
+                                    <form action="{{ route('admins.sanphams.destroy',$item) }}" method="post" class="" onsubmit="return confirm('Bạn có đồng ý xóa không ?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="border-0 bg-white d-inline">
@@ -81,7 +77,41 @@
                                     </form>
 
                                 </div>                                                       
-                              
+                            </td> --}}
+                            <td>
+                                <div class="dropdown">
+                                    <a class="btn btn-soft-secondary btn-sm dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-horizontal text-muted fs-18 rounded-2 border p-1 "></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <!-- View Option -->
+                                        <li>
+                                            <a class="dropdown-item" href="">
+                                                <i class="mdi mdi-eye text-muted fs-16 p-1"></i> View
+                                            </a>
+                                        </li>
+                                        <!-- Edit Option -->
+                                        <li>
+                                            <a class="dropdown-item edit-list" data-edit-id="1" href="{{ route('admins.sanphams.edit',$item) }}">
+                                                <i class="mdi mdi-pencil text-muted fs-16 p-1"></i> Edit
+                                            </a>
+                                        </li>
+                                        <!-- Divider -->
+                                        <li class="dropdown-divider"></li>
+                                        <!-- Delete Option -->
+                                        <li>
+                                            
+                                            <form action="{{ route('admins.sanphams.destroy',$item) }}" method="post" class="" onsubmit="return confirm('Bạn có đồng ý xóa không ?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item remove-list border-0 bg-white d-inline" data-id="1" data-bs-toggle="modal" data-bs-target="#removeItemModal">
+                                                    <i class="mdi mdi-delete text-muted fs-16 p-1"></i> Delete
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </td>
                         </tr>
                         @endforeach

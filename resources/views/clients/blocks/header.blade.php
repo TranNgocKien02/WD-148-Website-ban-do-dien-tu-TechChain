@@ -98,7 +98,7 @@
                                             <a class="megamenu-blog" href="blog-left-sidebar.html">{{ $danhMuc->ten_danh_muc }}</a>
                                             <!-- Danh mục con -->
                                             <ul class="sub-dropdown">
-                                                {{-- <li>{{ $danhMuc->ten_danh_muc }}</li> --}}
+                                                <li>{{ $danhMuc->ten_danh_muc }}</li>
                                                 @foreach ($danhMuc->hangs as $hang)
                                                 <li><a href="blog-2-column.html">{{ $hang->ten_hang }}</a></li>
                                                 @endforeach

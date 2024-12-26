@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('don_hangs', function (Blueprint $table) {
-            $table->decimal('tien_khuyen_mai', 10, 2)->default(0)->after('tien_hang'); // Thêm trường tien_khuyen_mai
-
+        Schema::create('san_phams', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -22,9 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('don_hangs', function (Blueprint $table) {
-            $table->dropColumn('tien_khuyen_mai'); // Xóa trường tien_khuyen_mai nếu rollback
-
-        });
+        Schema::dropIfExists('san_phams');
     }
 };

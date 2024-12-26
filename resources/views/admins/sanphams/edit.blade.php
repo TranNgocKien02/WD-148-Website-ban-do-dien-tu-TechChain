@@ -17,176 +17,225 @@
 
         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
             <div class="flex-grow-1">
-                <h4 class="fs-18 fw-semibold m-0">Quản lý danh mục sản phẩm</h4>
+                <h4 class="fs-18 fw-semibold m-0">Sửa sản phẩm</h4>
             </div>
         </div>
+        <form action="{{ route('admins.sanphams.update', $sanPham) }}" method="post" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
         <div class="row">
-        <!-- Striped Rows -->
-        <div class="col-xl-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">{{ $title }}</h5>
-                </div><!-- end card header -->
-
-                <div class="card-body">
-                        <form action="{{ route('admins.sanphams.update',$sanPham->id) }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                        <div class="row">
-
-                            <div class="col-lg-6">
-                                <div class="mb-3">
-                                    <label for="ma_san_pham" class="form-label">Mã sản phẩm</label>
-                                    <input type="text" id="ma_san_pham" name="ma_san_pham" class="form-control 
-                                    @error('ma_san_pham') is-invalid @enderror" value="{{ old('ma_san_pham') . $sanPham->ma_san_pham}} "
-                                    placeholder="Mã sản phẩm">
-
-                                    @error('ma_san_pham')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                            <a href="#collapseProductInfo" class="d-block card-header py-3" data-bs-toggle="collapse"
+                            role="button" aria-expanded="true" aria-controls="collapseProductInfo">
+                                <h6 class="m-0 text-primary fw-bold">Thông tin chính</h6>
+                            </a>
+                            <div class="collapse show" id="collapseProductInfo">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="product-title-input" class="form-label">Tên sản phẩm</label>
+                                        <input type="text" class="form-control" name="ten_san_pham" id="product-title-input" placeholder="Tên sản phẩm" value="{{$sanPham->ten_san_pham}}">
+                                        @error('ten_san_pham')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="d-flex justify-content-between gap-3">
+                                        <div class="mb-3 w-100">
+                                            <label for="product-title-input" class="form-label">Giá gốc</label>
+                                            <input type="text" class="form-control" name="gia_san_pham" placeholder="Giá gốc" value="{{$sanPham->gia_san_pham}}">
+                                            @error('gia_san_pham')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3 w-100">
+                                            <label for="product-title-input" class="form-label">Giá khuyến mãi</label>
+                                            <input type="text" class="form-control" name="gia_khuyen_mai" placeholder="Giá khuyến mãi" value="{{$sanPham->gia_khuyen_mai}}">
+                                            @error('gia_khuyen_mai')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 w-100">
+                                            <label for="product-title-input" class="form-label">Số lượng</label>
+                                            <input type="number" class="form-control" name="so_luong" placeholder="Số lượng" value="{{$sanPham->so_luong}}">
+                                            @error('so_luong')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Mô tả ngắn</label>
+                                        <textarea name="mo_ta_ngan" cols="30" rows="5" class="form-control">{{$sanPham->mo_ta_ngan}}</textarea>
+                                        @error('mo_ta_ngan')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Nội dung</label>
+                                        <textarea name="noi_dung" cols="30" rows="5" class="form-control">{{$sanPham->noi_dung}}</textarea>
+                                        @error('noi_dung')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="ten_san_pham" class="form-label">Tên sản phẩm</label>
-                                    <input type="text" id="ten_san_pham" name="ten_san_pham" class="form-control 
-                                    @error('ten_san_pham') is-invalid @enderror" value="{{ old('ten_san_pham' ) . $sanPham->ten_san_pham }}"
-                                    placeholder="Tên sản phẩm">
+                            </div>
+                </div>
 
-                                    @error('ten_san_pham')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="danh_muc_id" class="form-label">Danh mục</label>
-                                    <select name="danh_muc_id" id="danh_muc_id" class="form-control 
-                                    @error('danh_muc_id') is-invalid @enderror" value="{{ old('danh_muc_id' . $sanPham->danh_muc_id ) }}"
-                                    placeholder="Danh mục" >
-                                        @foreach($listDanhMuc as $index => $danh_muc)
-                                            <option value="{{ $danh_muc->id }}">{{ $danh_muc->ten_danh_muc }}</option>
-                                        @endforeach
-                                    </select>
-                                    {{-- <input type="text" id="danh_muc_id" name="danh_muc_id" class="form-control 
-                                    @error('danh_muc_id') is-invalid @enderror" value="{{ old('danh_muc_id') }}"
-                                    placeholder="Danh mục"> --}}
-
-                                    @error('danh_muc_id')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="gia_san_pham" class="form-label">Giá sản phẩm</label>
-                                    <input type="number" id="gia_san_pham" name="gia_san_pham" class="form-control 
-                                    @error('gia_san_pham') is-invalid @enderror" value="{{ old('gia_san_pham')  . $sanPham->gia_san_pham}}"
-                                    placeholder="Giá sản phẩm">
-
-                                    @error('gia_san_pham')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="gia_khuyen_mai" class="form-label">Giá khuyến mại</label>
-                                    <input type="number" id="gia_khuyen_mai" name="gia_khuyen_mai" class="form-control 
-                                    @error('gia_khuyen_mai') is-invalid @enderror" value="{{ old('gia_khuyen_mai')  . $sanPham->gia_khuyen_mai}}"
-                                    placeholder="Giá khuyến">
-    
-                                    @error('gia_khuyen_mai')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="noi_dung" class="form-label">Nội dung</label>
-                                    <textarea name="noi_dung" id="noi_dung" cols="30" rows="10" class="form-control 
-                                    @error('noi_dung') is-invalid @enderror" value="{{ old('noi_dung') . $sanPham->noi_dung}}"
-                                    placeholder="Nội dung">{{$sanPham->noi_dung}}</textarea>
-                                    {{-- <input type="text" id="noi_dung" name="noi_dung" class="form-control 
-                                    @error('noi_dung') is-invalid @enderror" value="{{ old('noi_dung') }}"
-                                    placeholder="Nội dung"> --}}
-
-                                    @error('noi_dung')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                               
-                                
-                                {{-- <div>
-
-                                    <label for="trang_thai" class="form-label">Trạng thái</label>
-                                    <div class="col-sm-10 mb-3 d-flex gap-2 ">
+                <div class="card shadow mb-4">
+                            <a href="#collapseProductGallery" class="d-block card-header py-3" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="collapseProductGallery">
+                                <h6 class="m-0 text-primary fw-bold">Ảnh</h6>
+                            </a>
+                            <div class="collapse show" id="collapseProductGallery">
+                                <div class="card-body">
+                                    <div class="mb-4">
+                                        <h5 class="fs-14 mb-1">Ảnh sản phẩm</h5>
+                                        {{-- <p class="text-muted">Add Product main Image.</p> --}}
+                                        <input type="file" class="form-control" name="hinh_anh">
                                         
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="trang_thai" id="gridRadios1" value="1" checked>
-                                            <label class="form-check-label text-success" for="gridRadios1">
-                                                Hiển thị
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="trang_thai" id="gridRadios2" value="0">
-                                            <label class="form-check-label text-danger" for="gridRadios2">
-                                                Ẩn
-                                            </label>
-                                        </div>
-                                       
-                                  </div>
-                                </div> --}}
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="so_luong" class="form-label">Số lượng</label>
-                                <input type="number" id="so_luong" name="so_luong" class="form-control 
-                                @error('so_luong') is-invalid @enderror" value="{{ old('so_luong')  . $sanPham->so_luong}}"
-                                placeholder="Số lượng">
-
-                                @error('so_luong')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="luot_xem" class="form-label">Lượt xem</label>
-                                <input type="number" id="luot_xem" name="luot_xem" class="form-control 
-                                @error('luot_xem') is-invalid @enderror" value="{{ old('luot_xem')  . $sanPham->luot_xem}}"
-                                placeholder="Lượt xem">
-
-                                @error('luot_xem')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="ngay_nhap" class="form-label">Ngày nhập</label>
-                                <input type="date" id="ngay_nhap" name="ngay_nhap" class="form-control 
-                                @error('ngay_nhap') is-invalid @enderror" value="{{ old('ngay_nhap')  . $sanPham->ngay_nhap}}"
-                                placeholder="Ngày nhập">
-
-                                @error('ngay_nhap')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                          
-                            <div class="mb-3">
-                                <label for="mo_ta_ngan" class="form-label">Mô tả ngắn</label>
-                                <input type="text" id="mo_ta_ngan" name="mo_ta_ngan" class="form-control 
-                                @error('mo_ta_ngan') is-invalid @enderror" value="{{ old('mo_ta_ngan')  . $sanPham->mo_ta_ngan}}"
-                                placeholder="Mô tả ngắn">
-
-                                @error('mo_ta_ngan')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                                <div class="mb-3">
-                                    <label for="hinh_anh-select" class="form-label">Hình ảnh </label>
-                                    <input type="file" id="hinh_anh" name="hinh_anh" class="form-control" onchange="showImage(event)">
-                                    <img src="{{ Storage::url($sanPham->hinh_anh) }}" id="img_danh_muc" alt="Hình ảnh sản phẩm" style="width: 150px; display:block ;">
+                                    </div>
+                                    <div>
+                                        <h5 class="fs-14 mb-1">Thư viện ảnh</h5>
+                                        {{-- <p class="text-muted">Add Product Gallery Images.</p> --}}
+                                        <input type="file" class="form-control" name="hinh_anh_san_phams[]" multiple>
+                                        
+                                    </div>
                                 </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                        </form>
-                    </div>
-                </div><!-- end card header -->
+                            </div>
+                </div>
 
+                <div class="card shadow mb-4">
+                    <a href="#collapseProductVariants" class="d-block card-header py-3" data-bs-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="collapseProductVariants">
+                        <h6 class="m-0 text-primary fw-bold">Biến thể</h6>
+                    </a>
+                    <div class="collapse show" id="collapseProductVariants">
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Dung lượng</th>
+                                            <th>Màu sắc</th>
+                                            <th>Ảnh</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="variantsContainer">
+                                    @foreach ($variants as $key => $item)
+                                        <tr class="variant" data-index="0">
+                                            <td>
+                                                @error('variants.*.dung_luong')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                <input class="form-control" type="text" name="variants[0][dung_luong]" value="{{$item->dung_luong}}">
+                                            </td>
+                                            <td>
+                                                @error('variants.*.mau_sac')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                <input class="form-control" type="text" name="variants[0][mau_sac]" value="{{$item->mau_sac}}">
+                                            </td>
+                                            <td>
+                                                <input class="form-control" type="file" name="variants[0][anh]">
+                                            </td>
+                                            <td>
+                                                @error('variants.*.so_luong')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                <input class="form-control" type="text" name="variants[0][so_luong]"  value="{{$item->so_luong}}">
+                                            </td>
+                                            <td>
+                                                @error("variants.*.gia")
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                                <input class="form-control" type="text" name="variants[0][gia]" value="{{$item->gia}}">
+                                            </td>
+                                            <td>
+                                                <div class="btn btn-danger removeVariant">X</div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="btn btn-info" id="addMoreVariant">Add more variant</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mb-3">
+                    <button type="submit" class="btn btn-success w-sm">Submit</button>
+                </div>
+            </div>
+
+            <!-- Right content -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <a href="#collapseStatus" class="d-block card-header py-3" data-bs-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseStatus">
+                        <h6 class="m-0 text-primary fw-bold">Thông tin khác</h6>
+                    </a>
+                    <div class="collapse show" id="collapseStatus">
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <label for="choices-category-input" class="form-label">Danh mục</label>
+                                <select class="form-control" id="choices-category-input" name="danh_muc_id">
+                                    <!-- Add category options here -->
+                                    @foreach($listDanhMuc as $index => $danh_muc)
+                                        <option value="{{ $danh_muc->id }}">{{ $danh_muc->ten_danh_muc }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="choices-hang-input" class="form-label">Hãng</label>
+                                <select class="form-control" id="choices-hang-input" name="hang_id">
+                                    <!-- Add category options here -->
+                                    @foreach($listHang as $index => $hang)
+                                        <option value="{{ $hang->id }}">{{ $hang->ten_hang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label for="choices-publish-status-input" class="form-label">Trạng thái</label>
+                                <div id="choices-publish-status-input" class="d-flex gap-5">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_active" id="status-active" value="1" checked>
+                                        <label class="form-check-label text-success" for="status-active">
+                                            Bán
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_active" id="status-inactive" value="0">
+                                        <label class="form-check-label text-danger" for="status-inactive">
+                                            Hủy bán
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            @php
+                                $types = [
+                                    'is_best_sale' => 'Bán chạy',
+                                    'is_40_sale' => 'Giảm 40%',
+                                    'is_hot_online' => 'Hot online'
+                                ];
+                            @endphp
+
+                            {{-- <label for="choices-publish-type-input" class="form-label">Product Type</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Product type options here -->
+                            </div> --}}
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
+    </div>
                            
      
 

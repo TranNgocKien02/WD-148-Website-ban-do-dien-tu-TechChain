@@ -123,10 +123,10 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/', [SanPhamController::class, 'index'])->name('index');
                 Route::get('/create', [SanPhamController::class, 'create'])->name('create');
                 Route::post('/store', [SanPhamController::class, 'store'])->name('store');
-                Route::get('/show/{id}', [SanPhamController::class, 'show'])->name('show');
-                Route::get('{id}/edit', [SanPhamController::class, 'edit'])->name('edit');
-                Route::put('{id}/update', [SanPhamController::class, 'update'])->name('update');
-                Route::delete('{id}/destroy', [SanPhamController::class, 'destroy'])->name('destroy');
+                // Route::get('/show/{id}', [SanPhamController::class, 'show'])->name('show');
+                Route::get('{sanPham}/edit', [SanPhamController::class, 'edit'])->name('edit');
+                Route::put('{sanPham}/update', [SanPhamController::class, 'update'])->name('update');
+                Route::delete('{sanPham}/destroy', [SanPhamController::class, 'destroy'])->name('destroy');
             });
 
         Route::prefix('donhangs')
@@ -162,14 +162,14 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
 
             });
         // route quản lý trang web
-    //     Route::prefix('thongtintrangwebs')
-    //     ->as('thongtintrangwebs.')
-    //     ->group(function () {
-    //         Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index');
-    //         Route::get('/show/{id}', [ThongTinTrangWebController::class, 'show'])->name('show');
-    //         Route::put('{id}/update', [ThongTinTrangWebController::class, 'update'])->name('update');
-    //         Route::delete('{id}/destroy', [ThongTinTrangWebController::class, 'destroy'])->name('destroy');
-    // });
+            Route::prefix('thongtintrangwebs')
+                ->as('thongtintrangwebs.')
+                ->group(function () {
+                    Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index');
+                    Route::get('/show/{id}', [ThongTinTrangWebController::class, 'show'])->name('show');
+                    Route::put('{id}/update', [ThongTinTrangWebController::class, 'update'])->name('update');
+                    Route::delete('{id}/destroy', [ThongTinTrangWebController::class, 'destroy'])->name('destroy');
+            });
     Route::prefix('khachangs')
         ->as('khachhangs.')
         ->group(function () {

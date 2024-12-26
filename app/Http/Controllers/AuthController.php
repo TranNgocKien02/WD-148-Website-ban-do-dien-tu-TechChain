@@ -143,10 +143,10 @@ class AuthController extends Controller
 
     //đăng ký
 // >>>>>>> main
-//     public function showFromRegister()
-//     {
-//         return view('auth.register');
-//     }
+    public function showFromRegister()
+    {
+        return view('auth.register');
+    }
 
 // <<<<<<< HEAD
     // Xử lý đăng ký

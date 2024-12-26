@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,12 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hangs', function (Blueprint $table) {
+        Schema::create('bien_the_san_pham', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_hang');
-            $table->text('mo_ta')->nullable();
-            $table->foreignIdFor(DanhMuc::class)->constrained();
             $table->foreignIdFor(SanPham::class)->constrained();
+            $table->string('dung_luong')->nullable();
+            $table->string('mau_sac')->nullable();
+            $table->string('anh')->nullable();
+            $table->integer('so_luong')->default(0);
+            $table->float('gia')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hangs');
+        Schema::dropIfExists('bien_the_san_pham');
     }
 };
