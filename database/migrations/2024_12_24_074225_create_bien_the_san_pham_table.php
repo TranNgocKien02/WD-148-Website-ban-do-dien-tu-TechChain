@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('so_luong')->default(0);
             $table->float('gia')->nullable();
             $table->timestamps();
+            $table->unique(['san_pham_id', 'dung_luong', 'mau_sac'], 'product_variant_unique');
         });
     }
 

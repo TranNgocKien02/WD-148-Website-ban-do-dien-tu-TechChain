@@ -9,11 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Bootstrap CSS (CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.ico') }}">
 
+    <!--Table-->
+    <link rel="stylesheet" href="{{asset('assets/admin/css/jquery.dataTables.min.css')}}">
+    
     <!-- App css -->
     <link href="{{ asset('assets/admin/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
@@ -58,6 +61,11 @@
     <script src="{{ asset('assets/admin/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/feather-icons/feather.min.js') }}"></script>
+
+    <!-- CDN jQuery -->
+    <script src="{{asset('assets/admin/js/jquery-3.6.0.min.js')}}"></script>
+    <!-- CDN JS DataTables -->
+    <script src="{{asset('assets/admin/js/jquery.dataTables.min.js')}}"></script>
 
     <!-- Apexcharts JS -->
     <script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script>

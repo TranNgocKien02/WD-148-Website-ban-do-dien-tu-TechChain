@@ -22,17 +22,17 @@ class UpdateSanPhamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'ten_san_pham' => 'required|string|max:255', // Bắt buộc, kiểu chuỗi, tối đa 255 ký tự
-            // 'danh_muc_id' => 'required|exists:danh_mucs,id', // Bắt buộc, phải tồn tại trong bảng danh_mucs
-            // 'gia_san_pham' => 'required|numeric|min:0', // Bắt buộc, kiểu số, giá trị không âm
-            // 'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg', // Không bắt buộc, định dạng hình ảnh, tối đa 2MB
-            // 'variants' => 'nullable|array|min:1', // Bắt buộc, phải là mảng, ít nhất 1 biến thể
-            // 'variants.*.dung_luong' => 'required|string|max:50', // Dung lượng biến thể
-            // 'variants.*.mau_sac' => 'required|string|max:50', // Màu sắc biến thể
-            // 'variants.*.so_luong' => 'required|integer|min:0', // Số lượng biến thể, không âm
-            // 'variants.*.gia' => 'required|numeric|min:0', // Giá biến thể, không âm
-            // 'hinh_anh_san_phams' => 'nullable|array', // Không bắt buộc, phải là mảng
-            // 'hinh_anh_san_phams.*' => 'nullable|image|mimes:jpeg,png,jpg', // Mỗi ảnh trong thư viện ảnh
+            'ten_san_pham' => 'required|string|max:255', // Bắt buộc, kiểu chuỗi, tối đa 255 ký tự
+            'danh_muc_id' => 'required|exists:danh_mucs,id', // Bắt buộc, phải tồn tại trong bảng danh_mucs
+            'gia_san_pham' => 'required|numeric|min:0', // Bắt buộc, kiểu số, giá trị không âm
+            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg', // Không bắt buộc, định dạng hình ảnh, tối đa 2MB
+            'variants' => 'nullable|array|min:1', // Bắt buộc, phải là mảng, ít nhất 1 biến thể
+            'variants.*.dung_luong' => 'required|string|max:50', // Dung lượng biến thể
+            'variants.*.mau_sac' => 'required|string|max:50', // Màu sắc biến thể
+            'variants.*.so_luong' => 'required|integer|min:0', // Số lượng biến thể, không âm
+            'variants.*.gia' => 'required|numeric|min:0', // Giá biến thể, không âm
+            'hinh_anh_san_phams' => 'nullable|array', // Không bắt buộc, phải là mảng
+            'hinh_anh_san_phams.*' => 'nullable|image|mimes:jpeg,png,jpg', // Mỗi ảnh trong thư viện ảnh
         ];
     }
 

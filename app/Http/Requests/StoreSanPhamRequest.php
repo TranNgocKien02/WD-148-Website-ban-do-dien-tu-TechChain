@@ -29,13 +29,39 @@ class StoreSanPhamRequest extends FormRequest
             'variants' => 'nullable|array|min:1', // Bắt buộc, phải là mảng, ít nhất 1 biến thể
             'variants.*.dung_luong' => 'required|string|max:50', // Dung lượng biến thể
             'variants.*.mau_sac' => 'required|string|max:50', // Màu sắc biến thể
-            'variants.*.so_luong' => 'required|integer|min:0', // Số lượng biến thể, không âm
-            'variants.*.gia' => 'required|numeric|min:0', // Giá biến thể, không âm
+            'variants.*.so_luong' => 'required|numeric|min:0', // Số lượng biến thể, không âm
+            'variants.*.gia' => 'required|numeric|min:0',
             'hinh_anh_san_phams' => 'nullable|array', // Không bắt buộc, phải là mảng
             'hinh_anh_san_phams.*' => 'nullable|image|mimes:jpeg,png,jpg', // Mỗi ảnh trong thư viện ảnh
         ];
     }
 
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $variants = $this->input('variants', []);
+            $uniqueVariants = [];
+
+            foreach ($variants as $index => $variant) {
+                $key = $variant['dung_luong'] . '-' . $variant['mau_sac'];
+
+                if (isset($uniqueVariants[$key])) {
+                    // Thêm lỗi vào trường tương ứng
+                    $validator->errors()->add('variants.' . $index . '.dung_luong', 'Biến thể với dung lượng và màu sắc này đã tồn tại.');
+                    $validator->errors()->add('variants.' . $index . '.mau_sac', 'Biến thể với dung lượng và màu sắc này đã tồn tại.');
+                } else {
+                    $uniqueVariants[$key] = true;
+                }
+            }
+        });
+    }
+
+
+    /**
+     * Get custom error messages for validator errors.
+     *
+     * @return array<string, string>
+     */
     public function messages(): array
     {
         return [
@@ -44,10 +70,6 @@ class StoreSanPhamRequest extends FormRequest
             'danh_muc_id.exists' => 'Danh mục không hợp lệ.',
             'gia_san_pham.required' => 'Giá sản phẩm không được để trống.',
             'gia_san_pham.numeric' => 'Giá sản phẩm phải là số.',
-            'variants.*.dung_luong.required' => 'Dung lượng của biến thể là bắt buộc.',
-            'variants.*.mau_sac.required' => 'Màu sắc của biến thể là bắt buộc.',
-            'variants.*.so_luong.required' => 'Số lượng của biến thể là bắt buộc.',
-            'variants.*.so_luong.min' => 'Số lượng của biến thể phải lớn hơn hoặc bằng 0.',
             'hinh_anh.image' => 'Hình ảnh phải là file định dạng jpeg, png hoặc jpg.',
             'hinh_anh_san_phams.*.image' => 'Mỗi hình ảnh trong thư viện phải là file định dạng jpeg, png hoặc jpg.',
         ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Hang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DanhMuc;
 use Illuminate\Support\Facades\Storage;
 
 class HangController extends Controller
@@ -27,9 +28,9 @@ class HangController extends Controller
     public function create()
     {
         $title = "Thêm Hãng";
-        $listHang = Hang::with('danhMuc')->get();
+        $listDanhMuc = DanhMuc::query()->get();
 
-        return view('admins.hangs.create',compact('title','listHang'));
+        return view('admins.hangs.create',compact('title', 'listDanhMuc'));
     }
 
     /**

@@ -123,7 +123,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/', [SanPhamController::class, 'index'])->name('index');
                 Route::get('/create', [SanPhamController::class, 'create'])->name('create');
                 Route::post('/store', [SanPhamController::class, 'store'])->name('store');
-                // Route::get('/show/{id}', [SanPhamController::class, 'show'])->name('show');
+                Route::get('{sanPham}/show', [SanPhamController::class, 'show'])->name('show');
                 Route::get('{sanPham}/edit', [SanPhamController::class, 'edit'])->name('edit');
                 Route::put('{sanPham}/update', [SanPhamController::class, 'update'])->name('update');
                 Route::delete('{sanPham}/destroy', [SanPhamController::class, 'destroy'])->name('destroy');

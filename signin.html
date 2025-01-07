@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiperJS Linked Sliders</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .product-img-slider {
+            width: 80%;
+            max-width: 600px;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .nav-slide-item img {
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .nav-slide-item img:hover {
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-img-slider">
+        <!-- Main Slider -->
+        <div class="swiper product-thumbnail-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/600x400/ff7f7f/333333?text=Image+1" alt="Image 1" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/600x400/7f7fff/333333?text=Image+2" alt="Image 2" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/600x400/7fff7f/333333?text=Image+3" alt="Image 3" />
+                </div>
+            </div>
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <!-- Thumbnail Slider -->
+        <div class="swiper product-nav-slider mt-2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="nav-slide-item">
+                        <img src="https://via.placeholder.com/600x400/ff7f7f/333333?text=Image+1" alt="Thumb 1" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="nav-slide-item">
+                        <img src="https://via.placeholder.com/600x400/7f7fff/333333?text=Image+2" alt="Thumb 2" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="nav-slide-item">
+                        <img src="https://via.placeholder.com/600x400/7fff7f/333333?text=Image+3" alt="Thumb 3" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Thumbnail slider (small images)
+            const navSlider = new Swiper('.product-nav-slider', {
+                slidesPerView: 3,
+                spaceBetween: 10,
+                slideToClickedSlide: true, // Allows clicking on thumbnails
+                watchSlidesVisibility: true,
+                watchSlidesProgress: true,
+            });
+
+            // Main slider (large images)
+            const thumbnailSlider = new Swiper('.product-thumbnail-slider', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                loop: true,
+                thumbs: {
+                    swiper: navSlider, // Link main slider to thumbnails
+                },
+            });
+        });
+    </script>
+</body>
+</html>

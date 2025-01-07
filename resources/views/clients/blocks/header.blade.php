@@ -93,7 +93,7 @@
                                     <a href="index.html">Danh mục</a>
                                     <ul class="dropdown">
                                         <!-- Vòng lặp qua các danh mục chính -->
-                                        @foreach ($listDanhMuc as $danhMuc)
+                                        {{-- @foreach ($listDanhMuc as $danhMuc)
                                         <li class="dropdown-item">
                                             <a class="megamenu-blog" href="blog-left-sidebar.html">{{ $danhMuc->ten_danh_muc }}</a>
                                             <!-- Danh mục con -->
@@ -104,7 +104,7 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-                                        @endforeach
+                                        @endforeach --}}
                                 
                                         <!-- Thông tin -->
                                         <li class="dropdown-item">

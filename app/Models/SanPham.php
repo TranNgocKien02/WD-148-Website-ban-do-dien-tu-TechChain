@@ -19,9 +19,10 @@ class SanPham extends Model
         'noi_dung',
         'so_luong',
         'luot_xem',
-        'ngay_nhap',
+        'ngay_dang_ban',
         'danh_muc_id',
         'hang_id',
+        'trang_thai',
         'is_type',
         'is_new',
         'is_hot',
@@ -57,5 +58,11 @@ class SanPham extends Model
     public function hang()
     {
         return $this->belongsTo(Hang::class);
+    }
+
+    public function scopeScheduled($query)
+    {
+        return $query->where('trang_thai', 'da_len_lich')
+        ->where('ngay_dang_ban', '<=', now());
     }
 }
