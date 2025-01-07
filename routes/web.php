@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BaoCaoController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\KhuyenMaiController;
@@ -8,21 +9,36 @@ use App\Http\Controllers\client\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+<<<<<<< HEAD
+// use App\Http\Controllers\CartController;
+// use App\Http\Controllers\OderController;
+=======
 use App\Http\Controllers\CartController;
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\HangController;
 use App\Http\Controllers\Admin\SanPhamController;
+<<<<<<< HEAD
+use App\Http\Controllers\CartController;
+=======
 use App\Http\Controllers\Admin\ThongKeController;
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\Admin\KhachHangController;
+<<<<<<< HEAD
+use App\Http\Controllers\Admin\ThongKeController;
+use App\Http\Controllers\Admin\LienHeController;
+use App\Http\Controllers\Client\LienHeController as ControllersLienHeController;
+=======
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\PayPalController;
 use App\Models\ThongTinTrangWeb;
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +85,19 @@ Route::put('/profile/update', [UserController::class, 'update'])->name('profile.
 
 // Auth::routes();
 
+<<<<<<< HEAD
+Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
+
+Route::get('/product-detail/{id}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
+Route::post('/cart/add', [CartController::class, 'addCart'])->name('cart.add');
+Route::get('/cart/list', [CartController::class, 'listCart'])->name('cart.list');
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+
+Route::controller(ControllersLienHeController::class)->group(function () {
+    Route::get('/contact', 'index')->name('contact');
+    Route::post('/contact', 'store')->name('contact.store');
+});
+=======
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
@@ -76,6 +105,7 @@ Route::post('/cart/add',            [CartController::class, 'addCart'])->name('c
 Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/cart/update',         [CartController::class, 'updateCart'])->name('cart.update');
 Route::delete('/cart/{id}',         [CartController::class, 'destroy'])->name('cart.destroy');
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 
 // thanh toán PayPal
 // Route::post('/paypal/capture', [PayPalController::class, 'capture'])->name('paypal.capture');
@@ -92,6 +122,8 @@ Route::middleware('auth')->prefix('donhangs')
         Route::get('/show/{id}',    [OrderController::class, 'show'])->name('show');
         Route::put('{id}/update',   [OrderController::class, 'update'])->name('update');
     });
+
+
 
 // route Admin
 Route::middleware(['auth', 'auth.admin'])->prefix('admins')
@@ -149,6 +181,8 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/bao-cao', [ThongKeController::class, 'baoCao'])->name('bao-cao');
 
             });
+<<<<<<< HEAD
+=======
             Route::prefix('hangs')
             ->as('hangs.')
             ->group(function () {
@@ -185,19 +219,41 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
             Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
         });
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 
-        // route tài khoản
-        Route::prefix('taikhoans')
-            ->as('taikhoans.')
+        Route::prefix('banners')
+            ->as('banners.')
             ->group(function () {
-                Route::get('/', [TaiKhoanController::class, 'index'])->name('index'); // List all accounts
-                Route::get('/create', [TaiKhoanController::class, 'create'])->name('create'); // Show create form
-                Route::post('/store', [TaiKhoanController::class, 'store'])->name('store'); // Store new account
-                Route::get('/show/{id}', [TaiKhoanController::class, 'show'])->name('show'); // Show specific account
-                Route::get('{id}/edit', [TaiKhoanController::class, 'edit'])->name('edit'); // Edit account
-                Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
-                Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
+                Route::get('/', [BannerController::class, 'index'])->name('index');
+                Route::get('{banner}/edit', [BannerController::class, 'edit'])->name('edit');
+                Route::get('/create', [BannerController::class, 'create'])->name('create');
+                Route::post('/store', [BannerController::class, 'store'])->name('store');
+                Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
+                Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
             });
+<<<<<<< HEAD
+            
+        // route quản lý trang web
+        Route::prefix('thong-tin-trang-web')
+            ->as('thongtintrangwebs.')
+            ->group(function () {
+                Route::get('/', [DonHangController::class, 'index'])->name('index');
+                Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
+                Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
+                Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
+            });
+
+        // route quản lý lien he
+        Route::prefix('lien-he')
+            ->as('lienhes.')
+            ->group(function () {
+                Route::get('/', [LienHeController::class, 'index'])->name('index');
+                Route::get('{lienHe}/', [LienHeController::class, 'show'])->name('show');
+                Route::post('/respond', [LienHeController::class, 'respond'])->name('respond');
+                Route::delete('{lienHe}/destroy', [LienHeController::class, 'destroy'])->name('destroy');
+            });
+    });
+=======
 
             // Route::prefix('khuyenmais')
             // ->as('khuyenmais.')
@@ -218,6 +274,7 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             
     // });
     
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 Route::prefix('clients')
     ->as('clients.')
     ->group(function () {
