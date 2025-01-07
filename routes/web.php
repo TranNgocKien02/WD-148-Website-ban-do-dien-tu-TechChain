@@ -9,36 +9,22 @@ use App\Http\Controllers\client\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-<<<<<<< HEAD
 // use App\Http\Controllers\CartController;
 // use App\Http\Controllers\OderController;
-=======
-use App\Http\Controllers\CartController;
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\Admin\DanhMucController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\HangController;
 use App\Http\Controllers\Admin\SanPhamController;
-<<<<<<< HEAD
 use App\Http\Controllers\CartController;
-=======
-use App\Http\Controllers\Admin\ThongKeController;
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\Admin\KhachHangController;
-<<<<<<< HEAD
-use App\Http\Controllers\Admin\ThongKeController;
-use App\Http\Controllers\Admin\LienHeController;
-use App\Http\Controllers\Client\LienHeController as ControllersLienHeController;
-=======
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\PayPalController;
 use App\Models\ThongTinTrangWeb;
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +71,6 @@ Route::put('/profile/update', [UserController::class, 'update'])->name('profile.
 
 // Auth::routes();
 
-<<<<<<< HEAD
 Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 
 Route::get('/product-detail/{id}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
@@ -97,7 +82,7 @@ Route::controller(ControllersLienHeController::class)->group(function () {
     Route::get('/contact', 'index')->name('contact');
     Route::post('/contact', 'store')->name('contact.store');
 });
-=======
+
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
@@ -105,7 +90,6 @@ Route::post('/cart/add',            [CartController::class, 'addCart'])->name('c
 Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/cart/update',         [CartController::class, 'updateCart'])->name('cart.update');
 Route::delete('/cart/{id}',         [CartController::class, 'destroy'])->name('cart.destroy');
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 
 // thanh toán PayPal
 // Route::post('/paypal/capture', [PayPalController::class, 'capture'])->name('paypal.capture');
@@ -181,8 +165,6 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/bao-cao', [ThongKeController::class, 'baoCao'])->name('bao-cao');
 
             });
-<<<<<<< HEAD
-=======
             Route::prefix('hangs')
             ->as('hangs.')
             ->group(function () {
@@ -219,7 +201,6 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
             Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
         });
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 
         Route::prefix('banners')
             ->as('banners.')
