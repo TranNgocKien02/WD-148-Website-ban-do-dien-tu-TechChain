@@ -35,11 +35,11 @@
                 </li>
 
                 <li>
-                    <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
+                    {{-- <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
 
                         <i data-feather="users"></i>
                             <span> Quản lý tài khoản </span>
-                    </a>
+                    </a> --}}
 
                 </li>
 
@@ -49,7 +49,19 @@
                             <span> Quản lý thông tin </span>
                     </a>
 
+<<<<<<< HEAD
+                </li>
+
+                <li>
+                    <a class='tp-link' href='{{ route('admins.banners.index') }}'>
+                        <i data-feather="users"></i>
+                            <span> Quản lý Banner </span>
+                    </a>
+
+                </li>
+=======
                 </li> --}}
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
     
                 <li class="menu-title">Kinh doanh </li>
 
@@ -91,6 +103,13 @@
                     <a class='tp-link' href='{{ route('admins.hangs.index') }}'>
                         <i data-feather="package"></i>
                             <span>Hãng Sản Phẩm</span>
+                    </a>
+
+                </li>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.lienhes.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Liên Hệ</span>
                     </a>
 
                 </li>

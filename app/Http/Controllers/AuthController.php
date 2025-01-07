@@ -35,12 +35,59 @@ class AuthController extends Controller
 //     // Hiển thị form đăng ký
 // =======
     //đăng nhập 
+<<<<<<< HEAD
+=======
 
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
     public function showFromLogin()
     {
         return view('auth.login');
     }
 
+<<<<<<< HEAD
+    //đăng nhập 
+    public function login(Request $request)
+    {
+        $user = $request->
+        // only('email','password');
+        validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string'
+        ]);
+        // dd($user);
+        if (Auth::attempt($user)) {
+            return redirect()->intended('home');
+        }
+        return redirect()->intended('home');
+
+
+        return redirect()->back()->withErrors([
+            'email' => 'Thông tin sai đăng nhập ' 
+        ]);
+     }
+    
+
+
+    //đăng ký
+    public function showFromRegister()
+    {
+        return view('auth.register');
+    }
+
+
+    //đăng ký 
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8|',
+        ]);
+
+        $user = User::query()->create($data) ;
+        
+        $user = User::query()->create($data);
+=======
      //đăng nhập 
     //  public function login(Request $request){
     //     $user = $request->
@@ -67,10 +114,23 @@ class AuthController extends Controller
 
     // Kiểm tra nếu người dùng tồn tại và mật khẩu khớp
     $user = User::where('email', $credentials['email'])->first();
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
 
     if ($user && $user->password === $credentials['password']) {
         // Đăng nhập người dùng
         Auth::login($user);
+<<<<<<< HEAD
+
+        return redirect()->intended('home') ;
+        #
+
+     }
+    
+    //đăng xuất 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+=======
         return redirect()->intended('clients');  // Chuyển đến trang đích 'clients'
     }
 
@@ -202,6 +262,7 @@ class AuthController extends Controller
         // Xóa giỏ hàng khỏi session khi đăng xuất
         session()->forget('cart');
         Auth::logout() ;
+>>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
         return redirect('/login');
     }
 }

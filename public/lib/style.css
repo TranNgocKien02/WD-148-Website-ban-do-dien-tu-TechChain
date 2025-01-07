@@ -523,7 +523,15 @@ textarea:focus {
 /*  1.8 Background Variation Set
 /*----------------------------------------*/
 /*Home One | Slider Background Image*/
-.bg-1,
+.bg{
+    /* background-image: url(''); */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    min-height: 475px;
+    width: 100%;
+}
+/* .bg-1,
 .bg-2,
 .bg-3 {
     background-image: url(images/slider/1.jpg);
@@ -532,15 +540,15 @@ textarea:focus {
     background-size: cover;
     min-height: 475px;
     width: 100%;
-}
+} */
 
-.bg-2 {
+/* .bg-2 {
     background-image: url(images/slider/2.jpg);
 }
 
 .bg-3 {
     background-image: url(images/slider/3.jpg);
-}
+} */
 
 /*Home Two | Slider Background Image*/
 .bg-4,
@@ -3159,6 +3167,7 @@ textarea:focus {
     position: relative;
     overflow: hidden;
 }
+
 
 .li-banner>a,
 .single-banner>a,
