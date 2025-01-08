@@ -3439,7 +3439,9 @@ textarea:focus {
     font-size  : 14px;
     color      : #888;
     line-height: 36px;
-    display    : block;
+    display    : flex;
+    justify-content: center;
+    align-items: center;
     position   : relative;
     transition : all 0.3s ease-in-out;
 }
