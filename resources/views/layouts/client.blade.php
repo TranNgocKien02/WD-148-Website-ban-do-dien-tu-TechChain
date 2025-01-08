@@ -14,7 +14,6 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Favicon -->
-        {{-- <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"> --}}
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('lib/images/favicon.png')}}">
 
         <!-- Material Design Iconic Font-V2.2.0 -->
@@ -47,9 +46,11 @@
         <link rel="stylesheet" href="{{asset('lib/style.css')}}">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{asset('lib/css/responsive.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/client/css/style.css') }}">
-    {{-- <script src="{{ asset('assets/client/js/main.js') }}"></script>
-    <script src="{{asset('lib/js/main.js')}}"></script> --}}
+        {{-- <link rel="stylesheet" href="{{ asset('assets/client/css/style.css') }}"> --}}
+    {{-- <script src="{{ asset('assets/client/js/main.js') }}"></script> --}}
+        <script src="{{asset('lib/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
+    {{-- <script src="{{asset('lib/js/main.js')}}"></script> --}}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -75,7 +76,7 @@
         </div>
         <!-- Body Wrapper End Here -->
         <!-- jQuery-V1.12.4 -->
-        <script src="{{asset('lib/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+        {{-- <script src="{{asset('lib/js/vendor/modernizr-2.8.3.min.js')}}"></script> --}}
 
         <script src="{{asset('lib/js/vendor/jquery-1.12.4.min.js')}}"></script>
         <!-- Popper js -->

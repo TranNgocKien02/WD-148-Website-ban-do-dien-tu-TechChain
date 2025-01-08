@@ -16,7 +16,7 @@
                     <input type="text" id="name" class="form-control" name="name" placeholder="Name" required="required" 
                     value="{{ old('name') }}">
                     @error('name')
-                    <p class="text-danger">{{ @message }}</p>
+                    <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="fxt-transformY-50 fxt-transition-delay-1">
                     <input type="email" id="email" class="form-control" name="email" placeholder="Email" required="required" value="{{ old('email') }}">
                     @error('email')
-                    <p class="text-danger">{{ @message }}</p>
+                    <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <input id="password" type="password" class="form-control" name="password" placeholder="********" required="required" value="{{ old('password') }}">
                     <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                     @error('password')
-                    <p class="text-danger">{{ @message }}</p>
+                    <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
             </div>

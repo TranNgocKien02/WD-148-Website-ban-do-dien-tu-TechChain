@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BaoCaoController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\KhuyenMaiController;
 use App\Http\Controllers\Admin\ThongTinTrangWebController;
 use App\Http\Controllers\client\UserController;
+use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -20,9 +22,12 @@ use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\Admin\KhachHangController;
+use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\PayPalController;
 use App\Models\ThongTinTrangWeb;
+use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,13 +57,14 @@ route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/profile', [UserController::class, 'showProfile'])->name('profile')->middleware('auth');
 Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
 Route::put('/profile/update', [UserController::class, 'update'])->name('profile.update');
+
 // lấy lại mật khẩu
-// Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
-// Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
-// Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
-// Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-
+    
 // Route::get('/home', function () {
 //     return view('home');
 // })->middleware('auth');
@@ -123,10 +129,10 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('/', [SanPhamController::class, 'index'])->name('index');
                 Route::get('/create', [SanPhamController::class, 'create'])->name('create');
                 Route::post('/store', [SanPhamController::class, 'store'])->name('store');
-                Route::get('/show/{id}', [SanPhamController::class, 'show'])->name('show');
-                Route::get('{id}/edit', [SanPhamController::class, 'edit'])->name('edit');
-                Route::put('{id}/update', [SanPhamController::class, 'update'])->name('update');
-                Route::delete('{id}/destroy', [SanPhamController::class, 'destroy'])->name('destroy');
+                Route::get('{sanPham}/show', [SanPhamController::class, 'show'])->name('show');
+                Route::get('{sanPham}/edit', [SanPhamController::class, 'edit'])->name('edit');
+                Route::put('{sanPham}/update', [SanPhamController::class, 'update'])->name('update');
+                Route::delete('{sanPham}/destroy', [SanPhamController::class, 'destroy'])->name('destroy');
             });
 
         Route::prefix('donhangs')
@@ -147,9 +153,8 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 // Route::delete('{id}/destroy', [ThongKeController::class, 'destroy'])->name('destroy'); // Xóa báo cáo nếu cần
                 Route::get('/chi-tiet-thong-ke', [ThongKeController::class, 'chiTietThongKe'])->name('chiTietThongKe');
                 Route::get('/bao-cao', [ThongKeController::class, 'baoCao'])->name('bao-cao');
-
             });
-            Route::prefix('hangs')
+        Route::prefix('hangs')
             ->as('hangs.')
             ->group(function () {
                 Route::get('/', [HangController::class, 'index'])->name('index');
@@ -159,65 +164,84 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('{id}/edit', [HangController::class, 'edit'])->name('edit');
                 Route::put('{id}/update', [HangController::class, 'update'])->name('update');
                 Route::delete('{id}/destroy', [HangController::class, 'destroy'])->name('destroy');
-
             });
         // route quản lý trang web
-    //     Route::prefix('thongtintrangwebs')
-    //     ->as('thongtintrangwebs.')
-    //     ->group(function () {
-    //         Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index');
-    //         Route::get('/show/{id}', [ThongTinTrangWebController::class, 'show'])->name('show');
-    //         Route::put('{id}/update', [ThongTinTrangWebController::class, 'update'])->name('update');
-    //         Route::delete('{id}/destroy', [ThongTinTrangWebController::class, 'destroy'])->name('destroy');
-    // });
-    Route::prefix('khachangs')
-        ->as('khachhangs.')
-        ->group(function () {
-            Route::get('/', [KhachHangController::class, 'index'])->name('index');
-            Route::get('/create', [KhachHangController::class, 'create'])->name('create');
-            Route::post('/store', [KhachHangController::class, 'store'])->name('store');
-            Route::get('/show/{id}', [KhachHangController::class, 'show'])->name('show');
-            Route::get('{id}/edit', [KhachHangController::class, 'edit'])->name('edit');
-            Route::put('{id}/update', [KhachHangController::class, 'update'])->name('update');
-            Route::delete('{id}/destroy', [KhachHangController::class, 'destroy'])->name('destroy');
-        });
-
-            Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
-            Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
-        });
-
-        // route tài khoản
-        Route::prefix('taikhoans')
-            ->as('taikhoans.')
+        Route::prefix('thongtintrangwebs')
+            ->as('thongtintrangwebs.')
             ->group(function () {
-                Route::get('/', [TaiKhoanController::class, 'index'])->name('index'); // List all accounts
-                Route::get('/create', [TaiKhoanController::class, 'create'])->name('create'); // Show create form
-                Route::post('/store', [TaiKhoanController::class, 'store'])->name('store'); // Store new account
-                Route::get('/show/{id}', [TaiKhoanController::class, 'show'])->name('show'); // Show specific account
-                Route::get('{id}/edit', [TaiKhoanController::class, 'edit'])->name('edit'); // Edit account
-                Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
-                Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
+                Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index');
+                Route::get('/show/{id}', [ThongTinTrangWebController::class, 'show'])->name('show');
+                Route::put('{id}/update', [ThongTinTrangWebController::class, 'update'])->name('update');
+                Route::delete('{id}/destroy', [ThongTinTrangWebController::class, 'destroy'])->name('destroy');
             });
 
-            // Route::prefix('khuyenmais')
-            // ->as('khuyenmais.')
-            // ->group(function () {
+    Route::prefix('lien-he')
+    ->as('lienhes.')
+    ->group(function () {
+        Route::get('/', [LienHeController::class, 'index'])->name('index');
+        Route::get('{lienHe}/', [LienHeController::class, 'show'])->name('show');
+        Route::post('/respond', [LienHeController::class, 'respond'])->name('respond');
+        Route::delete('{lienHe}/destroy', [LienHeController::class, 'destroy'])->name('destroy');
+    });
+        Route::prefix('khachangs')
+            ->as('khachhangs.')
+            ->group(function () {
+                Route::get('/', [KhachHangController::class, 'index'])->name('index');
+                Route::get('/create', [KhachHangController::class, 'create'])->name('create');
+                Route::post('/store', [KhachHangController::class, 'store'])->name('store');
+                Route::get('/show/{id}', [KhachHangController::class, 'show'])->name('show');
+                Route::get('{id}/edit', [KhachHangController::class, 'edit'])->name('edit');
+                Route::put('{id}/update', [KhachHangController::class, 'update'])->name('update');
+                Route::delete('{id}/destroy', [KhachHangController::class, 'destroy'])->name('destroy');
+            });
 
-            //     Route::get('/', [KhuyenMaiController::class, 'index'])->name('index'); // List all promotions
-            //     Route::get('/create', [KhuyenMaiController::class, 'create'])->name('create'); // Show create form for promotions
-            //     Route::post('/store', [KhuyenMaiController::class, 'store'])->name('store'); // Store new promotion
-            //     Route::get('/show/{id}', [KhuyenMaiController::class, 'show'])->name('show'); // Show specific promotion
-            //     Route::get('{id}/edit', [KhuyenMaiController::class, 'edit'])->name('edit'); // Edit promotion
-            //     Route::put('{id}/update', [KhuyenMaiController::class, 'update'])->name('update'); // Update promotion
-            //     Route::delete('{id}/destroy', [KhuyenMaiController::class, 'destroy'])->name('destroy'); // Delete promotion
-            // });
+        Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
+        Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
+    });
 
-            // route up khuyến mãi
-            Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('client.apply_coupon');
-            Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
-            
-    // });
-    
+Route::prefix('banners')
+->as('banners.')
+->group(function () {
+    Route::get('/', [BannerController::class, 'index'])->name('index');
+    Route::get('{banner}/edit', [BannerController::class, 'edit'])->name('edit');
+    Route::get('/create', [BannerController::class, 'create'])->name('create');
+    Route::post('/store', [BannerController::class, 'store'])->name('store');
+    Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
+    Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
+});
+
+// route tài khoản
+Route::prefix('taikhoans')
+    ->as('taikhoans.')
+    ->group(function () {
+        Route::get('/', [TaiKhoanController::class, 'index'])->name('index'); // List all accounts
+        Route::get('/create', [TaiKhoanController::class, 'create'])->name('create'); // Show create form
+        Route::post('/store', [TaiKhoanController::class, 'store'])->name('store'); // Store new account
+        Route::get('/show/{id}', [TaiKhoanController::class, 'show'])->name('show'); // Show specific account
+        Route::get('{id}/edit', [TaiKhoanController::class, 'edit'])->name('edit'); // Edit account
+        Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
+        Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
+    });
+
+// Route::prefix('khuyenmais')
+// ->as('khuyenmais.')
+// ->group(function () {
+
+//     Route::get('/', [KhuyenMaiController::class, 'index'])->name('index'); // List all promotions
+//     Route::get('/create', [KhuyenMaiController::class, 'create'])->name('create'); // Show create form for promotions
+//     Route::post('/store', [KhuyenMaiController::class, 'store'])->name('store'); // Store new promotion
+//     Route::get('/show/{id}', [KhuyenMaiController::class, 'show'])->name('show'); // Show specific promotion
+//     Route::get('{id}/edit', [KhuyenMaiController::class, 'edit'])->name('edit'); // Edit promotion
+//     Route::put('{id}/update', [KhuyenMaiController::class, 'update'])->name('update'); // Update promotion
+//     Route::delete('{id}/destroy', [KhuyenMaiController::class, 'destroy'])->name('destroy'); // Delete promotion
+// });
+
+// route up khuyến mãi
+Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('client.apply_coupon');
+Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
+
+// });
+
 Route::prefix('clients')
     ->as('clients.')
     ->group(function () {
@@ -232,7 +256,7 @@ Route::prefix('clients')
         // khuyến mãi
         // Route::post('/apply-coupon', [KhuyenMaiController::class, 'applyCoupon'])->name('apply.coupon');
 
-        
+
     });
 
 
@@ -253,3 +277,9 @@ Route::prefix('clients')
 //         });
 //     });
 // });
+
+// Đăng nhập với Google
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+
+// Callback sau khi người dùng đăng nhập thành công với Google
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);

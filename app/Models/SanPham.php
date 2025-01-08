@@ -19,43 +19,50 @@ class SanPham extends Model
         'noi_dung',
         'so_luong',
         'luot_xem',
-        'ngay_nhap',
+        'ngay_dang_ban',
         'danh_muc_id',
+        'hang_id',
+        'trang_thai',
         'is_type',
         'is_new',
         'is_hot',
         'is_hot_deal',
         'is_show_home',
+        'is_active',
     ];
 
     protected $casts = [
-        'is_type'=> 'boolean',
-        'is_new'=> 'boolean',
-        'is_hot'=> 'boolean',
-        'is_hot_deal'=> 'boolean',
-        'is_show_home'=> 'boolean',
+        'is_type' => 'boolean',
+        'is_new' => 'boolean',
+        'is_hot' => 'boolean',
+        'is_hot_deal' => 'boolean',
+        'is_show_home' => 'boolean',
+        'is_active' => 'boolean',
 
     ];
 
-    public function danhMuc(){
-        return $this->belongsTo(DanhMuc::class) ;
+    public function danhMuc()
+    {
+        return $this->belongsTo(DanhMuc::class);
     }
-    public function hinhAnhSanPham(){
-        return $this->hasMany(HinhAnhSanPham::class) ;
+    public function hinhAnhSanPham()
+    {
+        return $this->hasMany(HinhAnhSanPham::class);
     }
-     // Quan hệ ngược lại với HangModel
-     public function hang()
-{
-    return $this->belongsTo(HangModel::class, 'hang_id');
+
+    public function productVariants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+    // Quan hệ ngược lại với Hang
+    public function hang()
+    {
+        return $this->belongsTo(Hang::class);
+    }
+
+    public function scopeScheduled($query)
+    {
+        return $query->where('trang_thai', 'da_len_lich')
+        ->where('ngay_dang_ban', '<=', now());
+    }
 }
-}
-
-// protected $fillable = [
-//     'san_pham_id',
-//     'hinh_anh',
-
-// ];
-
-// public function sanPham(){
-//     return $this->belongsTo(SanPham::class) ;
-// }

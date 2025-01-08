@@ -27,9 +27,9 @@ class DanhMuc extends Model
     }
 
 
-    // Quan hệ một-nhiều với HangModel
+    // Quan hệ một-nhiều với Hang
     public function hangs()
     {
-        return $this->hasMany(HangModel::class, 'danh_muc_id', 'id');
+        return $this->hasMany(Hang::class);
     }
 }

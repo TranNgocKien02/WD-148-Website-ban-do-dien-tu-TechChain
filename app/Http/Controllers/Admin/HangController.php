@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\HangModel;
+use App\Models\Hang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DanhMuc;
 use Illuminate\Support\Facades\Storage;
 
 class HangController extends Controller
@@ -16,7 +17,7 @@ class HangController extends Controller
     {
         $title = "Hãng sản phẩm";
 
-        $listHang = HangModel::with('danhMuc')->get();
+        $listHang = Hang::with('danhMuc')->get();
 
         return view('admins.hangs.index',compact('title','listHang'));
     }
@@ -27,9 +28,9 @@ class HangController extends Controller
     public function create()
     {
         $title = "Thêm Hãng";
-        $listHang = HangModel::with('danhMuc')->get();
+        $listDanhMuc = DanhMuc::query()->get();
 
-        return view('admins.hangs.create',compact('title','listHang'));
+        return view('admins.hangs.create',compact('title', 'listDanhMuc'));
     }
 
     /**
@@ -40,13 +41,13 @@ class HangController extends Controller
         if ($request->isMethod('POST')) {
             $param = $request->except('_token');
             if ($request->hasFile('hinh_anh')) {
-               $filepath = $request->file('hinh_anh')->store('uploads/HangModels','public');
+               $filepath = $request->file('hinh_anh')->store('uploads/Hangs','public');
             }else{
                 $filepath = null ;
             }
             $param['hinh_anh'] = $filepath ;
 
-            HangModel::create($param);
+            Hang::create($param);
 
             return redirect()->route('admins.hangs.index')->with('success','Thêm hãng thành công');
         }
@@ -67,8 +68,8 @@ class HangController extends Controller
     public function edit(string $id)
     {
         $title = "Sửa sản phẩm";
-        $hang = HangModel::findOrFail($id);
-        $listHang = HangModel::get();
+        $hang = Hang::findOrFail($id);
+        $listHang = Hang::get();
         return view('admins.hangs.edit', compact('title','hang','listHang'));
     }
 
@@ -80,19 +81,19 @@ class HangController extends Controller
         if ($request->isMethod('PUT')) {
             $param = $request->except('_token','_method');
 
-            $HangModel = HangModel::findOrFail($id) ;
+            $Hang = Hang::findOrFail($id) ;
 
             if ($request->hasFile('anh_san_pham')) {
-                if ($HangModel->anh_san_pham && Storage::disk('public')->exists($HangModel->anh_san_pham)) {
-                    Storage::disk('public')->delete($HangModel->anh_san_pham);
+                if ($Hang->anh_san_pham && Storage::disk('public')->exists($Hang->anh_san_pham)) {
+                    Storage::disk('public')->delete($Hang->anh_san_pham);
                 }
-                $filepath = $request->file('anh_san_pham')->store('uploads/HangModels','public');
+                $filepath = $request->file('anh_san_pham')->store('uploads/Hangs','public');
             }else{
-                $filepath = $HangModel->anh_san_pham ;
+                $filepath = $Hang->anh_san_pham ;
             }
             $param['anh_san_pham'] = $filepath ;
 
-            $HangModel->update($param) ;
+            $Hang->update($param) ;
             return redirect()->route('admins.hangs.index')->with('success', 'Sửa sản phẩm thành công');
 
 
@@ -105,12 +106,12 @@ class HangController extends Controller
      */
     public function destroy(string $id)
     {
-        $HangModel = HangModel::findOrFail($id);
+        $Hang = Hang::findOrFail($id);
 
-        if ($HangModel->anh_san_pham && Storage::disk('public')->exists($HangModel->anh_san_pham)) {
-            Storage::disk('public')->delete($HangModel->anh_san_pham);
+        if ($Hang->anh_san_pham && Storage::disk('public')->exists($Hang->anh_san_pham)) {
+            Storage::disk('public')->delete($Hang->anh_san_pham);
         }
-            $HangModel->delete();
+            $Hang->delete();
             return redirect()->route('admins.hangs.index')->with('success','Xóa sản phẩm thành công');
 
         }

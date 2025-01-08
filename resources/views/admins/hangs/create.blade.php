@@ -65,8 +65,8 @@
                                 <select name="danh_muc_id" id="danh_muc_id" class="form-control 
                                 @error('danh_muc_id') is-invalid @enderror" value="{{ old('danh_muc_id') }}"
                                 placeholder="Danh mục" >
-                                    @foreach($listHang as $index => $hang)
-                                        <option value="{{ $hang->danhMuc->id }}">{{ $hang->danhMuc->ten_danh_muc }}</option>
+                                    @foreach($listDanhMuc as $index => $danhMuc)
+                                        <option value="{{ $danhMuc->id }}">{{ $danhMuc->ten_danh_muc }}</option>
                                     @endforeach
                                 </select>
                                 @error('danh_muc_id')
