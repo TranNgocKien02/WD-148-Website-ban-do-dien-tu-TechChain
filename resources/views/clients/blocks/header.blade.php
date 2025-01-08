@@ -24,6 +24,7 @@
                                                     <li><a href="login-register.html">My Account</a></li>
                                                     <li><a href="checkout.html">Checkout</a></li>
                                                     <li><a href="login-register.html">Sign In</a></li>
+                                                    <li><a href="{{ route('logout')}}">Log Out</a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -162,7 +163,7 @@
                                             </li>
                                             <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
                                                 <ul class="megamenu hb-megamenu">
-                                                    @foreach ($danhMuc as $item)
+                                                    {{-- @foreach ($danhMuc as $item)
                                                         <li><a href="">{{$item->ten_danh_muc}}</a>
                                                             <ul>
                                                                 @foreach ($item->hangs as $hang)
@@ -170,7 +171,7 @@
                                                                 @endforeach
                                                             </ul>
                                                         </li>
-                                                    @endforeach 
+                                                    @endforeach  --}}
                                                 </ul>
                                             </li>
                                             <li><a href="about-us.html">About Us</a></li>

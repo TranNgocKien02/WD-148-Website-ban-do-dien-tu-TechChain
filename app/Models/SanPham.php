@@ -65,4 +65,9 @@ class SanPham extends Model
         return $query->where('trang_thai', 'da_len_lich')
         ->where('ngay_dang_ban', '<=', now());
     }
+    // Liên kết với bình luận
+    public function binhLuans()
+    {
+        return $this->hasMany(BinhLuan::class, 'san_pham_id');
+    }
 }

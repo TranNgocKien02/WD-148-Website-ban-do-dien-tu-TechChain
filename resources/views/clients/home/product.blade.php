@@ -23,7 +23,7 @@
                                                 <!-- single-product-wrap start -->
                                                 <div class="single-product-wrap">
                                                     <div class="product-image">
-                                                        <a href="">
+                                                        <a href="{{ route('product-detail',$item->id )}}">
                                                             <img src="{{Storage::url($item->hinh_anh) }}" style=" " alt="Li's Product Image">
                                                         </a>
                                                         <span class="sticker">New</span>
@@ -230,4 +230,4 @@
                     </div>
                 </div>
             </div>
-            <!-- Product Area End Here -->
+<!-- Product Area End Here -->

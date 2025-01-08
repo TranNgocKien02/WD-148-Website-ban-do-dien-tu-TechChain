@@ -102,12 +102,20 @@
 
                 </li>
                 <li>
+                    <a class='tp-link' href='{{ route('admins.binhluans.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Bình Luận</span>
+                    </a>
+
+                </li>
+                <li>
                     <a class='tp-link' href='{{ route('admins.lienhes.index') }}'>
                         <i data-feather="package"></i>
                             <span>Liên Hệ</span>
                     </a>
 
                 </li>
+
             </ul>
 
         </div>

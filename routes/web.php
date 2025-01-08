@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BaoCaoController;
+use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\KhuyenMaiController;
 use App\Http\Controllers\Admin\ThongTinTrangWebController;
@@ -50,7 +51,7 @@ route::post('login', [AuthController::class, 'login'])->name('login');
 
 route::get('register', [AuthController::class, 'showFromRegister']);
 route::post('register', [AuthController::class, 'register'])->name('register');
-route::post('logout', [AuthController::class, 'logout'])->name('logout');
+route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/profile', [UserController::class, 'showProfile'])->name('profile')->middleware('auth');
 Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
 Route::put('/profile/update', [UserController::class, 'update'])->name('profile.update');
@@ -78,6 +79,7 @@ Route::post('/cart/add',            [CartController::class, 'addCart'])->name('c
 Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
 Route::post('/cart/update',         [CartController::class, 'updateCart'])->name('cart.update');
 Route::delete('/cart/{id}',         [CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/binh-luan', [BinhLuanController::class, 'store'])->middleware('auth')->name('binh-luan.store');
 
 // thanh toán PayPal
 // Route::post('/paypal/capture', [PayPalController::class, 'capture'])->name('paypal.capture');
@@ -200,6 +202,16 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
         Route::post('/store', [BannerController::class, 'store'])->name('store');
         Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
         Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
+    });
+
+// route bình luận
+    Route::prefix('binhluans')
+    ->as('binhluans.')
+    ->group(function () {
+        Route::get('/', [BinhLuanController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [BinhLuanController::class, 'show'])->name('show');
+        
+        Route::delete('{id}/destroy', [BinhLuanController::class, 'destroy'])->name('destroy');
     });
 
     // route tài khoản
