@@ -523,7 +523,16 @@ textarea:focus {
 /*  1.8 Background Variation Set
 /*----------------------------------------*/
 /*Home One | Slider Background Image*/
-.bg-1,
+
+.bg {
+    /* background-image: url(''); */
+    background-repeat  : no-repeat;
+    background-position: center center;
+    background-size    : cover;
+    min-height         : 475px;
+    width              : 100%;
+}
+/* .bg-1,
 .bg-2,
 .bg-3 {
     background-image   : url(images/slider/1.jpg);
@@ -532,15 +541,15 @@ textarea:focus {
     background-size    : cover;
     min-height         : 475px;
     width              : 100%;
-}
+} */
 
-.bg-2 {
+/* .bg-2 {
     background-image: url(images/slider/2.jpg);
 }
 
 .bg-3 {
     background-image: url(images/slider/3.jpg);
-}
+} */
 
 /*Home Two | Slider Background Image*/
 .bg-4,
@@ -1850,7 +1859,9 @@ textarea:focus {
     text-align : center;
     height     : 45px;
     line-height: 45px;
-    display    : block;
+    display    : flex;
+    justify-content: center;
+    align-items: center;
     transition : all 0.3s ease-in-out;
 }
 
@@ -2845,12 +2856,15 @@ textarea:focus {
 
 .add-actions-link li a {
     color             : #a4a4a4;
-    display           : block;
+    display           : flex;
+    justify-content: center;
+    align-items: center;
     font-size         : 17px;
     font-weight       : 400;
     padding           : 0;
     position          : relative;
     text-align        : center;
+    height: 100%;
     -webkit-transition: all 300ms ease-in 0s;
     transition        : all 300ms ease-in 0s;
 }
@@ -3071,11 +3085,12 @@ textarea:focus {
     overflow: hidden;
 }
 
+
+
 .li-banner>a,
 .single-banner>a,
 .featured-banner a {
     width   : 100%;
-    height  : 100%;
     display : block;
     overflow: hidden;
     position: relative;
@@ -3424,7 +3439,9 @@ textarea:focus {
     font-size  : 14px;
     color      : #888;
     line-height: 36px;
-    display    : block;
+    display    : flex;
+    justify-content: center;
+    align-items: center;
     position   : relative;
     transition : all 0.3s ease-in-out;
 }
@@ -5953,7 +5970,9 @@ span.required {
 }
 
 .product-image>a img {
-    width: 100%;
+    width     : 206px;
+    height    : 206px;
+    object-fit: cover;
 }
 
 .shop-products-wrapper .tab-content .tab-pane.active {

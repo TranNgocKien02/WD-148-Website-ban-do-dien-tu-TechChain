@@ -95,6 +95,13 @@
 
                 </li>
                 <li>
+                    <a class='tp-link' href='{{ route('admins.banners.index') }}'>
+                        <i data-feather="users"></i>
+                            <span> Quản lý Banner </span>
+                    </a>
+
+                </li>
+                <li>
                     <a class='tp-link' href='{{ route('admins.lienhes.index') }}'>
                         <i data-feather="package"></i>
                             <span>Liên Hệ</span>

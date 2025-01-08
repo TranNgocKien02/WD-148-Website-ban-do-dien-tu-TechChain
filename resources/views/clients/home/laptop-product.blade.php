@@ -1,19 +1,5 @@
-@foreach ($danhMuc as $danhMuc)
     <section class="product-area li-laptop-product pt-60 pb-45">
-        <div class="container">
-            <div class="row">
-                <!-- Begin Li's Section Area -->
-                <div class="col-lg-12">
-                    <div class="li-section-title">
-                        <h2>
-                            <span>{{ $danhMuc->ten_danh_muc }}</span>
-                        </h2>
-                        <ul class="li-sub-category-list">
-                            @foreach ($danhMuc->hangs as $hang)
-                                <li><a href="shop-left-sidebar.html">{{ $hang->ten_hang }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="container">
                     <div class="row">
                         <!-- Begin Li's Section Area -->
                         <div class="col-lg-12">
@@ -35,7 +21,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
                                                     <a href="single-product.html">
-                                                        <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
+                                                        <img src="images/product/large-size/1.jpg" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
                                                 </div>
@@ -43,7 +29,7 @@
                                                     <div class="product_desc_info">
                                                         <div class="product-review">
                                                             <h5 class="manufacturer">
-                                                                <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                <a href="shop-left-sidebar.html">Graphic Corner</a>
                                                             </h5>
                                                             <div class="rating-box">
                                                                 <ul class="rating">
@@ -55,11 +41,9 @@
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                        <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
+                                                        <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
                                                         <div class="price-box">
-                                                            <span class="new-price new-price-2">${{$item->gia_khuyen_mai}}</span>
-                                                            <span class="old-price">${{$item->gia_san_pham}}</span>
-                                                            <span class="discount-percentage">-7%</span>
+                                                            <span class="new-price">$46.80</span>
                                                         </div>
                                                     </div>
                                                     <div class="add-actions">
@@ -73,21 +57,12 @@
                                             </div>
                                             <!-- single-product-wrap end -->
                                         </div>
-                                    </div>
-                                    <!-- single-product-wrap end -->
+                                    @endforeach
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
+                        <!-- Li's Section Area End Here -->
                     </div>
                 </div>
-
-                <!-- Li's Section Area End Here -->
-
-            </div>
-
-
-        </div>
-
-    </section>
-@endforeach
+            </section>
 <!-- Li's Laptop Product Area End Here -->
