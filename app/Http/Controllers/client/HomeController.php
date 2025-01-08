@@ -35,7 +35,7 @@ class HomeController extends Controller
         $bannerMain = Banner::query()->where('loai', 'main')->where('is_active', true)->get();
         $bannerSale = Banner::query()->where('loai', 'sale')->where('is_active', true)->take(2)->get();
         $bannerProduct = Banner::query()->where('loai', 'product')->where('is_active', true)->get();
-        // dd($danhMuc);    
+        // dd($bannerMain->anh);    
         return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal', 'sanPhamTrending', 'banners', 'bannerMain', 'bannerSale', 'bannerProduct'));
     }
 }

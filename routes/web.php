@@ -191,23 +191,19 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::delete('{id}/destroy', [KhachHangController::class, 'destroy'])->name('destroy');
             });
 
-        Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
-        Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
+    Route::prefix('banners')
+    ->as('banners.')
+    ->group(function () {
+        Route::get('/', [BannerController::class, 'index'])->name('index');
+        Route::get('{banner}/edit', [BannerController::class, 'edit'])->name('edit');
+        Route::get('/create', [BannerController::class, 'create'])->name('create');
+        Route::post('/store', [BannerController::class, 'store'])->name('store');
+        Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
+        Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
     });
 
-Route::prefix('banners')
-->as('banners.')
-->group(function () {
-    Route::get('/', [BannerController::class, 'index'])->name('index');
-    Route::get('{banner}/edit', [BannerController::class, 'edit'])->name('edit');
-    Route::get('/create', [BannerController::class, 'create'])->name('create');
-    Route::post('/store', [BannerController::class, 'store'])->name('store');
-    Route::put('{banner}/update', [BannerController::class, 'update'])->name('update');
-    Route::delete('{banner}/destroy', [BannerController::class, 'destroy'])->name('destroy');
-});
-
-// route tài khoản
-Route::prefix('taikhoans')
+    // route tài khoản
+    Route::prefix('taikhoans')
     ->as('taikhoans.')
     ->group(function () {
         Route::get('/', [TaiKhoanController::class, 'index'])->name('index'); // List all accounts
@@ -219,18 +215,28 @@ Route::prefix('taikhoans')
         Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
     });
 
-// Route::prefix('khuyenmais')
-// ->as('khuyenmais.')
-// ->group(function () {
+        //     Route::prefix('khuyenmais')
+        // ->as('khuyenmais.')
+        // ->group(function () {
 
-//     Route::get('/', [KhuyenMaiController::class, 'index'])->name('index'); // List all promotions
-//     Route::get('/create', [KhuyenMaiController::class, 'create'])->name('create'); // Show create form for promotions
-//     Route::post('/store', [KhuyenMaiController::class, 'store'])->name('store'); // Store new promotion
-//     Route::get('/show/{id}', [KhuyenMaiController::class, 'show'])->name('show'); // Show specific promotion
-//     Route::get('{id}/edit', [KhuyenMaiController::class, 'edit'])->name('edit'); // Edit promotion
-//     Route::put('{id}/update', [KhuyenMaiController::class, 'update'])->name('update'); // Update promotion
-//     Route::delete('{id}/destroy', [KhuyenMaiController::class, 'destroy'])->name('destroy'); // Delete promotion
-// });
+        //     Route::get('/', [KhuyenMaiController::class, 'index'])->name('index'); // List all promotions
+        //     Route::get('/create', [KhuyenMaiController::class, 'create'])->name('create'); // Show create form for promotions
+        //     Route::post('/store', [KhuyenMaiController::class, 'store'])->name('store'); // Store new promotion
+        //     Route::get('/show/{id}', [KhuyenMaiController::class, 'show'])->name('show'); // Show specific promotion
+        //     Route::get('{id}/edit', [KhuyenMaiController::class, 'edit'])->name('edit'); // Edit promotion
+        //     Route::put('{id}/update', [KhuyenMaiController::class, 'update'])->name('update'); // Update promotion
+        //     Route::delete('{id}/destroy', [KhuyenMaiController::class, 'destroy'])->name('destroy'); // Delete promotion
+        // });
+
+        Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
+        Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
+    });
+
+        
+
+
+
+
 
 // route up khuyến mãi
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('client.apply_coupon');
