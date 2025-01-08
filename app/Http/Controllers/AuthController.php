@@ -8,32 +8,32 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-// <<<<<<< HEAD
-//     // Hiển thị form đăng nhập
-//     public function showFromLogin()
-//     {
-//         return view('auth.login');
-//     }
+    // <<<<<<< HEAD
+    //     // Hiển thị form đăng nhập
+    //     public function showFromLogin()
+    //     {
+    //         return view('auth.login');
+    //     }
 
-//     // Xử lý đăng nhập
-//     public function login(Request $request)
-//     {
-//         $credentials = $request->validate([
-//             'email' => 'required|string|email|max:255',
-//             'password' => 'required|string',
-//         ]);
+    //     // Xử lý đăng nhập
+    //     public function login(Request $request)
+    //     {
+    //         $credentials = $request->validate([
+    //             'email' => 'required|string|email|max:255',
+    //             'password' => 'required|string',
+    //         ]);
 
-//         if (Auth::attempt($credentials)) {
-//             return redirect()->intended('home'); // Điều hướng tới trang đích
-//         }
+    //         if (Auth::attempt($credentials)) {
+    //             return redirect()->intended('home'); // Điều hướng tới trang đích
+    //         }
 
-//         return redirect()->back()->withErrors([
-//             'email' => 'Thông tin đăng nhập không đúng.',
-//         ]);
-//     }
+    //         return redirect()->back()->withErrors([
+    //             'email' => 'Thông tin đăng nhập không đúng.',
+    //         ]);
+    //     }
 
-//     // Hiển thị form đăng ký
-// =======
+    //     // Hiển thị form đăng ký
+    // =======
     //đăng nhập 
 
     public function showFromLogin()
@@ -41,7 +41,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-     //đăng nhập 
+    //đăng nhập 
     //  public function login(Request $request){
     //     $user = $request->
     //     // only('email','password');
@@ -59,25 +59,25 @@ class AuthController extends Controller
     //     ]);
     //  }
     public function login(Request $request)
-{
-    $credentials = $request->validate([
-        'email' => 'required|string|email|max:255',
-        'password' => 'required|string'
-    ]);
+    {
+        $credentials = $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string'
+        ]);
 
-    // Kiểm tra nếu người dùng tồn tại và mật khẩu khớp
-    $user = User::where('email', $credentials['email'])->first();
+        // Kiểm tra nếu người dùng tồn tại và mật khẩu khớp
+        $user = User::where('email', $credentials['email'])->first();
 
-    if ($user && $user->password === $credentials['password']) {
-        // Đăng nhập người dùng
-        Auth::login($user);
-        return redirect()->intended('clients');  // Chuyển đến trang đích 'clients'
+        if ($user && $user->password === $credentials['password']) {
+            // Đăng nhập người dùng
+            Auth::login($user);
+            return redirect()->intended('clients');  // Chuyển đến trang đích 'clients'
+        }
+
+        return redirect()->back()->withErrors([
+            'email' => 'Thông tin sai đăng nhập'
+        ]);
     }
-
-    return redirect()->back()->withErrors([
-        'email' => 'Thông tin sai đăng nhập'
-    ]);
-}
 
     //đăng nhập 
 
@@ -117,7 +117,7 @@ class AuthController extends Controller
     //         'email' => 'Thông tin sai đăng nhập '
     //     ]);
     // }
-   
+
     //đăng nhập 
     // public function login(Request $request)
     // {
@@ -141,31 +141,33 @@ class AuthController extends Controller
     //     ]);
     // }
 
-    // đăng ký
+    //đăng ký
+    // >>>>>>> main
     public function showFromRegister()
     {
         return view('auth.register');
     }
 
+    // <<<<<<< HEAD
     // Xử lý đăng ký
-    public function register(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
+    // public function register(Request $request)
+    // {
+    //     $data = $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users',
+    //         'password' => 'required|string|min:8',
+    //     ]);
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']), // Mã hóa mật khẩu
-        ]);
+    //     $user = User::create([
+    //         'name' => $data['name'],
+    //         'email' => $data['email'],
+    //         'password' => bcrypt($data['password']), // Mã hóa mật khẩu
+    //     ]);
 
-        Auth::login($user);
+    //     Auth::login($user);
 
-        return redirect()->intended('home');
-    }
+    //     return redirect()->intended('home');
+    // }
 
     // // Đăng xuất
     // public function logout()
@@ -173,35 +175,36 @@ class AuthController extends Controller
     //     Auth::logout();
     //     return redirect('/login');
     // }
-// }
-// =======
-    
-//     public function register(Request $request)
-// {
-//     $data = $request->validate([
-//         'name' => 'required|string|max:255',
-//         'email' => 'required|string|email|max:255',
-//         'password' => 'required|string|min:8',
-//     ]);
+    // }
+    // =======
 
-//     // Lưu mật khẩu trực tiếp mà không mã hóa
-//     $user = User::create([
-//         'name' => $data['name'],
-//         'email' => $data['email'],
-//         'password' => $data['password'], // Không sử dụng Hash::make()
-//     ]);
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
 
-//     Auth::login($user);
+        // Lưu mật khẩu trực tiếp mà không mã hóa
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'], // Không sử dụng Hash::make()
+        ]);
 
-//     return redirect()->intended('home');
-// }
+        Auth::login($user);
+
+        return redirect()->intended('home');
+    }
 
 
-      //đăng xuất 
-    public function logout(Request $request){
+    //đăng xuất 
+    public function logout(Request $request)
+    {
         // Xóa giỏ hàng khỏi session khi đăng xuất
         session()->forget('cart');
-        Auth::logout() ;
+        Auth::logout();
         return redirect('/login');
     }
 }
