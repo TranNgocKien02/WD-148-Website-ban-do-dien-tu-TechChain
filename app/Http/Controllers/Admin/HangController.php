@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Hang;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreHangRequest;
+use App\Http\Requests\UpdateHangRequest;
 use App\Models\DanhMuc;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class HangController extends Controller
 {
@@ -19,7 +20,8 @@ class HangController extends Controller
 
         $listHang = Hang::with('danhMuc')->get();
 
-        return view('admins.hangs.index',compact('title','listHang'));
+        return view('admins.hangs.index', compact('title', 'listHang'));
+
     }
 
     /**
@@ -30,89 +32,81 @@ class HangController extends Controller
         $title = "Thêm Hãng";
         $listDanhMuc = DanhMuc::query()->get();
 
-        return view('admins.hangs.create',compact('title', 'listDanhMuc'));
+        return view('admins.hangs.create', compact('title', 'listDanhMuc'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHangRequest $request)
     {
-        if ($request->isMethod('POST')) {
-            $param = $request->except('_token');
-            if ($request->hasFile('hinh_anh')) {
-               $filepath = $request->file('hinh_anh')->store('uploads/Hangs','public');
-            }else{
-                $filepath = null ;
-            }
-            $param['hinh_anh'] = $filepath ;
+            $data = $request->all();
+        try {
+            DB::beginTransaction();
 
-            Hang::create($param);
+            Hang::query()->create($data);
 
-            return redirect()->route('admins.hangs.index')->with('success','Thêm hãng thành công');
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return back()->with('message', 'Lỗi');
         }
+        return redirect()->route('admins.hangs.index')->with('success', 'Thêm hãng thành công');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Hang $hang)
     {
-
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Hang $hang)
     {
         $title = "Sửa sản phẩm";
-        $hang = Hang::findOrFail($id);
         $listHang = Hang::get();
-        return view('admins.hangs.edit', compact('title','hang','listHang'));
+        return view('admins.hangs.edit', compact('title', 'hang', 'listHang'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateHangRequest $request, Hang $hang)
     {
-        if ($request->isMethod('PUT')) {
-            $param = $request->except('_token','_method');
+        $data = $request->all();
 
-            $Hang = Hang::findOrFail($id) ;
+        try {
+            DB::beginTransaction();
 
-            if ($request->hasFile('anh_san_pham')) {
-                if ($Hang->anh_san_pham && Storage::disk('public')->exists($Hang->anh_san_pham)) {
-                    Storage::disk('public')->delete($Hang->anh_san_pham);
-                }
-                $filepath = $request->file('anh_san_pham')->store('uploads/Hangs','public');
-            }else{
-                $filepath = $Hang->anh_san_pham ;
-            }
-            $param['anh_san_pham'] = $filepath ;
+            $hang->update($data);
 
-            $Hang->update($param) ;
-            return redirect()->route('admins.hangs.index')->with('success', 'Sửa sản phẩm thành công');
-
-
-            
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return back()->with('message', 'Lỗi');
         }
+            return redirect()->route('admins.hangs.index')->with('success', 'Sửa sản phẩm thành công');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Hang $hang)
     {
-        $Hang = Hang::findOrFail($id);
+        try {
+            DB::beginTransaction();
+            $hang->delete();
 
-        if ($Hang->anh_san_pham && Storage::disk('public')->exists($Hang->anh_san_pham)) {
-            Storage::disk('public')->delete($Hang->anh_san_pham);
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            // return back()->with('message', 'Lỗi');
+            return dd($exception);
         }
-            $Hang->delete();
-            return redirect()->route('admins.hangs.index')->with('success','Xóa sản phẩm thành công');
-
-        }
+        return redirect()->route('admins.hangs.index')->with('success', 'Xóa sản phẩm thành công');
+    }
 }

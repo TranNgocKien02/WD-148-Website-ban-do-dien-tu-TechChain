@@ -18,7 +18,7 @@ class Hang extends Model
     // Quan hệ ngược lại với DanhMuc
     public function danhMuc()
     {
-        return $this->hasMany(DanhMuc::class, 'danh_muc_id');
+        return $this->belongsTo(DanhMuc::class);
     }
     // Quan hệ một-nhiều với SanPham
     public function sanPhams()

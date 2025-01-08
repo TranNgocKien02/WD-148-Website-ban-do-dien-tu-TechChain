@@ -4,7 +4,12 @@
     {{ $title }}
 @endsection
 @section('css')
-
+<style>
+        .dataTables_length {
+            display: none;
+            /* Ẩn phần 'Show entries' */
+        }
+    </style>
 @endsection
 
 
@@ -30,7 +35,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped mb-0">
+                <table id="table" class="datatable table table-striped mb-0">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -89,5 +94,23 @@
 @endsection
 
 @section('js')
+<script>
+        $(document).ready(function() {
+            // Áp dụng DataTable cho tất cả các bảng có class 'datatable'
+            $('table.datatable').each(function() {
+                $(this).DataTable({
+                    "paging": true, // Hiển thị phân trang
+                    "searching": true, // Tìm kiếm
+                    "ordering": true, // Sắp xếp
+                    "info": true, // Hiển thị thông tin
+                    "pageLength": 8 // Số dòng mỗi trang
+                });
+            });
+        });
 
+        $(document).on('click', '.dropdown-item[data-bs-toggle="modal"]', function() {
+            var actionUrl = $(this).data('action');
+            $('#deleteForm').attr('action', actionUrl); // Cập nhật action cho form
+        });
+    </script>
 @endsection

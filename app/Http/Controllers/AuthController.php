@@ -71,7 +71,7 @@ class AuthController extends Controller
         if ($user && $user->password === $credentials['password']) {
             // Đăng nhập người dùng
             Auth::login($user);
-            return redirect()->intended('clients');  // Chuyển đến trang đích 'clients'
+            return redirect()->intended('/');  // Chuyển đến trang đích 'clients'
         }
 
         return redirect()->back()->withErrors([
@@ -205,7 +205,7 @@ class AuthController extends Controller
         // Xóa giỏ hàng khỏi session khi đăng xuất
         session()->forget('cart');
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 }
 // >>>>>>> main
