@@ -35,33 +35,21 @@
                 </li>
 
                 <li>
-                    {{-- <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
+                    <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
 
                         <i data-feather="users"></i>
                             <span> Quản lý tài khoản </span>
-                    </a> --}}
+                    </a>
 
                 </li>
 
-                {{-- <li>
+                <li>
                     <a class='tp-link' href='{{ route('admins.thongtintrangwebs.index') }}'>
                         <i data-feather="users"></i>
                             <span> Quản lý thông tin </span>
                     </a>
 
-<<<<<<< HEAD
                 </li>
-
-                <li>
-                    <a class='tp-link' href='{{ route('admins.banners.index') }}'>
-                        <i data-feather="users"></i>
-                            <span> Quản lý Banner </span>
-                    </a>
-
-                </li>
-=======
-                </li> --}}
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
     
                 <li class="menu-title">Kinh doanh </li>
 

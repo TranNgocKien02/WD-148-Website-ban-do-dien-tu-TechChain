@@ -1,3 +1,4 @@
+
 <!-- Begin Li's Trending Product Area -->
             <section class="product-area li-trending-product pt-60 pb-45">
                 <div class="container">
@@ -25,7 +26,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
                                                     <a href="single-product.html">
-                                                        <img src="{{Storage::url($item->anh) }}" alt="Li's Product Image">
+                                                        <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
                                                 </div>
@@ -60,16 +61,11 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-<<<<<<< HEAD
                                             </div>
                                             <!-- single-product-wrap end -->
                                         </div>
                                     @endforeach
                                             
-=======
-                                                <!-- single-product-wrap end -->
-                                            </div>
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +78,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
                                                     <a href="single-product.html">
-                                                        <img src="{{Storage::url($item->anh) }}" alt="Li's Product Image">
+                                                        <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
                                                 </div>
@@ -117,16 +113,11 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-<<<<<<< HEAD
                                             </div>
                                             <!-- single-product-wrap end -->
                                         </div>
                                     @endforeach
                                             
-=======
-                                                <!-- single-product-wrap end -->
-                                            </div>
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +130,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
                                                     <a href="single-product.html">
-                                                        <img src="{{Storage::url($item->anh) }}" alt="Li's Product Image">
+                                                        <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
                                                 </div>
@@ -174,16 +165,11 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-<<<<<<< HEAD
                                             </div>
                                             <!-- single-product-wrap end -->
                                         </div>
                                     @endforeach
                                             
-=======
-                                                <!-- single-product-wrap end -->
-                                            </div>
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +181,6 @@
                 </div>
             </section>
             <!-- Li's Trending Product Area End Here -->
-<<<<<<< HEAD
             <!-- Begin Li's Trendding Products Area -->
             <section class="product-area li-laptop-product li-trendding-products best-sellers pb-45">
                 <div class="container">
@@ -215,7 +200,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
                                                     <a href="single-product.html">
-                                                        <img src="{{Storage::url($item->anh) }}" alt="Li's Product Image">
+                                                        <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
                                                 </div>
@@ -263,6 +248,3 @@
                 </div>
             </section>
             <!-- Li's Trendding Products Area End Here -->
-=======
-         
->>>>>>> fc5807a59d65c29f01def7a0693c838480361fc6

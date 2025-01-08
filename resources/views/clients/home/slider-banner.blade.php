@@ -8,7 +8,7 @@
                                 <div class="slider-active owl-carousel">
                                     <!-- Begin Single Slide Area -->
                                      @foreach ($bannerMain as $banner)
-                                    <div class="single-slide align-center-left  animation-style-01 bg" style="background-image: url('{{ Storage::url($banner->anh) }}');">
+                                    <div class="single-slide align-center-left  animation-style-01 bg" style="background-image: url('{{ Storage::url($banner->hinh_anh) }}');">
                                         <div class="slider-progress"></div>
                                         <div class="slider-content">
                                             <h5>{{$banner->mo_ta}}</h5>
@@ -29,7 +29,7 @@
                             @foreach ($bannerSale as $banner)
                                 <div class="li-banner {{ $loop->iteration == 2 ? 'mt-15 mt-sm-30 mt-xs-30' : '' }}">
                                     <a href="{{$banner->link}}">
-                                        <img src="{{ Storage::url($banner->anh) }}" alt="">
+                                        <img src="{{ Storage::url($banner->hinh_anh) }}" alt="">
                                     </a>
                                 </div>
                             @endforeach
