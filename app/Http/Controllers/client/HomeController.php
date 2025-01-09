@@ -35,7 +35,33 @@ class HomeController extends Controller
         $bannerMain = Banner::query()->where('loai', 'main')->where('is_active', true)->get();
         $bannerSale = Banner::query()->where('loai', 'sale')->where('is_active', true)->take(2)->get();
         $bannerProduct = Banner::query()->where('loai', 'product')->where('is_active', true)->get();
-        // dd($bannerMain->anh);    
-        return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal', 'sanPhamTrending', 'banners', 'bannerMain', 'bannerSale', 'bannerProduct'));
+        // dd($bannerMain->anh);  
+         // Get the cart from the session
+         $cart = session()->get('cart', []);
+    
+         // If the cart is empty, forget the coupon
+         if (empty($cart)) {
+             session()->forget('coupon');
+         }
+     
+         $total = 0;
+         $subTotal = 0;
+         $coupon = session()->get('coupon', 0); // Get the coupon value
+     
+         // Calculate subtotal
+         foreach ($cart as $item) {
+             // Use the promotional price if it exists, otherwise use the regular price
+             $price = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
+             $subTotal += $price * $item['so_luong'];
+         }
+     
+         // Set shipping cost
+         $shipping = 20000;
+     
+         // Calculate the total price
+         $total = $subTotal + $shipping - $coupon;  
+        return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal',
+         'sanPhamTrending', 'banners', 'bannerMain',
+         'bannerSale', 'bannerProduct','cart', 'total', 'shipping', 'subTotal', 'coupon'));
     }
 }

@@ -95,41 +95,47 @@
                                         <!-- Header Middle Wishlist Area End Here -->
                                         <!-- Begin Header Mini Cart Area -->
                                         <li class="hm-minicart">
+                                            {{-- @php
+                                                $price = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
+                                                $subtotal = $price * $item['so_luong'];
+                                            @endphp --}}
                                             <div class="hm-minicart-trigger">
                                                 <span class="item-icon"></span>
-                                                <span class="item-text">£80.00
+                                               
+                                                <span class="item-text">{{ isset($subtotal) ? number_format($subtotal, 0, '', '.') . 'đ' : '0đ' }}
                                                     <span class="cart-item-count">2</span>
                                                 </span>
                                             </div>
                                             <span></span>
                                             <div class="minicart">
                                                 <ul class="minicart-product-list">
+                                                    @if (!empty($cart) && is_array($cart))
+                                                    @foreach ($cart as $key => $item)
                                                     <li>
                                                         <a href="single-product.html" class="minicart-product-image">
-                                                            <img src="images/product/small-size/5.jpg" alt="cart products">
+                                                            <img src="{{ Storage::url($item['hinh_anh']) }}" alt="cart products">
                                                         </a>
                                                         <div class="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                            <span>£40 x 1</span>
+                                                            <h6><a href="single-product.html">{{ $item['ten_san_pham'] }}</a></h6>
+                                                            <span>@if (isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0)
+                                                                <del><span class="text-decoration-line-through">{{ number_format($item['gia'], 0, '', '.') }}đ</span></del>
+                                                                <br>
+                                                                <span class="text-success">{{ number_format($item['gia_khuyen_mai'], 0, '', '.') }}đ</span>
+                                                            @else
+                                                                {{ number_format($item['gia'], 0, '', '.') }}đ
+                                                            @endif x {{ $item['so_luong'] }}</span>
                                                         </div>
                                                         <button class="close" title="Remove">
                                                             <i class="fa fa-close"></i>
                                                         </button>
                                                     </li>
-                                                    <li>
-                                                        <a href="single-product.html" class="minicart-product-image">
-                                                            <img src="images/product/small-size/6.jpg" alt="cart products">
-                                                        </a>
-                                                        <div class="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                            <span>£40 x 1</span>
-                                                        </div>
-                                                        <button class="close" title="Remove">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
-                                                    </li>
+                                                   @endforeach
+                                                   @else
+                                                        <p>Giỏ hàng của bạn đang trống.</p>
+                                                    @endif
                                                 </ul>
-                                                <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                                                <p class="minicart-total">SUBTOTAL: <span>{{ isset($subtotal) ? number_format($subtotal, 0, '', '.') . 'đ' : '0đ' }}</span>
+                                                </p>
                                                 <div class="minicart-button">
                                                     <a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
                                                         <span>View Full Cart</span>
@@ -159,7 +165,7 @@
                                 <div class="hb-menu">
                                     <nav style="display: block;">
                                         <ul>
-                                            <li class="dropdown-holder"><a href="index.html">Home</a>
+                                            <li class="dropdown-holder"><a href="{{ route('clients.index')}}">Home</a>
                                             </li>
                                             <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
                                                 <ul class="megamenu hb-megamenu">

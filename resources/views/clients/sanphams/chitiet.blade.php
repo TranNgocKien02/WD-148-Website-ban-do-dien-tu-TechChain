@@ -44,6 +44,8 @@
                 </div>
 
                 <div class="col-lg-7 col-md-6">
+                    <form action="{{ route('cart.add') }}" class="cart-quantity" method="post">
+                        @csrf
                     <div class="product-details-view-content pt-60">
                         <div class="product-info">
                             <h2>{{ $product->ten_san_pham }}</h2>
@@ -73,9 +75,9 @@
                                 <div class="product-variants-1">
                                     <div class="produt-variants-size">
                                         <label>Dung lượng</label>
-                                        <select class="nice-select">
+                                        <select class="nice-select" name="dung_luong">
                                             @foreach ($bienThes as $bienThe)
-                                                <option value="{{ $bienThe->id }}" title="M">
+                                                <option value="{{ $bienThe->dung_luong }}" title="M">
                                                     {{ $bienThe->dung_luong }}Mb</option>
                                             @endforeach
                                             {{-- <option value="1" title="S" selected="selected">40x60cm</option>
@@ -87,9 +89,9 @@
                                 <div class="product-variants-2">
                                     <div class="produt-variants-size">
                                         <label>Màu sắc</label>
-                                        <select class="nice-select">
+                                        <select class="nice-select" name="mau_sac">
                                             @foreach ($bienThes as $bienThe)
-                                                <option value="{{ $bienThe->id }}" title="M">{{ $bienThe->mau_sac }}
+                                                <option value="{{ $bienThe->mau_sac }}" title="M">{{ $bienThe->mau_sac }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -97,18 +99,24 @@
                                 </div>
                             </div>
                             <div class="single-add-to-cart">
-                                <form action="{{ route('cart.list') }}" class="cart-quantity" method="get">
-                                    @csrf
+                                
                                     <div class="quantity">
                                         <label>Quantity</label>
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
+                                            <input class="cart-plus-minus-box" name="quantity" value="1" type="text">
+                                            <input class="cart-plus-minus-box" name="product_id" value="{{ $product->id }}" type="hidden">
+                                        
                                             <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                         </div>
                                     </div>
                                     <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
-                                </form>
+                               
+                                {{-- <form action="{{ route('cart.list') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <button class="add-to-cart btn btn-warning" type="submit">Mua ngay</button>
+                                </form> --}}
                             </div>
                             <div class="product-additional-info pt-25">
                                 <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Thêm vào danh sách
@@ -155,6 +163,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>

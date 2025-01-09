@@ -70,4 +70,9 @@ class SanPham extends Model
     {
         return $this->hasMany(BinhLuan::class, 'san_pham_id');
     }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'san_pham_id');
+    }
+
 }

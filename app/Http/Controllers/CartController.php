@@ -46,6 +46,8 @@ class CartController extends Controller
 {
     $productId = $request->input('product_id');
     $quantity = $request->input('quantity');
+    $dung_luong = $request->input('dung_luong');
+    $mau_sac = $request->input('mau_sac');
     
     // Lấy sản phẩm từ database
     $sanPham = SanPham::findOrFail($productId);
@@ -66,6 +68,8 @@ class CartController extends Controller
             'gia' => $sanPham->gia_san_pham, // Sử dụng 'gia' thay vì 'gia_goc'
             'gia_khuyen_mai' => $sanPham->gia_khuyen_mai ?? 0, // Giá khuyến mãi (nếu có)
             'hinh_anh' => $sanPham->hinh_anh,
+            'dung_luong' => $dung_luong,
+            'mau_sac' => $mau_sac,
         ];
     }
     
