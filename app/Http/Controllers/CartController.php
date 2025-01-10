@@ -84,6 +84,9 @@ class CartController extends BaseController
     }
     public function addCart(Request $request)
 {
+    if (!auth()->check()) {
+        return redirect()->route('login')->with('alert', 'Vui lòng đăng nhập để mua sản phẩm vào giỏ hàng.');
+    }
     $this->shareCartData(); 
 
     $productId = $request->input('product_id');

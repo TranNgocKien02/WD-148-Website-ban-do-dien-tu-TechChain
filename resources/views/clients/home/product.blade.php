@@ -46,7 +46,7 @@
                                                             </div>
                                                             <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
                                                             <div class="price-box">
-                                                                <span class="new-price">${{$item->gia_san_pham}}</span>
+                                                                <span class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
                                                             </div>
                                                         </div>
                                                         <div class="add-actions">

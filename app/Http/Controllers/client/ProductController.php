@@ -19,9 +19,15 @@ class ProductController extends BaseController
         $listDanhMuc = DanhMuc::with('sanPhams')->get();
         $collection = SanPham::get();
         $bienThes = ProductVariant::where('san_pham_id', $id)->get();
-        $binhLuans = BinhLuan::with(['sanPham', 'user'])->get();
-        
-        // dd($bienThes);
-        return view('clients.sanphams.chitiet', compact('bienThes','product','collection','listDanhMuc','binhLuans'));
+        $binhLuans = BinhLuan::with(['sanPham', 'user'])
+        ->where('san_pham_id', $id)
+        ->get();
+
+         // Lấy 15 sản phẩm khác cùng danh mục, ngoại trừ sản phẩm hiện tại
+        $relatedProducts = SanPham::where('danh_muc_id', $product->danh_muc_id)
+            ->where('id', '!=', $product->id)
+            ->paginate(15);
+        // dd($relatedProducts);
+        return view('clients.sanphams.chitiet', compact('bienThes','product','collection','listDanhMuc','binhLuans','relatedProducts'));
     }
 }
