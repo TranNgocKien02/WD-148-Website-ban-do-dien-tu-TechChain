@@ -4,7 +4,12 @@
     {{ $title }}
 @endsection
 @section('css')
-
+<style>
+        .dataTables_length {
+            display: none;
+            /* Ẩn phần 'Show entries' */
+        }
+    </style>  
 @endsection
 
 @section('content')
@@ -35,7 +40,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             @endif
-                            <table class="table table-striped mb-0">
+                            <table id="table" class="datatable table table-striped mb-0">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -79,5 +84,18 @@
 @endsection
 
 @section('js')
-
+<script>
+        $(document).ready(function() {
+            // Áp dụng DataTable cho tất cả các bảng có class 'datatable'
+            $('table.datatable').each(function() {
+                $(this).DataTable({
+                    "paging": true, // Hiển thị phân trang
+                    "searching": true, // Tìm kiếm
+                    "ordering": true, // Sắp xếp
+                    "info": true, // Hiển thị thông tin
+                    "pageLength": 8 // Số dòng mỗi trang
+                });
+            });
+        });
+    </script>
 @endsection
