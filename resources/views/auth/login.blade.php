@@ -82,6 +82,11 @@
 
 @section('content')
 
+    @if(session('alert'))
+        <script type="text/javascript">
+            alert("{{ session('alert') }}");
+        </script>
+    @endif
 
                       <div class="col-lg-12">
                         <div class="card overflow-hidden card-bg-fill galaxy-border-none">

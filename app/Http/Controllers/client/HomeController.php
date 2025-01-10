@@ -1,14 +1,18 @@
 <?php
 namespace App\Http\Controllers\Client;
 
+use App\Http\Controllers\BaseController;
+use App\Models\Cart;
 use App\Models\Banner;
 use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-class HomeController extends Controller
+use Illuminate\Support\Facades\Auth;
+
+class HomeController extends BaseController
 {
     /**
      * Create a new controller instance.
@@ -24,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        $this->shareCartData(); // Gọi phương thức chia sẻ dữ liệu giỏ hàng
         $danhMuc = DanhMuc::query()->where('trang_thai', true)->get();
         $sanPham = SanPham::query()->take(10)->get();
         $sanPhamMoi = SanPham::query()->take(10)->get();
@@ -36,32 +40,10 @@ class HomeController extends Controller
         $bannerSale = Banner::query()->where('loai', 'sale')->where('is_active', true)->take(2)->get();
         $bannerProduct = Banner::query()->where('loai', 'product')->where('is_active', true)->get();
         // dd($bannerMain->anh);  
-         // Get the cart from the session
-         $cart = session()->get('cart', []);
-    
-         // If the cart is empty, forget the coupon
-         if (empty($cart)) {
-             session()->forget('coupon');
-         }
-     
-         $total = 0;
-         $subTotal = 0;
-         $coupon = session()->get('coupon', 0); // Get the coupon value
-     
-         // Calculate subtotal
-         foreach ($cart as $item) {
-             // Use the promotional price if it exists, otherwise use the regular price
-             $price = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
-             $subTotal += $price * $item['so_luong'];
-         }
-     
-         // Set shipping cost
-         $shipping = 20000;
-     
-         // Calculate the total price
-         $total = $subTotal + $shipping - $coupon;  
+        
+        //  dd($subTotal);
         return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal',
          'sanPhamTrending', 'banners', 'bannerMain',
-         'bannerSale', 'bannerProduct','cart', 'total', 'shipping', 'subTotal', 'coupon'));
+         'bannerSale', 'bannerProduct'));
     }
 }

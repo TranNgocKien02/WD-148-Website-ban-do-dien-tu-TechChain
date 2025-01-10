@@ -76,10 +76,12 @@ Route::put('/profile/update', [UserController::class, 'update'])->name('profile.
 
 Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
 Route::post('/cart/add',            [CartController::class, 'addCart'])->name('cart.add');
-Route::post('/cart/add',            [CartController::class, 'addCart'])->name('cart.add');
+Route::post('/cart/store',            [CartController::class, 'storeCart'])->name('cart.store');
 Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
+Route::get('/cart-full/list',            [CartController::class, 'listFullCart'])->name('cart-full.list');
+Route::get('/cart-full/create',            [OrderController::class, 'createFullCart'])->name('fulldonhangs.create');
 Route::post('/cart/update',         [CartController::class, 'updateCart'])->name('cart.update');
-Route::delete('/cart/{id}',         [CartController::class, 'destroy'])->name('cart.destroy');
+Route::delete('{cart}/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/binh-luan', [BinhLuanController::class, 'store'])->middleware('auth')->name('binh-luan.store');
 
 // thanh toán PayPal

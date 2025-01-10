@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderRequest;
-use App\Mail\OrderConfirm;
+use App\Models\Cart;
 use App\Models\DonHang;
+use App\Mail\OrderConfirm;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class OrderController extends Controller
+class OrderController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->shareCartData(); 
         $donHangs = Auth::user()->donHang;
 
         $trangThaiDonhang = DonHang::TRANG_THAI_DON_HANG;
@@ -32,41 +34,70 @@ class OrderController extends Controller
      */
 public function create()
 {
+    $this->shareCartData(); 
     $cart = session()->get('cart', []); // Lấy dữ liệu giỏ hàng từ session
 
     if (!empty($cart)) {
         // Tính tổng tiền và các giá trị liên quan (subTotal, shipping, coupon)
-        $subTotal = 0;
+        $subtotal = 0;
         $shipping = 20000; // Phí vận chuyển mặc định
         $coupon = session()->get('coupon', 0); // Kiểm tra coupon có trong session không
 
-        foreach ($cart as $item) {
+        foreach ($cart as $key => $item) {
             // Ưu tiên giá khuyến mãi nếu có, nếu không thì lấy giá gốc
-            $giaHienThi = $item['gia_khuyen_mai'] ?? $item['gia'];
-            $subTotal += $giaHienThi * $item['so_luong'];
+            $giaHienThi =  isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
+            $subtotal += $giaHienThi * $item['so_luong'];
         }
 
         // Tính tổng tiền, trừ đi nếu có coupon
-        $total = $subTotal + $shipping - $coupon;
+        $total = $subtotal + $shipping - $coupon;
 
         // Lưu lại giá trị subTotal, shipping và coupon vào session
-        session()->put('subTotal', $subTotal);
+        session()->put('subtotal', $subtotal);
         session()->put('shipping', $shipping);
         session()->put('coupon', $coupon);
-
         // Trả dữ liệu cho view
-        return view('clients.donhangs.create', compact('cart', 'subTotal', 'shipping', 'coupon', 'total'));
+        return view('clients.donhangs.create', compact('cart', 'subtotal', 'shipping', 'coupon', 'total'));
     }
 
     // Nếu giỏ hàng rỗng, chuyển hướng về trang giỏ hàng
     return redirect()->route('cart.list')->with('message', 'Giỏ hàng của bạn đang trống.');
 }
+public function createFullCart()
+{
+    $this->shareCartData(); 
+    $userId = Auth::id();
+    $cart = Cart::with('sanPham')->where('user_id', $userId)->get();
 
+    if (!empty($cart)) {
+        // Tính tổng tiền và các giá trị liên quan (subTotal, shipping, coupon)
+        $subtotal = 0;
+        $shipping = 20000; // Phí vận chuyển mặc định
+        $coupon = session()->get('coupon', 0); // Kiểm tra coupon có trong session không
+
+        foreach ($cart as $key => $item) {
+            // Ưu tiên giá khuyến mãi nếu có, nếu không thì lấy giá gốc
+            $giaHienThi =  isset($item->sanPham->gia_khuyen_mai) && $item->sanPham->gia_khuyen_mai > 0 ? $item->sanPham->gia_khuyen_mai : $item->sanPham->gia_san_pham;
+            $subtotal += $giaHienThi * $item->so_luong;
+        }
+
+        // Tính tổng tiền, trừ đi nếu có coupon
+        $total = $subtotal + $shipping - $coupon;
+
+        // Trả dữ liệu cho view
+        return view('clients.donhangs.createfull', compact('cart', 'subtotal', 'shipping', 'coupon', 'total'));
+    }
+
+    // Nếu giỏ hàng rỗng, chuyển hướng về trang giỏ hàng
+    return redirect()->route('cart.list')->with('message', 'Giỏ hàng của bạn đang trống.');
+}
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        $this->shareCartData(); 
+
         // Kiểm tra xem yêu cầu có phải là phương thức POST không
         if ($request->isMethod('POST')) {
             // Bắt đầu giao dịch
@@ -100,7 +131,8 @@ public function create()
                 // Lưu chi tiết đơn hàng
                 foreach ($carts as $productId => $item) {
                     $thanhTien = $item['gia'] * $item['so_luong']; // Tính thành tiền của mỗi sản phẩm
-    
+                    $dung_luong = $item['dung_luong']; // Lấy dung lượng của sản phẩm
+                    $mau_sac = $item['mau_sac']; // Lấy dung lượng của sản phẩm
                     // Lưu chi tiết đơn hàng vào bảng chi tiết
                     $donHang->chiTietDonHang()->create([
                         'don_hang_id' => $don_hang_id,
@@ -108,6 +140,8 @@ public function create()
                         'don_gia' => $item['gia'],
                         'so_luong' => $item['so_luong'],
                         'thanh_tien' => $thanhTien,
+                        'dung_luong' => $dung_luong,
+                        'mau_sac' => $mau_sac,
                     ]);
                 }
     
@@ -144,6 +178,8 @@ public function create()
      */
     public function show(string $id)
     {
+    $this->shareCartData(); 
+
         $donHang = DonHang::query()->findOrFail($id);
         $trangThaiDonhang = DonHang::TRANG_THAI_DON_HANG;
         $trangThaiThanhToan = DonHang::TRANG_THAI_THANH_TOAN;
@@ -164,6 +200,8 @@ public function create()
      */
     public function update(Request $request, string $id)
     {
+    $this->shareCartData(); 
+
         $donHang = DonHang::query()->findOrFail($id);
         DB::beginTransaction();
 

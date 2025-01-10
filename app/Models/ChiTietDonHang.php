@@ -15,6 +15,8 @@ class ChiTietDonHang extends Model
         'don_gia',
         'so_luong',
         'thanh_tien',
+        'dung_luong',
+        'mau_sac',
     ];
 
     public function donHang(){

@@ -44,9 +44,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
+                  
+                      
                     <div class="row">
                         <div class="col-lg-12">
-                            <form action="{{ route('cart.update') }}" method="post">
+                            <form action="{{ route('cart.update')}}" method="post">
                                 @csrf
                                 <!-- Cart Table Area -->
                                 <div class="cart-table table-responsive">
@@ -66,48 +68,57 @@
                                                 <tr>
                                                     <td class="pro-thumbnail">
                                                         <a href="#">
-                                                            <img class="img-fluid" src="{{ Storage::url($item['hinh_anh']) }}" alt="Product" />
+                                                            <img class="img-fluid" src="{{ Storage::url($item->sanPham->hinh_anh) }}" alt="Product" width="100px" />
                                                         </a>
-                                                        <input type="hidden" name="cart[{{ $key }}][hinh_anh]" value="{{ $item['hinh_anh'] }}">
+                                                        <input type="hidden" name="hinh_anh" value="{{ $item->sanPham->hinh_anh }}">
                                                     </td>
                                                     <td class="pro-title">
-                                                        <a href="{{ route('product-detail', $key) }}" class="tm-cart-productname">{{ $item['ten_san_pham'] }}</a><br>
-                                                        <a href="{{ route('product-detail', $key) }}" class="tm-cart-productname">{{ $item['dung_luong'] }},{{ $item['mau_sac'] }}</a>
-                                                        <input type="hidden" name="cart[{{ $key }}][ten_san_pham]" value="{{ $item['ten_san_pham'] }}">
-                                                        <input type="hidden" name="cart[{{ $key }}][dung_luong]" value="{{ $item['dung_luong'] }}">
-                                                        <input type="hidden" name="cart[{{ $key }}][mau_sac]" value="{{ $item['mau_sac'] }}">
+                                                        <a href="{{ route('product-detail', $key) }}" class="tm-cart-productname">{{ $item->sanPham->ten_san_pham }}</a><br>
+                                                        <a href="{{ route('product-detail', $key) }}" class="tm-cart-productname">{{ $item->dung_luong }},{{ $item->mau_sac }}</a>
+                                                        <input type="hidden" name="ten_san_pham" value="{{ $item->sanPham->ten_san_pham }}">
                                                     </td>
                                         
                                                     <td class="pro-price">
-                                                        @if (isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0)
-                                                            <del><span class="text-decoration-line-through">{{ number_format($item['gia'], 0, '', '.') }}đ</span></del>
+                                                        @if (isset($item->sanPham->gia_khuyen_mai) && $item->sanPham->gia_khuyen_mai > 0)
+                                                            <del><span class="text-decoration-line-through">{{ number_format($item->sanpham->gia_san_pham, 0, '', '.') }}đ</span></del>
                                                             <br>
-                                                            <span class="text-success">{{ number_format($item['gia_khuyen_mai'], 0, '', '.') }}đ</span>
+                                                            <span class="text-success">{{ number_format($item->sanPham->gia_khuyen_mai, 0, '', '.') }}đ</span>
                                                         @else
-                                                            {{ number_format($item['gia'], 0, '', '.') }}đ
+                                                            {{ number_format($item->sanpham->gia_san_pham, 0, '', '.') }}đ
                                                         @endif
                                                     </td>
                                         
-                                                    <input type="hidden" name="cart[{{ $key }}][gia]" value="{{ isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'] }}">
+                                                    <input type="hidden" name="gia" value="{{ isset($item->sanPham->gia_khuyen_mai) && $item->sanPham->gia_khuyen_mai > 0 ? $item->sanPham->gia_khuyen_mai : $item->sanpham->gia_san_pham }}">
                                         
                                                     <td class="pro-quantity">
                                                         <div class="pro-qty">
                                                             <span class="dec qtybtn">-</span>
-                                                            <input type="text" value="{{ $item['so_luong'] }}" data-price="{{ $item['gia'] }}" class="quantityInput" name="cart[{{ $key }}][so_luong]" />
+                                                            <input type="text" value="{{ $item->so_luong }}" data-price="{{ $item->sanpham->gia_san_pham }}" class="quantityInput" name="so_luong" />
                                                             <span class="inc qtybtn">+</span>
                                                         </div>
                                                     </td>
                                         
                                                     <td class="pro-subtotal">
                                                         @php
-                                                            $price = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
-                                                            $subtotal = $price * $item['so_luong'];
+                                                            $price = isset($item->sanPham->gia_khuyen_mai) && $item->sanPham->gia_khuyen_mai > 0 ? $item->sanPham->gia_khuyen_mai : $item->sanpham->gia_san_pham;
+                                                            $subtotal = $price * $item->so_luong;
                                                         @endphp
                                                         <span class="subtotal">{{ number_format($subtotal, 0, '', '.') }}đ</span>
                                                     </td>
-                                        
-                                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                              
+                                                    <!-- Delete Option -->
+                                                    <td>
+                                                        <a class="dropdown-item" href="#"
+                                                           data-bs-toggle="modal"
+                                                           data-bs-target="#removeItemModal"
+                                                           data-id="{{ $item->id }}"
+                                                           data-action="{{ route('cart.destroy', $item) }}">
+                                                           <i class="mdi mdi-delete text-muted fs-16 p-1"></i>
+                                                           Xóa
+                                                        </a>
+                                                    </td>
                                                 </tr>
+                                              
                                             @endforeach
                                         </tbody>
                                         
@@ -161,7 +172,7 @@
                                             <tr>
                                                 <td>Tổng sản phẩm</td>
                                                 <td>
-                                                    {{ number_format($subTotal, 0, '', '.') }}đ
+                                                    {{ number_format($subtotal, 0, '', '.') }}đ
                                                 </td>
                                             </tr>
                                             <tr>
@@ -198,7 +209,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="{{ route('donhangs.create') }}" class="btn btn-warning ">Tiến hành thanh toán</a>
+                                <a href="{{ route('fulldonhangs.create') }}" class="btn btn-warning ">Tiến hành thanh toán</a>
                             </div>
                         </div>
                     </div>
@@ -206,8 +217,35 @@
                 </div>
             </div>
         </div>
+
+<!-- Modal Xác nhận xóa -->
+<div class="modal fade" id="removeItemModal" tabindex="-1" aria-labelledby="removeItemModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="removeItemModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa sản phẩm này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form id="deleteForm" method="POST" action="">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
         <!-- cart main wrapper end -->
     </main>
+
 
     <!-- Scroll to top start -->
     <div class="scroll-top not-visible">
@@ -218,6 +256,16 @@
 
 @section('js')
   <script>
+    // Đảm bảo jQuery được tải và sẵn sàng sử dụng
+    $(document).ready(function () {
+            $(document).on('click', '.dropdown-item[data-bs-toggle="modal"]', function () {
+                var actionUrl = $(this).data('action');
+                $('#deleteForm').attr('action', actionUrl); // Cập nhật action của form với URL chính xác
+            });
+        });
+
+
+
     $(document).ready(function() {
         // Add the increment and decrement buttons only once
         $('.pro-qty').each(function() {
@@ -229,20 +277,20 @@
         });
 
         function updateTotals() {
-            var subTotal = 0;
+            var subtotal = 0;
             $('.quantityInput').each(function() {
                 var input = $(this);
                 var price = parseFloat(input.data('price'));
                 var quantity = parseFloat(input.val());
-                subTotal += price * quantity;
+                subtotal += price * quantity;
             });
 
             // Get shipping cost 
             var shipping = parseFloat($('.shipping').text().replace(/\./g, '').replace(' đ', ''));
-            var total = subTotal + shipping;
+            var total = subtotal + shipping;
 
             // Update values
-            $('.sub-total').text(subTotal.toLocaleString('vi-VN') + ' đ');
+            $('.sub-total').text(subtotal.toLocaleString('vi-VN') + ' đ');
             $('.total-amount').text(total.toLocaleString('vi-VN') + ' đ');
         }
 
@@ -283,13 +331,13 @@
             updateTotals();
         });
 
-        // xóa - má k xóa được điên quá trời
-        $('.pro-remove').on('click', function(event) {
-            event.preventDefault();
-            var $row = $(this).closest('tr');
-            $row.remove(); // Remove row
-            updateTotals(); // Update totals
-        });
+        // xóa
+        // $('.pro-remove').on('click', function(event) {
+        //     event.preventDefault();
+        //     var $row = $(this).closest('tr');
+        //     $row.remove(); // Remove row
+        //     updateTotals(); // Update totals
+        // });
 
         updateTotals();
     });

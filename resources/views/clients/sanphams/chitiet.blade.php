@@ -3,6 +3,11 @@
 @section('css')
 @endsection
 @section('content')
+    @if(session('alert'))
+        <script type="text/javascript">
+            alert("{{ session('alert') }}");
+        </script>
+    @endif
     <!-- Begin Li's Breadcrumb Area -->
     <div class="breadcrumb-area">
         <div class="container">
@@ -44,7 +49,7 @@
                 </div>
 
                 <div class="col-lg-7 col-md-6">
-                    <form action="{{ route('cart.add') }}" class="cart-quantity" method="post">
+                    <form action="{{ route('cart.store') }}" class="cart-quantity" method="post">
                         @csrf
                     <div class="product-details-view-content pt-60">
                         <div class="product-info">
@@ -75,21 +80,18 @@
                                 <div class="product-variants-1">
                                     <div class="produt-variants-size">
                                         <label>Dung lượng</label>
-                                        <select class="nice-select" name="dung_luong">
+                                        <select class="nice-select" name="dung_luong" id="dung_luong_select">
                                             @foreach ($bienThes as $bienThe)
                                                 <option value="{{ $bienThe->dung_luong }}" title="M">
                                                     {{ $bienThe->dung_luong }}Mb</option>
                                             @endforeach
-                                            {{-- <option value="1" title="S" selected="selected">40x60cm</option>
-                                                <option value="2" title="M">60x90cm</option>
-                                                <option value="3" title="L">80x120cm</option> --}}
                                         </select>
                                     </div>
                                 </div>
                                 <div class="product-variants-2">
                                     <div class="produt-variants-size">
                                         <label>Màu sắc</label>
-                                        <select class="nice-select" name="mau_sac">
+                                        <select class="nice-select" name="mau_sac" id="mau_sac_select">
                                             @foreach ($bienThes as $bienThe)
                                                 <option value="{{ $bienThe->mau_sac }}" title="M">{{ $bienThe->mau_sac }}
                                                 </option>
@@ -99,24 +101,34 @@
                                 </div>
                             </div>
                             <div class="single-add-to-cart">
-                                
                                     <div class="quantity">
                                         <label>Quantity</label>
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" name="quantity" value="1" type="text">
-                                            <input class="cart-plus-minus-box" name="product_id" value="{{ $product->id }}" type="hidden">
-                                        
+                                            <input class="cart-plus-minus-box" name="so_luong" value="1" type="text" id="so_luong_select">
+                                            <input class="cart-plus-minus-box" name="san_pham_id" value="{{ $product->id }}" type="hidden">
+                                            {{-- @if (auth()->check()) --}}
+                                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                            {{-- @else
+                                                <p>Vui lòng <a href="{{ route('login') }}">đăng nhập</a> để gửi bình luận.</p>
+                                            @endif --}}
                                             <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                         </div>
                                     </div>
-                                    <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
-                               
-                                {{-- <form action="{{ route('cart.list') }}" method="post">
+                                  
+                                <!-- Form đăng nhập của bạn -->
+                                
+                                <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                                </form>
+                                <form action="{{ route('cart.add') }}" method="post" id="form2" class="form2">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <button class="add-to-cart btn btn-warning" type="submit">Mua ngay</button>
-                                </form> --}}
+                                    <input type="hidden" id="dung_luong_input" name="dung_luong_value" value="">
+                                    <input type="hidden" id="mau_sac_input" name="mau_sac_value" value="">
+                                    <input type="hidden" id="so_luong_input" name="so_luong_value" value="">
+                                    <button class="add-to-cart " type="submit">Mua ngay</button>
+                                </form>
+
                             </div>
                             <div class="product-additional-info pt-25">
                                 <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Thêm vào danh sách
@@ -163,7 +175,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+              
                 </div>
             </div>
         </div>
@@ -872,6 +884,22 @@
 
 @section('js')
     <script>
+    // Lắng nghe sự kiện khi người dùng thay đổi lựa chọn trong select
+    document.getElementById('form2').addEventListener('submit', function() {
+            // Lấy giá trị dung lượng được chọn
+             // Lấy giá trị từ các input trong Form 1
+        var selectedDungLuong = document.getElementById('dung_luong_select').value;
+        var selectedMauSac = document.getElementById('mau_sac_select').value;
+        var selectedSoLuong = document.getElementById('so_luong_select').value;
+
+        // Gán giá trị vào input ẩn
+        document.getElementById('mau_sac_input').value = selectedMauSac;
+        document.getElementById('so_luong_input').value = selectedSoLuong;
+         document.getElementById('dung_luong_input').value = selectedDungLuong;
+    });
+        
+
+
         $(document).ready(function() {
             $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
             $('.pro-qty').append('<span class="inc qtybtn">+</span>');
