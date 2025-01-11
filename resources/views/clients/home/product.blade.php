@@ -23,7 +23,7 @@
                                                 <!-- single-product-wrap start -->
                                                 <div class="single-product-wrap">
                                                     <div class="product-image">
-                                                        <a href="">
+                                                        <a href="{{ route('product-detail',$item->id )}}">
                                                             <img src="{{Storage::url($item->hinh_anh) }}" style=" " alt="Li's Product Image">
                                                         </a>
                                                         <span class="sticker">New</span>
@@ -46,7 +46,7 @@
                                                             </div>
                                                             <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
                                                             <div class="price-box">
-                                                                <span class="new-price">${{$item->gia_san_pham}}</span>
+                                                                <span class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
                                                             </div>
                                                         </div>
                                                         <div class="add-actions">
@@ -230,4 +230,4 @@
                     </div>
                 </div>
             </div>
-            <!-- Product Area End Here -->
+<!-- Product Area End Here -->

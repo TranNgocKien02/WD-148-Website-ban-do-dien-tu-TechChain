@@ -7,7 +7,7 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="header-top-left">
                         <ul class="phone-wrap">
-                            <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+                            <li><span>Telephone Enquiry:</span><a href="#"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,43 +77,59 @@
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
                             <li class="hm-minicart">
+                                {{-- @php
+                                                $price = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
+                                                $subtotal = $price * $item['so_luong'];
+                                            @endphp --}}
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-                                    <span class="item-text">£80.00
-                                        <span class="cart-item-count">2</span>
+                                    <span class="item-text"> {{ number_format($subTotal, 0, '', '.') }}VND
+                                        <span class="cart-item-count">{{ $cartItemCount }}</span>
                                     </span>
                                 </div>
                                 <span></span>
                                 <div class="minicart">
                                     <ul class="minicart-product-list">
-                                        <li>
-                                            <a href="single-product.html" class="minicart-product-image">
-                                                <img src="images/product/small-size/5.jpg" alt="cart products">
-                                            </a>
-                                            <div class="minicart-product-details">
-                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                <span>£40 x 1</span>
-                                            </div>
-                                            <button class="close" title="Remove">
-                                                <i class="fa fa-close"></i>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <a href="single-product.html" class="minicart-product-image">
-                                                <img src="images/product/small-size/6.jpg" alt="cart products">
-                                            </a>
-                                            <div class="minicart-product-details">
-                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                <span>£40 x 1</span>
-                                            </div>
-                                            <button class="close" title="Remove">
-                                                <i class="fa fa-close"></i>
-                                            </button>
-                                        </li>
+
+                                        @if (isset($cartToDisplay))
+                                            @foreach ($cartToDisplay as $item)
+                                                <li>
+                                                    <a href="single-product.html" class="minicart-product-image">
+                                                        <img src="{{ Storage::url($item->sanPham->hinh_anh) }}"
+                                                            alt="cart products">
+                                                    </a>
+                                                    <div class="minicart-product-details">
+
+                                                        <h6><a
+                                                                href="single-product.html">{{ $item->sanPham->ten_san_pham }}</a>
+                                                        </h6>
+                                                        <span>
+                                                            @if (isset($item->sanPham->gia_khuyen_mai) && $item->sanPham->gia_khuyen_mai > 0)
+                                                                <del><span
+                                                                        class="text-decoration-line-through">{{ number_format($item->sanPham->gia_san_pham, 0, '', '.') }}đ</span></del>
+                                                                <br>
+                                                                <span
+                                                                    class="text-success">{{ number_format($item->sanPham->gia_khuyen_mai, 0, '', '.') }}đ</span>
+                                                            @else
+                                                                {{ number_format($item->sanPham->gia_san_pham, 0, '', '.') }}đ
+                                                            @endif x {{ $item->so_luong }}
+
+                                                        </span>
+                                                    </div>
+                                                    <button class="close" title="Remove">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </li>
+                                            @endforeach
+                                        @else
+                                            <p>Giỏ hàng của bạn đang trống.</p>
+                                        @endif
                                     </ul>
-                                    <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                                    <p class="minicart-total">SUBTOTAL:
+                                        <span>{{ number_format($subTotal, 0, '', '.') }}đ</span>
+                                    </p>
                                     <div class="minicart-button">
-                                        <a href="{{ route('cart.list') }}"
+                                        <a href="{{ route('cart-full.list')}}"
                                             class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
@@ -142,7 +158,7 @@
                     <div class="hb-menu">
                         <nav style="display: block;">
                             <ul>
-                                <li class="dropdown-holder"><a href="index.html">Home</a>
+                                <li class="dropdown-holder"><a href="{{route('index')}}">Home</a>
                                 </li>
                                 <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
                                     <ul class="megamenu hb-megamenu">
@@ -158,7 +174,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>
                         </nav>
                     </div>

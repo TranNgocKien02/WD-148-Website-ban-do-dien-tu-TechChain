@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BinhLuanController;
+use App\Http\Controllers\Client\LienHeController;
 use App\Http\Controllers\client\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,3 +61,55 @@ Route::middleware('auth')->prefix('orders')->name('orders.')->group(function () 
 
 // Client Routes
     Route::get('/', [HomeController::class, 'index'])->name('index');
+// Route::get('/home', function () {
+//     return view('home');
+// })->middleware('auth');
+// route::get('/admin',function () {
+//     return 'Đây là trang admin';
+// })->middleware(['auth','auth.admin']);
+
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
+Route::post('/cart/add',            [CartController::class, 'addCart'])->name('cart.add');
+Route::post('/cart/store',            [CartController::class, 'storeCart'])->name('cart.store');
+Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
+Route::get('/cart-full/list',            [CartController::class, 'listFullCart'])->name('cart-full.list');
+Route::get('/cart-full/create',            [OrderController::class, 'createFullCart'])->name('fulldonhangs.create');
+Route::post('/cart/update',         [CartController::class, 'updateCart'])->name('cart.update');
+Route::delete('{cart}/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/binh-luan', [BinhLuanController::class, 'store'])->middleware('auth')->name('binh-luan.store');
+
+
+Route::middleware('auth')->prefix('donhangs')
+    ->as('donhangs.')
+    ->group(function () {
+        Route::get('/',             [OrderController::class, 'index'])->name('index');
+        Route::get('/create',       [OrderController::class, 'create'])->name('create');
+        Route::post('/store',       [OrderController::class, 'store'])->name('store');
+        Route::get('/show/{id}',    [OrderController::class, 'show'])->name('show');
+        Route::put('{id}/update',   [OrderController::class, 'update'])->name('update');
+    });
+
+
+
+Route::controller(LienHeController::class)->group(function () {
+    Route::get('/contact', 'index')->name('contact');
+    Route::post('/contact', 'store')->name('contact.store');
+});
+
+
+
+
+
+// route up khuyến mãi
+Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('client.apply_coupon');
+Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
+
+// });
+
+
+

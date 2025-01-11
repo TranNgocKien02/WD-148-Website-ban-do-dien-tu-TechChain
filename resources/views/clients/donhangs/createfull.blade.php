@@ -103,15 +103,15 @@
                                             <tr>
                                                 <td>
                                                     <a href="{{ route('product-detail', $key) }}">
-                                                        {{ $item['ten_san_pham'] }} <strong>x [{{ $item['so_luong'] }}]
-                                                            ({{ $item['dung_luong'] }},{{ $item['mau_sac'] }})
+                                                        {{ $item->sanpham->ten_san_pham }} <strong>x [{{ $item->so_luong }}]
+                                                            ({{ $item->dung_luong }},{{ $item->mau_sac }})
                                                         </strong>
                                                     </a>
                                                 </td>
                                                 <td>
                                                     @php
-                                                        $gia_hien_thi = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
-                                                        $tong_gia = $gia_hien_thi * $item['so_luong'];
+                                                        $gia_hien_thi = isset($item->sanpham->gia_khuyen_mai) && $item->sanpham->gia_khuyen_mai > 0 ? $item->sanpham->gia_khuyen_mai : $item->sanpham->gia_san_pham;
+                                                        $tong_gia = $gia_hien_thi * $item->so_luong;
                                                     @endphp
                                                     {{ number_format($gia_hien_thi, 0, '', '.') }}đ
                                                 </td>
@@ -124,8 +124,6 @@
                                             <td>
                                                 <strong>{{ number_format($subtotal, 0, '', '.') }}đ</strong>
                                                 <input type="hidden" name="tien_hang" value="{{$subtotal}}">
-                                                <input type="hidden" name="dung_luong" value="{{$item['dung_luong']}}">
-                                                <input type="hidden" name="mau_sac" value="{{ $item['mau_sac']}}">
                                             </td>
                                         </tr>
                                         <tr>

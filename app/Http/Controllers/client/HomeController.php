@@ -1,16 +1,18 @@
 <?php
 namespace App\Http\Controllers\Client;
 
+use App\Http\Controllers\BaseController;
+use App\Models\Cart;
 use App\Models\Banner;
 use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     /**
      * Create a new controller instance.
@@ -26,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        $this->shareCartData(); // Gọi phương thức chia sẻ dữ liệu giỏ hàng
         $danhMuc = DanhMuc::query()->where('trang_thai', true)->get();
         $sanPham = SanPham::query()->take(10)->get();
         $sanPhamMoi = SanPham::query()->take(10)->get();
@@ -37,7 +39,11 @@ class HomeController extends Controller
         $bannerMain = Banner::query()->where('loai', 'main')->where('is_active', true)->get();
         $bannerSale = Banner::query()->where('loai', 'sale')->where('is_active', true)->take(2)->get();
         $bannerProduct = Banner::query()->where('loai', 'product')->where('is_active', true)->get();
-        // dd($bannerMain->anh);    
-        return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal', 'sanPhamTrending', 'banners', 'bannerMain', 'bannerSale', 'bannerProduct'));
+        // dd($bannerMain->anh);  
+        
+        //  dd($subTotal);
+        return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal',
+         'sanPhamTrending', 'banners', 'bannerMain',
+         'bannerSale', 'bannerProduct'));
     }
 }
