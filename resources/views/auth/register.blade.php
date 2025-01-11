@@ -98,13 +98,13 @@
                                                     </div>
                                                     <div class="carousel-inner text-center text-white-50 pb-5">
                                                         <div class="carousel-item active">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                            <p class="fs-15 fst-italic">" Chào buổi sáng! Khám phá những thiết bị công nghệ tuyệt vời nhất ngay hôm nay tại TechChain. "</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" The theme is really great with an amazing customer support."</p>
+                                                            <p class="fs-15 fst-italic">" Thư giãn cùng TechChain - Đừng bỏ lỡ những ưu đãi đặc biệt chỉ có hôm nay!."</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                            <p class="fs-15 fst-italic">" Không gian yên tĩnh, thời điểm hoàn hảo để chọn sản phẩm ưng ý tại TechChain! "</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,8 +118,8 @@
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <div>
-                                            <h5 class="text-primary">Register Account</h5>
-                                            <p class="text-muted">Get your Free Velzon account now.</p>
+                                            <h5 class="text-primary">ĐĂNG KÝ TÀI KHOẢN</h5>
+                                            <p class="text-muted">Nhận ngay tài khoản E-Smart miễn phí.</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -127,23 +127,23 @@
                                             @csrf
                                                 <div class="mb-3">
                                                     <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                                    <input type="email" name="email" class="form-control" id="useremail" placeholder="Enter email address" required value="{{old('email')}}">
+                                                    <input type="email" name="email" class="form-control" id="useremail" placeholder="Nhậo địa chỉ email" required value="{{old('email')}}">
                                                     @error('email')
                                                         <p class="text-danger fs-12 m-0">{{ $message }}</p>
                                                     @enderror
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                                    <input type="text" name="name" class="form-control" id="username" placeholder="Enter username" required value="{{old('name')}}">
+                                                    <label for="username" class="form-label">Tên tài khoản <span class="text-danger">*</span></label>
+                                                    <input type="text" name="name" class="form-control" id="username" placeholder="Nhập tên tài khoản" required value="{{old('name')}}">
                                                     @error('name')
                                                         <p class="text-danger fs-12 m-0">{{ $message }}</p>
                                                     @enderror
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="password-input">Password</label>
+                                                    <label class="form-label" for="password-input">Mật khẩu </label>
                                                     <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" name="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <input type="password" name="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Nhập mật khẩu" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                         @error('password')
                                                             <p class="text-danger fs-12 m-0">{{ $message }}</p>
@@ -152,15 +152,16 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="password-input">Password confirm</label>
+                                                    <label class="form-label" for="password-input">Xác nhận mật khẩu </label>
                                                     <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" name="password_confirmation" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter repassword" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <input type="password" name="password_confirmation" class="form-control pe-5 password-input" onpaste="return false" placeholder="Nhập lại mật khẩu " id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>
 
                                                 <div class="mb-4">
-                                                    <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the Velzon <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
+                                                    <p class="mb-0 fs-12 text-muted fst-italic">Bằng cách đăng ký, bạn đồng ý với Điều khoản sử dụng của E-Smart <br>                           
+                                                        <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Điều khoản</a></p>
                                                 </div>
 
                                                 <div id="password-contain" class="p-3 bg-light mb-2 rounded">
@@ -172,12 +173,12 @@
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button class="btn btn-success w-100" type="submit">Sign Up</button>
+                                                    <button class="btn btn-success w-100" type="submit">Đăng ký</button>
                                                 </div>
 
                                                 <div class="mt-4 text-center">
                                                     <div class="signin-other-title">
-                                                        <h5 class="fs-13 mb-4 title text-muted">Create account with</h5>
+                                                        <h5 class="fs-13 mb-4 title text-muted">Tạo tài khoản với</h5>
                                                     </div>
 
                                                     <div>
@@ -191,7 +192,7 @@
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Already have an account ? <a href="{{ route('login') }}" class="fw-semibold text-primary text-decoration-underline"> Signin</a> </p>
+                                            <p class="mb-0">Bạn đã có tài khoản? <a href="{{ route('login') }}" class="fw-semibold text-primary text-decoration-underline"> Đăng nhập </a> </p>
                                         </div>
                                     </div>
                                 </div>

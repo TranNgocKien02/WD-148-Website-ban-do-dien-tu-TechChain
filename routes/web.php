@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\Client\LienHeController;
 use App\Http\Controllers\client\UserController;
+use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -10,6 +11,12 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\client\ProductController;
+use App\Http\Controllers\Admin\KhachHangController;
+use App\Http\Controllers\MomoController;
+use App\Http\Controllers\PayPalController;
+use App\Models\ThongTinTrangWeb;
+use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |----------------------------------------------------------------------
@@ -61,6 +68,20 @@ Route::middleware('auth')->prefix('orders')->name('orders.')->group(function () 
 
 // Client Routes
     Route::get('/', [HomeController::class, 'index'])->name('index');
+route::get('register', [AuthController::class, 'showFromRegister']);
+route::post('register', [AuthController::class, 'register'])->name('register');
+route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/profile', [UserController::class, 'showProfile'])->name('profile')->middleware('auth');
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+Route::put('/profile/update', [UserController::class, 'update'])->name('profile.update');
+
+// lấy lại mật khẩu
+Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+    
 // Route::get('/home', function () {
 //     return view('home');
 // })->middleware('auth');
@@ -113,3 +134,28 @@ Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
 
 
 
+
+
+
+
+
+// Route::middleware('auth')->group(function (){
+//     Route::get('/home', function () {
+//         return view('home');
+//     });
+//     Route::get('/home2', function () {
+//         return view('home');
+//     });
+
+//     Route::middleware('auth.admin')->group(function (){
+//         route::get('/admin',function () {
+//             return 'Đây là trang admin';
+//         });
+//     });
+// });
+
+// Đăng nhập với Google
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+
+// Callback sau khi người dùng đăng nhập thành công với Google
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
