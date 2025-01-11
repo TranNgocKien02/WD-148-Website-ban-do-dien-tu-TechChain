@@ -3,7 +3,7 @@
 @section('css')
 @endsection
 @section('content')
-    @if(session('alert'))
+    @if (session('alert'))
         <script type="text/javascript">
             alert("{{ session('alert') }}");
         </script>
@@ -28,19 +28,23 @@
                     <!-- Product Details Left -->
                     <div class="product-details-left">
                         <div class="product-details-images slider-navigation-1">
-                            @foreach ($bienThes as $bienThe)
+                            <div class="lg-image">
+                                <img src="{{ Storage::url($product->hinh_anh) }}" class="object-fit-cover"
+                                    alt="product image">
+                            </div>
+
+                            @foreach ($bienThes as $item)
                                 <div class="lg-image">
-                                    <a class="popup-img venobox vbox-item" href="{{ Storage::url($bienThe->anh) }}"
-                                        data-gall="myGallery">
-                                        <img src="{{ Storage::url($bienThe->anh) }}" alt="product image">
-                                    </a>
+                                    <img src="{{ Storage::url($item->anh) }}" class="object-fit-cover" alt="product image">
                                 </div>
                             @endforeach
 
                         </div>
                         <div class="product-details-thumbs slider-thumbs-1">
+                            <div class="sm-image"><img src="{{ Storage::url($product->hinh_anh) }}" class="object-fit-cover"
+                                    alt="product image thumb"></div>
                             @foreach ($bienThes as $bienThe)
-                                <div class="sm-image"><img src="{{ Storage::url($bienThe->anh) }}"
+                                <div class="sm-image"><img src="{{ Storage::url($bienThe->anh) }}" class="object-fit-cover"
                                         alt="product image thumb"></div>
                             @endforeach
                         </div>
@@ -51,61 +55,64 @@
                 <div class="col-lg-7 col-md-6">
                     <form action="{{ route('cart.store') }}" class="cart-quantity" method="post">
                         @csrf
-                    <div class="product-details-view-content pt-60">
-                        <div class="product-info">
-                            <h2>{{ $product->ten_san_pham }}</h2>
-                            {{-- <span class="product-details-ref">Reference: demo_15</span> --}}
-                            <div class="rating-box pt-20">
-                                <ul class="rating rating-with-review-item">
-                                    <li><i class="fa fa-star-o"></i></li>
-                                    <li><i class="fa fa-star-o"></i></li>
-                                    <li><i class="fa fa-star-o"></i></li>
-                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                    <li class="review-item"><a href="#">Đọc bình luận</a></li>
-                                    <li class="review-item"><a href="#">Bình luận</a></li>
-                                </ul>
-                            </div>
-                            <div class="price-box pt-20">
-                                <span
-                                    class="new-price new-price-2">{{ number_format($product->gia_san_pham, 0, '', '.') }}đ</span>
-                            </div>
-                            <div class="product-desc">
-                                <p>
-                                    <span>{{ $product->mo_ta_ngan }}
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="product-variants">
-                                <div class="product-variants-1">
-                                    <div class="produt-variants-size">
-                                        <label>Dung lượng</label>
-                                        <select class="nice-select" name="dung_luong" id="dung_luong_select">
-                                            @foreach ($bienThes as $bienThe)
-                                                <option value="{{ $bienThe->dung_luong }}" title="M">
-                                                    {{ $bienThe->dung_luong }}Mb</option>
-                                            @endforeach
-                                        </select>
+                        <div class="product-details-view-content pt-60">
+                            <div class="product-info">
+                                <h2>{{ $product->ten_san_pham }}</h2>
+                                {{-- <span class="product-details-ref">Reference: demo_15</span> --}}
+                                <div class="rating-box pt-20">
+                                    <ul class="rating rating-with-review-item">
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                        <li class="review-item"><a href="#">Đọc bình luận</a></li>
+                                        <li class="review-item"><a href="#">Bình luận</a></li>
+                                    </ul>
+                                </div>
+                                <div class="price-box pt-20">
+                                    <span
+                                        class="new-price new-price-2">{{ number_format($product->gia_san_pham, 0, '', '.') }}đ</span>
+                                </div>
+                                <div class="product-desc">
+                                    <p>
+                                        <span>{{ $product->mo_ta_ngan }}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="product-variants">
+                                    <div class="product-variants-1">
+                                        <div class="produt-variants-size">
+                                            <label>Dung lượng</label>
+                                            <select class="nice-select" name="dung_luong" id="dung_luong_select">
+                                                @foreach ($bienThes as $bienThe)
+                                                    <option value="{{ $bienThe->dung_luong }}" title="M">
+                                                        {{ $bienThe->dung_luong }}Mb</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="product-variants-2">
+                                        <div class="produt-variants-size">
+                                            <label>Màu sắc</label>
+                                            <select class="nice-select" name="mau_sac" id="mau_sac_select">
+                                                @foreach ($bienThes as $bienThe)
+                                                    <option value="{{ $bienThe->mau_sac }}" title="M">
+                                                        {{ $bienThe->mau_sac }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-variants-2">
-                                    <div class="produt-variants-size">
-                                        <label>Màu sắc</label>
-                                        <select class="nice-select" name="mau_sac" id="mau_sac_select">
-                                            @foreach ($bienThes as $bienThe)
-                                                <option value="{{ $bienThe->mau_sac }}" title="M">{{ $bienThe->mau_sac }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-add-to-cart">
+                                <div class="single-add-to-cart">
                                     <div class="quantity">
                                         <label>Quantity</label>
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" name="so_luong" value="1" type="text" id="so_luong_select">
-                                            <input class="cart-plus-minus-box" name="san_pham_id" value="{{ $product->id }}" type="hidden">
+                                            <input class="cart-plus-minus-box" name="so_luong" value="1" type="text"
+                                                id="so_luong_select">
+                                            <input class="cart-plus-minus-box" name="san_pham_id"
+                                                value="{{ $product->id }}" type="hidden">
                                             {{-- @if (auth()->check()) --}}
                                             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                             {{-- @else
@@ -115,70 +122,70 @@
                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                         </div>
                                     </div>
-                                  
-                                <!-- Form đăng nhập của bạn -->
-                                
-                                <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
-                                </form>
-                                <form action="{{ route('cart.add') }}" method="post" id="form2" class="form2">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <input type="hidden" id="dung_luong_input" name="dung_luong_value" value="">
-                                    <input type="hidden" id="mau_sac_input" name="mau_sac_value" value="">
-                                    <input type="hidden" id="so_luong_input" name="so_luong_value" value="">
-                                    <button class="add-to-cart " type="submit">Mua ngay</button>
-                                </form>
 
-                            </div>
-                            <div class="product-additional-info pt-25">
-                                <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Thêm vào danh sách
-                                    yêu thích</a>
-                                <div class="product-social-sharing pt-25">
-                                    <ul>
-                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a>
-                                        </li>
-                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
-                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google
-                                                +</a></li>
-                                        <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="block-reassurance">
-                                <ul>
-                                    <li>
-                                        <div class="reassurance-item">
-                                            <div class="reassurance-icon">
-                                                <i class="fa fa-check-square-o"></i>
-                                            </div>
-                                            <p>Chính sách bảo mật (sửa với module Đảm bảo với khách hàng)</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="reassurance-item">
-                                            <div class="reassurance-icon">
-                                                <i class="fa fa-truck"></i>
-                                            </div>
-                                            <p>Chính sách giao hàng (sửa với module Đảm bảo với khách hàng)</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="reassurance-item">
-                                            <div class="reassurance-icon">
-                                                <i class="fa fa-exchange"></i>
-                                            </div>
-                                            <p> Chính sách hoàn trả (sửa với module Đảm bảo với khách hàng)</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                                    <!-- Form đăng nhập của bạn -->
+
+                                    <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                    </form>
+                    <form action="{{ route('cart.add') }}" method="post" id="form2" class="form2">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" id="dung_luong_input" name="dung_luong_value" value="">
+                        <input type="hidden" id="mau_sac_input" name="mau_sac_value" value="">
+                        <input type="hidden" id="so_luong_input" name="so_luong_value" value="">
+                        <button class="add-to-cart " type="submit">Mua ngay</button>
+                    </form>
+
+                </div>
+                <div class="product-additional-info pt-25">
+                    <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Thêm vào danh sách
+                        yêu thích</a>
+                    <div class="product-social-sharing pt-25">
+                        <ul>
+                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a>
+                            </li>
+                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
+                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google
+                                    +</a></li>
+                            <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a>
+                            </li>
+                        </ul>
                     </div>
-              
+                </div>
+                <div class="block-reassurance">
+                    <ul>
+                        <li>
+                            <div class="reassurance-item">
+                                <div class="reassurance-icon">
+                                    <i class="fa fa-check-square-o"></i>
+                                </div>
+                                <p>Chính sách bảo mật (sửa với module Đảm bảo với khách hàng)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reassurance-item">
+                                <div class="reassurance-icon">
+                                    <i class="fa fa-truck"></i>
+                                </div>
+                                <p>Chính sách giao hàng (sửa với module Đảm bảo với khách hàng)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reassurance-item">
+                                <div class="reassurance-icon">
+                                    <i class="fa fa-exchange"></i>
+                                </div>
+                                <p> Chính sách hoàn trả (sửa với module Đảm bảo với khách hàng)</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+
+    </div>
+    </div>
+    </div>
     </div>
     <!-- content-wraper end -->
     <!-- Begin Product Area -->
@@ -219,23 +226,23 @@
                             @if ($binhLuans->isEmpty())
                                 <p>Không có bình luận nào.</p>
                             @else
-                            @foreach ($binhLuans as $binhluan)
-                                <div class="comment-author-infos pt-25">
-                                    <span>Tên người dùng : {{ $binhluan->user->name }}</span>
-                                    <em>Ngày bình luận : {{ $binhluan->created_at->format('d/m/Y') }}</em>
-                                    <em>Nội dung : {{ $binhluan->noi_dung }}</em>
-                                    <div class="comment-review">
-                                        <span>Đánh giá sao</span>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                        </ul>
+                                @foreach ($binhLuans as $binhluan)
+                                    <div class="comment-author-infos pt-25">
+                                        <span>Tên người dùng : {{ $binhluan->user->name }}</span>
+                                        <em>Ngày bình luận : {{ $binhluan->created_at->format('d/m/Y') }}</em>
+                                        <em>Nội dung : {{ $binhluan->noi_dung }}</em>
+                                        <div class="comment-review">
+                                            <span>Đánh giá sao</span>
+                                            <ul class="rating">
+                                                <li><i class="fa fa-star-o"></i></li>
+                                                <li><i class="fa fa-star-o"></i></li>
+                                                <li><i class="fa fa-star-o"></i></li>
+                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
                             @endif
                             <div class="review-btn" style="margin-top: 20px">
                                 <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết
@@ -265,10 +272,12 @@
                                                         <!-- Begin Feedback Area -->
                                                         <div class="feedback-area">
                                                             @if (auth()->check())
-                                                                <form action="{{ route('binh-luan.store') }}" method="post">
+                                                                <form action="{{ route('binh-luan.store') }}"
+                                                                    method="post">
                                                                     @csrf
                                                                     <div class="feedback">
-                                                                        <h3 class="feedback-title">Phản hồi với chúng tôi</h3>
+                                                                        <h3 class="feedback-title">Phản hồi với chúng tôi
+                                                                        </h3>
                                                                         <form action="#">
                                                                             <p class="your-opinion">
                                                                                 <label>Đánh giá</label>
@@ -284,15 +293,19 @@
                                                                                 </span>
                                                                             </p>
                                                                             <p class="feedback-form">
-                                                                                <label for="feedback">Bình luận của bạn</label>
+                                                                                <label for="feedback">Bình luận của
+                                                                                    bạn</label>
                                                                                 <textarea id="feedback" name="noi_dung" cols="45" rows="8" aria-required="true"></textarea>
                                                                             </p>
                                                                             <input type="hidden" name="san_pham_id"
                                                                                 value="{{ $product->id }}">
-                                                                                @if (auth()->check())
-                                                                                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                                                            @if (auth()->check())
+                                                                                <input type="hidden" name="user_id"
+                                                                                    value="{{ auth()->id() }}">
                                                                             @else
-                                                                                <p>Vui lòng <a href="{{ route('login') }}">đăng nhập</a> để gửi bình luận.</p>
+                                                                                <p>Vui lòng <a
+                                                                                        href="{{ route('login') }}">đăng
+                                                                                        nhập</a> để gửi bình luận.</p>
                                                                             @endif
                                                                             <div class="feedback-input">
                                                                                 <div class="feedback-btn pb-15">
@@ -307,7 +320,8 @@
                                                                     </div>
                                                                 </form>
                                                             @else
-                                                                <p>Vui lòng <a href="{{ route('login') }}">đăng nhập</a> để gửi bình luận.</p>
+                                                                <p>Vui lòng <a href="{{ route('login') }}">đăng nhập</a>
+                                                                    để gửi bình luận.</p>
                                                             @endif
                                                         </div>
                                                         <!-- Feedback Area End Here -->
@@ -342,53 +356,55 @@
                             {{-- @if ($relatedProducts->count() == 0)
                     <p>Không có sản phẩm nào khác trong danh mục này.</p>
                 @else --}}
-                <div class="col-lg-12 related-products">
-                    <!-- single-product-wrap start -->
-                    @foreach ($relatedProducts as $item)
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="{{ route('product-detail',$item->id )}}">
-                                    <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
-                                </a>
-                                <span class="sticker">New</span>
-                            </div>
-                            <div class="product_desc">
-                                <div class="product_desc_info">
-                                    <div class="product-review">
-                                        <h5 class="manufacturer">
-                                            <a href="product-details.html">{{$item->ten_san_pham}}</a>
-                                        </h5>
-                                        <div class="rating-box">
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                            </ul>
+                @foreach ($relatedProducts as $item)
+                            <div class="col-lg-12 related-products">
+                                <!-- single-product-wrap start -->
+                                    <div class="single-product-wrap">
+                                        <div class="product-image">
+                                            <a href="{{ route('product-detail', $item->id) }}">
+                                                <img src="{{ Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
+                                            </a>
+                                            <span class="sticker">New</span>
+                                        </div>
+                                        <div class="product_desc">
+                                            <div class="product_desc_info">
+                                                <div class="product-review">
+                                                    <h5 class="manufacturer">
+                                                        <a href="product-details.html">{{ $item->ten_san_pham }}</a>
+                                                    </h5>
+                                                    <div class="rating-box">
+                                                        <ul class="rating">
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <h4><a class="product_name"
+                                                        href="single-product.html">{{ $item->ten_san_pham }}</a></h4>
+                                                <div class="price-box">
+                                                    <span
+                                                        class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
+                                                </div>
+                                            </div>
+                                            <div class="add-actions">
+                                                <ul class="add-actions-link">
+                                                    <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                                    <li><a href="#" title="quick view" class="quick-view-btn"
+                                                            data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                                class="fa fa-eye"></i></a></li>
+                                                    <li><a class="links-details" href="wishlist.html"><i
+                                                                class="fa fa-heart-o"></i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                    <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
-                                    <div class="price-box">
-                                        <span class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
-                                    </div>
+                                    <!-- single-product-wrap end -->
                                 </div>
-                                <div class="add-actions">
-                                    <ul class="add-actions-link">
-                                        <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                        <li><a href="#" title="quick view" class="quick-view-btn"
-                                                data-toggle="modal" data-target="#exampleModalCenter"><i
-                                                    class="fa fa-eye"></i></a></li>
-                                        <li><a class="links-details" href="wishlist.html"><i
-                                                    class="fa fa-heart-o"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <!-- single-product-wrap end -->
-                </div>
-                    {{-- <div class="related-products">
+                                @endforeach
+                            {{-- <div class="related-products">
                         @foreach ($relatedProducts as $product)
                             <div class="product-item">
                                 <h3>{{ $product->ten_san_pham }}</h3>
@@ -398,11 +414,11 @@
                         @endforeach
                     </div> --}}
 
-                    <!-- Hiển thị liên kết phân trang -->
-                    <div class="pagination">
-                        {{ $relatedProducts->links() }}
-                    </div>
-                {{-- @endif --}}
+                            <!-- Hiển thị liên kết phân trang -->
+                            <div class="pagination">
+                                {{ $relatedProducts->links() }}
+                            </div>
+                            {{-- @endif --}}
                             {{-- <div class="col-lg-12">
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
@@ -448,7 +464,7 @@
                                 </div>
                                 <!-- single-product-wrap end -->
                             </div> --}}
-                         
+
                         </div>
                     </div>
                 </div>
@@ -720,20 +736,20 @@
 
 @section('js')
     <script>
-    // Lắng nghe sự kiện khi người dùng thay đổi lựa chọn trong select
-    document.getElementById('form2').addEventListener('submit', function() {
+        // Lắng nghe sự kiện khi người dùng thay đổi lựa chọn trong select
+        document.getElementById('form2').addEventListener('submit', function() {
             // Lấy giá trị dung lượng được chọn
-             // Lấy giá trị từ các input trong Form 1
-        var selectedDungLuong = document.getElementById('dung_luong_select').value;
-        var selectedMauSac = document.getElementById('mau_sac_select').value;
-        var selectedSoLuong = document.getElementById('so_luong_select').value;
+            // Lấy giá trị từ các input trong Form 1
+            var selectedDungLuong = document.getElementById('dung_luong_select').value;
+            var selectedMauSac = document.getElementById('mau_sac_select').value;
+            var selectedSoLuong = document.getElementById('so_luong_select').value;
 
-        // Gán giá trị vào input ẩn
-        document.getElementById('mau_sac_input').value = selectedMauSac;
-        document.getElementById('so_luong_input').value = selectedSoLuong;
-         document.getElementById('dung_luong_input').value = selectedDungLuong;
-    });
-        
+            // Gán giá trị vào input ẩn
+            document.getElementById('mau_sac_input').value = selectedMauSac;
+            document.getElementById('so_luong_input').value = selectedSoLuong;
+            document.getElementById('dung_luong_input').value = selectedDungLuong;
+        });
+
 
 
         $(document).ready(function() {

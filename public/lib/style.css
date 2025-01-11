@@ -1327,9 +1327,22 @@ textarea:focus {
     margin-right: 10px;
 }
 
+.product-details-left {
+    height: auto;
+}
+
 .product-details-images .lg-image img,
 .product-details-thumbs .sm-image img {
     width: 100%;
+    /* height: 470px; */
+}
+
+.product-details-images .lg-image img {
+    height: 470px;
+}
+
+.product-details-thumbs .sm-image img {
+    height: 118px;
 }
 
 .product-details-thumbs .sm-image {

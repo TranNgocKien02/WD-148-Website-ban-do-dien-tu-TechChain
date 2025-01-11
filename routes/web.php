@@ -135,10 +135,6 @@ Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
 
 
 
-
-
-
-
 // Route::middleware('auth')->group(function (){
 //     Route::get('/home', function () {
 //         return view('home');
