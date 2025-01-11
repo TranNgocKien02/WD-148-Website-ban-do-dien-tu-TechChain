@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\DonHang;
-use App\Models\SanPham;
+use App\Models\ProductVariant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,11 +16,15 @@ return new class extends Migration
         Schema::create('chi_tiet_don_hangs', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(DonHang::class)->constrained();
-            $table->foreignIdFor(SanPham::class)->constrained();
-
+            $table->foreignIdFor(ProductVariant::class)->constrained('bien_the_san_pham');
+            $table->string('ten_san_pham');
+            $table->string('ma_san_pham');
+            $table->string('anh_san_pham');
             $table->double('don_gia');
+            $table->string('gia_khuyen_mai');
+            $table->string('dung_luong');
+            $table->string('mau_sac');
             $table->unsignedInteger('so_luong');
-            $table->double('thanh_tien');
             $table->timestamps();
         });
     }
@@ -33,3 +37,4 @@ return new class extends Migration
         Schema::dropIfExists('chi_tiet_don_hangs');
     }
 };
+

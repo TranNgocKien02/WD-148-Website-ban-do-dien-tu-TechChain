@@ -136,7 +136,6 @@
             
             $('#removeItemModal #deleteForm').attr('action', actionUrl);
             
-            $('#removeItemModal .modal-body').append('<br>Item ID: ' + itemId);
         });
 
     </script>

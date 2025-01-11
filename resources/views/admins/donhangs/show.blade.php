@@ -9,130 +9,360 @@
 
 
 @section('content')
-    <div class="content">
+    <div class="container-fluid">
 
-        <!-- Start Content-->
-        <div class="container-xxl">
-
-            <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
+        <!-- start page title -->
+        <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Chi tiết đơn hàng</h4>
+                    <h4 class="fs-18 fw-semibold m-0">Quản lý đơn hàng</h4>
                 </div>
             </div>
-            {{-- <div class="row">
-                <!-- Striped Rows -->
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">{{ $title }}</h5>
-                        </div><!-- end card header -->
+        <!-- end page title -->
 
-                        <div class="card-body">
-
+        <div class="row">
+            <div class="col-xl-9">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h5 class="card-title flex-grow-1 mb-0">Order {{ $donHang->ma_don_hang }}</h5>
                         </div>
                     </div>
-                </div>
-            </div> <!-- container-fluid --> --}}
-            <div class="row">
-                <!-- Striped Rows -->
-                <div class="col-xl-12">
-                    <div class="card">
-                      
-
-                        <div class="card-body">
-                            <table class="table table-striped mb-0">
-                                <h3>Thôn tin người nhận </h3>
-                                <thead>
-                                    <th>Thông tin tài khoản đặt hàng</th>
-                                    <th>Thông tin người nhận hàng</th>
+                    <div class="card-body">
+                        <div class="table-responsive table-card">
+                            <table class="table table-nowrap align-middle table-borderless mb-0">
+                                <thead class="table-light text-muted">
+                                    <tr>
+                                        <th scope="col">Chi Tiết Sản Phẩm</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Giá khuyến mãi</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col" class="text-end">Tổng tiền</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <ul>
-                                                <li>Tên tài khoản:<b>{{ $donHang->user->name }}</b></li>
-                                                <li>Email:<b>{{ $donHang->user->email }}</b></li>
-                                                <li>Số điện thoại:<b>{{ $donHang->user->phone }}</b></li>
-                                                <li>Địa chỉ:<b>{{ $donHang->user->address }}</b></li>
-                                                <li>Tài khoản :<b>{{ $donHang->user->role }}</b></li>
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <ul>
-                                                <li>Tên người nhận: <strong>{{ $donHang->ten_nguoi_nhan }}</strong></li>
-                                                <li>Email người nhận: <strong>{{ $donHang->email_nguoi_nhan }}</strong></li>
-                                                <li>Số điện thoại người nhận: <strong>{{ $donHang->so_dien_thoai_nguoi_nhan }}</strong></li>
-                                                <li>Địa chỉ người nhận: <strong>{{ $donHang->dia_chi_nguoi_nhan }}</strong></li>
-                                                <li>Ngày đặt hàng : <strong>
-                                                        @if ($donHang->created_at)
-                                                            {{ $donHang->created_at->format('d-m-Y') }}
-                                                        @else
-                                                            No Date
-                                                        @endif
-                                                    </strong></li>
-                                                <li>Ghi chú nhận hàng: <strong>{{ $donHang->ghi_chu }}</strong></li>
-                                                <li>Trạng thái đơn hàng: <strong>{{ $donHang->trang_thai_don_hang }}</strong></li>
-                                                <li>Trạng thái thanh toán: <strong>{{ $donHang->trang_thai_thanh_toan }}</strong></li>
-                                                <li>Tổng tiền hàng: <strong>{{ number_format($donHang->tien_hang, 0, '', '.') }}đ</strong></li>
-                                                <li>Tổng tiền khuyến mãi: <strong>{{ number_format( $donHang->tien_khuyen_mai, 0, '', '.') }}đ</strong></li>
-                                                <li>Tổng tiền ship: <strong>{{ number_format( $donHang->tien_ship, 0, '', '.') }}đ</strong></li>
-                                                <li>Tổng tiền đơn hàng: <strong class="text-danger">{{ number_format($donHang->tong_tien, 0, '', '.') }}đ</strong></li>
-                                            </ul>
+                                    @foreach ($donHang->chiTietDonHangs as $item)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class="flex-shrink-0 avatar-md bg-light rounded p-1">
+                                                        <img src="{{ Storage::url($item->anh_san_pham) }}" alt=""
+                                                            class="img-fluid d-block">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h5 class="fs-15 fw-bold"><a
+                                                                href="{{ route('admins.sanphams.show', $item->productVariant->san_pham_id) }}"
+                                                                class="link-dark">{{ $item->ten_san_pham }}</a></h5>
+                                                        <p class="text-muted mb-0">Dung lượng: <span
+                                                                class="fw-medium">{{ $item->dung_luong }}</span>
+                                                        </p>
+                                                        <p class="text-muted mb-0">Màu sắc:<span
+                                                                class="fw-medium">{{ $item->mau_sac }}</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ number_format($item->don_gia, 0, ',', '.') }} VND</td>
+                                            <td>{{ number_format($item->gia_khuyen_mai, 0, ',', '.') }} VND</td>
+
+                                            <td>{{ $item->so_luong }}</td>
+                                            <td class="fw-medium text-end">
+                                                {{ number_format($item->so_luong * $item->gia_khuyen_mai, 0, ',', '.') }}
+                                                VND
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    <tr class="border-top border-top-dashed">
+                                        <td colspan="3"></td>
+                                        <td colspan="2" class="fw-medium p-0">
+                                            <table class="table table-borderless mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Tổng phụ :</td>
+                                                        <td class="text-end">{{ number_format($tongPhu, 0, ',', '.') }} VND
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Giảm giá từ Voucher:</td>
+                                                        <td class="text-end">{{ number_format($giamGia, 0, ',', '.') }} VND
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phị vận chuyển :</td>
+                                                        <td class="text-end">
+                                                            {{ number_format($phiVanChuyen, 0, ',', '.') }} VND</td>
+                                                    </tr>
+                                                    <tr class="border-top border-top-dashed">
+                                                        <th scope="row">Tổng (VND) :</th>
+                                                        <th class="text-end">
+                                                            {{ number_format($donHang->tong_tien, 0, ',', '.') }} VND</th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Sản phẩm của đơn hàng</h5>
-                            <div class="row mt-5">
-                                <div class="col-lg-12">
-                                    <div class="myaccount-content">
-                                        <h5>Sản phẩm</h5>
-                                        <div class="myaccount-table table-responsive text-center">
-                                            <table class="table table-bordered">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th>Hình ảnh</th>
-                                                        <th>Mã sản phẩm</th>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Đơn giá</th>
-                                                        <th>Số lượng</th>
-                                                        <th>Thành tiền</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($donHang->chiTietDonHang as $item)
-                                                    @php
-                                                        $sanPham = $item->sanPham ;
-                                                    @endphp
-                                                    <tr>
-                                                        <td>
-                                                            <img class="img-fluid" src=" {{ Storage::url($sanPham->hinh_anh) }}" alt="Sản phẩm" width="75px">
-                                                        </td>
-                                                        
-                                                        <td>{{ $sanPham->ma_san_pham }}</td>
-                                                        <td>{{ $sanPham->ten_san_pham }}</td>
-                                                        <td>{{ number_format($item->don_gia, 0, '', '.') }}đ</td>
-                                                        <td>{{ $item->so_luong }}</td>
-                                                        <td>{{ number_format($item->thanh_tien, 0, '', '.') }}đ</td>
-            
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                   
-                                                   
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-            
-            
-                                </div>
-                            </div>
-                        </div><!-- end card header -->
                     </div>
                 </div>
-            </div> <!-- container-fluid -->
-        </div> <!-- content -->
-    @endsection
+                <!--end card-->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-sm-flex align-items-center">
+                            <h5 class="card-title flex-grow-1 mb-0">Order Status</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="profile-timeline">
+                            @if ($donHang->trang_thai_don_hang === "huy_don_hang")
+                                <div class="alert alert-danger mb-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 avatar-xs">
+                                            <div class="avatar-title bg-danger rounded-circle material-shadow">
+                                                <i class="mdi mdi-cancel"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="fs-15 mb-0 fw-bold text-danger">Đơn Hàng Đã Bị Hủy</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                                    <!-- Đặt Hàng -->
+                                    <div class="accordion-item border-0">
+                                        <div class="accordion-header" id="headingOne">
+                                            <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse"
+                                                href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 avatar-xs">
+                                                        <div class="avatar-title bg-success rounded-circle material-shadow">
+                                                            <i class="mdi mdi-shopping"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6
+                                                            class="fs-15 mb-0 fw-bold">
+                                                            Đặt Hàng - <span
+                                                                class="fw-normal">{{ \Carbon\Carbon::parse($donHang->created_at)->format('d/m/Y, g:iA') }}</span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Người Bán Xác Nhận -->
+                                    <div class="accordion-item border-0">
+                                        <div class="accordion-header" id="headingTwo">
+                                            <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse"
+                                                href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 avatar-xs">
+                                                        <div class="avatar-title bg-success rounded-circle material-shadow">
+                                                            <i class="mdi mdi-gift-outline"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6
+                                                            class="fs-15 mb-1 {{ in_array($donHang->trang_thai_don_hang, ['da_xac_nhan','dang_chuan_bi', 'dang_van_chuyen', 'da_giao_hang']) ? 'fw-bold' : 'fw-normal' }}">
+                                                            Người Bán Xác Nhận</h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Đang Chuẩn Bị Hàng -->
+                                    <div class="accordion-item border-0">
+                                        <div class="accordion-header" id="headingThree">
+                                            <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse"
+                                                href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 avatar-xs">
+                                                        <div class="avatar-title bg-success rounded-circle material-shadow">
+                                                            <i class="mdi mdi-package"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6
+                                                            class="fs-15 mb-1 {{ in_array($donHang->trang_thai_don_hang, ['dang_chuan_bi', '_dang_van_chuyen', 'da_giao_hang']) ? 'fw-bold' : 'fw-normal' }}">
+                                                            Đang Chuẩn Bị Hàng</h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Đang Vận Chuyển -->
+                                    <div class="accordion-item border-0">
+                                        <div class="accordion-header" id="headingFour">
+                                            <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse"
+                                                href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 avatar-xs">
+                                                        <div class="avatar-title bg-success rounded-circle material-shadow">
+                                                            <i class="mdi mdi-truck"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6
+                                                            class="fs-15 mb-1 {{ in_array($donHang->trang_thai_don_hang, ['dang_van_chuyen', 'da_giao_hang']) ? 'fw-bold' : 'fw-normal' }}">
+                                                            Đang Vận Chuyển</h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Đã Giao Hàng -->
+                                    <div class="accordion-item border-0">
+                                        <div class="accordion-header" id="headingFour">
+                                            <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse"
+                                                href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 avatar-xs">
+                                                        <div class="avatar-title bg-success rounded-circle material-shadow">
+                                                            <i class="mdi mdi-truck"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6
+                                                            class="fs-15 mb-1 {{ in_array($donHang->trang_thai_don_hang, ['da_giao_hang']) ? 'fw-bold' : 'fw-normal' }}">
+                                                            Đã Giao Hàng</h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <!--end accordion-->
+                        </div>
+                    </div>
+                </div>
+
+                <!--end card-->
+            </div>
+            <!--end col-->
+            <div class="col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex">
+                            <h5 class="card-title flex-grow-1 mb-0"><i
+                                    class="mdi mdi-truck-fast-outline align-middle me-1 text-muted"></i> Chi tiết thanh toán
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <p class="text-muted mb-0">Phương thức thanh toán : {{$donHang->phuong_thuc_thanh_toan}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--end card-->
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex">
+                            <h5 class="card-title flex-grow-1 mb-0">Chi Tiết Khách Hàng</h5>
+                            <div class="flex-shrink-0">
+                                <a href="javascript:void(0);" class="link-secondary">Xem</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0 vstack gap-3">
+                            <li>
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="{{ Storage::url($donHang->user->anh) }}" alt="" class="avatar-sm rounded material-shadow">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="fs-14 mb-1 fw-bold">{{ $donHang->user->name }}</h6>
+                                        <p class="text-muted mb-0"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><i class="mdi mdi-email-outline me-2 align-middle text-muted fs-16"></i>{{ $donHang->user->email }}
+                            </li>
+                            <li><i class="mdi mdi-phone-outline me-2 align-middle text-muted fs-16"></i>{{ $donHang->user->phone }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--end card-->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="mdi mdi-map-marker-outline align-middle me-1 text-muted"></i>  Địa Chỉ
+                            Giao Hàng</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled vstack gap-2 fs-13 mb-0">
+                            <li class="fw-bold fs-14">{{ $donHang->ten_nguoi_nhan }}</li>
+                            <li>{{ $donHang->so_dien_thoai_nguoi_nhan }}</li>
+                            <li>{{ $donHang->dia_chi_nguoi_nhan }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <!--end card-->
+
+                {{-- <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="ri-secure-payment-line align-bottom me-1 text-muted"></i>
+                            Chi Tiết Thanh Toán</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="flex-shrink-0">
+                                <p class="text-muted mb-0">Transactions:</p>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <h6 class="mb-0">#VLZ124561278124</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="flex-shrink-0">
+                                <p class="text-muted mb-0">Phương thức:</p>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <h6 class="mb-0">Debit Card</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="flex-shrink-0">
+                                <p class="text-muted mb-0">Card Holder Name:</p>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <h6 class="mb-0">Joseph Parker</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="flex-shrink-0">
+                                <p class="text-muted mb-0">Card Number:</p>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <h6 class="mb-0">xxxx xxxx xxxx 2456</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <p class="text-muted mb-0">Total Amount:</p>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <h6 class="mb-0">$415.96</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> --}}
+                <!--end card-->
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+
+    </div>
+@endsection

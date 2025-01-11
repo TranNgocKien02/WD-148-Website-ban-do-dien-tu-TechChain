@@ -62,9 +62,11 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
             ->as('donhangs.')
             ->group(function () {
                 Route::get('/', [DonHangController::class, 'index'])->name('index');
-                Route::get('/show/{id}', [DonHangController::class, 'show'])->name('show');
-                Route::put('{id}/update', [DonHangController::class, 'update'])->name('update');
-                Route::delete('{id}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
+                Route::get('/show/{donHang}', [DonHangController::class, 'show'])->name('show');
+                Route::put('{donHang}/update', [DonHangController::class, 'update'])->name('update');
+                Route::delete('{donHang}/destroy', [DonHangController::class, 'destroy'])->name('destroy');
+                Route:: delete('bulkDelete', [DonHangController::class, 'bulkDelete'])->name('bulkDelete');
+
             });
 
         // Route cho thống kê
@@ -139,8 +141,8 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::get('{id}/edit', [TaiKhoanController::class, 'edit'])->name('edit'); // Edit account
                 Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
                 Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
-            });    
+            });
 
-        // Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
-        // Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
+    // Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
+    // Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info
     });
