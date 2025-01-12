@@ -62,6 +62,7 @@ class ProductFilter extends BaseController
         }
         // Phân trang (hiển thị 12 sản phẩm mỗi trang)
         $sanPhamHot = $query->distinct()->paginate(12);
+        // dd($sanPhamHot);
 
         // Các dữ liệu bổ sung
         $danhMuc = DanhMuc::query()->where('trang_thai', true)->get();

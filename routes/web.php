@@ -86,7 +86,7 @@ Route::post('forgot-password', [AuthController::class, 'sendResetLink'])->name('
 Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-    
+
 
 // Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
 Route::post('/cart/add',            [CartController::class, 'addCart'])->name('cart.add');
@@ -146,8 +146,17 @@ Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
 //     });
 // });
 
+Route::get(
+    '/about-us',
+    function () {
+        return view('clients.aboutUs.index');
+    }
+);
+
 // Đăng nhập với Google
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+
+
 
 // Callback sau khi người dùng đăng nhập thành công với Google
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);

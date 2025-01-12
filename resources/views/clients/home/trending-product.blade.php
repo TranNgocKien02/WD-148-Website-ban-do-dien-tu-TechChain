@@ -57,7 +57,6 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -111,7 +110,6 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -165,7 +163,6 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -237,7 +234,6 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                         </ul>

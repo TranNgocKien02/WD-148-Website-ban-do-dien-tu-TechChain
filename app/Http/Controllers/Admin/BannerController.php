@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,8 +21,45 @@ class BannerController extends Controller
     public function index()
     {
         $title = "Banner";
-        $data = Banner::all();
-        return view(self::PATH_VIEW . __FUNCTION__, compact('title','data'));
+
+        $created_at = request('created_at');
+        $loai = request('loai'); // Hoặc dùng $_GET['trang_thai'] nếu cần
+        $ngay = request('ngay');
+        $query = Banner::query();
+        if ($loai) {
+            $query->where('loai', $loai);
+        }
+        switch ($created_at) {
+            case 'today':
+                $query->whereDate('created_at', Carbon::today());
+                break;
+            case 'week':
+                $query->whereBetween('created_at', [
+                    Carbon::now()->startOfWeek(), // Ngày đầu tuần
+                    Carbon::now()->endOfWeek()    // Ngày cuối tuần
+                ]);
+                break;
+            case 'month':
+                $query->whereMonth('created_at', Carbon::now()->month); // Tháng hiện tại
+                break;
+            case 'quarter':
+                $query->whereBetween('created_at', [
+                    Carbon::now()->startOfQuarter(), // Ngày bắt đầu quý
+                    Carbon::now()->endOfQuarter()    // Ngày kết thúc quý
+                ]);
+                break;
+        }
+
+        if ($ngay) {
+            $query->whereDate('created_at', Carbon::parse($ngay)); // Lọc theo ngày người dùng chọn
+        }
+
+        $data = $query->orderByDesc('id')->get();
+
+
+
+        // $data = Banner::all();
+        return view(self::PATH_VIEW . __FUNCTION__, compact('title', 'data'));
     }
 
     /**

@@ -21,7 +21,7 @@
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
                                                     <a href="single-product.html">
-                                                        <img src="images/product/large-size/1.jpg" alt="Li's Product Image">
+                                                        <img src="{{Storage::url($item->hinh_anh)}}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
                                                 </div>
@@ -50,7 +50,6 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                         </ul>

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreSanPhamRequest;
 use App\Http\Requests\UpdateSanPhamRequest;
+use App\Models\BinhLuan;
 use Carbon\Carbon;
 
 class SanPhamController extends Controller
@@ -195,13 +196,12 @@ class SanPhamController extends Controller
         $title = "Sản phẩm";
         $listDanhMuc = DanhMuc::get();
         $listHang = Hang::get();
-
+        $totalReviews = BinhLuan::where('san_pham_id', $sanPham)->count();
         $img_gallery = HinhAnhSanPham::where('san_pham_id', $sanPham->id)->get();
-        // dd($img_gallery);
         $variants = ProductVariant::query()->where('san_pham_id', $sanPham->id)->orderBy('created_at')->get();
 
 
-        return view('admins.sanphams.show', compact('title', 'sanPham',  'listDanhMuc', 'listHang', 'img_gallery', 'variants'));
+        return view('admins.sanphams.show', compact('title', 'sanPham',  'listDanhMuc', 'listHang', 'img_gallery', 'variants', 'totalReviews'));
     }
 
     /**

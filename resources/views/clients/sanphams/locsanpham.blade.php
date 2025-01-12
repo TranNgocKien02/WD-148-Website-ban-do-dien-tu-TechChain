@@ -35,8 +35,8 @@
                                 <div class="product-view-mode">
                                     <!-- shop-item-filter-list start -->
                                     <ul class="nav shop-item-filter-list" role="tablist">
-                                        <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a></li>
-                                        <li class="active" role="presentation"><a aria-selected="true" class="active show" data-toggle="tab" role="tab" aria-controls="list-view" href="#list-view"><i class="fa fa-th-list"></i></a></li>
+                                        <li role="presentation"><a data-toggle="tab" role="tab" class="active show" aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a></li>
+                                        <li class="active" role="presentation"><a aria-selected="true"  data-toggle="tab" role="tab" aria-controls="list-view" href="#list-view"><i class="fa fa-th-list"></i></a></li>
                                     </ul>
                                     <!-- shop-item-filter-list end -->
                                 </div>
@@ -62,7 +62,7 @@
                                                     <div class="product-image">
                                                         <a href="">
                                                             <!-- Đổi src từ link tĩnh thành động từ sản phẩm -->
-                                                            <img src="{{ $sanPham->hinh_anh }}" alt="{{ $sanPham->ten_san_pham }}">
+                                                            <img src="{{ Storage::url($sanPham->hinh_anh) }}" alt="{{ $sanPham->ten_san_pham }}">
                                                         </a>
                                                         <!-- Nếu sản phẩm mới, có thể thêm điều kiện kiểm tra -->
                                                         @if($sanPham->is_new)
@@ -100,7 +100,6 @@
                                                         </div>
                                                         <div class="add-actions">
                                                             <ul class="add-actions-link">
-                                                                <li class="add-cart active"><a href="">Add to cart</a></li>
                                                                 <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                                 <li><a class="links-details" href=""><i class="fa fa-heart-o"></i></a></li>
                                                             </ul>
@@ -124,7 +123,7 @@
                                                     <div class="product-image">
                                                         <a href="">
                                                             <!-- Đổi hình ảnh động -->
-                                                            <img src="{{ $sanPham->hinh_anh }}" alt="{{ $sanPham->ten_san_pham }}">
+                                                            <img src="{{ Storage::url($sanPham->hinh_anh) }}" alt="{{ $sanPham->ten_san_pham }}">
                                                         </a>
                                                         <!-- Nếu sản phẩm mới -->
                                                         @if($sanPham->is_new)
@@ -166,10 +165,6 @@
                                                 <div class="col-lg-4">
                                                     <div class="shop-add-action mb-xs-30">
                                                         <ul class="add-actions-link">
-                                                            <!-- Thêm vào giỏ hàng -->
-                                                            <li class="add-cart">
-                                                                <a href="">Add to cart</a>
-                                                            </li>
                                                             <!-- Thêm vào danh sách yêu thích -->
                                                             <li class="wishlist">
                                                                 <a href="">

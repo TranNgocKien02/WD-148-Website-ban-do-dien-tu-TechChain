@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('luot_xem')->default(0);
             $table->double('danh_gia_trung_binh')->nullable()->default(0);
             $table->dateTime('ngay_dang_ban');
+            $table->integer('so_luong_da_ban')->nullable()->default(0);
             $table->foreignIdFor(DanhMuc::class)->constrained();
             $table->foreignIdFor(Hang::class)->constrained();
             $table->string('trang_thai')->nullable();
