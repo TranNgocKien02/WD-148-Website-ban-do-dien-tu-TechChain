@@ -47,7 +47,7 @@
 
                         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-18 fw-semibold m-0">Dashboard</h4>
+                                <h4 class="fs-18 fw-semibold m-0">Bảng điều khiển</h4>
                             </div>
                         </div>
 
@@ -60,7 +60,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-14 mb-1">Website Traffic</div>
+                                                    <div class="fs-14 mb-1">Lưu lượng truy cập trang web</div>
                                                 </div>
 
                                                 <div class="d-flex align-items-baseline mb-2">
@@ -81,7 +81,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-14 mb-1">Conversion rate</div>
+                                                    <div class="fs-14 mb-1">Tỷ lệ chuyển đổi</div>
                                                 </div>
 
                                                 <div class="d-flex align-items-baseline mb-2">
@@ -102,11 +102,11 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-14 mb-1">Session duration</div>
+                                                    <div class="fs-14 mb-1">Thời lượng phiên</div>
                                                 </div>
 
                                                 <div class="d-flex align-items-baseline mb-2">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">90 Sec</div>
+                                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">90 Giây</div>
                                                     <div class="me-auto">
                                                         <span class="text-success d-inline-flex align-items-center">
                                                             25%
@@ -123,7 +123,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-14 mb-1">Active Users</div>
+                                                    <div class="fs-14 mb-1">Người dùng đang hoạt động</div>
                                                 </div>
 
                                                 <div class="d-flex align-items-baseline mb-2">
@@ -153,7 +153,7 @@
                                             <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                                 <i data-feather="bar-chart" class="widgets-icons"></i>
                                             </div>
-                                            <h5 class="card-title mb-0">Monthly Sales</h5>
+                                            <h5 class="card-title mb-0">Doanh thu hàng tháng</h5>
                                         </div>
                                     </div>
 
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 col-xl-4">
+                            {{-- <div class="col-md-6 col-xl-4">
                                 <div class="card overflow-hidden">
 
                                     <div class="card-header">
@@ -172,7 +172,7 @@
                                             <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                                 <i data-feather="tablet" class="widgets-icons"></i>
                                             </div>
-                                            <h5 class="card-title mb-0">Best Traffic Source</h5>
+                                            <h5 class="card-title mb-0">Nguồn lưu lượng truy cập tốt nhất</h5>
                                         </div>
                                     </div>
 
@@ -182,8 +182,8 @@
                                                 <tbody>
                                                     <thead>
                                                         <tr>
-                                                            <th>Network</th>
-                                                            <th colspan="2">Visitors</th>
+                                                            <th>Mạng</th>
+                                                            <th colspan="2">Khách thăm quan</th>
                                                         </tr>
                                                     </thead>
 
@@ -263,11 +263,11 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- End Monthly Sales -->
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-6 col-xl-6">
                                 <div class="card">
                                     
@@ -425,7 +425,7 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div> <!-- container-fluid -->
                 </div> <!-- content -->
