@@ -61,11 +61,13 @@
                                 {{-- <span class="product-details-ref">Reference: demo_15</span> --}}
                                 <div class="rating-box pt-20">
                                     <ul class="rating rating-with-review-item">
-                                        <li><i class="fa fa-star-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $product->danh_gia_trung_binh)
+                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                            @else
+                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                            @endif
+                                        @endfor
                                         <li class="review-item"><a href="#">Đọc bình luận</a></li>
                                         <li class="review-item"><a href="#">Bình luận</a></li>
                                     </ul>
@@ -231,14 +233,17 @@
                                         <span>Tên người dùng : {{ $binhluan->user->name }}</span>
                                         <em>Ngày bình luận : {{ $binhluan->created_at->format('d/m/Y') }}</em>
                                         <em>Nội dung : {{ $binhluan->noi_dung }}</em>
+
                                         <div class="comment-review">
                                             <span>Đánh giá sao</span>
                                             <ul class="rating">
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $binhluan->sao)
+                                                        <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                    @else
+                                                        <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                    @endif
+                                                @endfor
                                             </ul>
                                         </div>
                                     </div>
@@ -356,9 +361,9 @@
                             {{-- @if ($relatedProducts->count() == 0)
                     <p>Không có sản phẩm nào khác trong danh mục này.</p>
                 @else --}}
-                @foreach ($relatedProducts as $item)
-                            <div class="col-lg-12 related-products">
-                                <!-- single-product-wrap start -->
+                            @foreach ($relatedProducts as $item)
+                                <div class="col-lg-12 related-products">
+                                    <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
                                             <a href="{{ route('product-detail', $item->id) }}">
@@ -373,14 +378,16 @@
                                                         <a href="product-details.html">{{ $item->ten_san_pham }}</a>
                                                     </h5>
                                                     <div class="rating-box">
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        </ul>
-                                                    </div>
+                                                                    <ul class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
+                                                                    </ul>
+                                                                </div>
                                                 </div>
                                                 <h4><a class="product_name"
                                                         href="single-product.html">{{ $item->ten_san_pham }}</a></h4>
@@ -403,7 +410,7 @@
                                     </div>
                                     <!-- single-product-wrap end -->
                                 </div>
-                                @endforeach
+                            @endforeach
                             {{-- <div class="related-products">
                         @foreach ($relatedProducts as $product)
                             <div class="product-item">

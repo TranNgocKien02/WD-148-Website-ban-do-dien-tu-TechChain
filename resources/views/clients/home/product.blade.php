@@ -36,11 +36,13 @@
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
-                                                                        <li><i class="fa fa-star-o"></i></li>
-                                                                        <li><i class="fa fa-star-o"></i></li>
-                                                                        <li><i class="fa fa-star-o"></i></li>
-                                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -84,14 +86,16 @@
                                                                 <a href="shop-left-sidebar.html">Graphic Corner</a>
                                                             </h5>
                                                             <div class="rating-box">
-                                                                <ul class="rating">
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                </ul>
-                                                            </div>
+                                                                    <ul class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
+                                                                    </ul>
+                                                                </div>
                                                         </div>
                                                         <h4><a class="product_name"
                                                                 href="single-product.html">{{ $item->ten_san_pham }}</a></h4>
@@ -165,14 +169,16 @@
                                                                 <a href="shop-left-sidebar.html">Studio Design</a>
                                                             </h5>
                                                             <div class="rating-box">
-                                                                <ul class="rating">
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                </ul>
-                                                            </div>
+                                                                    <ul class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
+                                                                    </ul>
+                                                                </div>
                                                         </div>
                                                         <h4><a class="product_name"
                                                                 href="single-product.html">{{ $item->ten_san_pham }}</a></h4>

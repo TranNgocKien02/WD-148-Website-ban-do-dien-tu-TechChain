@@ -78,10 +78,13 @@
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
-                                                                        <!-- Hiển thị sao đánh giá (giả sử bạn có trường rating) -->
-                                                                        @for($i = 0; $i < 5; $i++)
-                                                                            <li><i class="fa {{ $i < $sanPham->rating ? 'fa-star' : 'fa-star-o' }}"></i></li>
-                                                                            @endfor
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $sanPham->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -138,10 +141,13 @@
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
-                                                                        <!-- Hiển thị sao đánh giá (giả sử bạn có trường rating) -->
-                                                                        @for($i = 0; $i < 5; $i++)
-                                                                            <li><i class="fa {{ $i < $sanPham->rating ? 'fa-star' : 'fa-star-o' }}"></i></li>
-                                                                            @endfor
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $sanPham->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
                                                                     </ul>
                                                                 </div>
                                                             </div>

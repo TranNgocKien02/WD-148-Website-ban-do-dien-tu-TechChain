@@ -15,8 +15,14 @@ class CouponController extends Controller
         
         $ngayTao = request('ngay_tao');
         $ngay = request('ngay');
+        $loai = request('loai');
 
         $query = Coupon::query();
+
+        if ($loai) {
+            $query->where('type', $loai);
+        }
+
 
         switch ($ngayTao) {
             case 'today':

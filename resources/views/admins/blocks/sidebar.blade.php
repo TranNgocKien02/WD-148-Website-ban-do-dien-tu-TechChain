@@ -24,6 +24,14 @@
             </div>
 
             <ul id="side-menu">
+                <li>
+                    <a class='tp-link' href='{{ route('admins.dashboard') }}'>
+                        <i data-feather="package"></i>
+                            <span> Dashboard </span>
+                    </a>
+
+                </li>
+
     
                 <li class="menu-title">Kinh doanh </li>
                 

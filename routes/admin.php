@@ -29,6 +29,10 @@ use App\Http\Controllers\Admin\DanhMucController;
 Route::middleware(['auth', 'auth.admin'])->prefix('admins')
     ->as('admins.')
     ->group(function () {
+        Route::get('/', function () {
+            return view('admins.dashboard');
+        })->name('dashboard');
+
         Route::resource('coupons', CouponController::class);
 
 

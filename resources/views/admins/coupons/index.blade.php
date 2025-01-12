@@ -39,6 +39,14 @@
                                 <div class="row">
 
                                     <div class="col-md-2 mb-2">
+                                        <select name="loai" class="form-select">
+                                            <option value="">All - Loại</option>
+                                            <option value="percentage" {{ request('type') == 'percentage' ? 'selected' : '' }}>Phần trăm</option>
+                                            <option value="fixed" {{ request('type') == 'fixed' ? 'selected' : '' }}>Cố định</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-2">
                                         <select name="ngay_tao" class="form-select">
                                             <option value="">All - Thời gian</option>
                                             <option value="today" {{ request('ngay_tao') == 'today' ? 'selected' : '' }}>
@@ -89,7 +97,15 @@
                                                 <td>{{ $coupon->name }}</td>
                                                 <td>{{ $coupon->type == 'percentage' ? 'Phần trăm' : 'Cố định' }}</td>
                                                 <td>{{ $coupon->value }}</td>
-                                                <td>{{ $coupon->expiration_date }}</td>
+                                                {{-- <td>{{ $coupon->expiration_date->format('d/m/Y') }}</td> --}}
+                                                <td class="align-middle">
+                                                    {{ \Carbon\Carbon::parse($coupon->expiration_date)->format('d/m/Y') }}
+                                                    <small style="color: #878A99;">
+                                                        {{ \Carbon\Carbon::parse($coupon->expiration_date)->format('H:i A') }}
+                                                    </small>
+                                                </td>
+
+                                                
                                                 <td>
                                                     <a href="{{ route('admins.coupons.edit', $coupon->id) }}"><i
                                                             class="mdi mdi-pencil text-muted fs-18 rounded-2 border p-1 me-1"></i></a>

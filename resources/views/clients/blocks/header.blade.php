@@ -22,6 +22,7 @@
                                     <div class="setting ht-setting">
                                         <ul class="ht-setting-list">
                                             <li><a href="{{ route('profile') }}">Tài khoản</a></li>
+                                            <li><a href="{{ route('donhangs.index') }}">Đơn Mua</a></li>
                                             <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                         </ul>
                                     </div>
@@ -133,7 +134,7 @@
                                             class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
-                                        <a href="checkout.html" class="li-button li-button-fullwidth">
+                                        <a href="{{ route('fulldonhangs.create') }}" class="li-button li-button-fullwidth">
                                             <span>Checkout</span>
                                         </a>
                                     </div>
@@ -173,7 +174,6 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="about-us.html">About Us</a></li>
                                 <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>
                         </nav>

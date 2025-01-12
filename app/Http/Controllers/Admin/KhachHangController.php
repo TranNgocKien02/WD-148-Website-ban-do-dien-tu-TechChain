@@ -14,8 +14,15 @@ class KhachHangController extends Controller
     public function index()
     {
         $title = "Danh Sách Tài Khoản";
+        $role = request('role');
 
-        $listKhachHang = KhachHang::get();
+        $query = KhachHang::query();
+
+        if ($role) {
+            $query->where('role', $role);
+        }
+        $listKhachHang = $query->orderByDesc('id')->get();
+
         return view('admins.khachhangs.index',compact('title','listKhachHang'));
     }
 

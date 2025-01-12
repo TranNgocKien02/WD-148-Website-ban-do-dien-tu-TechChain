@@ -51,7 +51,6 @@
                                                 </option>
                                             @endforeach
                                         </select>
-
                                     </div>
 
                                     <div class="col-md-2 mb-2">

@@ -88,11 +88,13 @@
 
                                 <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
                                     <div class="text-muted fs-16">
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $sanPham->danh_gia_trung_binh)
+                                                <span class="mdi mdi-star"></span> <!-- Sao đầy -->
+                                            @else
+                                                <span class="mdi mdi-star-outline"></span> <!-- Sao rỗng -->
+                                            @endif
+                                        @endfor
                                     </div>
                                     <div class="text-muted">( 5.50k Customer Review )</div>
                                 </div>
@@ -341,15 +343,17 @@
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-grow-1">
                                                                 <div class="fs-16 align-middle text-warning">
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-half-fill"></i>
+                                                                     @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $sanPham->danh_gia_trung_binh)
+                                                                                <i class="mdi mdi-star"></i> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <i class="mdi mdi-star-outline"></i> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
                                                                 </div>
                                                             </div>
                                                             <div class="flex-shrink-0">
-                                                                <h6 class="mb-0">4.5 out of 5</h6>
+                                                                <h6 class="mb-0">{{$sanPham->danh_gia_trung_binh}} out of 5</h6>
                                                             </div>
                                                         </div>
                                                     </div>
