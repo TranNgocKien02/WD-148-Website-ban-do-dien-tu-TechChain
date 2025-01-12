@@ -47,7 +47,7 @@
                                                 </div>
                                             </div>
                                             <h4><a class="product_name"
-                                                    href="single-product.html">{{ $item->ten_san_pham }}</a></h4>
+                                                    href="{{ route('product-detail', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
                                             <div class="price-box">
                                                 <span
                                                     class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
@@ -57,8 +57,7 @@
                                             <ul class="add-actions-link">
                                                 <li><a class="links-details" href="wishlist.html"><i
                                                             class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" title="quick view" class="quick-view-btn"
-                                                        data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i
                                                             class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
@@ -103,7 +102,7 @@
                                                 </div>
                                             </div>
                                             <h4><a class="product_name"
-                                                    href="single-product.html">{{ $item->ten_san_pham }}</a></h4>
+                                                    href="{{ route('product-detail', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
                                             <div class="price-box">
                                                 <span
                                                     class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
@@ -113,8 +112,7 @@
                                             <ul class="add-actions-link">
                                                 <li><a class="links-details" href="wishlist.html"><i
                                                             class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" title="quick view" class="quick-view-btn"
-                                                        data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i
                                                             class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
@@ -159,7 +157,7 @@
                                                 </div>
                                             </div>
                                             <h4><a class="product_name"
-                                                    href="single-product.html">{{ $item->ten_san_pham }}</a></h4>
+                                                    href="{{ route('product-detail', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
                                             <div class="price-box">
                                                 <span
                                                     class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
@@ -169,8 +167,7 @@
                                             <ul class="add-actions-link">
                                                 <li><a class="links-details" href="wishlist.html"><i
                                                             class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" title="quick view" class="quick-view-btn"
-                                                        data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i
                                                             class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>

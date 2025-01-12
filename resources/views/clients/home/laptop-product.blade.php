@@ -20,7 +20,7 @@
                                             <!-- single-product-wrap start -->
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="{{ route('product-detail', $item->id) }}">
                                                         <img src="{{Storage::url($item->hinh_anh)}}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
@@ -43,7 +43,7 @@
                                                                     </ul>
                                                                 </div>
                                                         </div>
-                                                        <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
+                                                        <h4><a class="product_name" href="{{ route('product-detail', $item->id) }}">Accusantium dolorem1</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">$46.80</span>
                                                         </div>
@@ -51,7 +51,7 @@
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>

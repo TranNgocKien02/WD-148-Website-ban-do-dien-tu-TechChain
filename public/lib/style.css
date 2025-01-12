@@ -5987,8 +5987,10 @@ span.required {
 }
 
 .product-image>a img {
-    width     : 206px;
+    /* width     : 206px;
     height    : 206px;
+    object-fit: cover; */
+    width: 100%;
     object-fit: cover;
 }
 

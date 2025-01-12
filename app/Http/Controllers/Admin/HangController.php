@@ -76,9 +76,11 @@ class HangController extends Controller
      */
     public function edit(Hang $hang)
     {
+
         $title = "Sửa sản phẩm";
-        $listHang = Hang::get();
-        return view('admins.hangs.edit', compact('title', 'hang', 'listHang'));
+        $listDanhMuc = DanhMuc::query()->get();
+
+        return view('admins.hangs.edit', compact('title', 'hang', 'listDanhMuc'));
     }
 
     /**

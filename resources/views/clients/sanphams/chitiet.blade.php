@@ -68,8 +68,6 @@
                                                 <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
                                             @endif
                                         @endfor
-                                        <li class="review-item"><a href="#">Đọc bình luận</a></li>
-                                        <li class="review-item"><a href="#">Bình luận</a></li>
                                     </ul>
                                 </div>
                                 <div class="price-box pt-20">
@@ -89,7 +87,7 @@
                                             <select class="nice-select" name="dung_luong" id="dung_luong_select">
                                                 @foreach ($bienThes as $bienThe)
                                                     <option value="{{ $bienThe->dung_luong }}" title="M">
-                                                        {{ $bienThe->dung_luong }}Mb</option>
+                                                        {{ $bienThe->dung_luong }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -109,7 +107,7 @@
                                 </div>
                                 <div class="single-add-to-cart">
                                     <div class="quantity">
-                                        <label>Quantity</label>
+                                        <label>Số lượng</label>
                                         <div class="cart-plus-minus">
                                             <input class="cart-plus-minus-box" name="so_luong" value="1" type="text"
                                                 id="so_luong_select">
