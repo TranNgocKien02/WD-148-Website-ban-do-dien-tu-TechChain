@@ -39,7 +39,15 @@ class LienHeController extends Controller
 
     public function respond(Request $request)
     {
+
+        $request->validate([
+            'noi_dung' => 'required',
+        ], [
+            'noi_dung.required' => 'Nội dung là bắt buộc.'
+        ]);
         $data = $request->all();
+
+
         $data['nguoi_phan_hoi'] = auth()->user()->name;
         $lienHeId = $data['lien_he_id'];
         $data['created_at'] = Carbon::parse();
