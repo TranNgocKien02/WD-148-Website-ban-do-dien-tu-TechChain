@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Xóa Nhiều Đơn Hàng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        table th, table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h4>Quản lý đơn hàng</h4>
+        
+        <div class="table-responsive">
+            <table id="table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <input class="form-check-input" type="checkbox" id="checkAll">
+                        </th>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Tên khách hàng</th>
+                        <th scope="col">Ngày đặt</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Phương thức thanh toán</th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input class="form-check-input selectRow" type="checkbox" value="1"></td>
+                        <td>DH001</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>10/01/2025</td>
+                        <td>1,000,000 VND</td>
+                        <td>Chuyển khoản</td>
+                        <td>Đã giao</td>
+                    </tr>
+                    <tr>
+                        <td><input class="form-check-input selectRow" type="checkbox" value="2"></td>
+                        <td>DH002</td>
+                        <td>Trần Thị B</td>
+                        <td>09/01/2025</td>
+                        <td>1,500,000 VND</td>
+                        <td>Tiền mặt</td>
+                        <td>Đang xử lý</td>
+                    </tr>
+                    <tr>
+                        <td><input class="form-check-input selectRow" type="checkbox" value="3"></td>
+                        <td>DH003</td>
+                        <td>Phạm Hoàng C</td>
+                        <td>08/01/2025</td>
+                        <td>2,000,000 VND</td>
+                        <td>Chuyển khoản</td>
+                        <td>Đang xử lý</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Nút Xóa hàng loạt -->
+        <button id="bulkDeleteBtn" class="btn btn-danger" style="display: none;">Xóa</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Chọn hoặc bỏ chọn tất cả checkbox
+        document.getElementById('checkAll').addEventListener('change', function(e) {
+            const checkboxes = document.querySelectorAll('.selectRow');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = e.target.checked;
+            });
+            toggleBulkDeleteBtn();
+        });
+
+        // Kiểm tra nếu có đơn hàng nào được chọn để hiển thị nút xóa
+        document.querySelectorAll('.selectRow').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                toggleBulkDeleteBtn();
+            });
+        });
+
+        // Hàm để hiển thị nút "Xóa" nếu có ít nhất 1 đơn hàng được chọn
+        function toggleBulkDeleteBtn() {
+            const checkboxes = document.querySelectorAll('.selectRow:checked');
+            const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+            bulkDeleteBtn.style.display = checkboxes.length > 0 ? 'block' : 'none';
+        }
+
+        // Xử lý khi nhấn nút "Xóa"
+        document.getElementById('bulkDeleteBtn').addEventListener('click', function() {
+            const selectedIds = [];
+            document.querySelectorAll('.selectRow:checked').forEach(function(checkbox) {
+                selectedIds.push(checkbox.value);
+            });
+
+            if (selectedIds.length > 0) {
+                // Gửi AJAX request để xóa các đơn hàng đã chọn
+                fetch('/delete_orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': 'your-csrf-token-here',  // Thay thế bằng CSRF token thật nếu cần
+                    },
+                    body: JSON.stringify({ ids: selectedIds }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Xóa đơn hàng thành công!');
+                        location.reload();  // Tải lại trang sau khi xóa
+                    } else {
+                        alert('Có lỗi xảy ra, vui lòng thử lại!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra:', error);
+                    alert('Có lỗi xảy ra, vui lòng thử lại!');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

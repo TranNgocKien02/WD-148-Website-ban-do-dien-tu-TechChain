@@ -21,17 +21,27 @@ class DonHang extends Model
         'chua_thanh_toan' => 'Chưa thanh toán',
         'da_thanh_toan' => 'Đã thanh toán',
     ];
-    const CHO_XAC_NHAN = 'cho_xac_nhan'; 
-    const DA_XAC_NHAN  = 'da_xac_nhan';      
+
+    const PHUONG_THUC_THANH_TOAN = [
+        'COD' => 'Thanh toán khi nhận hàng',
+        'momo' => 'Momo'
+    ];
+
+    const COD = 'COD';
+    const MOMO  = 'momo';
+
+
+    const CHO_XAC_NHAN = 'cho_xac_nhan';
+    const DA_XAC_NHAN  = 'da_xac_nhan';
     const DANG_CHUAN_BI = 'dang_chuan_bi';
     const DANG_VAN_CHUYEN = 'dang_van_chuyen';
     const DA_GIAO_HANG = 'da_giao_hang';
     const HUY_DON_HANG = 'huy_don_hang';
     const CHUA_THANH_TOAN = 'chua_thanh_toan';
     const DA_THANH_TOAN = 'da_thanh_toan';
-        // Các trạng thái thanh toán
-   
-   
+    // Các trạng thái thanh toán
+
+
     protected $fillable = [
         'ma_don_hang',
         'user_id',
@@ -42,41 +52,44 @@ class DonHang extends Model
         'ghi_chu',
         'trang_thai_don_hang',
         'trang_thai_thanh_toan',
+        'phuong_thuc_thanh_toan',
         'tien_hang',
+        'tien_khuyen_mai',
         'tien_ship',
         'tong_tien',
-       
+
     ];
-    
-      // Thêm sự kiện Eloquent để tự động tạo ma_don_hang
+
+    // Thêm sự kiện Eloquent để tự động tạo ma_don_hang
     //   protected static function booted()
     //   {
     //       static::creating(function ($donHang) {
     //           // Lấy số lượng đơn hàng hiện tại
     //           $latestOrder = self::latest('id')->first();
     //           $nextId = $latestOrder ? $latestOrder->id + 1 : 1;
-  
+
     //           // Tạo mã đơn hàng mới
     //           $donHang->ma_don_hang = sprintf('DH%03d', $nextId);
     //       });
     //   }
     protected $dates = ['ngay_dat', 'deleted_at'];
 
-   
-    public function chiTietDonHang()
+
+    public function chiTietDonHangs()
     {
-        return $this->hasMany(ChiTietDonHang::class, 'don_hang_id');
+        return $this->hasMany(ChiTietDonHang::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
-    public function sanPhams()
+
+    public function coupon()
     {
-        return $this->belongsToMany(SanPham::class, 'dat_hang_san_phams', 'don_hang_id', 'san_pham_id')
-                    ->withPivot('so_luong', 'gia');
+        return $this->belongsTo(Coupon::class);
     }
+
     protected $casts = [
         'ngay_dat' => 'datetime',
     ];

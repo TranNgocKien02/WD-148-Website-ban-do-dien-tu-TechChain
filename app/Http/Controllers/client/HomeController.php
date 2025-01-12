@@ -1,65 +1,43 @@
 <?php
+namespace App\Http\Controllers\Client;
 
-namespace App\Http\Controllers\client;
+use App\Models\Banner;
+use App\Models\DanhMuc;
+use App\Models\SanPham;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('clients.home.index') ;
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $danhMuc = DanhMuc::query()->where('trang_thai', true)->get();
+        $sanPham = SanPham::query()->take(10)->get();
+        $sanPhamMoi = SanPham::query()->take(10)->get();
+        $sanPhamHot = SanPham::query()->get();
+        $sanPhamHotDeal = SanPham::query()->take(10)->get();
+        $sanPhamTrending = SanPham::query()->take(10)->get();
+        $banners = Banner::query()->where('is_active', true)->get();
+        $bannerMain = Banner::query()->where('loai', 'main')->where('is_active', true)->get();
+        $bannerSale = Banner::query()->where('loai', 'sale')->where('is_active', true)->take(2)->get();
+        $bannerProduct = Banner::query()->where('loai', 'product')->where('is_active', true)->get();
+        // dd($bannerMain->anh);    
+        return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal', 'sanPhamTrending', 'banners', 'bannerMain', 'bannerSale', 'bannerProduct'));
     }
 }

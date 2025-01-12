@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DanhMuc extends Model
 {
     use HasFactory;
-    
+
     // protected $table = 'danh_mucs' ;
 
     protected $fillable = [
@@ -22,7 +22,15 @@ class DanhMuc extends Model
 
     ];
 
-    public function sanPhams(){
-        return $this->hasMany(SanPham::class) ;
+    public function sanPhams()
+    {
+        return $this->hasMany(SanPham::class);
+    }
+
+
+    // Quan hệ một-nhiều với Hang
+    public function hangs()
+    {
+        return $this->hasMany(Hang::class);
     }
 }
