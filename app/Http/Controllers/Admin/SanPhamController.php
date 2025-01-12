@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreSanPhamRequest;
 use App\Http\Requests\UpdateSanPhamRequest;
-
+use Carbon\Carbon;
 
 class SanPhamController extends Controller
 {
@@ -31,9 +31,52 @@ class SanPhamController extends Controller
     {
         $title = "Sản phẩm";
 
-        $listSanPham = SanPham::latest()->get();
+        $listDanhMuc = DanhMuc::all();
 
-        return view('admins.sanphams.index', compact('title', 'listSanPham'));
+        $danhMuc = request('danh_muc'); // Hoặc dùng $_GET['trang_thai'] nếu cần
+        $ngayTao = request('ngay_tao');
+        $giaMax = request('gia_max', 1000000);
+        $ngay = request('ngay');
+
+        $query = SanPham::query();
+
+        if ($danhMuc) {
+            $query->where('danh_muc_id', $danhMuc);
+        }
+
+
+        switch ($ngayTao) {
+            case 'today':
+                $query->whereDate('created_at', Carbon::today());
+                break;
+            case 'week':
+                $query->whereBetween('created_at', [
+                    Carbon::now()->startOfWeek(), // Ngày đầu tuần
+                    Carbon::now()->endOfWeek()    // Ngày cuối tuần
+                ]);
+                break;
+            case 'month':
+                $query->whereMonth('created_at', Carbon::now()->month); // Tháng hiện tại
+                break;
+            case 'quarter':
+                $query->whereBetween('created_at', [
+                    Carbon::now()->startOfQuarter(), // Ngày bắt đầu quý
+                    Carbon::now()->endOfQuarter()    // Ngày kết thúc quý
+                ]);
+                break;
+        }
+
+         $query->where('gia_san_pham', '<=', $giaMax);
+
+            if ($ngay) {
+                $query->whereDate('created_at', Carbon::parse($ngay)); // Lọc theo ngày người dùng chọn
+            }
+
+
+        $listSanPham = $query->orderByDesc('id')->get();
+
+
+        return view('admins.sanphams.index', compact('title', 'listDanhMuc' ,'listSanPham'));
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\Admin\KhachHangController;
+use App\Http\Controllers\client\ProductFilter;
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\PayPalController;
 use App\Models\ThongTinTrangWeb;
@@ -46,7 +47,11 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 });
 
 // Product Routes
-Route::get('/product-detail/{id}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
+Route::middleware('auth')->prefix('product-detail')->group(function () {
+
+    Route::get('/{id}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
+});
+
 
 // Cart Routes (requires authentication)
 Route::middleware('auth')->prefix('cart')->group(function () {
@@ -67,7 +72,7 @@ Route::middleware('auth')->prefix('orders')->name('orders.')->group(function () 
 });
 
 // Client Routes
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 route::get('register', [AuthController::class, 'showFromRegister']);
 route::post('register', [AuthController::class, 'register'])->name('register');
 route::post('logout', [AuthController::class, 'logout'])->name('logout');
@@ -82,19 +87,8 @@ Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordF
 Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
     
-// Route::get('/home', function () {
-//     return view('home');
-// })->middleware('auth');
-// route::get('/admin',function () {
-//     return 'Đây là trang admin';
-// })->middleware(['auth','auth.admin']);
 
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
+// Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
 Route::post('/cart/add',            [CartController::class, 'addCart'])->name('cart.add');
 Route::post('/cart/store',            [CartController::class, 'storeCart'])->name('cart.store');
 Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
@@ -121,6 +115,8 @@ Route::controller(LienHeController::class)->group(function () {
     Route::get('/contact', 'index')->name('contact');
     Route::post('/contact', 'store')->name('contact.store');
 });
+
+Route::get('/product/filter', [ProductFilter::class, 'filter'])->name('filter');
 
 
 

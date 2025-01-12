@@ -83,7 +83,7 @@
                                             @endphp --}}
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-                                    <span class="item-text"> {{ number_format($subTotal, 0, '', '.') }}VND
+                                    <span class="item-text d-inline-block text-truncate" style="max-width: 80px;">  {{ number_format($subTotal, 0, '', '.') }}VND
                                         <span class="cart-item-count">{{ $cartItemCount }}</span>
                                     </span>
                                 </div>
@@ -160,7 +160,7 @@
                             <ul>
                                 <li class="dropdown-holder"><a href="{{route('index')}}">Home</a>
                                 </li>
-                                <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
+                                <li class="megamenu-holder"><a href="{{route('filter')}}">Shop</a>
                                     <ul class="megamenu hb-megamenu">
                                         @foreach ($danhMuc as $item)
                                             <li><a href="">{{ $item->ten_danh_muc }}</a>

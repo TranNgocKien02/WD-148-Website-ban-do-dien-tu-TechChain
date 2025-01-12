@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
@@ -11,7 +12,38 @@ class CouponController extends Controller
     public function index()
     {
         $title = 'Danh sách khuyến mãi';
-        $listCoupons = Coupon::all();
+        
+        $ngayTao = request('ngay_tao');
+        $ngay = request('ngay');
+
+        $query = Coupon::query();
+
+        switch ($ngayTao) {
+            case 'today':
+                $query->whereDate('created_at', Carbon::today());
+                break;
+            case 'week':
+                $query->whereBetween('created_at', [
+                    Carbon::now()->startOfWeek(), // Ngày đầu tuần
+                    Carbon::now()->endOfWeek()    // Ngày cuối tuần
+                ]);
+                break;
+            case 'month':
+                $query->whereMonth('created_at', Carbon::now()->month); // Tháng hiện tại
+                break;
+            case 'quarter':
+                $query->whereBetween('created_at', [
+                    Carbon::now()->startOfQuarter(), // Ngày bắt đầu quý
+                    Carbon::now()->endOfQuarter()    // Ngày kết thúc quý
+                ]);
+                break;
+        }
+
+        if ($ngay) {
+            $query->whereDate('created_at', Carbon::parse($ngay)); // Lọc theo ngày người dùng chọn
+        }
+
+        $listCoupons = $query->orderByDesc('id')->get();
         return view('admins.coupons.index', compact('listCoupons','title'));
     }
 
