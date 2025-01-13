@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\client\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\client\ProductFilter;
 use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\client\UserController;
 use App\Http\Controllers\client\ProductController;
 
 /*
@@ -59,3 +60,4 @@ Route::middleware('auth')->prefix('orders')->name('orders.')->group(function () 
 
 // Client Routes
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/filter', [ProductFilter::class, 'filter'])->name('filter');
