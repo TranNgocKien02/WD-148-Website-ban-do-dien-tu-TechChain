@@ -69,21 +69,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($donHang->chiTietDonHang as $item)
-                                        @php
-                                            $sanPham = $item->sanPham ;
-                                        @endphp
+                                        @foreach ($donHang->chiTietDonHangs as $item)
                                         <tr>
                                             <td>
-                                                <img class="img-fluid" src=" {{ Storage::url($sanPham->hinh_anh) }}" alt="Sản phẩm" width="75px">
+                                                <img class="img-fluid" src=" {{ Storage::url($item->anh_san_pham) }}" alt="Sản phẩm" width="75px">
                                             </td>
                                             
-                                            <td>{{ $sanPham->ma_san_pham }}</td>
-                                            <td>{{ $sanPham->ten_san_pham }}</td>
+                                            <td>{{ $item->ma_san_pham }}</td>
+                                            <td>{{ $item->ten_san_pham }}</td>
                                             <td>{{ number_format($item->don_gia, 0, '', '.') }}đ</td>
                                             <td>{{ $item->so_luong }}</td>
-                                            <td>{{ number_format($item->thanh_tien, 0, '', '.') }}đ</td>
-
+                                            <td>{{ number_format($item->don_gia * $item->so_luong, 0, '', '.') }}đ</td>
                                             </td>
                                         </tr>
                                         @endforeach

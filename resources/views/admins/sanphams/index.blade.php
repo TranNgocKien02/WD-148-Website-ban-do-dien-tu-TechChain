@@ -39,6 +39,52 @@
 
                         <div class="card-body">
 
+                             <form method="GET" action="{{ route('admins.sanphams.index') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-2 mb-2">
+                                        <select name="danh_muc" class="form-select">
+                                            <option value="">All - Danh Mục</option>
+                                            @foreach ($listDanhMuc as $item)
+                                                <option value="{{ $item->id }}" {{ request('danh_muc') == $item->id ? 'selected' : '' }}>
+                                                    {{ $item->ten_danh_muc }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-2">
+                                        <select name="ngay_tao" class="form-select">
+                                            <option value="">All - Thời gian</option>
+                                            <option value="today"
+                                                {{ request('ngay_tao') == 'today' ? 'selected' : '' }}>Hôm nay</option>
+                                            <option value="week"
+                                                {{ request('ngay_tao') == 'week' ? 'selected' : '' }}>Tuần</option>
+                                            <option value="month"
+                                                {{ request('ngay_tao') == 'month' ? 'selected' : '' }}>Tháng</option>
+                                            <option value="quarter"
+                                                {{ request('ngay_tao') == 'quarter' ? 'selected' : '' }}>Quý</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-2">
+                                        <input class="form-range" type="range" name="gia_max" id="gia_max" min="0" max="1000000" step="10000" 
+                                            value="{{ request('gia_max', 1000000) }}" 
+                                            oninput="document.getElementById('gia_max_val').innerText = this.value">
+                                        <span id="gia_max_val">{{ request('gia_max', 1000000) }}</span> VND
+                                    </div>
+
+                                    <div class="col-md-2 mb-2">
+                                        <input type="date" name="ngay" class="form-control" value="{{ request('ngay') }}">
+                                    </div>
+
+                                    <div class="col-md-4 mb-2">
+                                        <button type="submit" class="btn btn-primary">Lọc</button>
+                                        <a href="{{ route('admins.sanphams.index') }}" class="btn btn-secondary">Clear</a>
+                                    </div>
+                                </div>
+                            </form>
+
                             <!-- Tabs -->
                             <ul class="nav nav-tabs mb-2" id="productTabs" role="tablist">
                                 <li class="nav-item" role="presentation">

@@ -25,9 +25,11 @@ return new class extends Migration
             $table->string('dia_chi_nguoi_nhan');
            
             $table->text('ghi_chu')->nullable();
+            $table->string('coupon')->nullable();
 
             $table->string('trang_thai_don_hang')->default(DonHang::CHO_XAC_NHAN);
             $table->string('trang_thai_thanh_toan')->default(DonHang::CHUA_THANH_TOAN);
+            $table->string('phuong_thuc_thanh_toan')->default(DonHang::COD);
             $table->double('tien_hang');
             $table->decimal('tien_khuyen_mai', 10, 2)->default(0);
             $table->double('tien_ship');

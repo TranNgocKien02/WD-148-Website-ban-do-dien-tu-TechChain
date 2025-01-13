@@ -7,7 +7,7 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="header-top-left">
                         <ul class="phone-wrap">
-                            <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+                            <li><span>Telephone Enquiry:</span><a href="#"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -16,45 +16,26 @@
                 <div class="col-lg-9 col-md-8">
                     <div class="header-top-right">
                         <ul class="ht-menu">
-                            <!-- Begin Setting Area -->
-                            <li>
-                                <div class="ht-setting-trigger"><span>Setting</span></div>
-                                <div class="setting ht-setting">
-                                    <ul class="ht-setting-list">
-                                        <li><a href="login-register.html">My Account</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="login-register.html">Sign In</a></li>
-                                        <li><a href="{{ route('logout') }}">Log Out</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- Setting Area End Here -->
-                            <!-- Begin Currency Area -->
-                            <li>
-                                <span class="currency-selector-wrapper">Currency :</span>
-                                <div class="ht-currency-trigger"><span>USD $</span></div>
-                                <div class="currency ht-currency">
-                                    <ul class="ht-setting-list">
-                                        <li><a href="#">EUR €</a></li>
-                                        <li class="active"><a href="#">USD $</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- Currency Area End Here -->
-                            <!-- Begin Language Area -->
-                            <li>
-                                <span class="language-selector-wrapper">Language :</span>
-                                <div class="ht-language-trigger"><span>English</span></div>
-                                <div class="language ht-language">
-                                    <ul class="ht-setting-list">
-                                        <li class="active"><a href="#"><img src="images/menu/flag-icon/1.jpg"
-                                                    alt="">English</a></li>
-                                        <li><a href="#"><img src="images/menu/flag-icon/2.jpg"
-                                                    alt="">Français</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- Language Area End Here -->
+                            @auth
+                                 <li>
+                                    <div class="ht-setting-trigger"><span>  {{ auth()->user()->name }}</span></div>
+                                    <div class="setting ht-setting">
+                                        <ul class="ht-setting-list">
+                                            <li><a href="{{ route('profile') }}">Tài khoản</a></li>
+                                            <li><a href="{{ route('donhangs.index') }}">Đơn Mua</a></li>
+                                            <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @else
+                                <li>
+                                    <span><a href="{{ route('register') }}">Đăng Ký</a></span>
+                                </li>
+
+                                <li>
+                                    <span><a href="{{ route('login') }}">Đăng Nhập</a></span>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -103,8 +84,7 @@
                                             @endphp --}}
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-
-                                    <span class="item-text"> {{ number_format($subTotal, 0, '', '.') }}đ
+                                    <span class="item-text d-inline-block text-truncate" style="max-width: 80px;">  {{ number_format($subTotal, 0, '', '.') }}VND
                                         <span class="cart-item-count">{{ $cartItemCount }}</span>
                                     </span>
                                 </div>
@@ -154,7 +134,7 @@
                                             class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
-                                        <a href="checkout.html" class="li-button li-button-fullwidth">
+                                        <a href="{{ route('fulldonhangs.create') }}" class="li-button li-button-fullwidth">
                                             <span>Checkout</span>
                                         </a>
                                     </div>
@@ -179,23 +159,22 @@
                     <div class="hb-menu">
                         <nav style="display: block;">
                             <ul>
-                                <li class="dropdown-holder"><a href="{{ route('clients.index') }}">Home</a>
+                                <li class="dropdown-holder"><a href="{{route('index')}}">Home</a>
                                 </li>
-                                <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
+                                <li class="megamenu-holder"><a href="{{route('filter')}}">Shop</a>
                                     <ul class="megamenu hb-megamenu">
-                                        {{-- @foreach ($danhMuc as $item)
-                                                        <li><a href="">{{$item->ten_danh_muc}}</a>
-                                                            <ul>
-                                                                @foreach ($item->hangs as $hang)
-                                                                    <li><a href="">{{$hang->ten_hang}}</a></li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </li>
-                                                    @endforeach  --}}
+                                        @foreach ($danhMuc as $item)
+                                            <li><a href="">{{ $item->ten_danh_muc }}</a>
+                                                <ul>
+                                                    @foreach ($item->hangs as $hang)
+                                                        <li><a href="">{{ $hang->ten_hang }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>
                         </nav>
                     </div>

@@ -1,88 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Icons in Anchor Tags</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Font Awesome for icons -->
+    <title>Product Slider Test</title>
+
+    <!-- Thêm Swiper CSS từ CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.5/swiper-bundle.min.css" />
     <style>
-        /* Center the icons inside <a> */
-        .add-actions-link {
-            display: flex;
-            justify-content: center;  /* Center horizontally */
-            align-items: center;      /* Center vertically */
-            list-style: none;         /* Remove bullet points */
-            padding: 0;
-            margin: 0;
-        }
-
-        .add-actions-link li {
-            margin: 0 10px;  /* Optional: Add space between the icons */
-        }
-
-        .add-actions-link li a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;  /* Adjust icon size */
-            width: 40px;      /* Set width to ensure consistency */
-            height: 40px;     /* Set height for consistency */
-            text-align: center;
-        }
-
-        .product-image img {
-            max-width: 100%;
+        .product-slider img,
+        .product-thumbs img {
+            width: 100%;
             height: auto;
+            object-fit: cover;
+            display: block;
         }
 
-        .product_desc {
-            padding: 10px;
+        .product-thumbs {
+            margin-top: 20px;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #000;
         }
     </style>
 </head>
+
 <body>
 
-<div class="col-lg-12">
-    <!-- single-product-wrap start -->
-    <div class="single-product-wrap">
-        <div class="product-image">
-            <a href="">
-                <img src="https://via.placeholder.com/300" alt="Li's Product Image">
-            </a>
-            <span class="sticker">New</span>
-        </div>
-        <div class="product_desc">
-            <div class="product_desc_info">
-                <div class="product-review">
-                    <h5 class="manufacturer">
-                        <a href="shop-left-sidebar.html">Graphic Corner</a>
-                    </h5>
-                    <div class="rating-box">
-                        <ul class="rating">
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                        </ul>
-                    </div>
+    <div class="product-details-left" style="width: 60%; margin: auto;">
+        <!-- Swiper container for main images -->
+        <div class="swiper product-slider">
+            <div class="swiper-wrapper">
+                <!-- Main product image -->
+                <div class="swiper-slide">
+                    <img src="c:\Users\minh3\OneDrive\Hình ảnh\Screen\3.png" alt="product image">
                 </div>
-                <h4><a class="product_name" href="single-product.html">Product Name</a></h4>
-                <div class="price-box">
-                    <span class="new-price">$99.99</span>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/800x600.png?text=Product+Image+2" alt="product image">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/800x600.png?text=Product+Image+3" alt="product image">
                 </div>
             </div>
-            <div class="add-actions">
-                <ul class="add-actions-link">
-                    <li class="add-cart active"><a href="#">Add to cart</a></li>
-                    <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                    <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                </ul>
+            <!-- Add navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+        <!-- Swiper container for thumbnail images -->
+        <div class="swiper product-thumbs">
+            <div class="swiper-wrapper">
+                <!-- Thumbnail product image -->
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/100x100.png?text=Thumb+1" alt="product image thumb">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/100x100.png?text=Thumb+2" alt="product image thumb">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/100x100.png?text=Thumb+3" alt="product image thumb">
+                </div>
             </div>
         </div>
     </div>
-    <!-- single-product-wrap end -->
-</div>
 
+    <!-- Thêm Swiper JS từ CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.5/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Khởi tạo Swiper cho slider chính
+            var productSlider = new Swiper('.product-slider', {
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                loop: true,
+            });
+
+            // Khởi tạo Swiper cho thumbnail slider
+            var productThumbs = new Swiper('.product-thumbs', {
+                spaceBetween: 10,
+                slidesPerView: 4,
+                freeMode: true,
+                watchSlidesProgress: true,
+            });
+
+            // Liên kết slider chính với slider thumbnail
+            productSlider.controller.control = productThumbs;
+            productThumbs.controller.control = productSlider;
+        });
+    </script>
 </body>
+
 </html>

@@ -4,7 +4,11 @@
     {{ $title }}
 @endsection
 @section('css')
-
+<style>
+        .dataTables_length {
+            display: none;
+        }
+    </style>
 @endsection
 
 
@@ -30,8 +34,44 @@
         </div><!-- end card header -->
 
         <div class="card-body">
+            <form method="GET" action="{{ route('admins.banners.index') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-2 mb-2">
+                                        <select name="loai" class="form-select">
+                                            <option value="">All - Loại</option>
+                                            <option value="main" {{ request('loai') == 'main' ? 'selected' : '' }}>Main</option>
+                                            <option value="sale" {{ request('loai') == 'sale' ? 'selected' : '' }}>Sale</option>
+                                            <option value="product" {{ request('loai') == 'product' ? 'selected' : '' }}>Product</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-2">
+                                        <select name="created_at" class="form-select">
+                                            <option value="">All - Thời gian</option>
+                                            <option value="today"
+                                                {{ request('created_at') == 'today' ? 'selected' : '' }}>Hôm nay</option>
+                                            <option value="week"
+                                                {{ request('created_at') == 'week' ? 'selected' : '' }}>Tuần</option>
+                                            <option value="month"
+                                                {{ request('created_at') == 'month' ? 'selected' : '' }}>Tháng</option>
+                                            <option value="quarter"
+                                                {{ request('created_at') == 'quarter' ? 'selected' : '' }}>Quý</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 mb-2">
+                                        <input type="date" name="ngay" class="form-control" value="{{ request('ngay') }}">
+                                    </div>
+
+                                    <div class="col-md-4 mb-2">
+                                        <button type="submit" class="btn btn-primary">Lọc</button>
+                                        <a href="{{ route('admins.banners.index') }}" class="btn btn-secondary">Clear</a>
+                                    </div>
+                                </div>
+                            </form>
             <div class="table-responsive">
-                <table class="table table-striped mb-0">
+                <table id="table" class="datatable table table-striped mb-0">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -108,5 +148,18 @@
 @endsection
 
 @section('js')
-
+<script>
+            $(document).ready(function() {
+            // Áp dụng DataTable cho tất cả các bảng có class 'datatable'
+            $('table.datatable').each(function() {
+                $(this).DataTable({
+                    "paging": true, // Hiển thị phân trang
+                    "searching": true, // Tìm kiếm
+                    "ordering": true, // Sắp xếp
+                    "info": true, // Hiển thị thông tin
+                    "pageLength": 8 // Số dòng mỗi trang
+                });
+            });
+        });
+</script>
 @endsection

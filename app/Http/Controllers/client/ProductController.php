@@ -28,6 +28,6 @@ class ProductController extends BaseController
             ->where('id', '!=', $product->id)
             ->paginate(15);
         // dd($relatedProducts);
-        return view('clients.sanphams.chitiet', compact('bienThes','product','collection','listDanhMuc','binhLuans','relatedProducts'));
+        return view('clients.sanphams.chiTiet', compact('bienThes','product','collection','listDanhMuc','binhLuans','relatedProducts'));
     }
 }

@@ -11,19 +11,22 @@ class ChiTietDonHang extends Model
 
     protected $fillable = [
         'don_hang_id',
-        'san_pham_id',
+        'product_variant_id',
+        'ten_san_pham',
+        'ma_san_pham',
+        'anh_san_pham',
         'don_gia',
-        'so_luong',
-        'thanh_tien',
+        'gia_khuyen_mai',
         'dung_luong',
         'mau_sac',
+        'so_luong',
     ];
 
     public function donHang(){
         return $this->belongsTo(DonHang::class) ;
     }
-    public function sanPham()
+    public function productVariant()
     {
-        return $this->belongsTo(SanPham::class);
+        return $this->belongsTo(ProductVariant::class);
     }
 }

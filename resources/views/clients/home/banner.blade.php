@@ -3,32 +3,16 @@
                 <div class="container">
                     <div class="row">
                         <!-- Begin Single Banner Area -->
-                        <div class="col-lg-4 col-md-4 text-center">
-                            <div class="single-banner">
-                                <a href="#">
-                                    <img src="{{asset('lib/images/banner/1_3.jpg')}}" alt="Li's Static Banner">
-                                </a>
+                        @foreach ($bannerProduct as $item)
+                            <div class="col-lg-4 col-md-4 text-center">
+                                <div class="single-banner">
+                                    <a href="#">
+                                        <img style="height: 226px;" class="object-fit-cover" src="{{Storage::url($item->anh)}}" alt="Li's Static Banner">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Single Banner Area End Here -->
-                        <!-- Begin Single Banner Area -->
-                        <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                            <div class="single-banner">
-                                <a href="#">
-                                    <img src="{{asset('lib/images/banner/1_4.jpg')}}" alt="Li's Static Banner">
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Single Banner Area End Here -->
-                        <!-- Begin Single Banner Area -->
-                        <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                            <div class="single-banner">
-                                <a href="#">
-                                    <img src="{{asset('lib/images/banner/1_5.jpg')}}" alt="Li's Static Banner">
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Single Banner Area End Here -->
+                            <!-- Single Banner Area End Here -->
+                        @endforeach
                     </div>
                 </div>
             </div>

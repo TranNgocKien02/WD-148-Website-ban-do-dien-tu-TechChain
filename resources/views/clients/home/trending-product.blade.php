@@ -25,7 +25,7 @@
                                             <!-- single-product-wrap start -->
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="{{ route('product-detail', $item->id) }}">
                                                         <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
@@ -37,16 +37,18 @@
                                                                 <a href="shop-left-sidebar.html">Studio Design</a>
                                                             </h5>
                                                             <div class="rating-box">
-                                                                <ul class="rating">
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                </ul>
-                                                            </div>
+                                                                    <ul class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
+                                                                    </ul>
+                                                                </div>
                                                         </div>
-                                                        <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
+                                                        <h4><a class="product_name" href="{{ route('product-detail', $item->id) }}">{{$item->ten_san_pham}}</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price new-price-2">${{$item->gia_khuyen_mai}}</span>
                                                             <span class="old-price">${{$item->gia_san_pham}}</span>
@@ -55,9 +57,8 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -77,7 +78,7 @@
                                             <!-- single-product-wrap start -->
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="{{ route('product-detail', $item->id) }}">
                                                         <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
@@ -89,16 +90,18 @@
                                                                 <a href="shop-left-sidebar.html">Studio Design</a>
                                                             </h5>
                                                             <div class="rating-box">
-                                                                <ul class="rating">
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                </ul>
-                                                            </div>
+                                                                    <ul class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
+                                                                    </ul>
+                                                                </div>
                                                         </div>
-                                                        <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
+                                                        <h4><a class="product_name" href="{{ route('product-detail', $item->id) }}">{{$item->ten_san_pham}}</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price new-price-2">${{$item->gia_khuyen_mai}}</span>
                                                             <span class="old-price">${{$item->gia_san_pham}}</span>
@@ -107,9 +110,8 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -129,7 +131,7 @@
                                             <!-- single-product-wrap start -->
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="{{ route('product-detail', $item->id) }}">
                                                         <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
@@ -141,16 +143,18 @@
                                                                 <a href="shop-left-sidebar.html">Studio Design</a>
                                                             </h5>
                                                             <div class="rating-box">
-                                                                <ul class="rating">
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                </ul>
-                                                            </div>
+                                                                    <ul class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
+                                                                    </ul>
+                                                                </div>
                                                         </div>
-                                                        <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
+                                                        <h4><a class="product_name" href="{{ route('product-detail', $item->id) }}">{{$item->ten_san_pham}}</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price new-price-2">${{$item->gia_khuyen_mai}}</span>
                                                             <span class="old-price">${{$item->gia_san_pham}}</span>
@@ -159,9 +163,8 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -199,7 +202,7 @@
                                             <!-- single-product-wrap start -->
                                             <div class="single-product-wrap">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="{{ route('product-detail', $item->id) }}">
                                                         <img src="{{Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                                     </a>
                                                     <span class="sticker">New</span>
@@ -211,16 +214,18 @@
                                                                 <a href="shop-left-sidebar.html">Studio Design</a>
                                                             </h5>
                                                             <div class="rating-box">
-                                                                <ul class="rating">
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                                </ul>
-                                                            </div>
+                                                                    <ul class="rating">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $item->danh_gia_trung_binh)
+                                                                                <li><i class="fa fa-star"></i></li> <!-- Sao đầy -->
+                                                                            @else
+                                                                                <li><i class="fa fa-star-o"></i></li> <!-- Sao rỗng -->
+                                                                            @endif
+                                                                        @endfor
+                                                                    </ul>
+                                                                </div>
                                                         </div>
-                                                        <h4><a class="product_name" href="single-product.html">{{$item->ten_san_pham}}</a></h4>
+                                                        <h4><a class="product_name" href="{{ route('product-detail', $item->id) }}">{{$item->ten_san_pham}}</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price new-price-2">${{$item->gia_khuyen_mai}}</span>
                                                             <span class="old-price">${{$item->gia_san_pham}}</span>
@@ -229,9 +234,8 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
                                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>

@@ -46,6 +46,7 @@
         <link rel="stylesheet" href="{{asset('lib/style.css')}}">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{asset('lib/css/responsive.css')}}">
+
         {{-- <link rel="stylesheet" href="{{ asset('assets/client/css/style.css') }}"> --}}
     {{-- <script src="{{ asset('assets/client/js/main.js') }}"></script> --}}
         <script src="{{asset('lib/js/vendor/modernizr-2.8.3.min.js')}}"></script>
@@ -64,7 +65,7 @@
 
 
 
-    {{-- @yield('css') --}}
+    @yield('css')
         <!-- Modernizr js -->
 </head>
     <body>

@@ -18,7 +18,7 @@ class CreateCouponsTable extends Migration
             $table->string('name')->unique(); // Tên mã giảm giá, duy nhất
             $table->enum('type', ['percentage', 'fixed']); // Loại: percentage (phần trăm) hoặc fixed (cố định)
             $table->double('value'); // Giá trị giảm giá
-            $table->timestamp('expiration_date'); // Ngày hết hạn
+            $table->timestamp('expiration_date')->nullable(); // Ngày hết hạn
             $table->timestamps(); // Bao gồm created_at và updated_at
         });
     }
