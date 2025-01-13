@@ -75,4 +75,9 @@ class SanPham extends Model
         return $this->hasMany(Cart::class, 'san_pham_id');
     }
 
+    // quan hệ whitelist - yêu thích
+    public function whitelists()
+{
+    return $this->hasMany(Whitelist::class, 'product_id');
+}
 }

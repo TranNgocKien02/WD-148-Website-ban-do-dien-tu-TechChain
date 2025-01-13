@@ -70,8 +70,10 @@
                         <ul class="hm-menu">
                             <!-- Begin Header Middle Wishlist Area -->
                             <li class="hm-wishlist">
-                                <a href="">
-                                    <span class="cart-item-count wishlist-item-count">0</span>
+                                <a href="{{ route('whitelist.index') }}">
+                                    <span class="cart-item-count wishlist-item-count">
+                                        {{ auth()->user()->whitelist->count() }}
+                                    </span>
                                     <i class="fa fa-heart-o"></i>
                                 </a>
                             </li>
@@ -130,11 +132,14 @@
                                         <span>{{ number_format($subTotal, 0, '', '.') }}đ</span>
                                     </p>
                                     <div class="minicart-button">
-                                        <a href="{{ route('cart-full.list')}}"
+                                        <a
+                                         {{-- href="{{ route('cart-full.list')}}" --}}
                                             class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
-                                        <a href="{{ route('fulldonhangs.create') }}" class="li-button li-button-fullwidth">
+                                        <a
+                                         {{-- href="{{ route('fulldonhangs.create') }}"  --}}
+                                         class="li-button li-button-fullwidth">
                                             <span>Checkout</span>
                                         </a>
                                     </div>
@@ -159,9 +164,13 @@
                     <div class="hb-menu">
                         <nav style="display: block;">
                             <ul>
-                                <li class="dropdown-holder"><a href="{{route('index')}}">Home</a>
+                                <li class="dropdown-holder">
+                                    {{-- <a href="{{route('index')}}"> --}}
+                                        Home</a>
                                 </li>
-                                <li class="megamenu-holder"><a href="{{route('filter')}}">Shop</a>
+                                <li class="megamenu-holder">
+                                    {{-- <a href="{{route('filter')}}"> --}}
+                                        Shop</a>
                                     <ul class="megamenu hb-megamenu">
                                         @foreach ($danhMuc as $item)
                                             <li><a href="">{{ $item->ten_danh_muc }}</a>
@@ -174,7 +183,9 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="{{route('contact')}}">Contact</a></li>
+                                <li>
+                                    {{-- <a href="{{route('contact')}}"> --}}
+                                    Contact</a></li>
                             </ul>
                         </nav>
                     </div>

@@ -57,10 +57,17 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li>
+                                                                <form action="{{ route('whitelist.add', $item->id) }}" method="POST">
+                                                                    @csrf
+                                                                    <button type="submit" class="links-details">
+                                                                        <i class="fa fa-heart-o"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
                                                             <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
-                                                    </div>
+                                                    </div>                                                    
                                                 </div>
                                             </div>
                                             <!-- single-product-wrap end -->
@@ -110,7 +117,7 @@
                                                     </div>
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
-                                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a class="links-details" href=""><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                     </div>

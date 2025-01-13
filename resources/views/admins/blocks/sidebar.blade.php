@@ -77,14 +77,18 @@
 
                 </li>
                 <li>
-                    <a class='tp-link' href='{{ route('admins.banners.index') }}'>
+                    <a class='tp-link' 
+                    {{-- href='{{ route('admins.banners.index') }}' --}}
+                    >
                         <i data-feather="users"></i>
                             <span> Quản lý Banner </span>
                     </a>
 
                 </li>
                 <li>
-                    <a class='tp-link' href='{{ route('admins.binhluans.index') }}'>
+                    <a class='tp-link' 
+                    {{-- href='{{ route('admins.binhluans.index') }}' --}}
+                    >
                         <i data-feather="package"></i>
                             <span>Bình Luận</span>
                     </a>

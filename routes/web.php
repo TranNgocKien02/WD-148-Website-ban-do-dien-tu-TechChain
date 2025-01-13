@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\Client\LienHeController;
 use App\Http\Controllers\client\UserController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\WhitelistController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -98,6 +99,15 @@ Route::post('/cart/update',         [CartController::class, 'updateCart'])->name
 Route::delete('{cart}/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/binh-luan', [BinhLuanController::class, 'store'])->middleware('auth')->name('binh-luan.store');
 
+// whitelist
+Route::middleware('auth')->group(function () {
+    Route::post('/whitelist/add/{productId}', [WhitelistController::class, 'addToWhitelist'])->name('whitelist.add');
+    // Route::post('/whitelist/removeAll', [WhitelistController::class, 'removeAllFromWhitelist'])->name('whitelist.removeAll');
+    // Route::delete('/whitelist/remove/{productId}', [WhitelistController::class, 'destroy'])->name('whitelist.remove');
+    Route::delete('/whitelist/{id}', [WhitelistController::class, 'destroy'])->name('whitelist.remove');
+    Route::get('whitelist', [WhitelistController::class, 'index'])->name('whitelist.index');
+
+});
 
 Route::middleware('auth')->prefix('donhangs')
     ->as('donhangs.')
