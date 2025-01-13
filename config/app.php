@@ -196,6 +196,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+
     ],
 
     /*
@@ -208,10 +209,9 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
+'aliases' => Facade::defaultAliases()->merge([
+    'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+])->toArray(),
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
-        
-    ])->toArray(),
 
 ];
