@@ -63,4 +63,13 @@ class User extends Authenticatable
     public function donHang(){
         return $this->hasMany(DonHang::class) ;
     }
+    // Liên kết với bình luận
+    public function binhLuans()
+    {
+        return $this->hasMany(BinhLuan::class, 'user_id');
+    }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
 }

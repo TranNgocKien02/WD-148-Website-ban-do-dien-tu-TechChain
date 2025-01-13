@@ -17,10 +17,19 @@ class HangController extends Controller
     public function index()
     {
         $title = "Hãng sản phẩm";
+        $listDanhMuc = DanhMuc::all();
+        $danhMuc = request('danh_muc'); // Hoặc dùng $_GET['trang_thai'] nếu cần
 
-        $listHang = Hang::with('danhMuc')->get();
+        $query = Hang::query();
 
-        return view('admins.hangs.index', compact('title', 'listHang'));
+        if ($danhMuc) {
+            $query->where('danh_muc_id', $danhMuc);
+        }
+
+
+
+        $listHang = $query->orderByDesc('id')->get();
+        return view('admins.hangs.index', compact('title', 'listHang', 'listDanhMuc'));
 
     }
 
@@ -67,9 +76,11 @@ class HangController extends Controller
      */
     public function edit(Hang $hang)
     {
+
         $title = "Sửa sản phẩm";
-        $listHang = Hang::get();
-        return view('admins.hangs.edit', compact('title', 'hang', 'listHang'));
+        $listDanhMuc = DanhMuc::query()->get();
+
+        return view('admins.hangs.edit', compact('title', 'hang', 'listDanhMuc'));
     }
 
     /**

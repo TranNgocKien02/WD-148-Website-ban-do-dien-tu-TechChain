@@ -24,7 +24,7 @@
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">cart</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
                                 </ul>
                             </nav>
                         </div>
@@ -53,12 +53,12 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="pro-thumbnail">Thumbnail</th>
-                                                <th class="pro-title">Product</th>
-                                                <th class="pro-price">Price</th>
-                                                <th class="pro-quantity">Quantity</th>
-                                                <th class="pro-subtotal">Total</th>
-                                                <th class="pro-remove">Remove</th>
+                                                <th class="pro-thumbnail">Ảnh sản phẩm</th>
+                                                <th class="pro-title">Sản phẩm</th>
+                                                <th class="pro-price">Giá</th>
+                                                <th class="pro-quantity">Số lượng</th>
+                                                <th class="pro-subtotal">Tổng</th>
+                                                <th class="pro-remove">Xóa sản phẩm</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -71,8 +71,11 @@
                                                         <input type="hidden" name="cart[{{ $key }}][hinh_anh]" value="{{ $item['hinh_anh'] }}">
                                                     </td>
                                                     <td class="pro-title">
-                                                        <a href="{{ route('product-detail', $key) }}" class="tm-cart-productname">{{ $item['ten_san_pham'] }}</a>
+                                                        <a href="{{ route('product-detail', $key) }}" class="tm-cart-productname">{{ $item['ten_san_pham'] }}</a><br>
+                                                        <a href="{{ route('product-detail', $key) }}" class="tm-cart-productname">{{ $item['dung_luong'] }},{{ $item['mau_sac'] }}</a>
                                                         <input type="hidden" name="cart[{{ $key }}][ten_san_pham]" value="{{ $item['ten_san_pham'] }}">
+                                                        <input type="hidden" name="cart[{{ $key }}][dung_luong]" value="{{ $item['dung_luong'] }}">
+                                                        <input type="hidden" name="cart[{{ $key }}][mau_sac]" value="{{ $item['mau_sac'] }}">
                                                     </td>
                                         
                                                     <td class="pro-price">
@@ -116,7 +119,7 @@
 
                                     
                                     <div class="cart-update">
-                                        <button type="submit" class="btn btn-sqr">Update Cart</button>
+                                        <button type="submit" class="btn btn-sqr">Cập nhật giỏ hàng</button>
                                     </div>
                                 </div>
                             </form>
@@ -127,8 +130,8 @@
                                         <div class="apply-coupon-wrapper">
                                             <div class="coupon-all">
                                                 <div class="coupon">
-                                                    <input id="coupon_code" class="input-text" name="coupon_code" placeholder="Coupon code" type="text">
-                                                    <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
+                                                    <input id="coupon_code" class="input-text" name="coupon_code" placeholder="mã giảm giá" type="text">
+                                                    <input class="button" name="apply_coupon" value="Thêm voucher" type="submit">
                                                 </div>
                                             </div>
                                         </div>
@@ -152,17 +155,17 @@
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
-                                    <h6>Cart Totals</h6>
+                                    <h6>Tổng đơn hàng</h6>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
-                                                <td>Sub Total</td>
+                                                <td>Tổng sản phẩm</td>
                                                 <td>
                                                     {{ number_format($subTotal, 0, '', '.') }}đ
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Shipping</td>
+                                                <td>Vận chuyển</td>
                                                 <td>
                                                     {{ number_format($shipping,  0, '', '.') }}đ
                                                 </td>
@@ -176,7 +179,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="total">
-                                                <td>Total</td>
+                                                <td>Tổng</td>
                                                 <td>
                                                     {{ number_format($total,  0, '', '.') }}đ
                                                 </td>
@@ -195,7 +198,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="{{ route('donhangs.create') }}" class="btn btn-sqr d-block">Proceed Checkout</a>
+                                <a href="{{ route('donhangs.create') }}" class="btn btn-warning ">Tiến hành thanh toán</a>
                             </div>
                         </div>
                     </div>

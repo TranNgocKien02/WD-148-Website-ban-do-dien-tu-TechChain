@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ThongTinTrangWebController;
 use Illuminate\Support\Facades\Route;
@@ -142,6 +143,15 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admins')
                 Route::put('{id}/update', [TaiKhoanController::class, 'update'])->name('update'); // Update account
                 Route::delete('{id}/destroy', [TaiKhoanController::class, 'destroy'])->name('destroy'); // Delete account
             });
+
+    Route::prefix('binhluans')
+    ->as('binhluans.')
+    ->group(function () {
+        Route::get('/', [BinhLuanController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [BinhLuanController::class, 'show'])->name('show');
+
+        Route::delete('{id}/destroy', [BinhLuanController::class, 'destroy'])->name('destroy');
+    });
 
     // Route::get('/', [ThongTinTrangWebController::class, 'index'])->name('index'); // Display info
     // Route::post('/update', [ThongTinTrangWebController::class, 'update'])->name('update'); // Update info

@@ -1,0 +1,354 @@
+[33mcommit 6e46e1aabfa4f10ebdff11b3b103adc46d8cc0ae[m[33m ([m[1;36mHEAD -> [m[1;32mkien_dev[m[33m)[m
+Merge: 971570c e472609
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Wed Jan 8 11:07:27 2025 +0700
+
+    giai quyet xxung dot tu main
+
+[33mcommit 971570c220f68ef4413372ce86acdccaf792dceb[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Wed Jan 8 10:16:40 2025 +0700
+
+    commit main
+
+[33mcommit e4726093bf7c51a536cfbea7644a4be3789bf8c0[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: mynhle <130372152+mynhle@users.noreply.github.com>
+Date:   Wed Jan 8 09:58:25 2025 +0700
+
+    Mới nhất
+
+[33mcommit 9297e653dac23f1d308585b1d7ec2e8d027e4642[m
+Merge: 5522c53 2bd5ea9
+Author: mynhle <130372152+mynhle@users.noreply.github.com>
+Date:   Tue Jan 7 22:10:24 2025 +0700
+
+    Code mới
+
+[33mcommit 2bd5ea9774b5a139962fded6b89e5b35528f86c1[m
+Merge: e47e6f3 a18f548
+Author: mynhle <130372152+mynhle@users.noreply.github.com>
+Date:   Tue Jan 7 21:34:22 2025 +0700
+
+    Merge pull request #13 from TranNgocKien02/le_minh_dev
+    
+    Le minh dev
+
+[33mcommit 5522c5394113ef8f086b417520cbb15e3d9e7079[m[33m ([m[1;31morigin/le_minh_dev2[m[33m)[m
+Author: mynhle <130372152+mynhle@users.noreply.github.com>
+Date:   Tue Jan 7 21:14:42 2025 +0700
+
+    Mới
+
+[33mcommit ce36ad95485809a87efdf40db7eae24a4c0ab75b[m
+Author: mynhle <130372152+mynhle@users.noreply.github.com>
+Date:   Thu Dec 26 11:46:09 2024 +0700
+
+    bien the
+
+[33mcommit e47e6f344afc6f75cb6236d7c1ea745ffe41bbca[m[33m ([m[1;31morigin/le_minh2_dev[m[33m, [m[1;32mmain[m[33m)[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Sun Dec 22 09:39:06 2024 +0700
+
+    fit dang ky
+
+[33mcommit a18f5480945cfd5e95bd71c146528a4bd13cfff7[m
+Merge: ce79778 fc5807a
+Author: mynhle <130372152+mynhle@users.noreply.github.com>
+Date:   Sat Dec 21 22:47:39 2024 +0700
+
+    chuyển nhánh
+
+[33mcommit fc5807a59d65c29f01def7a0693c838480361fc6[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Sat Dec 21 15:08:31 2024 +0700
+
+    fit danh muc
+
+[33mcommit 94ae2d44305098eed4b02dc5c501e8423e1532ce[m
+Merge: 3a92e2c 675a8c9
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Sat Dec 21 09:36:54 2024 +0700
+
+    Merge pull request #12 from TranNgocKien02/duong_dev
+    
+    Duong dev
+
+[33mcommit 675a8c94cccbfd9b421f4e3ccfb86b3ad29c0031[m[33m ([m[1;31morigin/duong_dev[m[33m, [m[1;32mduong_dev[m[33m)[m
+Merge: 97f97c8 3a92e2c
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Sat Dec 21 09:23:31 2024 +0700
+
+    code mới
+
+[33mcommit 97f97c8c44573580177c362d9e392763e75955d4[m
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Wed Dec 4 22:23:14 2024 +0700
+
+    Update AuthController
+
+[33mcommit ce7977896d2bb91d7412b58f7be700a542fee7f3[m
+Author: minh33490 <minh333490@gmail.com>
+Date:   Thu Nov 28 20:47:34 2024 +0700
+
+    Thay đổi layout email contact
+
+[33mcommit 3a92e2c77383fd698325a298edd59a9206968b01[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Tue Nov 26 18:22:53 2024 +0700
+
+    update and fix all file
+
+[33mcommit 1cacc6dfd927b490443ee111d45ae97151521c9b[m
+Merge: 6de7a84 b34b9f8
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Fri Nov 22 09:19:03 2024 +0700
+
+    update merge all file
+
+[33mcommit b34b9f89cf7aa97efe86837cb6c1983415091b5c[m
+Merge: e996203 ddc3a3a
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Tue Nov 19 17:10:08 2024 +0700
+
+    Merge pull request #11 from TranNgocKien02/duong_dev
+    
+    Duong dev
+
+[33mcommit ddc3a3ad1ecbe13fafa1f0b2e3ec6e94c39cbd97[m
+Merge: 1c21404 fa8bc58
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Tue Nov 19 12:27:38 2024 +0700
+
+    Đã giải quyết xung đột
+
+[33mcommit 1c21404bbd70881069e43a79c4ffc79d512c1f4b[m
+Merge: 53924f8 092885d
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Tue Nov 19 12:20:35 2024 +0700
+
+    code mới
+
+[33mcommit 6de7a847857def588ed4180e521acec58cb8cc54[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Mon Nov 18 15:48:30 2024 +0700
+
+    update file main
+
+[33mcommit b34beb5290020d4ddb06e1a29fc4f333776b3c0f[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Mon Nov 11 16:30:12 2024 +0700
+
+    Lưu lại các thay đổi cục bộ trước khi pull
+
+[33mcommit e996203e15ca858d42b744832809c44bc4294196[m
+Merge: 0c0056c fa8bc58
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Mon Nov 18 15:39:42 2024 +0700
+
+    Merge pull request #9 from TranNgocKien02/duong_dev
+    
+    Duong dev
+
+[33mcommit fa8bc58be730b9a963dbfba373eb40bf1b6720d0[m
+Merge: be210f2 0c0056c
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Mon Nov 18 15:38:31 2024 +0700
+
+    Merge branch 'main' of https://github.com/TranNgocKien02/WD-148-Website-ban-do-dien-tu-TechChain into duong_dev
+
+[33mcommit be210f21d5d49e9fce3d166b8950a30b18a0c6d2[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Mon Nov 18 15:29:03 2024 +0700
+
+    ok
+    
+    commit
+
+[33mcommit 0c0056ca895cb2f4a9131779a9b22792df00b641[m
+Merge: c0b453f cc1c207
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Mon Nov 18 15:18:15 2024 +0700
+
+    Merge pull request #8 from TranNgocKien02/kien_dev
+    
+    Kien dev
+
+[33mcommit cc1c20751b0b0a92d5b12dcd318f99a42811aa3f[m[33m ([m[1;31morigin/kien_dev[m[33m)[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Mon Nov 18 15:01:41 2024 +0700
+
+    Thông điệp mô tả commit của bạn
+
+[33mcommit 092885d320713f1832e278d66985700269abd05f[m
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Sat Nov 16 16:45:38 2024 +0700
+
+    Thông điệp mô tả commit của bạn
+
+[33mcommit 98750366af423f88b422a8218b5bc925b95cb666[m
+Author: minh33490 <minh333490@gmail.com>
+Date:   Sat Nov 16 01:25:24 2024 +0700
+
+    Contact and Response
+
+[33mcommit 67edeb6c3afbbadd71a999ac4128fa58c218f868[m
+Author: minh33490 <minh333490@gmail.com>
+Date:   Thu Nov 14 01:29:29 2024 +0700
+
+    Mô tả thay đổi của bạn
+
+[33mcommit 3d4e30940cb269026d902c7641b25e30e19d3e8e[m
+Merge: bbe77b2 db1b928
+Author: minh33490 <minh333490@gmail.com>
+Date:   Wed Nov 13 21:40:51 2024 +0700
+
+    Merge branch 'le_minh_dev' of https://github.com/TranNgocKien02/WD-148-Website-ban-do-dien-tu-TechChain into le_minh_dev
+
+[33mcommit bbe77b28700acdb854b52f83f82611d3667f7672[m
+Author: minh33490 <minh333490@gmail.com>
+Date:   Wed Nov 13 21:34:14 2024 +0700
+
+    Quản lý banner
+
+[33mcommit 53924f8044fbd2c0015c6da3ffe16d1b533d9aac[m
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Tue Nov 12 18:08:19 2024 +0700
+
+    Cập nhật quên mật khẩu Hoàn Chỉnh - Ok luôn một phát ăn ngay
+
+[33mcommit c0b453f7d5bde05972e46d7a1a26795f35fa152a[m
+Merge: 42c9a8c db1b928
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Mon Nov 11 16:13:18 2024 +0700
+
+    Merge pull request #6 from TranNgocKien02/le_minh_dev
+    
+    Merge pull request #5 from TranNgocKien02/main
+
+[33mcommit db1b92827c20615042a9c63270c198964d3eff0a[m
+Merge: 19a83ae 42c9a8c
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Mon Nov 11 16:12:38 2024 +0700
+
+    Merge pull request #5 from TranNgocKien02/main
+    
+    Merge pull request #3 from TranNgocKien02/le_minh_dev
+
+[33mcommit 42c9a8cb8b765fd1eabbe478531f9c087555469a[m
+Merge: c77ea7e 19a83ae
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Sun Nov 10 21:15:28 2024 +0700
+
+    Merge pull request #3 from TranNgocKien02/le_minh_dev
+    
+    LeMinh28/10
+
+[33mcommit 19a83ae760101eaa43e8f95fec288d2a560320ba[m
+Merge: ce13392 c77ea7e
+Author: TranNgocKien02 <kientnph41341@fpt.edu.vn>
+Date:   Sun Nov 10 21:08:02 2024 +0700
+
+    le_minh_dev
+
+[33mcommit fe7adca6b9fc0d8ab868fbd282602474281cf7dd[m
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Fri Nov 8 21:31:26 2024 +0700
+
+    đẩy code quản lý chức năng khuyến mãi/Admin
+
+[33mcommit c77ea7e2693b56052c793094a9cbb18a94017926[m
+Merge: c73ada1 853bbbb
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Fri Nov 8 16:08:52 2024 +0700
+
+    Merge pull request #4 from TranNgocKien02/hau_dev
+    
+    xây dựng chức năng quản lý thông tin cá nhân
+
+[33mcommit 853bbbb548a345a8ea720049ff8949d5bc997924[m
+Merge: dbef905 c73ada1
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Fri Nov 8 16:08:44 2024 +0700
+
+    Merge branch 'main' into hau_dev
+
+[33mcommit c73ada1821761489314dee8ea10bd873089dd61d[m
+Merge: 5b7116b 7e283f2
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Fri Nov 8 14:53:26 2024 +0700
+
+    Merge pull request #1 from TranNgocKien02/duong_dev
+    
+    Duong dev
+
+[33mcommit 7e283f260b1cd0e28ae50a7e83b3c14bbbb4bdf2[m
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Fri Nov 8 10:35:00 2024 +0700
+
+    code Quên mật khẩu
+
+[33mcommit 777b1b21e66199025282904588ecb2317714fd58[m
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Thu Nov 7 12:56:31 2024 +0700
+
+    đẩy code quản lý thông tin trang web và quản lý phân quyền tài khoản admin
+
+[33mcommit ce13392d6d14304ec1b1944f474eb0a321be75d7[m
+Author: minh33490 <minh333490@gmail.com>
+Date:   Mon Oct 28 19:14:03 2024 +0700
+
+    LeMinh28/10
+
+[33mcommit 49edbdf7d55fc966876a69d49ef7f3469d0cb248[m
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Sat Oct 26 12:55:06 2024 +0700
+
+    Cập nhật chức năng báo cáo thống kê
+
+[33mcommit 8106b47a39b62f01c8b820bbbcf80c5da59e8cfc[m
+Author: duonglmph41308 <duongluong2k4@gmail.com>
+Date:   Sat Oct 26 12:33:21 2024 +0700
+
+    Cập nhật chức năng báo cáo thống kê
+
+[33mcommit dbef9055cb7dcc07d1c29c34a05f27eaa76b1bec[m
+Author: DODUYHAU2004 <hdo25389@gmail.com>
+Date:   Fri Oct 25 20:40:52 2024 +0700
+
+    xây dựng chức năng quản lý thông tin cá nhân
+
+[33mcommit 5b7116b44d4921efbbdcd469e0f5e36f26e90607[m[33m ([m[1;31morigin/vu_minh_dev[m[33m, [m[1;31morigin/dat_dev[m[33m)[m
+Author: TranNgocKien02 <127102227+TranNgocKien02@users.noreply.github.com>
+Date:   Mon Oct 21 15:22:21 2024 +0700
+
+    Add files via upload
+
+[33mcommit eacbe5eb8cd0948fa70edf8987c397003b8637ee[m
+Author: kientnph41341 <kientnph41341@fpt.edu.vn>
+Date:   Mon Oct 21 15:14:34 2024 +0700
+
+    first commit
+
+[33mcommit 46d45005b66d98c6bb294ccff6279fad4ff29afa[m
+Author: kientnph41341 <kientnph41341@fpt.edu.vn>
+Date:   Mon Aug 5 20:06:00 2024 +0700
+
+    Thông điệp commit
+
+[33mcommit c20e94994357f907a8a99690ce962e7307225ff0[m
+Author: kientnph41341 <kientnph41341@fpt.edu.vn>
+Date:   Sun Jul 21 15:41:42 2024 +0700
+
+    Thông điệp commit của bạn
+
+[33mcommit c9882b15918879837eb7c1a700c6ed1a7cad4376[m
+Author: kientnph41341 <kientnph41341@fpt.edu.vn>
+Date:   Sat Jul 20 13:23:30 2024 +0700
+
+    first commit
+
+[33mcommit 031421b14e4b92a7aa4e4daadc55f8bc4a87f1a6[m
+Author: kientnph41341 <kientnph41341@fpt.edu.vn>
+Date:   Sat Jul 20 13:21:30 2024 +0700
+
+    Thông điệp commit

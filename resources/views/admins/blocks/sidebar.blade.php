@@ -24,42 +24,17 @@
             </div>
 
             <ul id="side-menu">
-
-                <li class="menu-title">Quản trị </li>
-
                 <li>
                     <a class='tp-link' href='{{ route('admins.dashboard') }}'>
-                        <i data-feather="home"></i>
+                        <i data-feather="package"></i>
                             <span> Dashboard </span>
                     </a>
-                </li>
-
-                <li>
-                    <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
-
-                        <i data-feather="users"></i>
-                            <span> Quản lý tài khoản </span>
-                    </a>
 
                 </li>
 
-                <li>
-                    <a class='tp-link' href='{{ route('admins.thongtintrangwebs.index') }}'>
-                        <i data-feather="users"></i>
-                            <span> Quản lý thông tin </span>
-                    </a>
-
-                </li>
     
                 <li class="menu-title">Kinh doanh </li>
-
-                <li>
-                    <a class='tp-link' href='{{ route('admins.danhmucs.index') }}'>
-                        <i data-feather="align-center"></i>
-                            <span> Doanh mục sản phẩm </span>
-                    </a>
-                </li>
-
+                
                 <li>
                     <a class='tp-link' href='{{ route('admins.sanphams.index') }}'>
                         <i data-feather="package"></i>
@@ -67,6 +42,13 @@
                     </a>
 
                 </li>
+                <li>
+                    <a class='tp-link' href='{{ route('admins.danhmucs.index') }}'>
+                        <i data-feather="align-center"></i>
+                            <span> Doanh mục sản phẩm </span>
+                    </a>
+                </li>
+
                 <li>
                     <a class='tp-link' href='{{ route('admins.donhangs.index') }}'>
                         <i data-feather="package"></i>
@@ -102,12 +84,39 @@
 
                 </li>
                 <li>
+                    <a class='tp-link' href='{{ route('admins.binhluans.index') }}'>
+                        <i data-feather="package"></i>
+                            <span>Bình Luận</span>
+                    </a>
+
+                </li>
+                <li>
                     <a class='tp-link' href='{{ route('admins.lienhes.index') }}'>
                         <i data-feather="package"></i>
                             <span>Liên Hệ</span>
                     </a>
 
                 </li>
+
+                                <li class="menu-title">Quản trị </li>
+
+                <li>
+                    <a class='tp-link' href='{{ route('admins.khachhangs.index') }}'>
+
+                        <i data-feather="users"></i>
+                            <span> Quản lý tài khoản </span>
+                    </a>
+
+                </li>
+
+                <li>
+                    <a class='tp-link' href='{{ route('admins.thongtintrangwebs.index') }}'>
+                        <i data-feather="users"></i>
+                            <span> Quản lý thông tin </span>
+                    </a>
+
+                </li>
+
             </ul>
 
         </div>

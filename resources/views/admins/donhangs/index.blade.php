@@ -68,6 +68,7 @@
 
                                     <div class="col-md-4 mb-2">
                                         <button type="submit" class="btn btn-primary">Lọc</button>
+                                        <a href="{{ route('admins.donhangs.index') }}" class="btn btn-secondary">Clear</a>
                                     </div>
                                 </div>
                             </form>

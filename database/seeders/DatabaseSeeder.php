@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i < 5; $i++) {
             $tenDanhMuc = fake()->words(2, true);
-            $hinhAnh = 'https://picsum.photos/750/530?random=' . rand(1, 1000); 
+            $hinhAnh = ''; 
             DanhMuc::query()->create([
                 'hinh_anh' => $hinhAnh,
                 'ten_danh_muc' => $tenDanhMuc,
@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $tenSanPham = fake()->words(3, true);
             $maSanPham = Str::upper(Str::random(8));
-            $hinhAnh = 'https://picsum.photos/750/530?random=' . rand(1, 1000); 
+            $hinhAnh = ''; 
 
             SanPham::query()->create([
                 'ma_san_pham' => $maSanPham,

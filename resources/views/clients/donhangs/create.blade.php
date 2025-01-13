@@ -40,7 +40,7 @@
                 <!-- Checkout Billing Details -->
                 <div class="col-lg-6">
                     <div class="checkout-billing-details-wrap">
-                        <h5 class="checkout-title">Billing Details</h5>
+                        <h5 class="checkout-title">Chi tiết thanh toán</h5>
                         <div class="billing-form-wrap">
                         
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -87,15 +87,15 @@
                 <!-- Order Summary Details -->
                 <div class="col-lg-6">
                     <div class="order-summary-details">
-                        <h5 class="checkout-title">Your Order Summary</h5>
+                        <h5 class="checkout-title">Đơn hàng của bạn</h5>
                         <div class="order-summary-content">
                             <!-- Order Summary Table -->
                             <div class="order-summary-table table-responsive text-center">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Products</th>
-                                            <th>Total</th>
+                                            <th>Sản phẩm</th>
+                                            <th>Tổng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -103,29 +103,33 @@
                                             <tr>
                                                 <td>
                                                     <a href="{{ route('product-detail', $key) }}">
-                                                        {{ $item['ten_san_pham'] }} <strong>x [{{ $item['so_luong'] }}]</strong>
+                                                        {{ $item['ten_san_pham'] }} <strong>x [{{ $item['so_luong'] }}]
+                                                            ({{ $item['dung_luong'] }},{{ $item['mau_sac'] }})
+                                                        </strong>
                                                     </a>
                                                 </td>
                                                 <td>
                                                     @php
-                                                        $gia_hien_thi = $item['gia_khuyen_mai'] ?? $item['gia'];
+                                                        $gia_hien_thi = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
                                                         $tong_gia = $gia_hien_thi * $item['so_luong'];
                                                     @endphp
-                                                    {{ number_format($tong_gia, 0, '', '.') }}đ
+                                                    {{ number_format($gia_hien_thi, 0, '', '.') }}đ
                                                 </td>
                                             </tr>
                                         @endforeach
-                                    </tbody>
+                                    </tbody> 
                                     <tfoot>
                                         <tr>
-                                            <td>Sub Total</td>
+                                            <td>Tổng sản phẩm</td>
                                             <td>
-                                                <strong>{{ number_format($subTotal, 0, '', '.') }}đ</strong>
-                                                <input type="hidden" name="tien_hang" value="{{$subTotal}}">
+                                                <strong>{{ number_format($subtotal, 0, '', '.') }}đ</strong>
+                                                <input type="hidden" name="tien_hang" value="{{$subtotal}}">
+                                                <input type="hidden" name="dung_luong" value="{{$item['dung_luong']}}">
+                                                <input type="hidden" name="mau_sac" value="{{ $item['mau_sac']}}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Shipping</td>
+                                            <td>Phí vận chuyển</td>
                                             <td><strong>{{ number_format($shipping, 0, '', '.') }}đ</strong>
                                                 <input type="hidden" name="tien_ship" value="{{$shipping}}">
                                             
@@ -133,14 +137,14 @@
                                         </tr>
                                         @if($coupon > 0)
                                         <tr>
-                                            <td>Coupon Discount</td>
+                                            <td>Phiếu giảm giá</td>
                                             <td><strong>-{{ number_format($coupon, 0, '', '.') }}đ</strong>
                                                 <input type="hidden" name="tien_khuyen_mai" value="{{$coupon}}">
                                             </td>
                                         </tr>
                                         @endif
                                         <tr>
-                                            <td>Total</td>
+                                            <td>Tổng đơn hàng</td>
                                             <td><strong>{{ number_format($total, 0, '', '.') }}đ</strong>
                                                 <input type="hidden" name="tong_tien" value="{{$coupon}}">
                                             </td>
@@ -180,7 +184,7 @@
                                     <!-- Chi tiết khi chọn COD -->
                                     <div id="cod-details" class="payment-method-details summary-footer-area">
                                         <p>Thanh toán bằng tiền mặt khi giao hàng.</p>
-                                        <button type="submit" class="btn btn-sqr mt-2">Place Order</button>
+                                        <button type="submit" class="btn btn-warning mt-2">Đặt hàng</button>
                                     </div>
                                     
                                     <!-- Chi tiết khi chọn PayPal -->
@@ -190,18 +194,13 @@
                                             <!-- PayPal button sẽ được tích hợp vào đây -->
                                         </div>
                                         <!-- Nút Đặt hàng, ban đầu sẽ bị ẩn -->
-                                        <button type="submit" id="place-order-btn" class="btn btn-sqr mt-2" style="display: none;">Place Order</button>
+                                        <button type="submit" id="place-order-btn" class="btn btn-sqr mt-2" style="display: none;">Đặt hàng</button>
 
                                     </div>
                                 </div>
-                                
-                                
-                                
-                                
-{{--                             
-                                <div class="summary-footer-area">
+                                {{-- <div class="summary-footer-area">
                                     <button type="submit" class="btn btn-sqr">Place Order</button>
-                                </div> --}}
+                                </div>  --}}
                            
                             
                         </div>
@@ -226,23 +225,29 @@
 <!-- Thêm PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AbwlofImYY9g_g3EKi4Hx5ela-htKEt2Q9ZXXOcng8O3xteVQ_RM94T9axkKHesAQtcayGfz2eus3x_l&components=buttons"></script>
 <script>
-    // Sự kiện khi chọn phương thức thanh toán
-    document.getElementById('payment-method').addEventListener('change', function () {
-        const selectedMethod = this.value;
-        const codDetails = document.getElementById('cod-details');
-        const paypalDetails = document.getElementById('paypal-details');
-        const placeOrderButton = document.getElementById('place-order-btn'); // Nút Đặt hàng
+ document.getElementById('payment-method').addEventListener('change', function () {
+    const selectedMethod = this.value;
+    const codDetails = document.getElementById('cod-details');
+    const paypalDetails = document.getElementById('paypal-details');
+    const placeOrderButton = document.getElementById('place-order-btn'); // Nút Đặt hàng
+    const paypalBox = document.getElementById('paypal-box'); // Div chứa nút PayPal
 
-        if (selectedMethod === 'cod') {
-            codDetails.style.display = 'block';
-            paypalDetails.style.display = 'none';
-            placeOrderButton.style.display = 'none'; // Ẩn nút đặt hàng khi chọn COD
-        } else if (selectedMethod === 'paypal') {
-            codDetails.style.display = 'none';
-            paypalDetails.style.display = 'block';
-            placeOrderButton.style.display = 'none'; // Ẩn nút đặt hàng khi chọn PayPal
+    // Kiểm tra xem nút PayPal đã được khởi tạo chưa
+    const paypalButtonInitialized = paypalBox.querySelector('.paypal-button-container') !== null;
 
-            // Khởi tạo nút PayPal sau khi chọn PayPal
+    if (selectedMethod === 'cod') {
+        // Hiển thị chi tiết COD, ẩn PayPal và nút Đặt hàng
+        codDetails.style.display = 'block';
+        paypalDetails.style.display = 'none';
+        placeOrderButton.style.display = 'none'; // Ẩn nút đặt hàng khi chọn COD
+    } else if (selectedMethod === 'paypal') {
+        // Hiển thị chi tiết PayPal, ẩn COD và nút Đặt hàng
+        codDetails.style.display = 'none';
+        paypalDetails.style.display = 'block';
+        placeOrderButton.style.display = 'none'; // Ẩn nút đặt hàng khi chọn PayPal
+
+        // Chỉ khởi tạo nút PayPal nếu chưa được khởi tạo
+        if (!paypalButtonInitialized) {
             paypal.Buttons({
                 createOrder: function (data, actions) {
                     return actions.order.create({
@@ -266,7 +271,11 @@
                 }
             }).render('#paypal-box'); // Hiển thị nút PayPal trong div #paypal-box
         }
-    });
+    }
+});
+
+
+
 </script>
 
 

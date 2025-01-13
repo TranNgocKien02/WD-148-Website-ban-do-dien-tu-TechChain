@@ -35,6 +35,27 @@
                         </div><!-- end card header -->
 
                         <div class="card-body">
+                            <form method="GET" action="{{ route('admins.hangs.index') }}">
+                                @csrf
+                                <div class="row">
+
+                                    <div class="col-md-2 mb-2">
+                                        <select name="danh_muc" class="form-select">
+                                            <option value="">All - Danh Mục</option>
+                                            @foreach ($listDanhMuc as $item)
+                                                <option value="{{ $item->id }}" {{ request('danh_muc') == $item->id ? 'selected' : '' }}>
+                                                    {{ $item->ten_danh_muc }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4 mb-2">
+                                        <button type="submit" class="btn btn-primary">Lọc</button>
+                                        <a href="{{ route('admins.hangs.index') }}" class="btn btn-secondary">Clear</a>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="table-responsive">
                                 @if (session('success'))
                                     <div class="alert alert-success alert-dismissible fade show">

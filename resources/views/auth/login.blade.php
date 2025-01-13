@@ -7,7 +7,22 @@
 
 
 @section('content')
+{{-- @if(session('user'))
+    <div>
+        <h3>Chào mừng, {{ session('user.name') }}</h3>
+        <p>Email: {{ session('user.email') }}</p>
+        <img src="{{ session('user.avatar') }}" alt="Avatar" style="width: 50px; height: 50px;">
+        <a href="{{ route('logout') }}" class="btn btn-danger">Đăng xuất</a>
+    </div>
+@else
+    <p>Bạn chưa đăng nhập. <a href="{{ route('google.login') }}">Đăng nhập ngay</a></p>
+@endif --}}
 
+    @if(session('alert'))
+        <script type="text/javascript">
+            alert("{{ session('alert') }}");
+        </script>
+    @endif
 
                       <div class="col-lg-12">
                         <div class="card overflow-hidden card-bg-fill galaxy-border-none">
@@ -34,13 +49,13 @@
                                                     </div>
                                                     <div class="carousel-inner text-center text-white-50 pb-5">
                                                         <div class="carousel-item active">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                            <p class="fs-15 fst-italic">" Chào buổi sáng! Khám phá những thiết bị công nghệ tuyệt vời nhất ngay hôm nay tại TechChain. "</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" The theme is really great with an amazing customer support."</p>
+                                                            <p class="fs-15 fst-italic">" Thư giãn cùng TechChain - Đừng bỏ lỡ những ưu đãi đặc biệt chỉ có hôm nay!."</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                            <p class="fs-15 fst-italic">" Không gian yên tĩnh, thời điểm hoàn hảo để chọn sản phẩm ưng ý tại TechChain! "</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -54,8 +69,8 @@
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
                                         <div>
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Velzon.</p>
+                                            <h5 class="text-primary">CHÀO MỪNG BẠN !</h5>
+                                            <p class="text-muted">Đăng nhập để tiếp tục đến E-Smart.</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -63,7 +78,7 @@
                                               @csrf
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email</label>
-                                                    <input type="text" name="email" class="form-control" id="email" placeholder="Enter email" value="{{old('email')}}">
+                                                    <input type="text" name="email" class="form-control" id="email" placeholder="Nhập email" value="{{old('email')}}">
                                                     @error('email')
                                                     <p class="text-danger fs-12 m-0">{{ $message }}</p>
                                                     @enderror
@@ -71,42 +86,52 @@
 
                                                 <div class="mb-3">
                                                     <div class="float-end">
-                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Forgot password?</a>
+                                                        <a href="{{route('password.request')}}" class="text-muted">Quên mật khẩu?</a>
                                                     </div>
-                                                    <label class="form-label" for="password-input">Password</label>
+                                                    <label class="form-label" for="password-input">Mật khẩu </label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" name="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password-input">
+                                                        <input type="password" name="password" class="form-control pe-5 password-input" placeholder="Nhập mật khẩu" id="password-input">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
-                                                    <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                                                    <label class="form-check-label" for="auth-remember-check">Ghi nhớ đăng nhập</label>
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button class="btn btn-success w-100" type="submit">Sign In</button>
+                                                    <button class="btn btn-success w-100" type="submit">Đăng nhập</button>
                                                 </div>
 
                                                 <div class="mt-4 text-center">
                                                     <div class="signin-other-title">
-                                                        <h5 class="fs-13 mb-4 title">Sign In with</h5>
+                                                        <h5 class="fs-13 mb-4 title">Đăng nhập bằng</h5>
                                                     </div>
-
                                                     <div>
-                                                        <button type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></button>
-                                                        <button type="button" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></button>
+                                                        <a href="{{ route('google.login') }}" class="btn btn-danger">
+                                                            <i class="ri-google-fill fs-16"></i> Đăng nhập bằng Google
+                                                        </a>
+                                                    </div>
+                                                    {{-- <div>
+                                                        <a href="{{ route('google.login') }}" class="btn btn-primary">
+                                                            <i class="ri-facebook-fill fs-16"></i> Đăng nhập bằng Google
+                                                        </a>
+                                                    </div> --}}
+
+                                                    {{-- <div>
+                                                        <button href="{{ route('google.login') }}" type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></button>
+                                                        <button href="{{ route('google.login') }}" type="button" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></button>
                                                         <button type="button" class="btn btn-dark btn-icon waves-effect waves-light"><i class="ri-github-fill fs-16"></i></button>
                                                         <button type="button" class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-twitter-fill fs-16"></i></button>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
 
                                             </form>
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Don't have an account ? <a href="{{ route('register') }}" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p>
+                                            <p class="mb-0">Bạn chưa có tài khoản? <a href="{{ route('register') }}" class="fw-semibold text-primary text-decoration-underline"> Đăng ký</a> </p>
                                         </div>
                                     </div>
                                 </div>

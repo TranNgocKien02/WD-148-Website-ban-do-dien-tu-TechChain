@@ -1,6 +1,6 @@
-@extends('clients.layouts.master')
+@extends('layouts.client')
 
-@section('main-content')
+@section('content')
       @include('clients.lienhes.breadcrumb');
       @include('clients.lienhes.content');
 @endsection
