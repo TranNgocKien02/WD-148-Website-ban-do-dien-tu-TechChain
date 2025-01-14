@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    
-<!-- Mirrored from zoyothemes.com/tapeli/html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jul 2024 08:33:02 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
+
+    <!-- Mirrored from zoyothemes.com/tapeli/html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jul 2024 08:33:02 GMT -->
+    <!-- Added by HTTrack -->
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+    <head>
 
         <meta charset="utf-8" />
         <title>@yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc."/>
-        <meta name="author" content="Zoyothemes"/>
+        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
+        <meta name="author" content="Zoyothemes" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- App favicon -->
@@ -21,18 +23,20 @@
 
         <!-- Icons -->
         <link href="{{ asset('assets/admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-        
+
         {{-- biểu đồ hình tronf pie chart --}}
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         @yield('css')
     </head>
 
     <!-- body start -->
+
     <body data-menu-color="light" data-sidebar="default">
 
         <!-- Begin page -->
         <div id="app-layout">
-           
+
 
             <!-- Topbar Start -->
             @include('admins.blocks.header')
@@ -60,24 +64,29 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-14 mb-1">Lưu lượng truy cập trang web</div>
+                                                    <div class="fs-14 mb-1">Lưu lượng truy cập trang web theo ngày</div>
                                                 </div>
-
-                                                <div class="d-flex align-items-baseline mb-2">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">91.6K</div>
-                                                    <div class="me-auto">
-                                                        <span class="text-primary d-inline-flex align-items-center">
-                                                            15%
-                                                            <i data-feather="trending-up" class="ms-1" style="height: 22px; width: 22px;"></i>
-                                                        </span>
+                                                @foreach ($dailyVisits as $visit)
+                                                    <div class="d-flex align-items-baseline mb-2">
+                                                        <div class="fs-22 mb-0 me-2 fw-semibold text-black">
+                                                            {{ \Carbon\Carbon::parse($visit->date)->format('d/m/Y') }}
+                                                        </div>
+                                                        <div class="me-auto">
+                                                            <span class="text-primary d-inline-flex align-items-center">
+                                                                {{ $visit->visits }}
+                                                                <i data-feather="trending-up" class="ms-1"
+                                                                    style="height: 22px; width: 22px;"></i>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div id="website-visitors" class="apex-charts"></div>
+                                                @endforeach
+                                                {{-- <canvas id="trafficChart"></canvas> --}}
+                                                {{-- <div id="website-visitors" class="apex-charts"></div> --}}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-xl-3">
+                                    {{-- <div class="col-md-6 col-xl-3">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
@@ -96,7 +105,7 @@
                                                 <div id="conversion-visitors" class="apex-charts"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-md-6 col-xl-3">
                                         <div class="card">
@@ -104,8 +113,14 @@
                                                 <div class="d-flex align-items-center">
                                                     <div class="fs-14 mb-1">Thời lượng phiên</div>
                                                 </div>
+                                                <p><strong>Tổng số lượt truy cập:</strong> {{ $totalVisits }}</p>
 
-                                                <div class="d-flex align-items-baseline mb-2">
+                                                <p><strong>Dự đoán lưu lượng truy cập:</strong> {{ $estimatedVisits }}
+                                                </p>
+                                                <p><strong>Số người dùng đăng ký trong tháng:</strong>
+                                                    {{ $monthlyUsers }}</p>
+
+                                                {{-- <div class="d-flex align-items-baseline mb-2">
                                                     <div class="fs-22 mb-0 me-2 fw-semibold text-black">90 Giây</div>
                                                     <div class="me-auto">
                                                         <span class="text-success d-inline-flex align-items-center">
@@ -113,8 +128,8 @@
                                                             <i data-feather="trending-up" class="ms-1" style="height: 22px; width: 22px;"></i>
                                                         </span>
                                                     </div>
-                                                </div>
-                                                <div id="session-visitors" class="apex-charts"></div>
+                                                </div> --}}
+                                                {{-- <div id="session-visitors" class="apex-charts"></div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -126,16 +141,20 @@
                                                     <div class="fs-14 mb-1">Người dùng đang hoạt động</div>
                                                 </div>
 
-                                                <div class="d-flex align-items-baseline mb-2">
-                                                    <div class="fs-22 mb-0 me-2 fw-semibold text-black">2,986</div>
-                                                    <div class="me-auto">
-                                                        <span class="text-success d-inline-flex align-items-center">
-                                                            4%
-                                                            <i data-feather="trending-up" class="ms-1" style="height: 22px; width: 22px;"></i>
-                                                        </span>
-                                                    </div>
+                                                <div class="align-items-baseline mb-2">
+                                                    @forelse ($activeUsers as $user)
+                                                        <div class="fs-22 mb-0 me-2 fw-semibold text-black"> </div>
+                                                        <div class="me-auto">
+                                                            <span>{{ $user->name }}</span>
+                                                            <span class="text-success d-inline-flex align-items-center">
+                                                                - Hoạt động lúc:
+                                                                {{ $user->last_active_at->format('H:i:s d/m/Y') }}
+                                                            </span>
+                                                        </div>
+                                                    @empty
+                                                        <li>Không có người dùng nào đang hoạt động</li>
+                                                    @endforelse
                                                 </div>
-                                                <div id="active-users" class="apex-charts"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -147,24 +166,26 @@
                         <div class="row">
                             <div class="col-md-6 col-xl-8">
                                 <div class="card">
-                                    
-                                    <div class="card-header">
+
+                                    {{-- <div class="card-header">
                                         <div class="d-flex align-items-center">
                                             <div class="border border-dark rounded-2 me-2 widget-icons-sections">
                                                 <i data-feather="bar-chart" class="widgets-icons"></i>
                                             </div>
-                                            <h5 class="card-title mb-0">Doanh thu hàng tháng</h5>
+                                            <h5 class="card-title mb-0">Doanh thu </h5>
+                                            
                                         </div>
-                                    </div>
 
-                                    <div class="card-body">
-                                        <div id="monthly-sales" class="apex-charts"></div>
-                                    </div>
-                                    
+
+                                        <div class="card-body" style="width: 80%; margin: auto; padding: 20px;">
+                                            <canvas id="monthlyRevenueChart" width="400" height="200"></canvas>
+
+                                        </div>
+
+                                    </div> --}}
                                 </div>
-                            </div>
 
-                            {{-- <div class="col-md-6 col-xl-4">
+                                {{-- <div class="col-md-6 col-xl-4">
                                 <div class="card overflow-hidden">
 
                                     <div class="card-header">
@@ -264,10 +285,10 @@
 
                                 </div>
                             </div> --}}
-                        </div>
-                        <!-- End Monthly Sales -->
+                            </div>
+                            <!-- End Monthly Sales -->
 
-                        {{-- <div class="row">
+                            {{-- <div class="row">
                             <div class="col-md-6 col-xl-6">
                                 <div class="card">
                                     
@@ -427,40 +448,79 @@
                             </div>
                         </div> --}}
 
-                    </div> <!-- container-fluid -->
-                </div> <!-- content -->
-                @include('admins.blocks.footer')
+                        </div> <!-- container-fluid -->
+                    </div> <!-- content -->
+                    @include('admins.blocks.footer')
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Page content -->
+                <!-- ============================================================== -->
+
             </div>
-<!-- ============================================================== -->
-<!-- End Page content -->
-<!-- ============================================================== -->
+            <!-- END wrapper -->
 
-    </div>
-<!-- END wrapper -->
+            <!-- Vendor -->
+            <script src="{{ asset('assets/admin/libs/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('assets/admin/libs/simplebar/simplebar.min.js') }}"></script>
+            <script src="{{ asset('assets/admin/libs/node-waves/waves.min.js') }}"></script>
+            <script src="{{ asset('assets/admin/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
+            <script src="{{ asset('assets/admin/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
+            <script src="{{ asset('assets/admin/libs/feather-icons/feather.min.js') }}"></script>
 
-<!-- Vendor -->
-<script src="{{ asset('assets/admin/libs/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/simplebar/simplebar.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/node-waves/waves.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/feather-icons/feather.min.js') }}"></script>
+            <!-- Apexcharts JS -->
+            <script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-<!-- Apexcharts JS -->
-<script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script>
+            <!-- for basic area chart -->
+            <script src="{{ asset('assets/admin/stock-prices.js') }}"></script>
 
-<!-- for basic area chart -->
-<script src="{{ asset('assets/admin/stock-prices.js') }}"></script>
+            <!-- Widgets Init Js -->
+            <script src="{{ asset('assets/admin/js/pages/analytics-dashboard.init.js') }}"></script>
 
-        <!-- Widgets Init Js -->
-        <script src="{{ asset('assets/admin/js/pages/analytics-dashboard.init.js') }}"></script>
+            @yield('js')
+            <!-- App js-->
+            <script src="{{ asset('assets/admin/js/app.js') }}"></script>
+            <script>
+                console.log({!! json_encode($labels) !!});
+                console.log({!! json_encode($data) !!});
+                const ctx = document.getElementById('monthlyRevenueChart').getContext('2d');
+                const monthlyRevenueChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode($labels) !!},
+                        datasets: [{
+                            label: 'Doanh thu (VNĐ)',
+                            data: {!! json_encode($data) !!},
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                const ctx = document.getElementById('trafficChart').getContext('2d');
+                const trafficChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {!! json_encode($dailyVisits->pluck('date')) !!},
+                        datasets: [{
+                            label: 'Lượt truy cập',
+                            data: {!! json_encode($dailyVisits->pluck('visits')) !!},
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            fill: false,
+                        }]
+                    }
+                });
+            </script>
+    </body>
 
-@yield('js')
-<!-- App js-->
-<script src="{{ asset('assets/admin/js/app.js') }}"></script>
+    <!-- Mirrored from zoyothemes.com/tapeli/html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jul 2024 08:34:03 GMT -->
 
-</body>
-
-<!-- Mirrored from zoyothemes.com/tapeli/html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Jul 2024 08:34:03 GMT -->
 </html>

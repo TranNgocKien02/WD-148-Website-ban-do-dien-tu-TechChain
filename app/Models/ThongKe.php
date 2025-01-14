@@ -32,4 +32,12 @@ class ThongKe extends Model
     {
         return DonHang::sum('tong_tien');
     }
+    public function doanhThuHangThang()
+    {
+        return DonHang::selectRaw('MONTH(created_at) as month, YEAR(created_at) as year, SUM(tong_tien) as total_revenue')
+            ->groupBy('month', 'year')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get();
+    }
 }

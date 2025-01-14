@@ -30,7 +30,7 @@ class User extends Authenticatable
         'address',
         'password',
         'role',
-
+        'last_active_at',
     ];
 
     /**
@@ -50,6 +50,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_active_at' => 'datetime', // Chuyển đổi sang đối tượng Carbon
     ];
 
     // Mutator để mã hóa mật khẩu khi lưu vào DB
