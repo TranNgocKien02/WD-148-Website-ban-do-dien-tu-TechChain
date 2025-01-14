@@ -59,13 +59,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="mb-3 w-100">
-                                            <label for="product-title-input" class="form-label">Số lượng</label>
-                                            <input type="number" class="form-control @error('so_luong') is-invalid @elseif(old('so_luong')) is-valid @enderror" name="so_luong" value="{{ old('so_luong') }}">
-                                            @error('so_luong')
-                                                <span class="invalid-feedback">{{$message}}</span>
-                                            @enderror
-                                        </div>
                                     <div class="mb-3">
                                         <label class="form-label">Mô tả ngắn</label>
                                         <textarea name="mo_ta_ngan" cols="30" rows="5" class="form-control" >{{ old('mo_ta_ngan')}}</textarea>

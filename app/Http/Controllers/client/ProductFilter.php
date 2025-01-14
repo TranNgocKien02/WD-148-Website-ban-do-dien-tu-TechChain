@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\client;
 
-use App\Http\Controllers\BaseController;
 use App\Models\SanPham;
 use App\Models\BienTheSanPham;
 use App\Models\DanhMuc;
@@ -12,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ProductVariant;
 
-class ProductFilter extends BaseController
+class ProductFilter extends Controller
 {
     /**
      * Hàm lọc sản phẩm theo nhiều tiêu chí.
@@ -20,7 +19,6 @@ class ProductFilter extends BaseController
     public function filter(Request $request)
     {
 
-        $this->shareCartData(); // Gọi phương thức chia sẻ dữ liệu giỏ hàng
         // Lấy dữ liệu bộ lọc từ request
         $filters = $request->input('filters', []);
 

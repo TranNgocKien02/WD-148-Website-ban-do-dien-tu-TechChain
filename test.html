@@ -1,100 +1,50 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Slider Test</title>
-
-    <!-- Thêm Swiper CSS từ CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.5/swiper-bundle.min.css" />
+    <title>Chuyển Giá Trị từ Select sang Input</title>
     <style>
-        .product-slider img,
-        .product-thumbs img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            display: block;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-
-        .product-thumbs {
-            margin-top: 20px;
-        }
-
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: #000;
+        select, input {
+            padding: 10px;
+            margin: 10px 0;
         }
     </style>
 </head>
-
 <body>
 
-    <div class="product-details-left" style="width: 60%; margin: auto;">
-        <!-- Swiper container for main images -->
-        <div class="swiper product-slider">
-            <div class="swiper-wrapper">
-                <!-- Main product image -->
-                <div class="swiper-slide">
-                    <img src="c:\Users\minh3\OneDrive\Hình ảnh\Screen\3.png" alt="product image">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/800x600.png?text=Product+Image+2" alt="product image">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/800x600.png?text=Product+Image+3" alt="product image">
-                </div>
-            </div>
-            <!-- Add navigation buttons -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
+    <h2>Chuyển Giá Trị từ Select sang Input</h2>
 
-        <!-- Swiper container for thumbnail images -->
-        <div class="swiper product-thumbs">
-            <div class="swiper-wrapper">
-                <!-- Thumbnail product image -->
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/100x100.png?text=Thumb+1" alt="product image thumb">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/100x100.png?text=Thumb+2" alt="product image thumb">
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/100x100.png?text=Thumb+3" alt="product image thumb">
-                </div>
-            </div>
-        </div>
-    </div>
+    <select id="select1">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+    </select>
 
-    <!-- Thêm Swiper JS từ CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.5/swiper-bundle.min.js"></script>
+    <input type="text" id="input1" placeholder="Giá trị chọn sẽ hiển thị ở đây" />
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Khởi tạo Swiper cho slider chính
-            var productSlider = new Swiper('.product-slider', {
-                spaceBetween: 10,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                loop: true,
-            });
+        // Lắng nghe sự kiện thay đổi của select1
+        document.getElementById('select1').addEventListener('change', function() {
+            var value = this.value;  // Lấy giá trị của select1
 
-            // Khởi tạo Swiper cho thumbnail slider
-            var productThumbs = new Swiper('.product-thumbs', {
-                spaceBetween: 10,
-                slidesPerView: 4,
-                freeMode: true,
-                watchSlidesProgress: true,
-            });
-
-            // Liên kết slider chính với slider thumbnail
-            productSlider.controller.control = productThumbs;
-            productThumbs.controller.control = productSlider;
+            // Gán giá trị của select1 vào input1
+            document.getElementById('input1').value = value;
         });
-    </script>
-</body>
 
+        // Gán giá trị của option đầu tiên vào input1 khi trang tải lên
+        window.onload = function() {
+            var select1 = document.getElementById('select1');
+            var input1 = document.getElementById('input1');
+
+            // Gán giá trị của option đầu tiên cho input1 ngay khi tải trang
+            input1.value = select1.options[0].value;  // Gán giá trị của Option 1
+        };
+    </script>
+
+</body>
 </html>

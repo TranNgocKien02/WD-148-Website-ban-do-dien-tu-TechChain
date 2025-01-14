@@ -42,10 +42,14 @@
                                 <p>Ghi chú nhận hàng: <strong>{{ $donHang->ghi_chu }}</strong></p>
                                 <p>Trạng thái đơn hàng: <strong>{{ $donHang->trang_thai_don_hang }}</strong></p>
                                 <p>Trạng thái thanh toán: <strong>{{ $donHang->trang_thai_thanh_toan }}</strong></p>
-                                <p>Tổng tiền hàng: <strong>{{ number_format($donHang->tien_hang, 0, '', '.') }}đ</strong></p>
-                                <p>Tổng tiền khuyến mãi: <strong>{{ number_format( $donHang->tien_khuyen_mai, 0, '', '.') }}đ</strong></p>
-                                <p>Tổng tiền ship: <strong>{{ number_format( $donHang->tien_ship, 0, '', '.') }}đ</strong></p>
-                                <p>Tổng tiền đơn hàng: <strong>{{ number_format($donHang->tong_tien, 0, '', '.') }}đ</strong></p>
+                                <p>Tổng tiền hàng: <strong>{{ number_format($donHang->tien_hang, 0, '', '.') }}đ</strong>
+                                </p>
+                                <p>Tổng tiền khuyến mãi:
+                                    <strong>{{ number_format($donHang->tien_khuyen_mai, 0, '', '.') }}đ</strong></p>
+                                <p>Tổng tiền ship: <strong>{{ number_format($donHang->tien_ship, 0, '', '.') }}đ</strong>
+                                </p>
+                                <p>Tổng tiền đơn hàng:
+                                    <strong>{{ number_format($donHang->tong_tien, 0, '', '.') }}đ</strong></p>
                             </div>
                         </div>
 
@@ -57,36 +61,69 @@
                         <div class="myaccount-content">
                             <h5>Sản phẩm</h5>
                             <div class="myaccount-table table-responsive text-center">
-                                <table class="table table-bordered">
-                                    <thead class="thead-light">
+                                <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="li-product-thumbnail">Ảnh</th>
+                                        <th class="cart-product-name">Mã Sản Phẩm</th>
+                                        <th class="cart-product-name">Sản Phẩm</th>
+                                        <th class="li-product-price">Đơn Giá</th>
+                                        <th class="li-product-quantity">Số Lượng</th>
+                                        <th class="li-product-subtotal">Tổng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($donHang->chiTietDonHangs as $item)
                                         <tr>
-                                            <th>Hình ảnh</th>
-                                            <th>Mã sản phẩm</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Đơn giá</th>
-                                            <th>Số lượng</th>
-                                            <th>Thành tiền</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($donHang->chiTietDonHangs as $item)
-                                        <tr>
-                                            <td>
-                                                <img class="img-fluid" src=" {{ Storage::url($item->anh_san_pham) }}" alt="Sản phẩm" width="75px">
+                                            <td class="li-product-thumbnail"><a href="#"><img
+                                                        src="{{ Storage::url($item->anh_san_pham) }}"
+                                                        alt="{{ $item->anh_san_pham }}"></a></td>
+                                            <td>{{$item->ma_san_pham}}</td>                                                            
+                                            <td class=" ">
+                                                <a
+                                                    href="{{ route('product-detail', $item->productVariant->san_pham_id) }}">{{ $item->productVariant->sanPham->ten_san_pham }}</a>
+                                                <div class="">
+                                                    <small class="text-secondary">Dung lượng:
+                                                        {{ $item->dung_luong }}</small>
+                                                    <small class="text-secondary">Màu sắc: {{ $item->mau_sac }}</small>
+                                                </div>
                                             </td>
-                                            
-                                            <td>{{ $item->ma_san_pham }}</td>
-                                            <td>{{ $item->ten_san_pham }}</td>
-                                            <td>{{ number_format($item->don_gia, 0, '', '.') }}đ</td>
-                                            <td>{{ $item->so_luong }}</td>
-                                            <td>{{ number_format($item->don_gia * $item->so_luong, 0, '', '.') }}đ</td>
+                                            <td class="li-product-price">
+                                                @if ($item->gia_khuyen_mai > 0)
+                                                    <span class="amount text-danger">
+                                                        {{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                        VND
+                                                    </span>
+                                                    <del class="text-muted small" style="margin-left: 5px;">
+                                                        {{ number_format($item->don_gia, 0, '', '.') }}
+                                                        VND
+                                                    </del>
+                                                @else
+                                                    <span class="amount text-danger">
+                                                        {{ number_format($item->don_gia, 0, '', '.') }}
+                                                        VND
+                                                    </span>
+                                                @endif
+                                            </td>
+
+                                            <td class="quantity">
+                                                {{$item->so_luong}}
+                                            </td>
+                                            @php
+                                                $price =
+                                                    isset($item->productVariant->sanpham->gia_khuyen_mai) &&
+                                                    $item->productVariant->sanpham->gia_khuyen_mai > 0
+                                                        ? $item->productVariant->sanpham->gia_khuyen_mai
+                                                        : $item->productVariant->sanpham->don_gia;
+                                                $subtotal = $price * $item->so_luong;
+                                            @endphp
+                                            <td class="product-subtotal"><span
+                                                    class="amount">{{ number_format($subtotal, 0, '', '.') }} VND</span>
                                             </td>
                                         </tr>
-                                        @endforeach
-                                       
-                                       
-                                    </tbody>
-                                </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
                             </div>
                         </div>
 

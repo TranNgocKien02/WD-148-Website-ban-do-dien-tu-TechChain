@@ -22,7 +22,7 @@ class ProductVariant extends Model
 
     public function sanpham()
     {
-        return $this->belongsTo(SanPham::class);
+        return $this->belongsTo(SanPham::class, 'san_pham_id', 'id');
     }
 
 }

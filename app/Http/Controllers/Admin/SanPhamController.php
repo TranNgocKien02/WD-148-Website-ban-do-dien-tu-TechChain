@@ -110,7 +110,6 @@ class SanPhamController extends Controller
         $data['is_active'] ??= 0;
 
         $data['trang_thai'] = $request->filled('ngay_dang_ban') ? 'da_len_lich' : 'ban_nhap';
-        // dd($data['trang_thai']);
         $category = DanhMuc::find($data['danh_muc_id']);
         $categoryPrefix = strtoupper(implode('', array_map(fn($word) => Str::substr($word, 0, 1), explode(' ', $category->ten_danh_muc))));
         $randomNumber = rand(100000, 999999);
@@ -118,12 +117,9 @@ class SanPhamController extends Controller
 
         $data['ma_san_pham'] = $categoryPrefix . '-' . $creationDate . $randomNumber;
 
-        // $data['is_best_sale'] = !empty($data['is_best_sale']) ? 1 : 0;
-        // $data['is_40_sale'] = !empty($data['is_40_sale']) ? 1 : 0;
-        // $data['is_hot_online'] = !empty($data['is_hot_online']) ? 1 : 0;
-
         $listProVariants = $request->variants;
         $dataProVariants = [];
+        $totalQuantity = 0;
         if (!empty($listProVariants)) { // Kiểm tra nếu không rỗng
             foreach ($listProVariants as $item) {
                 $dataProVariants[] = [
@@ -133,8 +129,11 @@ class SanPhamController extends Controller
                     'so_luong' => $item['so_luong'],
                     'gia' => $item['gia']
                 ];
+                $totalQuantity += $item['so_luong'];
             }
         }
+
+        $data['so_luong'] = $totalQuantity;
 
         $listProGalleries = $request->hinh_anh_san_phams ?: [];
         $dataProGalleries = [];

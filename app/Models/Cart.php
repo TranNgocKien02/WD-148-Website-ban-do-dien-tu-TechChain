@@ -12,7 +12,7 @@ class Cart extends Model
 
     protected $fillable = [
         'user_id',
-        'san_pham_id',
+        'product_variant_id',
         'so_luong',
         'mau_sac',
         'dung_luong',
@@ -23,8 +23,8 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function sanPham()
+    public function productVariant()
     {
-        return $this->belongsTo(SanPham::class);
+        return $this->belongsTo(ProductVariant::class);
     }
 }

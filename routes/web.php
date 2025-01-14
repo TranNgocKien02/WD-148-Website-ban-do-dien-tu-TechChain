@@ -54,13 +54,13 @@ Route::middleware('auth')->prefix('product-detail')->group(function () {
 
 
 // Cart Routes (requires authentication)
-Route::middleware('auth')->prefix('cart')->group(function () {
-    Route::post('/add', [CartController::class, 'addCart'])->name('cart.add');
-    Route::get('/list', [CartController::class, 'listCart'])->name('cart.list');
-    Route::post('/update', [CartController::class, 'updateCart'])->name('cart.update');
-    Route::delete('/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-    Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.apply_coupon');
-});
+// Route::middleware('auth')->prefix('cart')->group(function () {
+//     Route::post('/add', [CartController::class, 'addCart'])->name('cart.add');
+//     Route::get('/list', [CartController::class, 'listCart'])->name('cart.list');
+//     Route::post('/update', [CartController::class, 'updateCart'])->name('cart.update');
+//     Route::delete('/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+//     Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.apply_coupon');
+// });
 
 // Order Routes (requires authentication)
 Route::middleware('auth')->prefix('orders')->name('orders.')->group(function () {
@@ -94,7 +94,8 @@ Route::post('/cart/store',            [CartController::class, 'storeCart'])->nam
 Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
 Route::get('/cart-full/list',            [CartController::class, 'listFullCart'])->name('cart-full.list');
 Route::get('/cart-full/create',            [OrderController::class, 'createFullCart'])->name('fulldonhangs.create');
-Route::post('/cart/update',         [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/updateFull',         [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/update',         [CartController::class, 'updateCartBuy'])->name('cart.updateBuy');
 Route::delete('{cart}/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/binh-luan', [BinhLuanController::class, 'store'])->middleware('auth')->name('binh-luan.store');
 
@@ -124,6 +125,9 @@ Route::get('/product/filter', [ProductFilter::class, 'filter'])->name('filter');
 
 // route up khuyến mãi
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('client.apply_coupon');
+Route::post('/remove-coupon', [CartController::class, 'removeCoupon'])->name('client.remove_coupon');
+
+
 Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
 
 // });

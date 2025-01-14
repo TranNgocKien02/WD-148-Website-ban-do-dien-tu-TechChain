@@ -160,22 +160,6 @@
                                         </div>
                                     </div>
                                     <!-- end col -->
-                                    {{-- <div class="col-lg-3 col-sm-6">
-                                        <div class="p-2 border border-dashed rounded">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-sm me-2">
-                                                    <div class="avatar-title rounded bg-transparent text-success fs-24">
-                                                        <i class="ri-inbox-archive-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <p class="text-muted mb-1">Total Revenue :</p>
-                                                    <h5 class="mb-0">$60,645</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col --> --}}
                                 </div>
 
                                 <div class="row">

@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\client;
 
-use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends BaseController
+class UserController extends Controller
 {
     public function showProfile()
     {
         // Trả về view hiển thị thông tin người dùng
-        $this->shareCartData(); // Gọi phương thức chia sẻ dữ liệu giỏ hàng
 
         return view('clients.user.profile', [
             'user' => auth()->user(), // Lấy thông tin người dùng đang đăng nhập

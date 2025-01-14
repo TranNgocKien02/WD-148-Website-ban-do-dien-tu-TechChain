@@ -4880,11 +4880,9 @@ thead {
 
 .coupon-all {
     margin-top: 30px;
+    float: right;
 }
 
-.coupon {
-    float: left;
-}
 
 .coupon input {
     background-color: transparent;

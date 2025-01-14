@@ -96,23 +96,23 @@
                                             @foreach ($cartToDisplay as $item)
                                                 <li>
                                                     <a href="single-product.html" class="minicart-product-image">
-                                                        <img src="{{ Storage::url($item->sanPham->hinh_anh) }}"
+                                                        <img src="{{ Storage::url($item->productVariant->sanpham->hinh_anh) }}"
                                                             alt="cart products">
                                                     </a>
                                                     <div class="minicart-product-details">
 
                                                         <h6><a
-                                                                href="single-product.html">{{ $item->sanPham->ten_san_pham }}</a>
+                                                                href="single-product.html">{{ $item->productVariant->sanpham->ten_san_pham }}</a>
                                                         </h6>
                                                         <span>
-                                                            @if (isset($item->sanPham->gia_khuyen_mai) && $item->sanPham->gia_khuyen_mai > 0)
-                                                                <del><span
-                                                                        class="text-decoration-line-through">{{ number_format($item->sanPham->gia_san_pham, 0, '', '.') }}đ</span></del>
+                                                            @if (isset($item->productVariant->sanpham->gia_khuyen_mai) && $item->productVariant->sanpham->gia_khuyen_mai > 0)
+                                                                <del>
+                                                                    <span class="text-decoration-line-through">{{ number_format($item->productVariant->sanpham->gia_san_pham, 0, '', '.') }}VND</span>
+                                                                </del>
                                                                 <br>
-                                                                <span
-                                                                    class="text-success">{{ number_format($item->sanPham->gia_khuyen_mai, 0, '', '.') }}đ</span>
+                                                                <span class="text-success">{{ number_format($item->productVariant->sanpham->gia_khuyen_mai, 0, '', '.') }}VND</span>
                                                             @else
-                                                                {{ number_format($item->sanPham->gia_san_pham, 0, '', '.') }}đ
+                                                                {{ number_format($item->productVariant->sanpham->gia_san_pham, 0, '', '.') }}VND
                                                             @endif x {{ $item->so_luong }}
 
                                                         </span>

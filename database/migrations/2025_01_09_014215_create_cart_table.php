@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\ProductVariant;
 use App\Models\User;
-use App\Models\SanPham;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(SanPham::class)->constrained()->onDelete('cascade'); // Khóa ngoại đến bảng san_pham
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade'); // Khóa ngoại đến bảng users
+            $table->foreignIdFor(ProductVariant::class)->constrained('bien_the_san_pham')->onDelete('cascade'); // Khóa ngoại đến bảng san_pham
             $table->integer('so_luong'); // Số lượng sản phẩm
             $table->string('mau_sac'); // Thêm màu sắc
             $table->string('dung_luong'); // Thêm dung lượng/kích thước

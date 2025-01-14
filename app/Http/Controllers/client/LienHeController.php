@@ -5,17 +5,16 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Requests\StoreLienHeRequest;
 use App\Models\LienHe;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class LienHeController extends BaseController
+class LienHeController extends Controller
 {
 
     public function index() {
-        $this->shareCartData(); // 
         return view('clients.lienhes.index');
     }
 

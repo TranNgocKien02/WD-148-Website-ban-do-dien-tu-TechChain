@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\BaseController;
 use App\Models\Cart;
 use App\Models\Banner;
 use App\Models\DanhMuc;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends BaseController
+class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -28,7 +27,6 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        $this->shareCartData(); // Gọi phương thức chia sẻ dữ liệu giỏ hàng
         $danhMuc = DanhMuc::query()->where('trang_thai', true)->get();
         $sanPham = SanPham::query()->where('ngay_dang_ban', '<=', now())->take(10)->get();
         $sanPhamMoi = SanPham::query()->where('ngay_dang_ban', '<=', now()) ->orderBy('created_at', 'desc') ->take(10)->get();
