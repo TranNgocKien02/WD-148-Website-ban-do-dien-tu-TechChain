@@ -178,6 +178,8 @@ class OrderController extends Controller
                         session()->forget('cart'); 
                     } 
                 }
+                session()->forget('coupon'); 
+
                 DB::commit();
 
                 

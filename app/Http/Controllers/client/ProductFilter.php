@@ -23,9 +23,9 @@ class ProductFilter extends Controller
         $filters = $request->input('filters', []);
 
         $query = SanPham::query()
-        ->distinct()
-        ->leftJoin('bien_the_san_pham', 'san_phams.id', '=', 'bien_the_san_pham.san_pham_id')
-        ->select('san_phams.*');
+            ->distinct()
+            ->leftJoin('bien_the_san_pham', 'san_phams.id', '=', 'bien_the_san_pham.san_pham_id')
+            ->select('san_phams.*');
 
         // Lọc theo hãng
         if (!empty($filters['brands'])) {
