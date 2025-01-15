@@ -79,14 +79,11 @@
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
                             <li class="hm-minicart">
-                                {{-- @php
-                                                $price = isset($item['gia_khuyen_mai']) && $item['gia_khuyen_mai'] > 0 ? $item['gia_khuyen_mai'] : $item['gia'];
-                                                $subtotal = $price * $item['so_luong'];
-                                            @endphp --}}
+
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-                                    <span class="item-text d-inline-block text-truncate" style="max-width: 80px;"> {{ number_format($subTotal, 0, '', '.') }}VND
-                                        <span class="cart-item-count">{{ $cartItemCount }}</span>
+                                    <span class="item-text d-inline-block text-truncate" style="max-width: 80px;">
+                                        <span class="cart-item-count"></span>
                                     </span>
                                 </div>
                                 <span></span>
@@ -128,7 +125,7 @@
                                         @endif
                                     </ul>
                                     <p class="minicart-total">SUBTOTAL:
-                                        <span>{{ number_format($subTotal, 0, '', '.') }}đ</span>
+                                        <span></span>
                                     </p>
                                     <div class="minicart-button">
                                         <a href="{{ route('cart-full.list')}}"
@@ -182,6 +179,8 @@
 
 
                                 <li><a href="{{route('contact')}}">Contact</a></li>
+                                <li><a href="{{route('about-us')}}">About Us</a></li>
+                                <li><a href="{{route('post')}}">Post</a></li>
                             </ul>
                         </nav>
                     </div>

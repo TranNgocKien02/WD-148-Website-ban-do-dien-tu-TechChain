@@ -75,57 +75,55 @@
                 <div class="row">
                     <!-- Begin Footer Logo Area -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="footer-logo">
-                            <h2>E-MART</h2>
-                            {{-- <img src="{{asset('lib/images/menu/logo/1.jpg')}}" alt="Footer Logo"> --}}
-                            <p class="info">
-                                Chúng tôi là một nhóm gồm các nhà thiết kế và nhà phát triển tạo ra Mẫu HTML &
-                                Woocommerce, Chủ đề Shopify chất lượng cao.
-                            </p>
-                        </div>
-                        <ul class="des">
-                            <li>
-                                <span>Địa chỉ: </span>
-                                Trịnh Văn Bô,Nam Từ Liêm,Hà Nội
-                            </li>
-                            <li>
-                                <span>Số điện thoại: </span>
-                                <a href="#">(+84) 961 215 069</a>
-                            </li>
-                            <li>
-                                <span>Email: </span>
-                                <a href="kientnph41341@gmail.com">kientnph41341@gmail.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Footer Logo Area End Here -->
-                    <!-- Begin Footer Block Area -->
-                    <div class="col-lg-2 col-md-3 col-sm-6">
-                        <div class="footer-block">
-                            <h3 class="footer-block-title">Sản Phẩm</h3>
-                            <ul>
-                                <li><a href="#">Giá giảm
-                                    </a></li>
-                                <li><a href="#"> Sản phẩm mới</a></li>
-                                <li><a href="#"> Bán hàng tốt nhất</a></li>
-                                <li><a href="#">Liên hệ với chúng tôi</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Footer Block Area End Here -->
-                    <!-- Begin Footer Block Area -->
-                    <div class="col-lg-2 col-md-3 col-sm-6">
-                        <div class="footer-block">
-                            <h3 class="footer-block-title">Công ty của chúng tôi
-                            </h3>
-                            <ul>
-                                <li><a href="#">Vận chuyển</a></li>
-                                <li><a href="#">Thông báo pháp lý</a></li>
-                                <li><a href="#">Về chúng tôi</a></li>
-                                <li><a href="#">Liên hệ với chúng tôi</a></li>
-                            </ul>
-                        </div>
-                    </div>
+    <div class="footer-logo">
+        <h2>TechChain</h2>
+        {{-- <img src="{{asset('lib/images/menu/logo/1.jpg')}}" alt="Footer Logo"> --}}
+        <p class="info">
+            Chúng tôi là đơn vị tiên phong trong lĩnh vực cung cấp các sản phẩm công nghệ hiện đại và chất lượng hàng đầu tại Việt Nam.
+        </p>
+    </div>
+    <ul class="des">
+        <li>
+            <span>Địa chỉ: </span>
+            123 Phạm Văn Đồng, Cầu Giấy, Hà Nội
+        </li>
+        <li>
+            <span>Số điện thoại: </span>
+            <a href="#">(+84) 987 654 321</a>
+        </li>
+        <li>
+            <span>Email: </span>
+            <a href="info@techchain.vn">info@techchain.vn</a>
+        </li>
+    </ul>
+</div>
+<!-- Footer Logo Area End Here -->
+<!-- Begin Footer Block Area -->
+<div class="col-lg-2 col-md-3 col-sm-6">
+    <div class="footer-block">
+        <h3 class="footer-block-title">Sản Phẩm</h3>
+        <ul>
+            <li><a href="#">Khuyến mãi</a></li>
+            <li><a href="#">Sản phẩm mới</a></li>
+            <li><a href="#">Bán chạy nhất</a></li>
+            <li><a href="#">Liên hệ với chúng tôi</a></li>
+        </ul>
+    </div>
+</div>
+<!-- Footer Block Area End Here -->
+<!-- Begin Footer Block Area -->
+<div class="col-lg-2 col-md-3 col-sm-6">
+    <div class="footer-block">
+        <h3 class="footer-block-title">Công ty của chúng tôi</h3>
+        <ul>
+            <li><a href="#">Chính sách vận chuyển</a></li>
+            <li><a href="#">Điều khoản sử dụng</a></li>
+            <li><a href="#">Giới thiệu về chúng tôi</a></li>
+            <li><a href="#">Hỗ trợ khách hàng</a></li>
+        </ul>
+    </div>
+</div>
+
                     <!-- Footer Block Area End Here -->
                     <!-- Begin Footer Block Area -->
                     <div class="col-lg-4">

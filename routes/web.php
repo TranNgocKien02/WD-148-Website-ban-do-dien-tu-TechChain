@@ -164,4 +164,9 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 
 // Callback sau khi người dùng đăng nhập thành công với Google
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
-
+Route::get('/about-us',function(){
+    return view('clients.gioithieu');
+})->name('about-us');
+Route::get('/post',function(){
+    return view('clients.baiviet');
+})->name('post');
