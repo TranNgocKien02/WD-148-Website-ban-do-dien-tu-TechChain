@@ -127,7 +127,7 @@
                                         </div>
                                     </div>
                                     <!-- end col -->
-                                    {{-- <div class="col-lg-3 col-sm-6">
+                                    <div class="col-lg-3 col-sm-6">
                                         <div class="p-2 border border-dashed rounded">
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar-sm me-2">
@@ -136,13 +136,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <p class="text-muted mb-1">No. of Orders :</p>
-                                                    <h5 class="mb-0">2,234</h5>
+                                                    <p class="text-muted mb-1">Số lượng đã bán :</p>
+                                                    <h5 class="mb-0">{{ number_format($sanPham->so_luong_da_ban, 0, '.', ',') }}</h5>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- end col --> --}}
+                                    <!-- end col -->
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="p-2 border border-dashed rounded">
                                             <div class="d-flex align-items-center">
@@ -152,7 +152,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <p class="text-muted mb-1">Số lượng :</p>
+                                                    <p class="text-muted mb-1">Số lượng tồn kho :</p>
                                                     <h5 class="mb-0">{{ number_format($sanPham->so_luong, 0, '.', ',') }}
                                                     </h5>
                                                 </div>

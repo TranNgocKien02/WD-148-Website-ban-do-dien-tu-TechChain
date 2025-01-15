@@ -240,7 +240,7 @@ class SanPhamController extends Controller
         $data['trang_thai'] = $request->filled('ngay_dang_ban') ? 'da_len_lich' : 'ban_nhap';
 
         $data['is_active'] ??= 0;
-        $data['slug'] = Str::slug($data['ten_san_pham']) . '-' . $data['ma_san_pham'];
+        $data['slug'] = Str::slug($data['ten_san_pham']) . '-' . $sanPham->ma_san_pham;
 
         $category = DanhMuc::find($data['danh_muc_id']);
         $categoryPrefix = strtoupper(implode('', array_map(fn($word) => Str::substr($word, 0, 1), explode(' ', $category->ten_danh_muc))));

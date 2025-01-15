@@ -8,11 +8,6 @@
                     <h2>
                         <span>SẢN PHẨM THỊNH HÀNH</span>
                     </h2>
-                    <ul class="nav li-product-menu li-trending-product-menu">
-                        <li><a class="active" data-toggle="tab" href="#home1"><span>Sanai</span></a></li>
-                        <li><a data-toggle="tab" href="#home2"><span>Camera Accessories</span></a></li>
-                        <li><a data-toggle="tab" href="#home3"><span>XailStation</span></a></li>
-                    </ul>
                 </div>
                 <!-- Begin Li's Tab Menu Content Area -->
                 <div class="tab-content li-tab-content li-trending-product-content">
@@ -25,7 +20,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{ route('product-detail', $item->slug) }}">
-                                                    <img src="{{ Storage::url($item->hinh_anh) }}"
+                                                    <img src="{{ Storage::url($item->hinh_anh) }}" style="width:206px; height: 206px; object-fit: cover;"
                                                         alt="Li's Product Image">
                                                 </a>
                                                 <span class="sticker">New</span>
@@ -54,10 +49,20 @@
                                                             href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                                     </h4>
                                                     <div class="price-box">
-                                                        <span
-                                                            class="new-price new-price-2">${{ $item->gia_khuyen_mai }}</span>
-                                                        <span class="old-price">${{ $item->gia_san_pham }}</span>
-                                                        <span class="discount-percentage">-7%</span>
+                                                        @if ($item->gia_khuyen_mai)
+                                                            <span
+                                                                class="new-price new-price-2">{{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                                VND</span>
+                                                            <span
+                                                                class="old-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                                VND</span>
+                                                            <span
+                                                                class="discount-percentage">-{{ $item->discount_percentage }}%</span>
+                                                        @else
+                                                            <span
+                                                                class="new-price new-price-2">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                                VND</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
@@ -96,7 +101,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{ route('product-detail', $item->slug) }}">
-                                                    <img src="{{ Storage::url($item->hinh_anh) }}"
+                                                    <img src="{{ Storage::url($item->hinh_anh) }}" style="width:206px; height: 206px; object-fit: cover;"
                                                         alt="Li's Product Image">
                                                 </a>
                                                 <span class="sticker">New</span>
@@ -125,10 +130,20 @@
                                                             href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                                     </h4>
                                                     <div class="price-box">
-                                                        <span
-                                                            class="new-price new-price-2">${{ $item->gia_khuyen_mai }}</span>
-                                                        <span class="old-price">${{ $item->gia_san_pham }}</span>
-                                                        <span class="discount-percentage">-7%</span>
+                                                        @if ($item->gia_khuyen_mai)
+                                                            <span
+                                                                class="new-price new-price-2">{{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                                VND</span>
+                                                            <span
+                                                                class="old-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                                VND</span>
+                                                            <span
+                                                                class="discount-percentage">-{{ $item->discount_percentage }}%</span>
+                                                        @else
+                                                            <span
+                                                                class="new-price new-price-2">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                                VND</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
@@ -158,7 +173,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{ route('product-detail', $item->slug) }}">
-                                                    <img src="{{ Storage::url($item->hinh_anh) }}"
+                                                    <img src="{{ Storage::url($item->hinh_anh) }}" style="width:206px; height: 206px; object-fit: cover;"
                                                         alt="Li's Product Image">
                                                 </a>
                                                 <span class="sticker">New</span>
@@ -187,10 +202,20 @@
                                                             href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                                     </h4>
                                                     <div class="price-box">
-                                                        <span
-                                                            class="new-price new-price-2">${{ $item->gia_khuyen_mai }}</span>
-                                                        <span class="old-price">${{ $item->gia_san_pham }}</span>
-                                                        <span class="discount-percentage">-7%</span>
+                                                        @if ($item->gia_khuyen_mai)
+                                                            <span
+                                                                class="new-price new-price-2">{{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                                VND</span>
+                                                            <span
+                                                                class="old-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                                VND</span>
+                                                            <span
+                                                                class="discount-percentage">-{{ $item->discount_percentage }}%</span>
+                                                        @else
+                                                            <span
+                                                                class="new-price new-price-2">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                                VND</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
@@ -241,13 +266,13 @@
                 </div>
                 <div class="row">
                     <div class="product-active owl-carousel">
-                        @foreach ($sanPham as $item)
+                        @foreach ($sanPhamTrending as $item)
                             <div class="col-lg-12">
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
                                         <a href="{{ route('product-detail', $item->slug) }}">
-                                            <img src="{{ Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
+                                            <img src="{{ Storage::url($item->hinh_anh) }}" style="width:206px; height: 206px; object-fit: cover;" alt="Li's Product Image">
                                         </a>
                                         <span class="sticker">New</span>
                                     </div>
@@ -273,10 +298,20 @@
                                                     href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                             </h4>
                                             <div class="price-box">
-                                                <span
-                                                    class="new-price new-price-2">${{ $item->gia_khuyen_mai }}</span>
-                                                <span class="old-price">${{ $item->gia_san_pham }}</span>
-                                                <span class="discount-percentage">-7%</span>
+                                                @if ($item->gia_khuyen_mai)
+                                                    <span
+                                                        class="new-price new-price-2">{{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                        VND</span>
+                                                    <span
+                                                        class="old-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                        VND</span>
+                                                    <span
+                                                        class="discount-percentage">-{{ $item->discount_percentage }}%</span>
+                                                @else
+                                                    <span
+                                                        class="new-price new-price-2">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                        VND</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="add-actions">

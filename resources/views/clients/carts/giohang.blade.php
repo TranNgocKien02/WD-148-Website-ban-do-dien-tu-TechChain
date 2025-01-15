@@ -57,8 +57,8 @@
                                 <tbody>
                                     @foreach ($cart as $item)
                                         <tr>
-                                            <td class="li-product-thumbnail"><a href="#"><img
-                                                        src="{{ Storage::url($item->productVariant->sanpham->hinh_anh) }}"
+                                            <td class="li-product-thumbnail"><a href="{{ route('product-detail', $item->productVariant->sanpham->slug) }}"><img
+                                                        src="{{ Storage::url($item->productVariant->sanpham->hinh_anh) }}" style="width: 150px; height: 150px; object-fit: cover"
                                                         alt="{{ $item->productVariant->sanpham->hinh_anh }}"></a></td>
                                             <td class="li-product-name ">
                                                 <a

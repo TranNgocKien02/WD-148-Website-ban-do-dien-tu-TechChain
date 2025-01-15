@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Client;
 
 use App\Models\Cart;
@@ -27,42 +28,118 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $danhMuc = DanhMuc::query()->where('trang_thai', true)->get();
-        $sanPham = SanPham::query()->where('ngay_dang_ban', '<=', now())->take(10)->get();
-        $sanPhamMoi = SanPham::query()->where('ngay_dang_ban', '<=', now()) ->orderBy('created_at', 'desc') ->take(10)->get();
-        $sanPhamHot = SanPham::query()->get();
-        $sanPhamHotDeal = SanPham::query()->take(10)->get();
-        $sanPhamTrending = SanPham::query()->take(10)->get();
-        // $banners = Banner::query()->where('is_active', true)->get();
-        $currentDate = now(); // Lấy ngày giờ hiện tại
+        $currentDate = now();
 
+        // Lấy danh mục
+        $danhMuc = DanhMuc::query()
+            ->where('trang_thai', true)
+            ->get();
+
+        // Lấy sản phẩm đang bán và đang active
+        $sanPham = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->where('so_luong', '>', 0)  
+            ->selectRaw('*, 
+            CASE 
+                WHEN gia_khuyen_mai > 0 THEN ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 
+                ELSE 0 
+            END as discount_percentage')
+            ->take(10)
+            ->get();
+
+        // Sản phẩm mới
+        $sanPhamMoi = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->where('so_luong', '>', 0)  
+            ->orderBy('created_at', 'desc')
+            ->selectRaw('*, 
+            CASE 
+                WHEN gia_khuyen_mai > 0 THEN ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 
+                ELSE 0 
+            END as discount_percentage')
+            ->take(10)
+            ->get();
+
+        // Sản phẩm hot (bán chạy)
+        $sanPhamHot = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->where('so_luong', '>', 0)  
+            ->orderBy('so_luong_da_ban', 'desc')
+            ->selectRaw('*, 
+            CASE 
+                WHEN gia_khuyen_mai > 0 THEN ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 
+                ELSE 0 
+            END as discount_percentage')
+            ->take(10)
+            ->get();
+
+        // Sản phẩm hot deal (giảm giá cao nhất)
+        $sanPhamHotDeal = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->where('so_luong', '>', 0)  
+            ->where('gia_khuyen_mai', '>', 0)
+            ->whereColumn('gia_san_pham', '>=', 'gia_khuyen_mai') // Đảm bảo giá khuyến mãi nhỏ hơn giá gốc
+            ->selectRaw('*, ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 as discount_percentage')
+            ->orderByDesc('discount_percentage') // Sắp xếp theo % giảm giá giảm dần
+            ->take(10)
+            ->get();
+
+        // Sản phẩm trending (sắp xếp theo lượt xem)
+        $sanPhamTrending = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->where('so_luong', '>', 0)  
+            ->orderByDesc('luot_xem')
+            ->selectRaw('*, 
+            CASE 
+                WHEN gia_khuyen_mai > 0 THEN ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 
+                ELSE 0 
+            END as discount_percentage')
+            ->take(10)
+            ->get();
+
+        // Banner chính
         $bannerMain = Banner::query()
-        ->where('loai', 'main')
-        ->where('is_active', true)
-        ->where('ngay_bat_dau', '<=', $currentDate) // Kiểm tra ngày đăng phải trước hoặc bằng hiện tại
-        ->where('ngay_ket_thuc', '>=', $currentDate) // Kiểm tra ngày kết thúc phải sau hoặc bằng hiện tại
-        ->get();
+            ->where('loai', 'main')
+            ->where('is_active', true)
+            ->where('ngay_bat_dau', '<=', $currentDate)
+            ->where('ngay_ket_thuc', '>=', $currentDate)
+            ->get();
 
+        // Banner sale
         $bannerSale = Banner::query()
-        ->where('loai', 'sale')
-        ->where('is_active', true)
-        ->where('ngay_bat_dau', '<=', $currentDate) // Kiểm tra ngày đăng phải trước hoặc bằng hiện tại
-        ->where('ngay_ket_thuc', '>=', $currentDate) // Kiểm tra ngày kết thúc phải sau hoặc bằng hiện tại
-        ->take(2)
-        ->get();
+            ->where('loai', 'sale')
+            ->where('is_active', true)
+            ->where('ngay_bat_dau', '<=', $currentDate)
+            ->where('ngay_ket_thuc', '>=', $currentDate)
+            ->take(2)
+            ->get();
 
+        // Banner sản phẩm
         $bannerProduct = Banner::query()
-        ->where('loai', 'product')
-        ->where('is_active', true)
-        ->where('ngay_bat_dau', '<=', $currentDate) // Kiểm tra ngày đăng phải trước hoặc bằng hiện tại
-        ->where('ngay_ket_thuc', '>=', $currentDate)->take(3) // Kiểm tra ngày kết thúc phải sau hoặc bằng hiện tại
-        ->get();
+            ->where('loai', 'product')
+            ->where('is_active', true)
+            ->where('ngay_bat_dau', '<=', $currentDate)
+            ->where('ngay_ket_thuc', '>=', $currentDate)
+            ->take(3)
+            ->get();
 
-        // dd($bannerMain->anh);  
-        
-        //  dd($subTotal);
-        return view('clients.home.index', compact('danhMuc', 'sanPham', 'sanPhamMoi', 'sanPhamHot', 'sanPhamHotDeal',
-         'sanPhamTrending', 'bannerMain',
-         'bannerSale', 'bannerProduct'));
+        // Truyền dữ liệu vào view
+        return view('clients.home.index', compact(
+            'danhMuc',
+            'sanPham',
+            'sanPhamMoi',
+            'sanPhamHot',
+            'sanPhamHotDeal',
+            'sanPhamTrending',
+            'bannerMain',
+            'bannerSale',
+            'bannerProduct'
+        ));
     }
+
 }

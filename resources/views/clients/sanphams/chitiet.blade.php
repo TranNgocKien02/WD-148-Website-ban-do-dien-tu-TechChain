@@ -41,22 +41,22 @@
                     <div class="product-details-left">
                         <div class="product-details-images slider-navigation-1">
                             <div class="lg-image">
-                                <img src="{{ Storage::url($product->hinh_anh) }}" class="object-fit-cover"
+                                <img src="{{ Storage::url($product->hinh_anh) }}" style="width: 470px; height: 470px; object-fit: cover"
                                     alt="product image">
                             </div>
 
                             @foreach ($bienThes as $item)
                                 <div class="lg-image">
-                                    <img src="{{ Storage::url($item->anh) }}" class="object-fit-cover" alt="product image">
+                                    <img src="{{ Storage::url($item->anh) }}" style="width: 470px; height: 470px; object-fit: cover" alt="product image">
                                 </div>
                             @endforeach
 
                         </div>
                         <div class="product-details-thumbs slider-thumbs-1">
-                            <div class="sm-image"><img src="{{ Storage::url($product->hinh_anh) }}" class="object-fit-cover"
+                            <div class="sm-image"><img src="{{ Storage::url($product->hinh_anh) }}" style="width: 118px; height: 118px; object-fit: cover"
                                     alt="product image thumb"></div>
                             @foreach ($bienThes as $bienThe)
-                                <div class="sm-image"><img src="{{ Storage::url($bienThe->anh) }}" class="object-fit-cover"
+                                <div class="sm-image"><img src="{{ Storage::url($bienThe->anh) }}" style="width: 118px; height: 118px; object-fit: cover"
                                         alt="product image thumb"></div>
                             @endforeach
                         </div>
@@ -245,7 +245,7 @@
                 <div id="product-details" class="tab-pane" role="tabpanel">
                     <div class="product-details-manufacturer">
                         <a href="#">
-                            <img src="images/product-details/1.jpg" alt="Product Manufacturer Image">
+                            <img src="{{Storage::url($product->hinh_anh)}}" style="width: 145px; height: 145px; object-fit: cover" alt="Product Manufacturer Image">
                         </a>
                         <p><span>Reference</span> demo_7</p>
                         <p><span>Reference</span> demo_7</p>
@@ -291,7 +291,7 @@
                                             <div class="modal-inner-area row">
                                                 <div class="col-lg-6">
                                                     <div class="li-review-product">
-                                                        <img src="{{ Storage::url($product->hinh_anh) }}"
+                                                        <img src="{{ Storage::url($product->hinh_anh) }}" 
                                                             alt="Li's Product" width="50px">
                                                         {{-- <div class="li-review-product-desc">
                                                                <p class="li-product-name">Today is a good day Framed poster</p>
@@ -393,7 +393,7 @@
                                     <div class="single-product-wrap">
                                         <div class="product-image">
                                             <a href="{{ route('product-detail', $item->slug) }}">
-                                                <img src="{{ Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
+                                                <img src="{{ Storage::url($item->hinh_anh) }}" style="width: 206px; height: 206px; object-fit: cover" alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>
                                         </div>

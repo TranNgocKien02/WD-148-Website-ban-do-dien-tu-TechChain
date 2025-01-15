@@ -18,6 +18,9 @@ class ProductFilter extends Controller
     public function filter(Request $request)
     {
 
+        $currentDate = now();
+
+
         // Lấy dữ liệu bộ lọc từ request
         $filters = $request->input('filters', []);
         $searchTerm = $request->input('search', '');
@@ -82,12 +85,61 @@ class ProductFilter extends Controller
 
         // Phân trang (hiển thị 12 sản phẩm mỗi trang)
         $sanPhamHot = $query->distinct()->paginate(12);
+        // dd($sanPhamHot);
 
         // Các dữ liệu bổ sung
         $danhMuc = DanhMuc::query()->where('trang_thai', true)->get();
-        $sanPhamMoi = SanPham::query()->take(10)->get();
-        $sanPhamHotDeal = SanPham::query()->take(10)->get();
-        $sanPhamTrending = SanPham::query()->take(10)->get();
+
+
+        $sanPhamMoi = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->selectRaw('*, 
+            CASE 
+                WHEN gia_khuyen_mai > 0 THEN ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 
+                ELSE 0 
+            END as discount_percentage')
+            ->take(10)
+            ->get();
+
+        // Sản phẩm hot (bán chạy)
+        // $sanPhamHot = SanPham::query()
+        //     ->where('ngay_dang_ban', '<=', $currentDate)
+        //     ->where('is_active', true)
+        //     ->orderBy('so_luong_da_ban', 'desc')
+        //     ->selectRaw('*, 
+        //     CASE 
+        //         WHEN gia_khuyen_mai > 0 THEN ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 
+        //         ELSE 0 
+        //     END as discount_percentage')
+        //     ->take(10)
+        //     ->get();
+
+        // Sản phẩm hot deal (giảm giá cao nhất)
+        $sanPhamHotDeal = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->where('gia_khuyen_mai', '>', 0)
+            ->whereColumn('gia_san_pham', '>=', 'gia_khuyen_mai') // Đảm bảo giá khuyến mãi nhỏ hơn giá gốc
+            ->selectRaw('*, ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 as discount_percentage')
+            ->orderByDesc('discount_percentage') // Sắp xếp theo % giảm giá giảm dần
+            ->take(10)
+            ->get();
+
+        // Sản phẩm trending (sắp xếp theo lượt xem)
+        $sanPhamTrending = SanPham::query()
+            ->where('ngay_dang_ban', '<=', $currentDate)
+            ->where('is_active', true)
+            ->orderByDesc('luot_xem')
+            ->selectRaw('*, 
+            CASE 
+                WHEN gia_khuyen_mai > 0 THEN ((gia_san_pham - gia_khuyen_mai) / gia_san_pham) * 100 
+                ELSE 0 
+            END as discount_percentage')
+            ->take(10)
+            ->get();
+
         $bienTheSanPhams = ProductVariant::query()
             ->select('mau_sac', 'dung_luong')
             ->distinct()

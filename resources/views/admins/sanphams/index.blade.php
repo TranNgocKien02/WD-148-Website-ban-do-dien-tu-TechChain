@@ -39,14 +39,15 @@
 
                         <div class="card-body">
 
-                             <form method="GET" action="{{ route('admins.sanphams.index') }}">
+                            <form method="GET" action="{{ route('admins.sanphams.index') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-2 mb-2">
                                         <select name="danh_muc" class="form-select">
                                             <option value="">All - Danh Mục</option>
                                             @foreach ($listDanhMuc as $item)
-                                                <option value="{{ $item->id }}" {{ request('danh_muc') == $item->id ? 'selected' : '' }}>
+                                                <option value="{{ $item->id }}"
+                                                    {{ request('danh_muc') == $item->id ? 'selected' : '' }}>
                                                     {{ $item->ten_danh_muc }}
                                                 </option>
                                             @endforeach
@@ -56,26 +57,28 @@
                                     <div class="col-md-2 mb-2">
                                         <select name="ngay_tao" class="form-select">
                                             <option value="">All - Thời gian</option>
-                                            <option value="today"
-                                                {{ request('ngay_tao') == 'today' ? 'selected' : '' }}>Hôm nay</option>
-                                            <option value="week"
-                                                {{ request('ngay_tao') == 'week' ? 'selected' : '' }}>Tuần</option>
-                                            <option value="month"
-                                                {{ request('ngay_tao') == 'month' ? 'selected' : '' }}>Tháng</option>
+                                            <option value="today" {{ request('ngay_tao') == 'today' ? 'selected' : '' }}>
+                                                Hôm nay</option>
+                                            <option value="week" {{ request('ngay_tao') == 'week' ? 'selected' : '' }}>
+                                                Tuần</option>
+                                            <option value="month" {{ request('ngay_tao') == 'month' ? 'selected' : '' }}>
+                                                Tháng</option>
                                             <option value="quarter"
                                                 {{ request('ngay_tao') == 'quarter' ? 'selected' : '' }}>Quý</option>
                                         </select>
                                     </div>
 
                                     <div class="col-md-2 mb-2">
-                                        <input class="form-range" type="range" name="gia_max" id="gia_max" min="0" max="1000000" step="10000" 
-                                            value="{{ request('gia_max', 1000000) }}" 
+                                        <input class="form-range" type="range" name="gia_max" id="gia_max"
+                                            min="0" max="1000000" step="10000"
+                                            value="{{ request('gia_max', 1000000) }}"
                                             oninput="document.getElementById('gia_max_val').innerText = this.value">
                                         <span id="gia_max_val">{{ request('gia_max', 1000000) }}</span> VND
                                     </div>
 
                                     <div class="col-md-2 mb-2">
-                                        <input type="date" name="ngay" class="form-control" value="{{ request('ngay') }}">
+                                        <input type="date" name="ngay" class="form-control"
+                                            value="{{ request('ngay') }}">
                                     </div>
 
                                     <div class="col-md-4 mb-2">
@@ -112,7 +115,7 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">Sản phẩm</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giá khuyến mãi</th>
+                                                <th scope="col">Số lượng đã bán</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Ngày nhập</th>
                                                 <th scope="col">Trạng thái</th>
@@ -144,8 +147,15 @@
                                                             </div>
                                                         </span>
                                                     </td>
-                                                    <td class="align-middle">{{ $item->gia_san_pham }}</td>
-                                                    <td class="align-middle">{{ $item->gia_khuyen_mai }}</td>
+                                                    <td class="align-middle">
+                                                        @if ($item->gia_khuyen_mai > 0)
+                                                            <span class="fs-14 fw-bold ">{{ number_format($item->gia_khuyen_mai, 0, ',', '.') }} VND</span> <br>
+                                                            <del class="old-price fs-12">{{ number_format($item->gia_san_pham, 0, ',', '.') }} VND</del>
+                                                        @else
+                                                            <span class="amount">{{ number_format($item->gia_san_pham, 0, ',', '.') }} VND</span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="align-middle">{{ $item->so_luong_da_ban }}</td>
                                                     <td class="align-middle">{{ $item->so_luong }}</td>
                                                     <td class="align-middle">{{ $item->created_at->format('d/m/Y') }}
                                                         <small
@@ -230,7 +240,7 @@
                                         <tbody>
                                             @foreach ($listSanPham->where('trang_thai', 'da_len_lich') as $index => $item)
                                                 <tr>
-                                                    <th class="align-middle"  scope="row">{{ $index + 1 }}</th>
+                                                    <th class="align-middle" scope="row">{{ $index + 1 }}</th>
                                                     <td class="gridjs-td">
                                                         <span>
                                                             <div class="d-flex align-items-center">
@@ -252,14 +262,14 @@
                                                             </div>
                                                         </span>
                                                     </td>
-                                                    <td  class="align-middle">{{ $item->gia_san_pham }}</td>
-                                                    <td  class="align-middle">{{ $item->gia_khuyen_mai }}</td>
-                                                    <td  class="align-middle">{{ $item->so_luong }}</td>
-                                                    <td  class="align-middle">{{ $item->created_at->format('d/m/Y') }}
+                                                    <td class="align-middle">{{ $item->gia_san_pham }}</td>
+                                                    <td class="align-middle">{{ $item->gia_khuyen_mai }}</td>
+                                                    <td class="align-middle">{{ $item->so_luong }}</td>
+                                                    <td class="align-middle">{{ $item->created_at->format('d/m/Y') }}
                                                         <small
                                                             style="color: #878A99;">{{ $item->created_at->format('H:i A') }}</small>
                                                     </td>
-                                                    <td  class="align-middle">
+                                                    <td class="align-middle">
                                                         @if ($item->trang_thai === 'da_len_lich')
                                                             <span class="badge bg-warning">Đã lên lịch</span>
                                                         @elseif ($item->trang_thai === 'ban_nhap')
@@ -271,7 +281,7 @@
                                                         @endif
                                                     </td>
 
-                                                    <td  class="align-middle">
+                                                    <td class="align-middle">
                                                         <div class="dropdown">
                                                             <a class="btn btn-soft-secondary btn-sm dropdown"
                                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -338,7 +348,7 @@
                                         <tbody>
                                             @foreach ($listSanPham->where('trang_thai', 'dang_ban') as $index => $item)
                                                 <tr>
-                                                    <th  class="align-middle" scope="row">{{ $index + 1 }}</th>
+                                                    <th class="align-middle" scope="row">{{ $index + 1 }}</th>
                                                     <td class="gridjs-td">
                                                         <span>
                                                             <div class="d-flex align-items-center">
@@ -360,14 +370,14 @@
                                                             </div>
                                                         </span>
                                                     </td>
-                                                    <td  class="align-middle">{{ $item->gia_san_pham }}</td>
-                                                    <td  class="align-middle">{{ $item->gia_khuyen_mai }}</td>
-                                                    <td  class="align-middle">{{ $item->so_luong }}</td>
-                                                    <td  class="align-middle">{{ $item->created_at->format('d/m/Y') }}
+                                                    <td class="align-middle">{{ $item->gia_san_pham }}</td>
+                                                    <td class="align-middle">{{ $item->gia_khuyen_mai }}</td>
+                                                    <td class="align-middle">{{ $item->so_luong }}</td>
+                                                    <td class="align-middle">{{ $item->created_at->format('d/m/Y') }}
                                                         <small
                                                             style="color: #878A99;">{{ $item->created_at->format('H:i A') }}</small>
                                                     </td>
-                                                    <td  class="align-middle">
+                                                    <td class="align-middle">
                                                         @if ($item->trang_thai === 'da_len_lich')
                                                             <span class="badge bg-warning">Đã lên lịch</span>
                                                         @elseif ($item->trang_thai === 'ban_nhap')
@@ -444,7 +454,7 @@
                                         <tbody>
                                             @foreach ($listSanPham->where('trang_thai', 'ban_nhap') as $index => $item)
                                                 <tr>
-                                                    <th  class="align-middle" scope="row">{{ $index + 1 }}</th>
+                                                    <th class="align-middle" scope="row">{{ $index + 1 }}</th>
                                                     <td class="gridjs-td">
                                                         <span>
                                                             <div class="d-flex align-items-center">
@@ -466,14 +476,14 @@
                                                             </div>
                                                         </span>
                                                     </td>
-                                                    <td  class="align-middle">{{ $item->gia_san_pham }}</td>
-                                                    <td  class="align-middle">{{ $item->gia_khuyen_mai }}</td>
-                                                    <td  class="align-middle">{{ $item->so_luong }}</td>
-                                                    <td  class="align-middle">{{ $item->created_at->format('d/m/Y') }}
+                                                    <td class="align-middle">{{ $item->gia_san_pham }}</td>
+                                                    <td class="align-middle">{{ $item->gia_khuyen_mai }}</td>
+                                                    <td class="align-middle">{{ $item->so_luong }}</td>
+                                                    <td class="align-middle">{{ $item->created_at->format('d/m/Y') }}
                                                         <small
                                                             style="color: #878A99;">{{ $item->created_at->format('H:i A') }}</small>
                                                     </td>
-                                                    <td  class="align-middle">
+                                                    <td class="align-middle">
                                                         @if ($item->trang_thai === 'da_len_lich')
                                                             <span class="badge bg-warning">Đã lên lịch</span>
                                                         @elseif ($item->trang_thai === 'ban_nhap')

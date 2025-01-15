@@ -13,7 +13,9 @@ class ProductController extends Controller
     //
     public function chiTietSanPham(string $slug){
         // Fetch all products
+        
         $product = SanPham::query()->where('slug', $slug)->first();
+        $product->increment('luot_xem');
         $listDanhMuc = DanhMuc::with('sanPhams')->get();
         $collection = SanPham::get();
         $bienThes = ProductVariant::where('san_pham_id', $product->id)->get();

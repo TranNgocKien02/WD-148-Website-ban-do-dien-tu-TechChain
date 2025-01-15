@@ -58,12 +58,12 @@
                                         @foreach ($wishlist as $item)
                                             <tr>
                                                 <td class="li-product-thumbnail">
-                                                    {{-- <a href="#"><img
+                                                    <img
                                                             src="{{ Storage::url($item->product->hinh_anh) }}"
-                                                            alt=""></a> --}}
+                                                            style="height: 120px; width: 120px; object-fit: cover"
+                                                            alt="">
                                                 </td>
-                                                <td class="li-product-name"><a
-                                                        href="#">{{ $item->product->ten_san_pham }}</a></td>
+                                                <td class="li-product-name">{{ $item->product->ten_san_pham }}</td>
                                                 <td class="li-product-price"><span class="amount">
                                                         @if ($item->product->gia_khuyen_mai > 0)
                                                             <span

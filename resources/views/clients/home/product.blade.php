@@ -23,7 +23,7 @@
                                 <div class="single-product-wrap">
                                     <div class="product-image">
                                         <a href="{{ route('product-detail', $item->slug) }}">
-                                            <img src="{{ Storage::url($item->hinh_anh) }}" style=" "
+                                            <img src="{{ Storage::url($item->hinh_anh) }}" style="width:206px; height: 206px; object-fit: cover;"
                                                 alt="Li's Product Image">
                                         </a>
                                         <span class="sticker">New</span>
@@ -32,7 +32,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                    <a href="">{{$item->hang->ten_hang}}</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -50,9 +50,21 @@
                                                     href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                             </h4>
                                             <div class="price-box">
-                                                <span
-                                                    class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
-                                            </div>
+                                                    @if ($item->gia_khuyen_mai)
+                                                        <span
+                                                            class="new-price new-price-2">{{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                            VND</span>
+                                                        <span
+                                                            class="old-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                            VND</span>
+                                                        <span
+                                                            class="discount-percentage">-{{ $item->discount_percentage }}%</span>
+                                                    @else
+                                                        <span
+                                                            class="new-price new-price-2">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                            VND</span>
+                                                    @endif
+                                                </div>
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
@@ -83,13 +95,13 @@
             <div id="li-bestseller-product" class="tab-pane" role="tabpanel">
                 <div class="row">
                     <div class="product-active owl-carousel">
-                        @foreach ($sanPhamHotDeal as $item)
+                        @foreach ($sanPhamHot as $item)
                             <div class="col-lg-12">
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
                                         <a href="{{ route('product-detail', $item->slug) }}">
-                                            <img src="{{ Storage::url($item->hinh_anh) }}" style=" "
+                                            <img src="{{ Storage::url($item->hinh_anh) }}" style="width:206px; height: 206px; object-fit: cover;"
                                                 alt="Li's Product Image">
                                         </a>
                                         <span class="sticker">New</span>
@@ -98,7 +110,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                    <a href="">{{$item->hang->ten_hang}}</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -116,9 +128,21 @@
                                                     href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                             </h4>
                                             <div class="price-box">
-                                                <span
-                                                    class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
-                                            </div>
+                                                    @if ($item->gia_khuyen_mai)
+                                                        <span
+                                                            class="new-price new-price-2">{{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                            VND</span>
+                                                        <span
+                                                            class="old-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                            VND</span>
+                                                        <span
+                                                            class="discount-percentage">-{{ $item->discount_percentage }}%</span>
+                                                    @else
+                                                        <span
+                                                            class="new-price new-price-2">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                            VND</span>
+                                                    @endif
+                                                </div>
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
@@ -149,13 +173,13 @@
             <div id="li-featured-product" class="tab-pane" role="tabpanel">
                 <div class="row">
                     <div class="product-active owl-carousel">
-                        @foreach ($sanPhamHot as $item)
+                        @foreach ($sanPhamHotDeal as $item)
                             <div class="col-lg-12">
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
                                         <a href="{{ route('product-detail', $item->slug) }}">
-                                            <img src="{{ Storage::url($item->hinh_anh) }}" style=" "
+                                            <img src="{{ Storage::url($item->hinh_anh) }}" style="width:206px; height: 206px; object-fit: cover;"
                                                 alt="Li's Product Image">
                                         </a>
                                         <span class="sticker">New</span>
@@ -164,7 +188,7 @@
                                         <div class="product_desc_info">
                                             <div class="product-review">
                                                 <h5 class="manufacturer">
-                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                    <a href="">{{$item->hang->ten_hang}}</a>
                                                 </h5>
                                                 <div class="rating-box">
                                                     <ul class="rating">
@@ -182,9 +206,21 @@
                                                     href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                             </h4>
                                             <div class="price-box">
-                                                <span
-                                                    class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
-                                            </div>
+                                                    @if ($item->gia_khuyen_mai)
+                                                        <span
+                                                            class="new-price new-price-2">{{ number_format($item->gia_khuyen_mai, 0, '', '.') }}
+                                                            VND</span>
+                                                        <span
+                                                            class="old-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                            VND</span>
+                                                        <span
+                                                            class="discount-percentage">-{{ $item->discount_percentage }}%</span>
+                                                    @else
+                                                        <span
+                                                            class="new-price new-price-2">{{ number_format($item->gia_san_pham, 0, '', '.') }}
+                                                            VND</span>
+                                                    @endif
+                                                </div>
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">

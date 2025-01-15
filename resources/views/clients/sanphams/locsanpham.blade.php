@@ -45,13 +45,11 @@
                                     <div class="row">
                                         @foreach ($sanPhamHot as $sanPham)
                                             <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
-
-
                                                 <div class="single-product-wrap">
                                                     <div class="product-image">
                                                         <a href="">
                                                             <!-- Đổi src từ link tĩnh thành động từ sản phẩm -->
-                                                            <img src="{{ $sanPham->hinh_anh }}"
+                                                            <img src="{{ Storage::url($sanPham->hinh_anh) }}" style="width:270px; height: 270px; object-fit: cover;"
                                                                 alt="{{ $sanPham->ten_san_pham }}">
                                                         </a>
                                                         <!-- Nếu sản phẩm mới, có thể thêm điều kiện kiểm tra -->
@@ -121,7 +119,7 @@
                                                     <div class="product-image">
                                                         <a href="">
                                                             <!-- Đổi hình ảnh động -->
-                                                            <img src="{{ $sanPham->hinh_anh }}"
+                                                            <img src="{{ Storage::url($sanPham->hinh_anh) }}" style="width:187.5px; height: 187.5px; object-fit: cover;"
                                                                 alt="{{ $sanPham->ten_san_pham }}">
                                                         </a>
                                                         <!-- Nếu sản phẩm mới -->
@@ -242,8 +240,8 @@
                         </div>
 
                         <form action="{{ route('filter') }}" method="GET">
-                            <button class="btn-clear-all mb-sm-30 mb-xs-30" type="reset"><a
-                                    href="{{ route('filter') }}">Clear all</a></button>
+                            <button class="btn-clear-all mb-sm-30 mb-xs-30 " type="reset"><a
+                                    href="{{ route('filter') }}" >Clear all</a> </button>
                             <!-- Filter by Brand -->
                             <div class="filter-sub-area">
                                 <h5 class="filter-sub-titel">Brand</h5>
@@ -332,7 +330,7 @@
                             </div>
 
                             <!-- Submit filter button -->
-                            <button type="submit" class="btn btn-filter">Filter</button>
+                            <button type="submit" class="btn btn-secondary">Filter</button>
                         </form>
                     </div>
 

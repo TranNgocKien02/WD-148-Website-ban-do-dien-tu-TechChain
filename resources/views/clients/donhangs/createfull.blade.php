@@ -178,8 +178,8 @@
 @endsection
 
 @section('js')
-    {{-- <!-- Thêm PayPal SDK -->
-    <script
+    <!-- Thêm PayPal SDK -->
+    {{-- <script
         src="https://www.paypal.com/sdk/js?client-id=AbwlofImYY9g_g3EKi4Hx5ela-htKEt2Q9ZXXOcng8O3xteVQ_RM94T9axkKHesAQtcayGfz2eus3x_l&components=buttons">
     </script>
     <script>
