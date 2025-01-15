@@ -22,7 +22,7 @@
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
-                                        <a href="{{ route('product-detail', $item->id) }}">
+                                        <a href="{{ route('product-detail', $item->slug) }}">
                                             <img src="{{ Storage::url($item->hinh_anh) }}" style=" "
                                                 alt="Li's Product Image">
                                         </a>
@@ -47,7 +47,8 @@
                                                 </div>
                                             </div>
                                             <h4><a class="product_name"
-                                                    href="{{ route('product-detail', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
+                                                    href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
+                                            </h4>
                                             <div class="price-box">
                                                 <span
                                                     class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
@@ -55,9 +56,19 @@
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
-                                                <li><a class="links-details" href="wishlist.html"><i
-                                                            class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i
+                                                <li>
+                                                    <form id="wishlist-form-{{ $item->id }}"
+                                                        action="{{ route('wishlist.add', $item->id) }}" method="POST"
+                                                        style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                    <a class="links-details" href="javascript:void(0);"
+                                                        onclick="document.getElementById('wishlist-form-{{ $item->id }}').submit();">
+                                                        <i class="fa fa-heart-o"></i>
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{ route('product-detail', $item->slug) }}"
+                                                        title="quick view" class="quick-view-btn"><i
                                                             class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
@@ -77,7 +88,7 @@
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
-                                        <a href="{{ route('product-detail', $item->id) }}">
+                                        <a href="{{ route('product-detail', $item->slug) }}">
                                             <img src="{{ Storage::url($item->hinh_anh) }}" style=" "
                                                 alt="Li's Product Image">
                                         </a>
@@ -102,7 +113,8 @@
                                                 </div>
                                             </div>
                                             <h4><a class="product_name"
-                                                    href="{{ route('product-detail', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
+                                                    href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
+                                            </h4>
                                             <div class="price-box">
                                                 <span
                                                     class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
@@ -110,9 +122,19 @@
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
-                                                <li><a class="links-details" href="wishlist.html"><i
-                                                            class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i
+                                                <li>
+                                                    <form id="wishlist-form-{{ $item->id }}"
+                                                        action="{{ route('wishlist.add', $item->id) }}" method="POST"
+                                                        style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                    <a class="links-details" href="javascript:void(0);"
+                                                        onclick="document.getElementById('wishlist-form-{{ $item->id }}').submit();">
+                                                        <i class="fa fa-heart-o"></i>
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{ route('product-detail', $item->slug) }}"
+                                                        title="quick view" class="quick-view-btn"><i
                                                             class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
@@ -132,7 +154,7 @@
                                 <!-- single-product-wrap start -->
                                 <div class="single-product-wrap">
                                     <div class="product-image">
-                                        <a href="{{ route('product-detail', $item->id) }}">
+                                        <a href="{{ route('product-detail', $item->slug) }}">
                                             <img src="{{ Storage::url($item->hinh_anh) }}" style=" "
                                                 alt="Li's Product Image">
                                         </a>
@@ -157,7 +179,8 @@
                                                 </div>
                                             </div>
                                             <h4><a class="product_name"
-                                                    href="{{ route('product-detail', $item->id) }}">{{ $item->ten_san_pham }}</a></h4>
+                                                    href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
+                                            </h4>
                                             <div class="price-box">
                                                 <span
                                                     class="new-price">{{ number_format($item->gia_san_pham, 0, '', '.') }}đ</span>
@@ -165,9 +188,19 @@
                                         </div>
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
-                                                <li><a class="links-details" href="wishlist.html"><i
-                                                            class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="{{ route('product-detail', $item->id) }}" title="quick view" class="quick-view-btn"><i
+                                                <li>
+                                                    <form id="wishlist-form-{{ $item->id }}"
+                                                        action="{{ route('wishlist.add', $item->id) }}"
+                                                        method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                    <a class="links-details" href="javascript:void(0);"
+                                                        onclick="document.getElementById('wishlist-form-{{ $item->id }}').submit();">
+                                                        <i class="fa fa-heart-o"></i>
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{ route('product-detail', $item->slug) }}"
+                                                        title="quick view" class="quick-view-btn"><i
                                                             class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>

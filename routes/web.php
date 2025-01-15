@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\client\ProductFilter;
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\WishlistController;
 use App\Models\ThongTinTrangWeb;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -49,7 +50,7 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 // Product Routes
 Route::middleware('auth')->prefix('product-detail')->group(function () {
 
-    Route::get('/{id}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
+    Route::get('/{slug}', [ProductController::class, 'chiTietSanPham'])->name('product-detail');
 });
 
 
@@ -106,6 +107,13 @@ Route::middleware('auth')->group(function () {
 });
 
 
+// wishlist
+Route::middleware('auth')->group(function () {
+    Route::post('/wishlist/add/{productId}', [WishlistController::class, 'addTowishlist'])->name('wishlist.add');
+    Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.remove');
+    Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+
+});
 
 Route::middleware('auth')->prefix('donhangs')
     ->as('donhangs.')

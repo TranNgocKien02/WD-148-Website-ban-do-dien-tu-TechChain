@@ -13,8 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const ROLE_ADMIN = 'Admin' ;
-    const ROLE_USER = 'User' ;
+    const ROLE_ADMIN = 'Admin';
+    const ROLE_USER = 'User';
 
 
     /**
@@ -52,16 +52,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Mutator để mã hóa mật khẩu khi lưu vào DB
-    // public function setPasswordAttribute($value)
-    // {
-    //     // Nếu giá trị password không rỗng, mã hóa mật khẩu bằng bcrypt
-    //     if (!empty($value)) {
-    //         $this->attributes['password'] = bcrypt($value);
-    //     }
-    // }
-    public function donHang(){
-        return $this->hasMany(DonHang::class) ;
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function donHang()
+    {
+        return $this->hasMany(DonHang::class);
     }
     // Liên kết với bình luận
     public function binhLuans()

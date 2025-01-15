@@ -69,7 +69,7 @@
                             <!-- Begin Header Logo Area -->
                             <div class="col-lg-3">
                                 <div class="logo pb-sm-30 pb-xs-30">
-                                    <a href="index.html">
+                                    <a href="{{route('index')}}">
                                         <img src="images/menu/logo/1.jpg" alt="">
                                     </a>
                                 </div>
@@ -232,9 +232,9 @@
                                 <div class="hb-menu">
                                     <nav>
                                         <ul>
-                                            <li class="dropdown-holder"><a href="index.html">Home</a>
+                                            <li class="dropdown-holder"><a href="{{route('index')}}">Home</a>
                                                 <ul class="hb-dropdown">
-                                                    <li class="active"><a href="index.html">Home One</a></li>
+                                                    <li class="active"><a href="{{route('index')}}">Home One</a></li>
                                                     <li><a href="index-2.html">Home Two</a></li>
                                                     <li><a href="index-3.html">Home Three</a></li>
                                                     <li><a href="index-4.html">Home Four</a></li>

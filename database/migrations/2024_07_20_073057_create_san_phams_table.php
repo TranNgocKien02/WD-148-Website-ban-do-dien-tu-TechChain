@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('ma_san_pham')->unique();
             $table->string('ten_san_pham');
+            $table->string('slug')->unique();
             $table->string('hinh_anh')->nullable();
             $table->double('gia_san_pham');
             $table->double('gia_khuyen_mai')->nullable();

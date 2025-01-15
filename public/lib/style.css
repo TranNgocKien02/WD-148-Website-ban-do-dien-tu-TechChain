@@ -74,7 +74,7 @@
 /*----------------------------------------*/
 body {
     color      : #242424;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size  : 14px;
     font-style : normal;
     font-weight: normal;
@@ -1816,7 +1816,7 @@ textarea:focus {
     color        : #242424;
     font-size    : 13px;
     border-radius: 15px 0 0 15px;
-    font-family  : 'Rubik', sans-serif;
+    font-family  : 'Roboto', sans-serif;
     font-weight  : 400;
     position     : relative;
 }
@@ -2589,7 +2589,7 @@ textarea:focus {
     color         : #c8c8c8;
     cursor        : pointer;
     display       : inline-block;
-    font-family   : 'Rubik', sans-serif;
+    font-family   : 'Roboto', sans-serif;
     font-size     : 20px;
     font-weight   : 500;
     line-height   : 18px;

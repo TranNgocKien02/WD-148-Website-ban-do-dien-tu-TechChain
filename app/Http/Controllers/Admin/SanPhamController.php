@@ -109,6 +109,7 @@ class SanPhamController extends Controller
 
         $data['is_active'] ??= 0;
 
+
         $data['trang_thai'] = $request->filled('ngay_dang_ban') ? 'da_len_lich' : 'ban_nhap';
         $category = DanhMuc::find($data['danh_muc_id']);
         $categoryPrefix = strtoupper(implode('', array_map(fn($word) => Str::substr($word, 0, 1), explode(' ', $category->ten_danh_muc))));
@@ -116,6 +117,8 @@ class SanPhamController extends Controller
         $creationDate = now()->format('d');
 
         $data['ma_san_pham'] = $categoryPrefix . '-' . $creationDate . $randomNumber;
+        $data['slug'] = Str::slug($data['ten_san_pham']) . '-' . $data['ma_san_pham'];
+
 
         $listProVariants = $request->variants;
         $dataProVariants = [];
@@ -237,6 +240,7 @@ class SanPhamController extends Controller
         $data['trang_thai'] = $request->filled('ngay_dang_ban') ? 'da_len_lich' : 'ban_nhap';
 
         $data['is_active'] ??= 0;
+        $data['slug'] = Str::slug($data['ten_san_pham']) . '-' . $data['ma_san_pham'];
 
         $category = DanhMuc::find($data['danh_muc_id']);
         $categoryPrefix = strtoupper(implode('', array_map(fn($word) => Str::substr($word, 0, 1), explode(' ', $category->ten_danh_muc))));
@@ -244,11 +248,6 @@ class SanPhamController extends Controller
         $creationDate = now()->format('d');
 
         $data['ma_san_pham'] = $categoryPrefix . '-' . $creationDate . $randomNumber;
-
-        // $data['slug'] = Str::slug($data['name']) . '-' . $data['sku'];
-        // $data['is_best_sale'] = !empty($data['is_best_sale']) ? 1 : 0;
-        // $data['is_40_sale'] = !empty($data['is_40_sale']) ? 1 : 0;
-        // $data['is_hot_online'] = !empty($data['is_hot_online']) ? 1 : 0;
 
         $listProGalleries = $request->hinh_anh_san_phams ?: [];
         $dataProGalleries = [];

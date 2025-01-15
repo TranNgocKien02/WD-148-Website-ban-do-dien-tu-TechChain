@@ -9,7 +9,7 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="{{route('index')}}"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Order detail</li>
                             </ul>
                         </nav>
@@ -81,7 +81,7 @@
                                             <td>{{$item->ma_san_pham}}</td>                                                            
                                             <td class=" ">
                                                 <a
-                                                    href="{{ route('product-detail', $item->productVariant->san_pham_id) }}">{{ $item->productVariant->sanPham->ten_san_pham }}</a>
+                                                    href="{{ route('product-detail', $item->productVariant->sanpham->slug) }}">{{ $item->productVariant->sanPham->ten_san_pham }}</a>
                                                 <div class="">
                                                     <small class="text-secondary">Dung lượng:
                                                         {{ $item->dung_luong }}</small>

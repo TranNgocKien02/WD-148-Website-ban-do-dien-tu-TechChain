@@ -25,7 +25,7 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="{{route('index')}}">Trang chủ</a></li>
                     <li class="active">Sản phẩm chi tiết</li>
                 </ul>
             </div>
@@ -161,7 +161,13 @@
 
                 </div>
                 <div class="product-additional-info pt-25">
-                    <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Thêm vào danh sách
+                    <form id="wishlist-form-{{ $item->id }}" action="{{ route('wishlist.add', $item->id) }}"
+                        method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a class="wishlist-btn" href="javascript:void(0);"
+                        onclick="document.getElementById('wishlist-form-{{ $item->id }}').submit();"><i
+                            class="fa fa-heart-o"></i>Thêm vào danh sách
                         yêu thích</a>
                     <div class="product-social-sharing pt-25">
                         <ul>
@@ -386,7 +392,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
-                                            <a href="{{ route('product-detail', $item->id) }}">
+                                            <a href="{{ route('product-detail', $item->slug) }}">
                                                 <img src="{{ Storage::url($item->hinh_anh) }}" alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>
@@ -395,7 +401,7 @@
                                             <div class="product_desc_info">
                                                 <div class="product-review">
                                                     <h5 class="manufacturer">
-                                                        <a href="product-details.html">{{ $item->ten_san_pham }}</a>
+                                                        <a href="{{ route('product-detail', $item->slug) }}">{{ $item->ten_san_pham }}</a>
                                                     </h5>
                                                     <div class="rating-box">
                                                         <ul class="rating">
@@ -422,8 +428,17 @@
                                                     <li><a href="#" title="quick view" class="quick-view-btn"
                                                             data-toggle="modal" data-target="#exampleModalCenter"><i
                                                                 class="fa fa-eye"></i></a></li>
-                                                    <li><a class="links-details" href="wishlist.html"><i
-                                                                class="fa fa-heart-o"></i></a></li>
+                                                    <li>
+                                                        <form id="wishlist-form-{{ $item->id }}"
+                                                            action="{{ route('wishlist.add', $item->id) }}"
+                                                            method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
+                                                        <a class="links-details" href="javascript:void(0);"
+                                                            onclick="document.getElementById('wishlist-form-{{ $item->id }}').submit();">
+                                                            <i class="fa fa-heart-o"></i>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>

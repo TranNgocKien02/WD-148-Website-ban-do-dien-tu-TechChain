@@ -11,14 +11,14 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller
 {
     //
-    public function chiTietSanPham(string $id){
+    public function chiTietSanPham(string $slug){
         // Fetch all products
-        $product = SanPham::findOrFail($id);
+        $product = SanPham::query()->where('slug', $slug)->first();
         $listDanhMuc = DanhMuc::with('sanPhams')->get();
         $collection = SanPham::get();
-        $bienThes = ProductVariant::where('san_pham_id', $id)->get();
+        $bienThes = ProductVariant::where('san_pham_id', $product->id)->get();
         $binhLuans = BinhLuan::with(['sanPham', 'user'])
-        ->where('san_pham_id', $id)
+        ->where('san_pham_id', $product->id)
         ->get();
         session()->forget('cart'); 
          // Lấy 15 sản phẩm khác cùng danh mục, ngoại trừ sản phẩm hiện tại

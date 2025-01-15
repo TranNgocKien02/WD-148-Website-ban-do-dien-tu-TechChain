@@ -12,6 +12,7 @@ class SanPham extends Model
     protected $fillable = [
         'ma_san_pham',
         'ten_san_pham',
+        'slug',
         'hinh_anh',
         'gia_san_pham',
         'gia_khuyen_mai',
@@ -75,4 +76,9 @@ class SanPham extends Model
         return $this->hasMany(Cart::class, 'san_pham_id');
     }
 
+    // quan hệ wishlist - yêu thích
+    public function wishlists()
+{
+    return $this->hasMany(Wishlist::class, 'product_id');
+}
 }

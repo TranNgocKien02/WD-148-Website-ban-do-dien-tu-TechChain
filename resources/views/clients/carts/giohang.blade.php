@@ -12,7 +12,7 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{route('index')}}">Home</a></li>
                     <li class="active">Shopping Cart</li>
                 </ul>
             </div>
@@ -62,7 +62,7 @@
                                                         alt="{{ $item->productVariant->sanpham->hinh_anh }}"></a></td>
                                             <td class="li-product-name ">
                                                 <a
-                                                    href="{{ route('product-detail', $item->productVariant->san_pham_id) }}">{{ $item->productVariant->sanPham->ten_san_pham }}</a>
+                                                    href="{{ route('product-detail', $item->productVariant->sanpham->slug) }}">{{ $item->productVariant->sanPham->ten_san_pham }}</a>
                                                 <div class="">
                                                     <small class="text-secondary">Dung lượng:
                                                         {{ $item->dung_luong }}</small>
