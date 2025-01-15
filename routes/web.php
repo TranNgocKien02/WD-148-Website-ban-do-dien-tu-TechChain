@@ -89,15 +89,22 @@ Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('p
 
 
 // Route::get('/product-detail/{id}',  [ProductController::class, 'chiTietSanPham'])->name('product-detail');
-Route::post('/cart/add',            [CartController::class, 'addCart'])->name('cart.add');
-Route::post('/cart/store',            [CartController::class, 'storeCart'])->name('cart.store');
-Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
-Route::get('/cart-full/list',            [CartController::class, 'listFullCart'])->name('cart-full.list');
-Route::get('/cart-full/create',            [OrderController::class, 'createFullCart'])->name('fulldonhangs.create');
-Route::post('/cart/updateFull',         [CartController::class, 'updateCart'])->name('cart.update');
-Route::post('/cart/update',         [CartController::class, 'updateCartBuy'])->name('cart.updateBuy');
-Route::delete('{cart}/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
-Route::post('/binh-luan', [BinhLuanController::class, 'store'])->middleware('auth')->name('binh-luan.store');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/cart/add',            [CartController::class, 'addCart'])->name('cart.add');
+    Route::post('/cart/store',            [CartController::class, 'storeCart'])->name('cart.store');
+    Route::get('/cart/list',            [CartController::class, 'listCart'])->name('cart.list');
+    Route::get('/cart-full/list',            [CartController::class, 'listFullCart'])->name('cart-full.list');
+    Route::get('/cart-full/create',            [OrderController::class, 'createFullCart'])->name('fulldonhangs.create');
+    Route::post('/cart/updateFull',         [CartController::class, 'updateCart'])->name('cart.update');
+    Route::post('/cart/update',         [CartController::class, 'updateCartBuy'])->name('cart.updateBuy');
+    Route::delete('{cart}/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::post('/binh-luan', [BinhLuanController::class, 'store'])->middleware('auth')->name('binh-luan.store');
+    Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('client.apply_coupon');
+    Route::post('/remove-coupon', [CartController::class, 'removeCoupon'])->name('client.remove_coupon');
+    Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
+});
+
 
 
 Route::middleware('auth')->prefix('donhangs')
@@ -117,38 +124,12 @@ Route::controller(LienHeController::class)->group(function () {
     Route::post('/contact', 'store')->name('contact.store');
 });
 
+
 Route::get('/product/filter', [ProductFilter::class, 'filter'])->name('filter');
 
 
-
-
-
 // route up khuyến mãi
-Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('client.apply_coupon');
-Route::post('/remove-coupon', [CartController::class, 'removeCoupon'])->name('client.remove_coupon');
 
-
-Route::get('/cart', [CartController::class, 'listCart'])->name('client.cart');
-
-// });
-
-
-
-
-// Route::middleware('auth')->group(function (){
-//     Route::get('/home', function () {
-//         return view('home');
-//     });
-//     Route::get('/home2', function () {
-//         return view('home');
-//     });
-
-//     Route::middleware('auth.admin')->group(function (){
-//         route::get('/admin',function () {
-//             return 'Đây là trang admin';
-//         });
-//     });
-// });
 
 Route::get(
     '/about-us',

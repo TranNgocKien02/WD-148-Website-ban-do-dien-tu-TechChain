@@ -10,6 +10,7 @@ use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OrderRequest;
 use App\Models\ChiTietDonHang;
+use App\Models\ProductVariant;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -99,7 +100,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'ten_nguoi_nhan' => 'required|string|max:255',
             'email_nguoi_nhan' => 'required|email|max:255',
             'so_dien_thoai_nguoi_nhan' => 'required|numeric|digits_between:10,15', // Kiểm tra số điện thoại
@@ -133,8 +134,9 @@ class OrderController extends Controller
 
                 $param['ma_don_hang'] = $this->generateUniqueOrderCode();
 
-             
+                
                 $donHang = DonHang::create($param); 
+
                 $don_hang_id = $donHang->id; 
 
                 $carts = session()->get('cart', []);
@@ -159,6 +161,22 @@ class OrderController extends Controller
                             'cart.user_id' => Auth::id(),
                             'cart.product_variant_id' => $item->product_variant_id
                         ])->delete();
+
+                        $variant = ProductVariant::find($item->product_variant_id);
+                        if ($variant) {
+                            $variant->so_luong -= $item['so_luong'];
+                            $variant->save();
+
+                            $sanPhamId = $variant->san_pham_id;
+                            $tongSoLuong = ProductVariant::where('san_pham_id', $sanPhamId)->sum('so_luong');
+
+                            $sanPham = SanPham::find($sanPhamId);
+                            if ($sanPham) {
+                                $sanPham->so_luong = $tongSoLuong;
+                                $sanPham->so_luong_da_ban += $item['so_luong'];
+                                $sanPham->save();
+                            }
+                        }
                     }
                 }else{
                     foreach ($carts as $item) {
@@ -175,7 +193,23 @@ class OrderController extends Controller
                             'so_luong' => $item['so_luong'],
                         ];
                         ChiTietDonHang::query()->create($data);
-                        session()->forget('cart'); 
+                        session()->forget('cart');
+
+                        $variant = ProductVariant::find($item['productVariant']);
+                        if ($variant) {
+                            $variant->so_luong -= $item['so_luong'];
+                            $variant->save();
+
+                            $sanPhamId = $variant->san_pham_id;
+                            $tongSoLuong = ProductVariant::where('san_pham_id', $sanPhamId)->sum('so_luong');
+
+                            $sanPham = SanPham::find($sanPhamId);
+                            if ($sanPham) {
+                                $sanPham->so_luong = $tongSoLuong;
+                                $sanPham->so_luong_da_ban += $item['so_luong'];
+                                $sanPham->save();
+                            }
+                        }
                     } 
                 }
                 session()->forget('coupon'); 

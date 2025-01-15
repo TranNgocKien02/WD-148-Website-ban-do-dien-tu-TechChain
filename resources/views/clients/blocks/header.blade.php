@@ -17,24 +17,24 @@
                     <div class="header-top-right">
                         <ul class="ht-menu">
                             @auth
-                                 <li>
-                                    <div class="ht-setting-trigger"><span>  {{ auth()->user()->name }}</span></div>
-                                    <div class="setting ht-setting">
-                                        <ul class="ht-setting-list">
-                                            <li><a href="{{ route('profile') }}">Tài khoản</a></li>
-                                            <li><a href="{{ route('donhangs.index') }}">Đơn Mua</a></li>
-                                            <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
+                            <li>
+                                <div class="ht-setting-trigger"><span> {{ auth()->user()->name }}</span></div>
+                                <div class="setting ht-setting">
+                                    <ul class="ht-setting-list">
+                                        <li><a href="{{ route('profile') }}">Tài khoản</a></li>
+                                        <li><a href="{{ route('donhangs.index') }}">Đơn Mua</a></li>
+                                        <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                             @else
-                                <li>
-                                    <span><a href="{{ route('register') }}">Đăng Ký</a></span>
-                                </li>
+                            <li>
+                                <span><a href="{{ route('register') }}">Đăng Ký</a></span>
+                            </li>
 
-                                <li>
-                                    <span><a href="{{ route('login') }}">Đăng Nhập</a></span>
-                                </li>
+                            <li>
+                                <span><a href="{{ route('login') }}">Đăng Nhập</a></span>
+                            </li>
                             @endauth
                         </ul>
                     </div>
@@ -60,10 +60,11 @@
                 <!-- Begin Header Middle Right Area -->
                 <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                     <!-- Begin Header Middle Searchbox Area -->
-                    <form action="#" class="hm-searchbox">
-                        <input type="text" placeholder="Enter your search key ...">
+                    <form action="{{ route('filter') }}" class="hm-searchbox" method="GET">
+                        <input type="text" name="search" placeholder="Enter your search key ..." value="{{ request('search', '') }}">
                         <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                     </form>
+
                     <!-- Header Middle Searchbox Area End Here -->
                     <!-- Begin Header Middle Right Area -->
                     <div class="header-middle-right">
@@ -84,7 +85,7 @@
                                             @endphp --}}
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-                                    <span class="item-text d-inline-block text-truncate" style="max-width: 80px;">  {{ number_format($subTotal, 0, '', '.') }}VND
+                                    <span class="item-text d-inline-block text-truncate" style="max-width: 80px;"> {{ number_format($subTotal, 0, '', '.') }}VND
                                         <span class="cart-item-count">{{ $cartItemCount }}</span>
                                     </span>
                                 </div>
@@ -115,15 +116,15 @@
                                                                 {{ number_format($item->productVariant->sanpham->gia_san_pham, 0, '', '.') }}VND
                                                             @endif x {{ $item->so_luong }}
 
-                                                        </span>
-                                                    </div>
-                                                    <button class="close" title="Remove">
-                                                        <i class="fa fa-close"></i>
-                                                    </button>
-                                                </li>
-                                            @endforeach
+                                                </span>
+                                            </div>
+                                            <button class="close" title="Remove">
+                                                <i class="fa fa-close"></i>
+                                            </button>
+                                        </li>
+                                        @endforeach
                                         @else
-                                            <p>Giỏ hàng của bạn đang trống.</p>
+                                        <p>Giỏ hàng của bạn đang trống.</p>
                                         @endif
                                     </ul>
                                     <p class="minicart-total">SUBTOTAL:
@@ -161,19 +162,25 @@
                             <ul>
                                 <li class="dropdown-holder"><a href="{{route('index')}}">Home</a>
                                 </li>
-                                <li class="megamenu-holder"><a href="{{route('filter')}}">Shop</a>
+                                <li class="megamenu-holder">
+                                    <a href="{{ route('filter') }}">Shop</a>
                                     <ul class="megamenu hb-megamenu">
                                         @foreach ($danhMuc as $item)
-                                            <li><a href="">{{ $item->ten_danh_muc }}</a>
-                                                <ul>
-                                                    @foreach ($item->hangs as $hang)
-                                                        <li><a href="">{{ $hang->ten_hang }}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
+                                        <li>
+                                            <a href="{{ route('filter', ['categories' => $item->id]) }}">{{ $item->ten_danh_muc }}</a>
+                                            <ul>
+                                                @foreach ($item->hangs as $hang)
+                                                <li>
+                                                    <a href="{{ route('filter', ['brands' => $hang->id]) }}">{{ $hang->ten_hang }}</a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
                                         @endforeach
                                     </ul>
                                 </li>
+
+
                                 <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>
                         </nav>
