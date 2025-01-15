@@ -29,8 +29,8 @@ class ProductFilter extends BaseController
 
         $query = SanPham::query()
             ->leftJoin('bien_the_san_pham', 'san_phams.id', '=', 'bien_the_san_pham.san_pham_id')
-            ->select('san_phams.*')
-            ->groupBy('san_phams.id'); // Nhóm các sản phẩm theo id để tránh trùng lặp
+            ->select('san_phams.*');
+            // ->groupBy('san_phams.id'); // Nhóm các sản phẩm theo id để tránh trùng lặp
 
         // Tìm kiếm theo tên sản phẩm, tên hãng, và tên danh mục
         if ($searchTerm) {
